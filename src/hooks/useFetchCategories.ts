@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { Category } from "types/Category";
 
 export const fetchCategories = async () => {
 	try{
@@ -17,5 +18,5 @@ export const useFetchCategories = () => {
     refetchOnWindowFocus: false,
   });
 
-	return {data, isLoading, error}
+	return {data, isLoading, error} as { data: Category[], isLoading: boolean, error: unknown}
 };

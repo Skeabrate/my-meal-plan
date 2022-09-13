@@ -2,11 +2,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { dehydrate, QueryClient } from 'react-query';
 import { useFetchCategories, fetchCategories } from 'hooks/useFetchCategories';
-import { Category } from 'types/Category';
 
 const Home: NextPage = () => {
-  const { data, isLoading, error }: { data: Category[]; isLoading: boolean; error: unknown } =
-    useFetchCategories();
+  const { data, isLoading, error } = useFetchCategories();
 
   return (
     <div>
