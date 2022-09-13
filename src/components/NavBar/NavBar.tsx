@@ -5,6 +5,7 @@ import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import Link from 'next/link';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
+import * as Styled from './NavBar.styles';
 
 const links = [
   {
@@ -23,7 +24,7 @@ const links = [
 
 const NavBar = () => {
   return (
-    <nav>
+    <Styled.Nav>
       <div>
         <Link href='/'>
           <a>
@@ -58,7 +59,7 @@ const NavBar = () => {
       <div>
         <CategoriesBar />
       </div>
-    </nav>
+    </Styled.Nav>
   );
 };
 
