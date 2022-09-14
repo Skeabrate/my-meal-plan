@@ -127,6 +127,42 @@ export const SlideCart = styled.div<MenuProps>`
   ul {
     list-style: none;
   }
+
+  ${({ theme }) => theme.mq.tablet} {
+    position: initial;
+    width: 100%;
+    height: 100%;
+    min-height: unset;
+    max-height: unset;
+    animation: unset;
+    display: flex;
+    flex-direction: row;
+
+    ul {
+      flex-direction: row;
+      width: unset;
+      height: 100%;
+
+      &:first-child {
+        width: 100%;
+        justify-content: center;
+      }
+
+      li {
+        width: unset;
+
+        a {
+          margin-inline: 10px;
+          height: 100%;
+          width: unset;
+          padding-inline: 10px;
+          opacity: 1;
+          transform: unset;
+          transition: unset;
+        }
+      }
+    }
+  }
 `;
 
 export const NavLinks = styled.ul<MenuProps>`
@@ -175,16 +211,20 @@ export const NavSubItems = styled.ul<MenuProps>`
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 300px;
 
-  li a {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateY(0px)' : 'translateY(40px)')};
-    opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
-    transition: all 0.3s ease-in-out;
-    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.6s' : 0)};
+  li {
+    height: 100%;
+    a {
+      width: 80px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateY(0px)' : 'translateY(40px)')};
+      opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
+      transition: all 0.3s ease-in-out;
+      transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.6s' : 0)};
+    }
   }
 `;

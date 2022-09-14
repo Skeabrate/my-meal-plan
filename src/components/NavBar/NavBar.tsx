@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Image from 'next/image';
+import * as Styled from './NavBar.styles';
 import LogoSrc from 'assets/logo.png';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
-import Link from 'next/link';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
-import * as Styled from './NavBar.styles';
-import { useRouter } from 'next/router';
 
 const links = [
   {
@@ -28,8 +28,6 @@ const NavBar = () => {
 
   const router = useRouter();
 
-  console.log(router.pathname);
-
   const toggleCart = () => {
     setIsCartOpen((state) => {
       if (state) {
@@ -50,13 +48,17 @@ const NavBar = () => {
   return (
     <Styled.Nav>
       <Styled.NavBar>
-        <Link href='/'>
+        <Link href='/' aria-label='navigate to homepage'>
           <a>
             <Image src={LogoSrc} alt='My Meal Plan' height='80' width='128' />
           </a>
         </Link>
 
-        <Styled.HambuergerMenu onClick={toggleCart} $isCartOpen={isCartOpen}>
+        <Styled.HambuergerMenu
+          aria-label='open navigation'
+          onClick={toggleCart}
+          $isCartOpen={isCartOpen}
+        >
           <div></div>
         </Styled.HambuergerMenu>
 
@@ -71,30 +73,28 @@ const NavBar = () => {
                 <Link href={href}>{name}</Link>
               </Styled.NavLink>
             ))}
-
-            <Styled.NavSubItems $isCartOpen={isCartOpen}>
-              <li>
-                <Link href='/search'>
-                  <a>
-                    <SearchSvg />
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/profile'>
-                  <a>
-                    <ProfileSvg />
-                  </a>
-                </Link>
-              </li>
-            </Styled.NavSubItems>
           </Styled.NavLinks>
+
+          <Styled.NavSubItems $isCartOpen={isCartOpen}>
+            <li>
+              <Link aria-label='search' href='/search'>
+                <a>
+                  <SearchSvg />
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link aria-label='profile' href='/profile'>
+                <a>
+                  <ProfileSvg />
+                </a>
+              </Link>
+            </li>
+          </Styled.NavSubItems>
         </Styled.SlideCart>
       </Styled.NavBar>
 
-      {/* <div>
-        <CategoriesBar />
-      </div> */}
+      <CategoriesBar />
     </Styled.Nav>
   );
 };
