@@ -20,4 +20,8 @@ export const GlobaStyles = createGlobalStyle`
 		font-family: ${({ theme }) => theme.fontFamily.lato};
 		font-size: ${({ theme }) => theme.fontSize.paragraph};
 	}
+
+	button, a{
+		cursor: pointer;
+	}
 `;

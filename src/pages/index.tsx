@@ -16,13 +16,13 @@ const Home: NextPage = () => {
 
       <main>
         <h1>My plan</h1>
-        <section>
+        {/* <section>
           {isLoading ? <p>Loading...</p> : null}
           {error ? <p>Error</p> : null}
           {data?.map(({ idCategory, strCategory, strCategoryThumb }) => (
             <article key={idCategory}>{strCategory}</article>
           ))}
-        </section>
+        </section> */}
       </main>
     </div>
   );
