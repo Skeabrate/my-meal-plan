@@ -6,6 +6,7 @@ import SearchSvg from 'assets/SVG/Search.svg';
 import Link from 'next/link';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
 import * as Styled from './NavBar.styles';
+import { useRouter } from 'next/router';
 
 const links = [
   {
@@ -25,19 +26,23 @@ const links = [
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  const router = useRouter();
+
+  console.log(router.pathname);
+
   const toggleCart = () => {
     setIsCartOpen((state) => {
-      // if (state) {
-      //   document.body.style.position = 'unset';
-      //   document.body.style.top = '';
-      //   document.body.style.width = 'unset';
-      //   document.body.style.overflow = 'unset';
-      // } else {
-      //   document.body.style.position = 'fixed';
-      //   document.body.style.top = '0';
-      //   document.body.style.width = '100%';
-      //   document.body.style.overflow = 'hidden';
-      // }
+      if (state) {
+        document.body.style.position = 'unset';
+        document.body.style.top = '';
+        document.body.style.width = 'unset';
+        document.body.style.overflow = 'unset';
+      } else {
+        document.body.style.position = 'fixed';
+        document.body.style.top = '0';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+      }
       return !state;
     });
   };
@@ -58,28 +63,32 @@ const NavBar = () => {
         <Styled.SlideCart $isCartOpen={isCartOpen}>
           <Styled.NavLinks $isCartOpen={isCartOpen}>
             {links.map(({ href, name }) => (
-              <li key={href}>
+              <Styled.NavLink
+                $isActive={router.pathname === href}
+                $isCartOpen={isCartOpen}
+                key={href}
+              >
                 <Link href={href}>{name}</Link>
-              </li>
+              </Styled.NavLink>
             ))}
-          </Styled.NavLinks>
 
-          <Styled.NavSubItems $isCartOpen={isCartOpen}>
-            <li>
-              <Link href='/search'>
-                <a>
-                  <SearchSvg />
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href='/profile'>
-                <a>
-                  <ProfileSvg />
-                </a>
-              </Link>
-            </li>
-          </Styled.NavSubItems>
+            <Styled.NavSubItems $isCartOpen={isCartOpen}>
+              <li>
+                <Link href='/search'>
+                  <a>
+                    <SearchSvg />
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/profile'>
+                  <a>
+                    <ProfileSvg />
+                  </a>
+                </Link>
+              </li>
+            </Styled.NavSubItems>
+          </Styled.NavLinks>
         </Styled.SlideCart>
       </Styled.NavBar>
 

@@ -110,6 +110,8 @@ export const SlideCart = styled.div<MenuProps>`
   left: 0;
   width: 100%;
   height: calc(100vh - ${navBarMobileHeight});
+  min-height: 300px;
+  max-height: 500px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -124,14 +126,6 @@ export const SlideCart = styled.div<MenuProps>`
 
   ul {
     list-style: none;
-
-    li {
-      a {
-        text-decoration: none;
-        color: black;
-        font-weight: 600;
-      }
-    }
   }
 `;
 
@@ -141,32 +135,37 @@ export const NavLinks = styled.ul<MenuProps>`
   justify-content: space-evenly;
   height: 100%;
   width: 100%;
+`;
 
-  li {
+export const NavLink = styled.li<{ $isActive: boolean; $isCartOpen: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  a {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+    text-decoration: ${({ $isActive }) => ($isActive ? 'underline' : 'none')};
 
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 60px;
-      font-size: 20px;
+    opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
+    transition: opacity 0.4s ease-in-out;
+    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.4s' : '0.2s')};
 
-      opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
-      transition: opacity 0.4s ease-in-out;
-      transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.4s' : '0.2s')};
+    &:hover {
+      text-decoration: underline;
     }
   }
 
   ${({ theme }) => theme.mq.tablet} {
-    li {
-      a {
-        font-size: ${({ theme }) => theme.fontSize.paragraph};
-      }
+    a {
+      font-size: ${({ theme }) => theme.fontSize.paragraph};
     }
   }
 `;
@@ -175,7 +174,6 @@ export const NavSubItems = styled.ul<MenuProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
   width: 100%;
 
   li a {
