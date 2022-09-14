@@ -3,6 +3,9 @@ import { NextPageContext } from 'next';
 import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider, DehydratedState } from 'react-query';
 import NavBar from 'components/NavBar/NavBar';
+import { ThemeProvider } from 'styled-components';
+import { theme } from 'styles/theme';
+import { GlobaStyles } from 'styles/GlobalStyle';
 
 type PageProps = {
   dehydratedState?: DehydratedState;
@@ -18,8 +21,11 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <NavBar />
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <GlobaStyles />
+          <NavBar />
+          <Component {...pageProps} />
+        </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>
   );
