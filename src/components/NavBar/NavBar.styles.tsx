@@ -127,16 +127,12 @@ export const SlideCart = styled.div<MenuProps>`
         text-decoration: none;
         color: black;
         font-weight: 600;
-
-        opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
-        transition: opacity 0.4s ease-in-out;
-        transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.3s' : 0)};
       }
     }
   }
 `;
 
-export const NavLinks = styled.ul`
+export const NavLinks = styled.ul<MenuProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -156,6 +152,10 @@ export const NavLinks = styled.ul`
       width: 100%;
       height: 60px;
       font-size: 20px;
+
+      opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
+      transition: opacity 0.4s ease-in-out;
+      transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.3s' : '0.1s')};
     }
   }
 
@@ -168,9 +168,22 @@ export const NavLinks = styled.ul`
   }
 `;
 
-export const NavSubItems = styled.ul`
+export const NavSubItems = styled.ul<MenuProps>`
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
   height: 200px;
+  width: 100%;
+
+  li a {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateY(0px)' : 'translateY(40px)')};
+    opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
+    transition: all 0.3s ease-in-out;
+    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.5s' : 0)};
+  }
 `;

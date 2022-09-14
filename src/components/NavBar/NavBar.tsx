@@ -43,7 +43,7 @@ const NavBar = () => {
         </Styled.HambuergerMenu>
 
         <Styled.SlideCart $isCartOpen={isCartOpen}>
-          <Styled.NavLinks>
+          <Styled.NavLinks $isCartOpen={isCartOpen}>
             {links.map(({ href, name }) => (
               <li key={href}>
                 <Link href={href}>{name}</Link>
@@ -51,11 +51,13 @@ const NavBar = () => {
             ))}
           </Styled.NavLinks>
 
-          <Styled.NavSubItems>
+          <Styled.NavSubItems $isCartOpen={isCartOpen}>
             <li>
-              <button>
-                <SearchSvg />
-              </button>
+              <Link href='/search'>
+                <a>
+                  <SearchSvg />
+                </a>
+              </Link>
             </li>
             <li>
               <Link href='/profile'>
