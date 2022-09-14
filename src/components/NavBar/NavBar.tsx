@@ -42,16 +42,16 @@ const NavBar = () => {
           <div></div>
         </Styled.HambuergerMenu>
 
-        <Styled.SlideCart>
-          <ul>
+        <Styled.SlideCart $isCartOpen={isCartOpen}>
+          <Styled.NavLinks>
             {links.map(({ href, name }) => (
               <li key={href}>
                 <Link href={href}>{name}</Link>
               </li>
             ))}
-          </ul>
+          </Styled.NavLinks>
 
-          <ul>
+          <Styled.NavSubItems>
             <li>
               <button>
                 <SearchSvg />
@@ -64,7 +64,7 @@ const NavBar = () => {
                 </a>
               </Link>
             </li>
-          </ul>
+          </Styled.NavSubItems>
         </Styled.SlideCart>
       </Styled.NavBar>
 

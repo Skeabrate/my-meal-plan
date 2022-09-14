@@ -1,22 +1,34 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
-type HamburgerMenu = {
+type MenuProps = {
   $isCartOpen: boolean;
 };
 
-export const Nav = styled.nav`
-  border-bottom: 1px solid grey;
-`;
+const navBarMobileHeight = '80px';
+
+export const Nav = styled.nav``;
 
 export const NavBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+  height: ${navBarMobileHeight};
   padding-inline: 10px;
 
   a {
     display: flex;
+    img {
+      height: 60px !important;
+    }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    height: 100px;
+    padding-inline: 40px;
+
+    a img {
+      height: unset !important;
+    }
   }
 `;
 
@@ -28,7 +40,7 @@ const buttonStyle = css`
   border-radius: 100px;
 `;
 
-export const HambuergerMenu = styled.button<HamburgerMenu>`
+export const HambuergerMenu = styled.button<MenuProps>`
   width: 60px;
   height: 60px;
   transition-duration: 0.5s;
@@ -70,11 +82,95 @@ export const HambuergerMenu = styled.button<HamburgerMenu>`
   }
 `;
 
-export const SlideCart = styled.div`
+const animateSlideCartIn = keyframes`
+	from{
+		transform: translateX(-100%);
+	} to {
+		transform: translateX(0);
+	}	
+`;
+
+const animateSlideCartOut = keyframes`
+	from{
+		transform: translateX(0);
+	} to {
+		transform: translateX(100%);
+	}	
+`;
+
+const animationSlideCartHelper = (animation: any, delay: string = '0s') => css`
+  animation: ${animation} 0.6s forwards;
+  animation-delay: ${delay};
+`;
+
+export const SlideCart = styled.div<MenuProps>`
   position: absolute;
-  top: 90px;
+  top: ${navBarMobileHeight};
   left: 0;
   width: 100%;
-  height: calc(100vh - 90px);
-  background-color: grey;
+  height: calc(100vh - ${navBarMobileHeight});
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  ${({ $isCartOpen }) =>
+    $isCartOpen
+      ? animationSlideCartHelper(animateSlideCartIn)
+      : animationSlideCartHelper(animateSlideCartOut, '0.3s')};
+
+  ul {
+    list-style: none;
+
+    li {
+      a {
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+
+        opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
+        transition: opacity 0.4s ease-in-out;
+        transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.3s' : 0)};
+      }
+    }
+  }
+`;
+
+export const NavLinks = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      font-size: 20px;
+    }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    li {
+      a {
+        font-size: ${({ theme }) => theme.fontSize.paragraph};
+      }
+    }
+  }
+`;
+
+export const NavSubItems = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 200px;
 `;

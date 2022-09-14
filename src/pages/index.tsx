@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
+      <main style={{ height: '200vh' }}>
         <h1>My plan</h1>
         {/* <section>
           {isLoading ? <p>Loading...</p> : null}
