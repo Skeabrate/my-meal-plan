@@ -16,7 +16,6 @@ export const GlobaStyles = createGlobalStyle`
 	body {
 		padding: 0;
 		margin: 0;
-		overflow-x: hidden !important;
 		font-family: ${({ theme }) => theme.fontFamily.lato};
 		font-size: ${({ theme }) => theme.fontSize.paragraph};
 	}

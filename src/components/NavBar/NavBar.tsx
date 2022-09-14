@@ -26,7 +26,20 @@ const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleCart = () => {
-    setIsCartOpen((state) => !state);
+    setIsCartOpen((state) => {
+      if (state) {
+        document.body.style.position = 'unset';
+        document.body.style.top = '';
+        document.body.style.width = 'unset';
+        document.body.style.overflow = 'unset';
+      } else {
+        document.body.style.position = 'fixed';
+        document.body.style.top = '0';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+      }
+      return !state;
+    });
   };
 
   return (

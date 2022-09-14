@@ -14,6 +14,7 @@ export const NavBar = styled.div`
   align-items: center;
   height: ${navBarMobileHeight};
   padding-inline: 10px;
+  position: relative;
 
   a {
     display: flex;
@@ -104,7 +105,7 @@ const animationSlideCartHelper = (animation: any, delay: string = '0s') => css`
 `;
 
 export const SlideCart = styled.div<MenuProps>`
-  position: absolute;
+  position: fixed;
   top: ${navBarMobileHeight};
   left: 0;
   width: 100%;
@@ -114,10 +115,12 @@ export const SlideCart = styled.div<MenuProps>`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateX(-100%);' : 'translateX(0)')};
   ${({ $isCartOpen }) =>
     $isCartOpen
       ? animationSlideCartHelper(animateSlideCartIn)
-      : animationSlideCartHelper(animateSlideCartOut, '0.3s')};
+      : animationSlideCartHelper(animateSlideCartOut, '0.5s')};
 
   ul {
     list-style: none;
@@ -155,7 +158,7 @@ export const NavLinks = styled.ul<MenuProps>`
 
       opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
       transition: opacity 0.4s ease-in-out;
-      transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.3s' : '0.1s')};
+      transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.4s' : '0.2s')};
     }
   }
 
@@ -184,6 +187,6 @@ export const NavSubItems = styled.ul<MenuProps>`
     transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateY(0px)' : 'translateY(40px)')};
     opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
     transition: all 0.3s ease-in-out;
-    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.5s' : 0)};
+    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.6s' : 0)};
   }
 `;
