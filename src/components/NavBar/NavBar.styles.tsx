@@ -110,6 +110,7 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   left: 0;
   width: 100%;
   height: ${({ $windowHeight }) => `calc(${$windowHeight}px - ${navBarMobileHeight})`};
+  min-height: 300px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

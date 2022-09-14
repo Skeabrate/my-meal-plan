@@ -8,6 +8,7 @@ import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
 import { useEffect } from 'react';
+import { debounce } from 'src/utils/debounce';
 
 const links = [
   {
@@ -50,9 +51,10 @@ const NavBar = () => {
   useEffect(() => {
     setWindowHeight(window.innerHeight);
 
-    window.addEventListener('resize', () => {
-      setWindowHeight(window.innerHeight);
-    });
+    window.addEventListener(
+      'resize',
+      debounce(() => setWindowHeight(window.innerHeight), 300)
+    );
   }, []);
 
   return (
