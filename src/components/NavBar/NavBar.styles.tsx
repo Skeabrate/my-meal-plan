@@ -104,19 +104,15 @@ const animationSlideCartHelper = (animation: any, delay: string = '0s') => css`
   animation-delay: ${delay};
 `;
 
-export const SlideCart = styled.div<MenuProps>`
+export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   position: fixed;
   top: ${navBarMobileHeight};
   left: 0;
   width: 100%;
-  height: calc(100vh - ${navBarMobileHeight});
-  min-height: 300px;
-  max-height: 500px;
+  height: ${({ $windowHeight }) => `calc(${$windowHeight}px - ${navBarMobileHeight})`};
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 
   transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateX(-100%);' : 'translateX(0)')};
   ${({ $isCartOpen }) =>
@@ -211,7 +207,8 @@ export const NavSubItems = styled.ul<MenuProps>`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 300px;
+  height: 100px;
+  background-color: rgb(230, 230, 230);
 
   li {
     height: 100%;

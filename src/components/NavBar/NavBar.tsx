@@ -7,6 +7,7 @@ import LogoSrc from 'assets/logo.png';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
+import { useEffect } from 'react';
 
 const links = [
   {
@@ -25,6 +26,7 @@ const links = [
 
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [windowHeight, setWindowHeight] = useState(0);
 
   const router = useRouter();
 
@@ -45,6 +47,14 @@ const NavBar = () => {
     });
   };
 
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      setWindowHeight(window.innerHeight);
+    });
+  }, []);
+
   return (
     <Styled.Nav>
       <Styled.NavBar>
@@ -62,7 +72,7 @@ const NavBar = () => {
           <div></div>
         </Styled.HambuergerMenu>
 
-        <Styled.SlideCart $isCartOpen={isCartOpen}>
+        <Styled.SlideCart $windowHeight={windowHeight} $isCartOpen={isCartOpen}>
           <Styled.NavLinks $isCartOpen={isCartOpen}>
             {links.map(({ href, name }) => (
               <Styled.NavLink

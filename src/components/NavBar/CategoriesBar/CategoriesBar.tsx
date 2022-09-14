@@ -1,11 +1,19 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 import { useFetchCategories } from 'hooks/useFetchCategories';
+
+const Wrapper = styled.div`
+  ul {
+    list-style: none;
+    display: flex;
+  }
+`;
 
 const CategoriesBar = () => {
   const { data, isLoading, error } = useFetchCategories();
 
   return (
-    <div>
+    <Wrapper>
       <ul>
         {data?.map(({ idCategory, strCategory }) => (
           <li key={idCategory}>
@@ -13,7 +21,7 @@ const CategoriesBar = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Wrapper>
   );
 };
 
