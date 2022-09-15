@@ -15,10 +15,11 @@ export const NavBar = styled.div`
   height: ${navBarMobileHeight};
   padding-inline: 10px;
   position: relative;
-  border-bottom: 1px solid rgb(88, 90, 109);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
 
   a {
     display: flex;
+
     img {
       height: 60px !important;
     }
@@ -37,7 +38,7 @@ export const NavBar = styled.div`
 const buttonStyle = css`
   height: 4px;
   width: 36px;
-  background-color: rgb(88, 90, 109);
+  background-color: ${({ theme }) => theme.colors.blue};
   transition-duration: 0.5s;
   border-radius: 100px;
 `;

@@ -4,6 +4,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       black: string;
+      blue: string;
     };
     fontFamily: {
       abril: string;

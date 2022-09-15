@@ -3,6 +3,7 @@ import { DefaultTheme } from 'styled-components';
 export const theme: DefaultTheme = {
   colors: {
     black: '#000',
+    blue: 'rgb(88, 90, 109)',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',
