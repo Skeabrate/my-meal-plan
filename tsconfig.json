@@ -21,8 +21,9 @@
       "types/*": ["src/types/*"],
 			"assets/*": ["src/assets/*"],
 			"styles/*": ["src/styles/*"],
+			"utils/*": ["src/utils/*"],
 		}
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
   "exclude": ["node_modules"]
 }

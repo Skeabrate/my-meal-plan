@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,8 +7,7 @@ import LogoSrc from 'assets/logo.png';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
-import { useEffect } from 'react';
-import { debounce } from 'src/utils/debounce';
+import { debounce } from 'utils/debounce';
 
 const links = [
   {
@@ -45,15 +44,15 @@ const NavBar = () => {
     });
   };
 
-  const debounceWindowHeightSetter = debounce(() => setWindowHeight(window.innerHeight), 300);
+  const debounceSetWindowHeightOnResize = debounce(() => setWindowHeight(window.innerHeight), 300);
 
   useEffect(() => {
     setWindowHeight(window.innerHeight);
 
-    window.addEventListener('resize', debounceWindowHeightSetter);
+    window.addEventListener('resize', debounceSetWindowHeightOnResize);
 
-    return () => window.removeEventListener('resize', debounceWindowHeightSetter);
-  }, [debounceWindowHeightSetter]);
+    return () => window.removeEventListener('resize', debounceSetWindowHeightOnResize);
+  }, [debounceSetWindowHeightOnResize]);
 
   return (
     <Styled.Nav>
