@@ -15,6 +15,7 @@ export const NavBar = styled.div`
   height: ${navBarMobileHeight};
   padding-inline: 10px;
   position: relative;
+  border-bottom: 1px solid rgb(88, 90, 109);
 
   a {
     display: flex;
@@ -36,7 +37,7 @@ export const NavBar = styled.div`
 const buttonStyle = css`
   height: 4px;
   width: 36px;
-  background-color: #2e2e2e;
+  background-color: rgb(88, 90, 109);
   transition-duration: 0.5s;
   border-radius: 100px;
 `;
@@ -134,6 +135,7 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
     animation: unset;
     display: flex;
     flex-direction: row;
+    transform: unset;
 
     ul {
       flex-direction: row;
@@ -182,14 +184,13 @@ export const NavLink = styled.li<{ $isActive: boolean; $isCartOpen: boolean }>`
     align-items: center;
     width: 100%;
     height: 60px;
-    font-size: 20px;
     color: black;
     font-weight: 600;
     text-decoration: ${({ $isActive }) => ($isActive ? 'underline' : 'none')};
 
     opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
-    transition: opacity 0.4s ease-in-out;
-    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.4s' : '0.2s')};
+    transition: opacity 0.5s ease-in-out;
+    transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.5s' : '0.2s')};
 
     &:hover {
       text-decoration: underline;
@@ -210,6 +211,21 @@ export const NavSubItems = styled.ul<MenuProps>`
   width: 100%;
   height: 100px;
   background-color: rgb(240, 240, 240);
+  transition: all 0.4s ease-in-out;
+  ${({ $isCartOpen }) => {
+    if ($isCartOpen)
+      return `
+			transform: translateY(0);
+			opacity: 1;
+			transition-delay: 0.7s;
+		`;
+    else
+      return `
+			transform: translateY(100%);
+			opacity: 0;
+			transition-delay: 0;
+		`;
+  }};
 
   li {
     height: 100%;
@@ -219,10 +235,13 @@ export const NavSubItems = styled.ul<MenuProps>`
       display: flex;
       justify-content: center;
       align-items: center;
-      transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateY(0px)' : 'translateY(40px)')};
-      opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
-      transition: all 0.3s ease-in-out;
-      transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.6s' : 0)};
     }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    background-color: white;
+    transform: unset;
+    transition: unset;
+    opacity: 1;
   }
 `;
