@@ -209,7 +209,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(240, 240, 240);
 
   li {
     height: 100%;

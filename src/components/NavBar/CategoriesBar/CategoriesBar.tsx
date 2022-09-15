@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   ul {
     list-style: none;
     display: flex;
+
     a {
       word-break: break-all;
     }

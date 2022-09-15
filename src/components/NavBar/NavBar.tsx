@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -34,28 +34,26 @@ const NavBar = () => {
   const toggleCart = () => {
     setIsCartOpen((state) => {
       if (state) {
-        document.body.style.position = 'unset';
-        document.body.style.top = '';
-        document.body.style.width = 'unset';
-        document.body.style.overflow = 'unset';
+        document.body.removeAttribute('style');
       } else {
-        document.body.style.position = 'fixed';
-        document.body.style.top = '0';
-        document.body.style.width = '100%';
-        document.body.style.overflow = 'hidden';
+        document.body.setAttribute(
+          'style',
+          'position: fixed; top: 0; width: 100%; overflow: hidden'
+        );
       }
       return !state;
     });
   };
 
+  const debounceWindowHeightSetter = debounce(() => setWindowHeight(window.innerHeight), 300);
+
   useEffect(() => {
     setWindowHeight(window.innerHeight);
 
-    window.addEventListener(
-      'resize',
-      debounce(() => setWindowHeight(window.innerHeight), 300)
-    );
-  }, []);
+    window.addEventListener('resize', debounceWindowHeightSetter);
+
+    return () => window.removeEventListener('resize', debounceWindowHeightSetter);
+  }, [debounceWindowHeightSetter]);
 
   return (
     <Styled.Nav>
