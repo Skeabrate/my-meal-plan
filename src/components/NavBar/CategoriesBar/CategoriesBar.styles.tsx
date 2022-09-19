@@ -11,25 +11,45 @@ export const Wrapper = styled.div<{ $isLinkDisabled: boolean }>`
     display: flex;
     margin: 0 auto;
     width: fit-content;
+    height: 60px;
 
     li {
-      height: 40px;
+      position: relative;
 
       a {
+        height: 100%;
+        padding-inline: 30px;
+        text-align: center;
         background-color: white;
+        display: flex;
+        justify-content: center;
         color: ${({ theme }) => theme.colors.blue};
-        padding-inline: 20px;
         display: flex;
         align-items: center;
         text-decoration: none;
         font-weight: 600;
         font-size: ${({ theme }) => theme.fontSize.caption};
         letter-spacing: 1px;
-        width: 100%;
-        height: 100%;
-
         pointer-events: ${({ $isLinkDisabled }) => $isLinkDisabled && 'none'};
       }
+
+      &:not(:first-child)::after {
+        content: '';
+        position: absolute;
+        background-color: ${({ theme }) => theme.colors.blue};
+        width: 4px;
+        height: 4px;
+        border-radius: 100px;
+        left: -2px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    ul {
+      height: 40px;
     }
   }
 `;

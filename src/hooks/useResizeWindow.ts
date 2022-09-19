@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import { debounce } from 'utils/debounce';
 
 export const useResizeWindow = () => {
-  const [windowHeight, setWindowHeight] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(
+    typeof window !== 'undefined' ? window.innerHeight : 0
+  );
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0
+  );
 
   const debounceSetWindowHeightOnResize = debounce(() => {
     setWindowHeight(window.innerHeight);
@@ -11,8 +15,6 @@ export const useResizeWindow = () => {
   }, 300);
 
   useEffect(() => {
-    setWindowHeight(window.innerHeight);
-
     window.addEventListener('resize', debounceSetWindowHeightOnResize);
 
     return () => window.removeEventListener('resize', debounceSetWindowHeightOnResize);
