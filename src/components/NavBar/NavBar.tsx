@@ -25,7 +25,7 @@ const links = [
 ];
 
 const NavBar = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState<null | boolean>(null);
 
   const { windowHeight } = useContext(ResizeWindowContext);
 
@@ -46,7 +46,7 @@ const NavBar = () => {
   };
 
   return (
-    <Styled.Nav>
+    <nav>
       <Styled.NavBar>
         <Link
           href='/'
@@ -112,7 +112,7 @@ const NavBar = () => {
       </Styled.NavBar>
 
       <CategoriesBar />
-    </Styled.Nav>
+    </nav>
   );
 };
 

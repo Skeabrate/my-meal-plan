@@ -19,6 +19,8 @@ const CategoriesBar = () => {
   const listRef = useRef<HTMLUListElement>(null);
 
   const startSliding = (e: any) => {
+    if (!window.matchMedia('(pointer: coarse)').matches) e.preventDefault(); // preventDefault if the screen doesn't support touch
+
     if (!listRef.current) return;
 
     setSlider((state) => ({

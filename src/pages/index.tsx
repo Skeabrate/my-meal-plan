@@ -21,7 +21,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main style={{ height: '200vh' }}>
-        <h1>My plan</h1>
         {/* <section>
           {isLoading ? <p>Loading...</p> : null}
           {error ? <p>Error</p> : null}

@@ -1,12 +1,10 @@
 import styled, { css, keyframes, ThemeConsumer } from 'styled-components';
 
 type MenuProps = {
-  $isCartOpen: boolean;
+  $isCartOpen: null | boolean;
 };
 
 const navBarMobileHeight = '80px';
-
-export const Nav = styled.nav``;
 
 export const NavBar = styled.div`
   display: flex;
@@ -117,11 +115,12 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   flex-direction: column;
   z-index: 1000;
 
-  transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateX(-100%);' : 'translateX(0)')};
-  ${({ $isCartOpen }) =>
-    $isCartOpen
-      ? animationSlideCartHelper(animateSlideCartIn)
-      : animationSlideCartHelper(animateSlideCartOut, '0.5s')};
+  transform: ${({ $isCartOpen }) =>
+    $isCartOpen === false ? 'translateX(0)' : 'translateX(-100%)'};
+  ${({ $isCartOpen }) => {
+    if ($isCartOpen === true) return animationSlideCartHelper(animateSlideCartIn);
+    else if ($isCartOpen === false) return animationSlideCartHelper(animateSlideCartOut, '0.5s');
+  }};
 
   ul {
     list-style: none;
@@ -173,7 +172,7 @@ export const NavLinks = styled.ul<MenuProps>`
   width: 100%;
 `;
 
-export const NavLink = styled.li<{ $isActive: boolean; $isCartOpen: boolean }>`
+export const NavLink = styled.li<MenuProps & { $isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
