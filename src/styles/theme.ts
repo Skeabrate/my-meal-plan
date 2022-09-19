@@ -5,7 +5,8 @@ export const theme: DefaultTheme = {
     blue: '#585A6D',
     green: '#21A179',
     orange: '#C44900',
-    grey: '#F0F0F0',
+    grey: '#d8d8d8 ',
+    lightGrey: '#F0F0F0',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

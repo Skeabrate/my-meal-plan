@@ -1,4 +1,4 @@
-import styled, { css, keyframes, ThemeConsumer } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 type MenuProps = {
   $isCartOpen: null | boolean;
@@ -211,7 +211,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-color: ${({ theme }) => theme.colors.grey};
+  background-color: ${({ theme }) => theme.colors.lightGrey};
   transition: all 0.4s ease-in-out;
   ${({ $isCartOpen }) => {
     if ($isCartOpen)

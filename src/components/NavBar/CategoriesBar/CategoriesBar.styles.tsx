@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div<{ $isLinkDisabled: boolean }>`
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
-  border-top: 1px solid ${({ theme }) => theme.colors.blue};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  border-top: 1px solid ${({ theme }) => theme.colors.grey};
   overflow: hidden;
 
   ul {
@@ -20,7 +20,6 @@ export const Wrapper = styled.div<{ $isLinkDisabled: boolean }>`
         height: 100%;
         padding-inline: 30px;
         text-align: center;
-        background-color: white;
         display: flex;
         justify-content: center;
         color: ${({ theme }) => theme.colors.blue};
@@ -29,14 +28,13 @@ export const Wrapper = styled.div<{ $isLinkDisabled: boolean }>`
         text-decoration: none;
         font-weight: 600;
         font-size: ${({ theme }) => theme.fontSize.caption};
-        letter-spacing: 1px;
         pointer-events: ${({ $isLinkDisabled }) => $isLinkDisabled && 'none'};
       }
 
       &:not(:first-child)::after {
         content: '';
         position: absolute;
-        background-color: ${({ theme }) => theme.colors.blue};
+        background-color: ${({ theme }) => theme.colors.grey};
         width: 4px;
         height: 4px;
         border-radius: 100px;

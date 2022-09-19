@@ -7,6 +7,7 @@ declare module 'styled-components' {
       green: string;
       orange: string;
       grey: string;
+      lightGrey: string;
     };
     fontFamily: {
       abril: string;
