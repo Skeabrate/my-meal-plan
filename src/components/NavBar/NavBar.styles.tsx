@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes, ThemeConsumer } from 'styled-components';
 
 type MenuProps = {
   $isCartOpen: boolean;
@@ -15,7 +15,6 @@ export const NavBar = styled.div`
   height: ${navBarMobileHeight};
   padding-inline: 10px;
   position: relative;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
 
   a {
     display: flex;
@@ -113,7 +112,7 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   width: 100%;
   height: ${({ $windowHeight }) => `calc(${$windowHeight}px - ${navBarMobileHeight})`};
   min-height: 300px;
-  background-color: #ffffff;
+  background-color: white;
   display: flex;
   flex-direction: column;
 
@@ -187,7 +186,8 @@ export const NavLink = styled.li<{ $isActive: boolean; $isCartOpen: boolean }>`
     height: 60px;
     color: black;
     font-weight: 600;
-    text-decoration: ${({ $isActive }) => ($isActive ? 'underline' : 'none')};
+    text-decoration: none;
+    color: ${({ $isActive, theme }) => ($isActive ? theme.colors.orange : 'black')};
 
     opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
     transition: opacity 0.5s ease-in-out;
@@ -211,7 +211,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-color: rgb(240, 240, 240);
+  background-color: ${({ theme }) => theme.colors.grey};
   transition: all 0.4s ease-in-out;
   ${({ $isCartOpen }) => {
     if ($isCartOpen)

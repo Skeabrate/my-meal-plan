@@ -4,7 +4,7 @@ import { dehydrate, QueryClient } from 'react-query';
 import { useFetchCategories, fetchCategories } from 'hooks/useFetchCategories';
 
 const Home: NextPage = () => {
-  const { data, isLoading, error } = useFetchCategories();
+  const { data, error } = useFetchCategories();
 
   return (
     <div>
