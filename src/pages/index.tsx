@@ -10,8 +10,14 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>My Meal Plan</title>
-        <meta name='description' content='Meal Plan app' />
-        <link rel='icon' href='/favicon.ico' />
+        <meta
+          name='description'
+          content='Meal Plan app'
+        />
+        <link
+          rel='icon'
+          href='/favicon.ico'
+        />
       </Head>
 
       <main style={{ height: '200vh' }}>

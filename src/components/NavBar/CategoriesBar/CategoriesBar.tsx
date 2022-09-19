@@ -1,51 +1,83 @@
 import Link from 'next/link';
-import styled from 'styled-components';
 import { useFetchCategories } from 'hooks/useFetchCategories';
-
-const Wrapper = styled.div`
-  width: 100%;
-  overflow: hidden;
-
-  ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
-    border-top: 1px solid ${({ theme }) => theme.colors.blue};
-
-    li {
-      height: 40px;
-
-      a {
-        background-color: white;
-        color: ${({ theme }) => theme.colors.blue};
-        padding-inline: 20px;
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: ${({ theme }) => theme.fontSize.caption};
-        letter-spacing: 1px;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-`;
+import * as Styled from './CategoriesBar.styles';
+import { useRef, useState } from 'react';
 
 const CategoriesBar = () => {
+  const [slider, setSlider] = useState({
+    isSliderMoving: false,
+    isLinkDisabled: false,
+    startPosition: 0,
+    endPosition: 0,
+  });
+
   const { data, isLoading, error } = useFetchCategories();
 
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const onMouseDownHandler = (e: any) => {
+    e.preventDefault();
+    if (!listRef.current) return;
+
+    const transformMatrix = window.getComputedStyle(listRef.current).getPropertyValue('transform');
+
+    if (transformMatrix !== 'none') {
+      const endPosition = parseInt(transformMatrix.split(',')[4].trim());
+
+      setSlider((state) => ({
+        ...state,
+        endPosition,
+      }));
+    }
+
+    setSlider((state) => ({
+      ...state,
+      isSliderMoving: true,
+      startPosition: e.pageX,
+    }));
+  };
+
+  const cancelSliding = (e: any) => {
+    e.preventDefault();
+    setSlider((state) => ({
+      ...state,
+      isSliderMoving: false,
+      isLinkDisabled: false,
+    }));
+  };
+
+  const updateSliderPostion = (e: any) => {
+    e.preventDefault();
+    if (!slider.isSliderMoving || !listRef.current) return;
+
+    setSlider((state) => ({
+      ...state,
+      isLinkDisabled: true,
+    }));
+
+    const currentPosition = e.pageX;
+    const diff = currentPosition - slider.startPosition;
+    listRef.current.style.transform = `translateX(${slider.endPosition + diff}px)`;
+  };
+
   return (
-    <Wrapper>
-      <ul>
+    <Styled.Wrapper $isLinkDisabled={slider.isLinkDisabled}>
+      <ul
+        ref={listRef}
+        onMouseMove={updateSliderPostion}
+        onMouseLeave={cancelSliding}
+        onMouseDown={onMouseDownHandler}
+      >
         {data?.map(({ idCategory, strCategory }) => (
-          <li key={idCategory}>
+          <li
+            key={idCategory}
+            onMouseUp={cancelSliding}
+          >
             <Link href={`/categories/${strCategory}`}>{strCategory}</Link>
           </li>
         ))}
       </ul>
-    </Wrapper>
+    </Styled.Wrapper>
   );
 };
 

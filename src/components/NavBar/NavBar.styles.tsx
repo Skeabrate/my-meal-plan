@@ -115,6 +115,7 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   background-color: white;
   display: flex;
   flex-direction: column;
+  z-index: 1000;
 
   transform: ${({ $isCartOpen }) => ($isCartOpen ? 'translateX(-100%);' : 'translateX(0)')};
   ${({ $isCartOpen }) =>
