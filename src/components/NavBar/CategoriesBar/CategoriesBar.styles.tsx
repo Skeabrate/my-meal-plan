@@ -28,7 +28,13 @@ export const Wrapper = styled.div<{ $isLinkDisabled: boolean }>`
         text-decoration: none;
         font-weight: 600;
         font-size: ${({ theme }) => theme.fontSize.caption};
+        letter-spacing: 0.5px;
         pointer-events: ${({ $isLinkDisabled }) => $isLinkDisabled && 'none'};
+        transition: scale 0.2s ease-in-out;
+
+        &:hover {
+          scale: 1.1;
+        }
       }
 
       &:not(:first-child)::after {

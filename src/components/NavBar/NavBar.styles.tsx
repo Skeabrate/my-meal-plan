@@ -230,12 +230,21 @@ export const NavSubItems = styled.ul<MenuProps>`
 
   li {
     height: 100%;
+
     a {
       width: 80px;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    svg path {
+      transition: all 0.2s ease-in-out;
+    }
+
+    &:hover svg path {
+      fill: ${({ theme }) => theme.colors.orange};
     }
   }
 
