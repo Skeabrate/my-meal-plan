@@ -9,7 +9,8 @@ export const Wrapper = styled.div<{ $isLinkDisabled: boolean }>`
   ul {
     list-style: none;
     display: flex;
-    justify-content: space-between;
+    margin: 0 auto;
+    width: fit-content;
 
     li {
       height: 40px;

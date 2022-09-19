@@ -1,7 +1,8 @@
+import { useRef, useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
-import { useFetchCategories } from 'hooks/useFetchCategories';
 import * as Styled from './CategoriesBar.styles';
-import { useRef, useState } from 'react';
+import { useFetchCategories } from 'hooks/useFetchCategories';
+import { ResizeWindowContext } from 'context/ResizeWindowContext';
 
 const CategoriesBar = () => {
   const [slider, setSlider] = useState({
@@ -13,11 +14,18 @@ const CategoriesBar = () => {
 
   const { data, isLoading, error } = useFetchCategories();
 
+  const { windowWidth } = useContext(ResizeWindowContext);
+
   const listRef = useRef<HTMLUListElement>(null);
 
-  const onMouseDownHandler = (e: any) => {
-    e.preventDefault();
+  const startSliding = (e: any) => {
     if (!listRef.current) return;
+
+    setSlider((state) => ({
+      ...state,
+      isSliderMoving: true,
+      startPosition: e.pageX ?? e.touches[0].clientX,
+    }));
 
     const transformMatrix = window.getComputedStyle(listRef.current).getPropertyValue('transform');
 
@@ -29,16 +37,9 @@ const CategoriesBar = () => {
         endPosition,
       }));
     }
-
-    setSlider((state) => ({
-      ...state,
-      isSliderMoving: true,
-      startPosition: e.pageX,
-    }));
   };
 
-  const cancelSliding = (e: any) => {
-    e.preventDefault();
+  const cancelSliding = () => {
     setSlider((state) => ({
       ...state,
       isSliderMoving: false,
@@ -47,32 +48,50 @@ const CategoriesBar = () => {
   };
 
   const updateSliderPostion = (e: any) => {
-    e.preventDefault();
     if (!slider.isSliderMoving || !listRef.current) return;
+    if (listRef.current.getBoundingClientRect().width < windowWidth) return;
 
     setSlider((state) => ({
       ...state,
       isLinkDisabled: true,
     }));
 
-    const currentPosition = e.pageX;
+    const currentPosition = e.pageX ?? e.touches[0].clientX;
     const diff = currentPosition - slider.startPosition;
     listRef.current.style.transform = `translateX(${slider.endPosition + diff}px)`;
+
+    if (listRef.current.getBoundingClientRect().left > 0) {
+      listRef.current.style.transform = 'translateX(0)';
+    }
+
+    if (listRef.current.getBoundingClientRect().right <= windowWidth) {
+      listRef.current.style.transform = `translateX(-${
+        listRef.current.getBoundingClientRect().width - windowWidth
+      }px)`;
+    }
   };
+
+  useEffect(() => {
+    if (listRef.current) listRef.current.style.transform = 'translateX(0)';
+  }, [windowWidth, listRef]);
 
   return (
     <Styled.Wrapper $isLinkDisabled={slider.isLinkDisabled}>
       <ul
         ref={listRef}
-        onMouseMove={updateSliderPostion}
+        // Desktop
+        onMouseDown={startSliding}
+        onMouseUp={cancelSliding}
         onMouseLeave={cancelSliding}
-        onMouseDown={onMouseDownHandler}
+        onMouseMove={updateSliderPostion}
+        // Mobile
+        onTouchStart={startSliding}
+        onTouchEnd={cancelSliding}
+        onTouchCancel={cancelSliding}
+        onTouchMove={updateSliderPostion}
       >
         {data?.map(({ idCategory, strCategory }) => (
-          <li
-            key={idCategory}
-            onMouseUp={cancelSliding}
-          >
+          <li key={idCategory}>
             <Link href={`/categories/${strCategory}`}>{strCategory}</Link>
           </li>
         ))}

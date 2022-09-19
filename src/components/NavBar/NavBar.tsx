@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import LogoSrc from 'assets/logo.png';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
-import { debounce } from 'utils/debounce';
+import { ResizeWindowContext } from 'context/ResizeWindowContext';
 
 const links = [
   {
@@ -26,7 +26,8 @@ const links = [
 
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [windowHeight, setWindowHeight] = useState(0);
+
+  const { windowHeight } = useContext(ResizeWindowContext);
 
   const router = useRouter();
 
@@ -44,22 +45,20 @@ const NavBar = () => {
     });
   };
 
-  const debounceSetWindowHeightOnResize = debounce(() => setWindowHeight(window.innerHeight), 300);
-
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-
-    window.addEventListener('resize', debounceSetWindowHeightOnResize);
-
-    return () => window.removeEventListener('resize', debounceSetWindowHeightOnResize);
-  }, [debounceSetWindowHeightOnResize]);
-
   return (
     <Styled.Nav>
       <Styled.NavBar>
-        <Link href='/' aria-label='navigate to homepage'>
+        <Link
+          href='/'
+          aria-label='navigate to homepage'
+        >
           <a>
-            <Image src={LogoSrc} alt='My Meal Plan' height='80' width='128' />
+            <Image
+              src={LogoSrc}
+              alt='My Meal Plan'
+              height='80'
+              width='128'
+            />
           </a>
         </Link>
 
@@ -71,7 +70,10 @@ const NavBar = () => {
           <div></div>
         </Styled.HambuergerMenu>
 
-        <Styled.SlideCart $windowHeight={windowHeight} $isCartOpen={isCartOpen}>
+        <Styled.SlideCart
+          $windowHeight={windowHeight}
+          $isCartOpen={isCartOpen}
+        >
           <Styled.NavLinks $isCartOpen={isCartOpen}>
             {links.map(({ href, name }) => (
               <Styled.NavLink
@@ -86,14 +88,20 @@ const NavBar = () => {
 
           <Styled.NavSubItems $isCartOpen={isCartOpen}>
             <li>
-              <Link aria-label='search' href='/search'>
+              <Link
+                aria-label='search'
+                href='/search'
+              >
                 <a>
                   <SearchSvg />
                 </a>
               </Link>
             </li>
             <li>
-              <Link aria-label='profile' href='/profile'>
+              <Link
+                aria-label='profile'
+                href='/profile'
+              >
                 <a>
                   <ProfileSvg />
                 </a>

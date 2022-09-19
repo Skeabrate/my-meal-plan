@@ -6,6 +6,7 @@ import NavBar from 'components/NavBar/NavBar';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
 import { GlobaStyles } from 'styles/GlobalStyle';
+import ResizeWindowProvider from 'context/ResizeWindowContext';
 
 type PageProps = {
   dehydratedState?: DehydratedState;
@@ -23,8 +24,10 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <GlobaStyles />
-          <NavBar />
-          <Component {...pageProps} />
+          <ResizeWindowProvider>
+            <NavBar />
+            <Component {...pageProps} />
+          </ResizeWindowProvider>
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>
