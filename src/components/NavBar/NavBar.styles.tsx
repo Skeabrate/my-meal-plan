@@ -32,10 +32,10 @@ export const NavBar = styled.div`
   }
 `;
 
-const buttonStyle = css`
+const buttonStyle = (isCartOpen: boolean | null) => css`
   height: 4px;
   width: 36px;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => (isCartOpen ? theme.colors.orange : theme.colors.blue)};
   transition-duration: 0.5s;
   border-radius: 100px;
 `;
@@ -52,7 +52,8 @@ export const HambuergerMenu = styled.button<MenuProps>`
   border: none;
 
   div {
-    ${buttonStyle};
+    ${({ $isCartOpen }) => buttonStyle($isCartOpen)};
+
     position: relative;
     ${({ $isCartOpen }) => $isCartOpen && `transform: rotateZ(-180deg);`};
 
@@ -61,7 +62,7 @@ export const HambuergerMenu = styled.button<MenuProps>`
       position: absolute;
       left: 0;
       top: -12px;
-      ${buttonStyle};
+      ${({ $isCartOpen }) => buttonStyle($isCartOpen)};
       ${({ $isCartOpen }) =>
         $isCartOpen && `transform: rotateZ(-45deg) scaleX(0.75) translate(-12px, -4px);`};
     }
@@ -71,7 +72,7 @@ export const HambuergerMenu = styled.button<MenuProps>`
       position: absolute;
       left: 0;
       bottom: -12px;
-      ${buttonStyle};
+      ${({ $isCartOpen }) => buttonStyle($isCartOpen)};
       ${({ $isCartOpen }) =>
         $isCartOpen && `transform: rotateZ(45deg) scaleX(0.75) translate(-12px, 4px);`};
     }
