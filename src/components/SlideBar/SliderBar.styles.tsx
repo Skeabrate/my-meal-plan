@@ -30,7 +30,6 @@ export const SlideBar = styled.div<SlideBarType>`
 
     li a {
       height: 100%;
-      padding-inline: 15px;
       display: flex;
       align-items: center;
       pointer-events: ${({ $isLinkDisabled }) => $isLinkDisabled && 'none'};
