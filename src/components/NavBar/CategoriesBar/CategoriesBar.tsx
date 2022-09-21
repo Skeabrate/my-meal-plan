@@ -20,32 +20,26 @@ const CategoriesBar = () => {
   });
 
   const { data, error } = useFetchCategories();
-
   const { windowWidth } = useContext(ResizeWindowContext);
-
   const listRef = useRef<HTMLUListElement>(null);
+
+  const getSliderTransformX = (ref: HTMLUListElement) =>
+    parseInt(window.getComputedStyle(ref).getPropertyValue('transform').split(',')[4].trim());
 
   const startSliding = (e: any) => {
     if (!window.matchMedia('(pointer: coarse)').matches) e.preventDefault(); // preventDefault if the screen doesn't support touch
+    listRef.current && (listRef.current.style.transition = 'none');
 
     setSlider((state) => ({
       ...state,
       isSliderMoving: true,
       startPosition: e.pageX ?? e.touches[0].clientX,
+      endPosition: listRef.current ? getSliderTransformX(listRef.current) : 0,
     }));
-
-    const getTransformMatrix = listRef.current
-      ? window.getComputedStyle(listRef.current).getPropertyValue('transform')
-      : '';
-
-    if (getTransformMatrix !== 'none')
-      setSlider((state) => ({
-        ...state,
-        endPosition: parseInt(getTransformMatrix.split(',')[4].trim()),
-      }));
   };
 
   const cancelSliding = () =>
+    slider.isSliderMoving &&
     setSlider((state) => ({
       ...state,
       isSliderMoving: false,
@@ -94,6 +88,40 @@ const CategoriesBar = () => {
     }
   };
 
+  const arrowButtonHandler = (direction: string) => {
+    if (!listRef.current) return;
+
+    const sliderOffset = getSliderTransformX(listRef.current);
+    const theEndOfSlider = Math.floor(listRef.current.getBoundingClientRect().right);
+    let moveSliderOnClickValue = direction === 'right' ? -200 : direction === 'left' ? 200 : 0;
+
+    if (direction === 'left' && sliderOffset + moveSliderOnClickValue >= 0) {
+      moveSliderOnClickValue = -1 * sliderOffset;
+      setDisplayArrows({
+        right: true,
+        left: false,
+      });
+    } else if (
+      direction === 'right' &&
+      theEndOfSlider - windowWidth <= moveSliderOnClickValue * -1
+    ) {
+      moveSliderOnClickValue = -1 * (theEndOfSlider - windowWidth);
+      setDisplayArrows({
+        left: true,
+        right: false,
+      });
+    } else {
+      setDisplayArrows({
+        left: true,
+        right: true,
+      });
+    }
+
+    listRef.current.style.transition = 'transform .3s ease-in-out';
+    listRef.current.style.transform = `translateX(${sliderOffset + moveSliderOnClickValue}px)`;
+  };
+
+  // handle window resize
   useEffect(() => {
     if (listRef.current) {
       listRef.current.style.transform = 'translateX(0)';
@@ -118,6 +146,7 @@ const CategoriesBar = () => {
           <Styled.Arrow
             $isActive={displayArrows.left}
             $left
+            onClick={() => arrowButtonHandler('left')}
           >
             <LeftArrow />
           </Styled.Arrow>
@@ -145,6 +174,7 @@ const CategoriesBar = () => {
           <Styled.Arrow
             $isActive={displayArrows.right}
             $right
+            onClick={() => arrowButtonHandler('right')}
           >
             <RightArrow />
           </Styled.Arrow>
