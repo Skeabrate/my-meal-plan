@@ -56,6 +56,7 @@ const NavBar = () => {
             <Image
               src={LogoSrc}
               alt='My Meal Plan'
+              priority
               height='80'
               width='128'
             />

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { dehydrate, QueryClient } from 'react-query';
 import { useFetchCategories, fetchCategories } from 'hooks/useFetchCategories';
 
-const Home: NextPage = () => {
+function Home() {
   const { data, error } = useFetchCategories();
 
   return (
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
       </main>
     </div>
   );
-};
+}
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -45,4 +45,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default Home as NextPage;
