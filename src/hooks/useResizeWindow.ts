@@ -7,12 +7,12 @@ export const useResizeWindow = () => {
 
   const debounceSetWindowHeightOnResize = debounce(() => {
     setWindowHeight(window.innerHeight);
-    setWindowWidth(window.innerWidth);
+    setWindowWidth(document.body.clientWidth);
   }, 300);
 
   useEffect(() => {
     setWindowHeight(window.innerHeight);
-    setWindowWidth(window.innerWidth);
+    setWindowWidth(document.body.clientWidth);
 
     window.addEventListener('resize', debounceSetWindowHeightOnResize);
 
