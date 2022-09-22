@@ -1,16 +1,40 @@
 import React from 'react';
+import Image from 'next/image';
 import { NextPage } from 'next';
 import { fetchCategories } from 'hooks/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMealsByCategory';
+import Link from 'next/link';
 
 const Category = ({ category }: { category: string }) => {
   const { data } = useFetchMealsByCategory(category);
 
-  console.log(data);
+  return (
+    <main>
+      <header>
+        <h1>{category}</h1>
+      </header>
 
-  return <div>{category}</div>;
+      <section>
+        {data.map(({ idMeal, strMeal, strMealThumb }) => (
+          <article key={idMeal}>
+            <Link href={`/meal/${strMeal}`}>
+              <a>
+                <Image
+                  src={strMealThumb}
+                  alt={strMeal}
+                  width='300'
+                  height='300'
+                />
+                <h2>{strMeal}</h2>
+              </a>
+            </Link>
+          </article>
+        ))}
+      </section>
+    </main>
+  );
 };
 
 export async function getStaticPaths() {

@@ -11,7 +11,7 @@ const CategoriesBar = () => {
       <SlideBar>
         {data?.map(({ idCategory, strCategory }) => (
           <li key={idCategory}>
-            <Link href={`/categories/${strCategory}`}>{strCategory}</Link>
+            <Link href={`/category/${strCategory}`}>{strCategory}</Link>
           </li>
         ))}
       </SlideBar>

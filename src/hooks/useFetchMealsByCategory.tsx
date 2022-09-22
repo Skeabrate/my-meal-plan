@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { ApiResponseType } from 'types/ApiResponseType';
+import { MealByCategoryType } from 'types/MealByCategoryType';
 
 export const fetchMealsByCategory = async (category: string) => {
   try {
@@ -21,5 +23,5 @@ export const useFetchMealsByCategory = (category: string) => {
     }
   );
 
-  return { data, isLoading, error } as any;
+  return { data, isLoading, error } as { data: MealByCategoryType[] } & ApiResponseType;
 };
