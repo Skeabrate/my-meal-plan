@@ -1,11 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { dehydrate, QueryClient } from 'react-query';
-import { useFetchCategories, fetchCategories } from 'hooks/useFetchCategories';
+import { fetchCategories } from 'hooks/useFetchCategories';
 
 function Home() {
-  const { data, error } = useFetchCategories();
-
   return (
     <div>
       <Head>
@@ -36,7 +34,7 @@ function Home() {
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery('categories', fetchCategories);
+  await queryClient.prefetchQuery('fetchCategories', fetchCategories);
 
   return {
     props: {

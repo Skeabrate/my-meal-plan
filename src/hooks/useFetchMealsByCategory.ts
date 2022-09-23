@@ -5,7 +5,7 @@ import { MealByCategoryType } from 'types/MealByCategoryType';
 
 export const fetchMealsByCategory = async (category: string) => {
   try {
-    const res = await axios.get(`${process.env.FILTER_BY_CATEGORY}${category}`);
+    const res = await axios.get(`${process.env.FETCH_MEALS_BY_CATEGORY}${category}`);
 
     return res?.data?.meals;
   } catch (err) {
@@ -14,14 +14,16 @@ export const fetchMealsByCategory = async (category: string) => {
 };
 
 export const useFetchMealsByCategory = (category: string) => {
-  const { data, isLoading, error } = useQuery(
-    'mealsByCategory',
-    () => fetchMealsByCategory(category),
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const {
+    data: mealsByCategory,
+    isLoading,
+    error,
+  } = useQuery('fetchMealsByCategory', () => fetchMealsByCategory(category), {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
-  return { data, isLoading, error } as { data: MealByCategoryType[] } & ApiResponseType;
+  return { mealsByCategory, isLoading, error } as {
+    mealsByCategory: MealByCategoryType[];
+  } & ApiResponseType;
 };

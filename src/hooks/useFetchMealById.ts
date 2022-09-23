@@ -14,10 +14,14 @@ export const fetchMealById = async (mealId: string) => {
 };
 
 export const useFetchMealById = (mealId: string) => {
-  const { data, isLoading, error } = useQuery('mealById', () => fetchMealById(mealId), {
+  const {
+    data: mealById,
+    isLoading,
+    error,
+  } = useQuery('fetchMealById', () => fetchMealById(mealId), {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
 
-  return { data, isLoading, error } as { data: MealType[] } & ApiResponseType;
+  return { mealById, isLoading, error } as { mealById: MealType[] } & ApiResponseType;
 };

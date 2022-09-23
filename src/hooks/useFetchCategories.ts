@@ -14,10 +14,14 @@ export const fetchCategories = async () => {
 };
 
 export const useFetchCategories = () => {
-  const { data, isLoading, error } = useQuery('categories', fetchCategories, {
+  const {
+    data: categories,
+    isLoading,
+    error,
+  } = useQuery('fetchCategories', fetchCategories, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
 
-  return { data, isLoading, error } as { data: CategoryType[] } & ApiResponseType;
+  return { categories, isLoading, error } as { categories: CategoryType[] } & ApiResponseType;
 };

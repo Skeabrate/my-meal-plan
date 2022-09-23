@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { NextPage } from 'next';
 import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMealsByCategory';
-import Link from 'next/link';
 
 const Category = ({ category }: { category: string }) => {
-  const { data: categories } = useFetchCategories();
-  const { data: mealsByCategory } = useFetchMealsByCategory(category);
+  const { categories } = useFetchCategories();
+  const { mealsByCategory } = useFetchMealsByCategory(category);
 
   const categoryDetails = useMemo(
     () => categories.find((item) => item.strCategory === category),
@@ -63,8 +63,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: { params: { category: string } }) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery('categories', fetchCategories);
-  await queryClient.prefetchQuery('mealsByCategory', () =>
+  await queryClient.prefetchQuery('fetchCategories', fetchCategories);
+  await queryClient.prefetchQuery('fetchMealsByCategory', () =>
     fetchMealsByCategory(context.params.category)
   );
 

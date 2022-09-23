@@ -1,12 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
 import { NextPage } from 'next';
 import { fetchCategories } from 'hooks/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealById, useFetchMealById } from 'hooks/useFetchMealById';
 
 const Meal = ({ mealId }: { mealId: string }) => {
-  const { data } = useFetchMealById(mealId);
+  const { mealById } = useFetchMealById(mealId);
   const {
     strMeal,
     strInstructions,
@@ -54,7 +53,7 @@ const Meal = ({ mealId }: { mealId: string }) => {
     strMeasure18,
     strMeasure19,
     strMeasure20,
-  } = data[0];
+  } = mealById[0];
 
   return (
     <main>
@@ -70,8 +69,8 @@ export async function getServerSideProps(context: { params: { meal: string } }) 
 
   const mealId = context.params.meal;
 
-  await queryClient.prefetchQuery('categories', fetchCategories);
-  await queryClient.prefetchQuery('mealById', () => fetchMealById(mealId));
+  await queryClient.prefetchQuery('fetchCategories', fetchCategories);
+  await queryClient.prefetchQuery('fetchMealById', () => fetchMealById(mealId));
 
   return {
     props: {
