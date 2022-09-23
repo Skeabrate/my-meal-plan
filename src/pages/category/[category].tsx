@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { NextPage } from 'next';
-import { fetchCategories } from 'hooks/useFetchCategories';
+import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMealsByCategory';
 import Link from 'next/link';
 
 const Category = ({ category }: { category: string }) => {
-  const { data } = useFetchMealsByCategory(category);
+  const { data: categories } = useFetchCategories();
+  const { data: mealsByCategory } = useFetchMealsByCategory(category);
+
+  const categoryDetails = useMemo(
+    () => categories.find((item) => item.strCategory === category),
+    [categories, category]
+  );
 
   return (
     <main>
       <header>
-        <h1>{category}</h1>
+        <h1>{categoryDetails?.strCategory}</h1>
+
+        <p>{categoryDetails?.strCategoryDescription}</p>
       </header>
 
       <section>
-        {data.map(({ idMeal, strMeal, strMealThumb }) => (
+        {mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => (
           <article key={idMeal}>
-            <Link href={`/meal/${strMeal}`}>
+            <Link href={`/meal/${idMeal}`}>
               <a>
                 <Image
                   src={strMealThumb}

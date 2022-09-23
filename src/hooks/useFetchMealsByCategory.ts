@@ -5,7 +5,7 @@ import { MealByCategoryType } from 'types/MealByCategoryType';
 
 export const fetchMealsByCategory = async (category: string) => {
   try {
-    const res = await axios.get(`${process.env.FILTER_BY_CATEGORY}${category}` || '');
+    const res = await axios.get(`${process.env.FILTER_BY_CATEGORY}${category}`);
 
     return res?.data?.meals;
   } catch (err) {
