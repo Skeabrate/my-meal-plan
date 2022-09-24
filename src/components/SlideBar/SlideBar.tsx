@@ -49,14 +49,15 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
     if (!slider.isSliderMoving || !listRef.current) return;
     if (listRef.current.getBoundingClientRect().width < windowWidth) return;
 
-    setSlider((state) => ({
-      ...state,
-      isLinkDisabled: true,
-    }));
-
     const currentPosition = e.pageX ?? e.touches[0].clientX;
     let diff = currentPosition - slider.startPosition;
     listRef.current.style.transform = `translateX(${slider.endPosition + diff}px)`;
+
+    if (diff > 10 || diff < -10)
+      setSlider((state) => ({
+        ...state,
+        isLinkDisabled: true,
+      }));
 
     if (listRef.current.getBoundingClientRect().left > 0) {
       listRef.current.style.transform = 'translateX(0)';
