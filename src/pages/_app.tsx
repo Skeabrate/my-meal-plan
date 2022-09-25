@@ -2,11 +2,12 @@ import React from 'react';
 import { NextPageContext } from 'next';
 import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider, DehydratedState } from 'react-query';
-import NavBar from 'components/NavBar/NavBar';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
 import { GlobaStyles } from 'styles/GlobalStyle';
+import NavBar from 'components/NavBar/NavBar';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
+import MainWrapper from 'templates/MainWrapper';
 
 type PageProps = {
   dehydratedState?: DehydratedState;
@@ -26,7 +27,9 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
           <GlobaStyles />
           <ResizeWindowProvider>
             <NavBar />
-            <Component {...pageProps} />
+            <MainWrapper>
+              <Component {...pageProps} />
+            </MainWrapper>
           </ResizeWindowProvider>
         </ThemeProvider>
       </Hydrate>

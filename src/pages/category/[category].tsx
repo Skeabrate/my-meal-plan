@@ -7,7 +7,6 @@ import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMealsByCategory';
-import MainWrapper from 'templates/MainWrapper';
 
 const Category = ({ category }: { category: string }) => {
   const { categories } = useFetchCategories();
@@ -22,7 +21,7 @@ const Category = ({ category }: { category: string }) => {
   const { strCategory, strCategoryDescription, strCategoryThumb } = categoryDetails;
 
   return (
-    <MainWrapper>
+    <div>
       <Styled.Intro>
         <div>
           <header>
@@ -57,7 +56,7 @@ const Category = ({ category }: { category: string }) => {
           </article>
         ))}
       </section>
-    </MainWrapper>
+    </div>
   );
 };
 
