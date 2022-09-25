@@ -18,6 +18,20 @@ export const GlobaStyles = createGlobalStyle`
 		margin: 0;
 		font-family: ${({ theme }) => theme.fontFamily.lato};
 		font-size: ${({ theme }) => theme.fontSize.paragraph};
+
+		h1, h2 {
+			font-family: ${({ theme }) => theme.fontFamily.abril};
+		}
+
+		h1{
+			font-size: ${({ theme }) => theme.fontSize.h1Mobile};
+		}
+
+		${({ theme }) => theme.mq.tablet} {
+			h1{
+			font-size: ${({ theme }) => theme.fontSize.h1Desktop};
+		}
+		}
 	}
 
 	button, a{

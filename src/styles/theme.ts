@@ -13,6 +13,9 @@ export const theme: DefaultTheme = {
     lato: '"Lato", sans-serif',
   },
   fontSize: {
+    h1Desktop: '5rem',
+    h1Mobile: '3rem',
+    abrilDesktop: '2rem',
     paragraph: '1.6rem',
     caption: '1.2rem',
   },

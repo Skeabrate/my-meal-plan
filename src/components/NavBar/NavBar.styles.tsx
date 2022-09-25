@@ -13,6 +13,7 @@ export const NavBar = styled.div`
   height: ${navBarMobileHeight};
   padding-inline: 10px;
   position: relative;
+  font-family: ${({ theme }) => theme.fontFamily.abril};
 
   a {
     display: flex;
@@ -186,22 +187,15 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean }>`
     width: 100%;
     height: 60px;
     color: black;
-    font-weight: 600;
     text-decoration: none;
     color: ${({ $isActive, theme }) => ($isActive ? theme.colors.orange : 'black')};
-
+    font-size: ${({ theme }) => theme.fontSize.abrilDesktop};
     opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
     transition: opacity 0.5s ease-in-out;
     transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.5s' : '0.2s')};
 
     &:hover {
       text-decoration: underline;
-    }
-  }
-
-  ${({ theme }) => theme.mq.tablet} {
-    a {
-      font-size: ${({ theme }) => theme.fontSize.paragraph};
     }
   }
 `;

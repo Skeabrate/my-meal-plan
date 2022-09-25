@@ -14,6 +14,9 @@ declare module 'styled-components' {
       lato: string;
     };
     fontSize: {
+      h1Desktop: string;
+      h1Mobile: string;
+      abrilDesktop: string;
       paragraph: string;
       caption: string;
     };

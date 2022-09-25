@@ -23,6 +23,7 @@
 			"styles/*": ["src/styles/*"],
 			"utils/*": ["src/utils/*"],
 			"context/*": ["src/context/*"],
+			"templates/*": ["src/templates/*"],
 		}
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],

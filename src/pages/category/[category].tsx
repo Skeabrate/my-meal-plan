@@ -2,10 +2,12 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
+import * as Styled from 'assets/styles/category.styles';
 import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMealsByCategory';
+import MainWrapper from 'templates/MainWrapper';
 
 const Category = ({ category }: { category: string }) => {
   const { categories } = useFetchCategories();
@@ -16,13 +18,27 @@ const Category = ({ category }: { category: string }) => {
     [categories, category]
   );
 
-  return (
-    <main>
-      <header>
-        <h1>{categoryDetails?.strCategory}</h1>
+  if (!categoryDetails) return;
+  const { strCategory, strCategoryDescription, strCategoryThumb } = categoryDetails;
 
-        <p>{categoryDetails?.strCategoryDescription}</p>
-      </header>
+  return (
+    <MainWrapper>
+      <Styled.Intro>
+        <div>
+          <header>
+            <h1>{strCategory}</h1>
+          </header>
+
+          <p>{strCategoryDescription}</p>
+        </div>
+
+        <Image
+          src={strCategoryThumb}
+          alt={strCategory}
+          width={400}
+          height={400}
+        />
+      </Styled.Intro>
 
       <section>
         {mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => (
@@ -41,7 +57,7 @@ const Category = ({ category }: { category: string }) => {
           </article>
         ))}
       </section>
-    </main>
+    </MainWrapper>
   );
 };
 
