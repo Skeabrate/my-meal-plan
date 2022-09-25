@@ -1,9 +1,7 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
-import Link from 'next/link';
 import * as Styled from './SliderBar.styles';
 import RightArrow from 'assets/SVG/RightArrow.svg';
 import LeftArrow from 'assets/SVG/LeftArrow.svg';
-import { useFetchCategories } from 'hooks/useFetchCategories';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 
 const SlideBar = ({ children }: { children: React.ReactNode }) => {
@@ -22,11 +20,15 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
   const { windowWidth } = useContext(ResizeWindowContext);
   const listRef = useRef<HTMLUListElement>(null);
 
+  const sliderTransitionValue = 'transform .3s ease-in-out';
+
   const getSliderTransformX = (ref: HTMLUListElement) =>
     parseInt(window.getComputedStyle(ref).getPropertyValue('transform').split(',')[4].trim());
 
   const startSliding = (e: any) => {
-    if (!window.matchMedia('(pointer: coarse)').matches) e.preventDefault(); // preventDefault if the screen doesn't support touch
+    const doesScreenSupportTouchEvents = window.matchMedia('(pointer: coarse)').matches;
+    if (!doesScreenSupportTouchEvents) e.preventDefault();
+
     listRef.current && (listRef.current.style.transition = 'none');
 
     setSlider((state) => ({
@@ -47,19 +49,25 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
 
   const updateSliderPostion = (e: any) => {
     if (!slider.isSliderMoving || !listRef.current) return;
-    if (listRef.current.getBoundingClientRect().width < windowWidth) return;
+
+    const isSliderSmallerThanWindowWidth =
+      listRef.current.getBoundingClientRect().width < windowWidth;
+    if (isSliderSmallerThanWindowWidth) return;
 
     const currentPosition = e.pageX ?? e.touches[0].clientX;
     let diff = currentPosition - slider.startPosition;
     listRef.current.style.transform = `translateX(${slider.endPosition + diff}px)`;
 
-    if (diff > 10 || diff < -10)
+    const isLinkDisabledOnSlide = diff > 10 || diff < -10;
+    if (isLinkDisabledOnSlide) {
       setSlider((state) => ({
         ...state,
         isLinkDisabled: true,
       }));
+    }
 
-    if (listRef.current.getBoundingClientRect().left > 0) {
+    const isSliderOnTheBeginnig = listRef.current.getBoundingClientRect().left > 0;
+    if (isSliderOnTheBeginnig) {
       listRef.current.style.transform = 'translateX(0)';
       setDisplayArrows((state) => ({
         ...state,
@@ -72,7 +80,8 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
       }));
     }
 
-    if (listRef.current.getBoundingClientRect().right <= windowWidth) {
+    const isSliderOnTheEnd = listRef.current.getBoundingClientRect().right <= windowWidth;
+    if (isSliderOnTheEnd) {
       listRef.current.style.transform = `translateX(-${
         listRef.current.getBoundingClientRect().width - windowWidth
       }px)`;
@@ -95,16 +104,18 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
     const theEndOfSlider = Math.floor(listRef.current.getBoundingClientRect().right);
     let moveSliderOnClickValue = direction === 'right' ? -200 : direction === 'left' ? 200 : 0;
 
-    if (direction === 'left' && sliderOffset + moveSliderOnClickValue >= 0) {
+    // handle arrows display and slider move value
+    const isMoveSliderLeftValueBiggerThanSpaceLeft = sliderOffset + moveSliderOnClickValue >= 0;
+    const isMoveSliderRightValueBiggerThanSpaceLeft =
+      theEndOfSlider - windowWidth <= moveSliderOnClickValue * -1;
+
+    if (direction === 'left' && isMoveSliderLeftValueBiggerThanSpaceLeft) {
       moveSliderOnClickValue = -1 * sliderOffset;
       setDisplayArrows({
         right: true,
         left: false,
       });
-    } else if (
-      direction === 'right' &&
-      theEndOfSlider - windowWidth <= moveSliderOnClickValue * -1
-    ) {
+    } else if (direction === 'right' && isMoveSliderRightValueBiggerThanSpaceLeft) {
       moveSliderOnClickValue = -1 * (theEndOfSlider - windowWidth);
       setDisplayArrows({
         left: true,
@@ -117,25 +128,29 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
       });
     }
 
-    listRef.current.style.transition = 'transform .3s ease-in-out';
+    listRef.current.style.transition = sliderTransitionValue;
     listRef.current.style.transform = `translateX(${sliderOffset + moveSliderOnClickValue}px)`;
   };
 
   // handle window resize
   useEffect(() => {
     if (listRef.current) {
+      listRef.current.style.transition = sliderTransitionValue;
       listRef.current.style.transform = 'translateX(0)';
 
-      if (listRef.current.getBoundingClientRect().width > windowWidth)
+      const isSliderBiggerThanWindowWidth =
+        listRef.current.getBoundingClientRect().width > windowWidth;
+      if (isSliderBiggerThanWindowWidth) {
         setDisplayArrows({
           right: true,
           left: false,
         });
-      else
+      } else {
         setDisplayArrows({
           right: false,
           left: false,
         });
+      }
     }
   }, [windowWidth, listRef]);
 
