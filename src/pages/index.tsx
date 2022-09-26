@@ -1,61 +1,43 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import { dehydrate, QueryClient } from 'react-query';
-import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 import Image from 'next/image';
 import Link from 'next/link';
+import { dehydrate, QueryClient } from 'react-query';
+import * as Styled from 'assets/styles/index.styles';
+import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 
 function Home() {
   const { categories, error } = useFetchCategories();
 
   return (
-    <div>
-      <Head>
-        <title>My Meal Plan</title>
-        <meta
-          name='description'
-          content='Meal Plan app'
-        />
-        <link
-          rel='icon'
-          href='/favicon.ico'
-        />
-      </Head>
+    <>
+      <h1>Available categories:</h1>
 
-      <main style={{ height: '200vh' }}>
-        <h1>Available categories:</h1>
-
-        {error ? (
-          <div>
-            <h2>Sorry we couldn't find any categories</h2>
-          </div>
-        ) : (
-          <section>
-            {categories?.map(({ idCategory, strCategory, strCategoryThumb }) => (
-              <Link
-                href={`/category/${strCategory}`}
-                key={idCategory}
-              >
+      {error ? (
+        <div style={{ paddingTop: '30px' }}>
+          <h2>Sorry we couldn't find any categories.</h2>
+        </div>
+      ) : (
+        <Styled.Categories>
+          {categories?.map(({ idCategory, strCategory, strCategoryThumb }) => (
+            <article key={idCategory}>
+              <Link href={`/category/${strCategory}`}>
                 <a>
-                  <article>
-                    <header>
-                      <h2>{strCategory}</h2>
-                    </header>
+                  <Image
+                    src={strCategoryThumb}
+                    alt={strCategory}
+                    width={240}
+                    height={240}
+                    objectFit='contain'
+                  />
 
-                    <Image
-                      src={strCategoryThumb}
-                      alt={strCategory}
-                      width={300}
-                      height={300}
-                    />
-                  </article>
+                  <h2>{strCategory}</h2>
                 </a>
               </Link>
-            ))}
-          </section>
-        )}
-      </main>
-    </div>
+            </article>
+          ))}
+        </Styled.Categories>
+      )}
+    </>
   );
 }
 

@@ -7,6 +7,7 @@ import { theme } from 'styles/theme';
 import { GlobaStyles } from 'styles/GlobalStyle';
 import NavBar from 'components/NavBar/NavBar';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
+import HeadComponent from 'components/HeadComponent/HeadComponent';
 import MainWrapper from 'templates/MainWrapper';
 
 type PageProps = {
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
         <ThemeProvider theme={theme}>
           <GlobaStyles />
           <ResizeWindowProvider>
+            <HeadComponent />
             <NavBar />
             <MainWrapper>
               <Component {...pageProps} />

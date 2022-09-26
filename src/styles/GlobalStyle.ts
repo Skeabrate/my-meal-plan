@@ -29,8 +29,8 @@ export const GlobaStyles = createGlobalStyle`
 
 		${({ theme }) => theme.mq.tablet} {
 			h1{
-			font-size: ${({ theme }) => theme.fontSize.h1Desktop};
-		}
+				font-size: ${({ theme }) => theme.fontSize.h1Desktop};
+			}
 		}
 	}
 
