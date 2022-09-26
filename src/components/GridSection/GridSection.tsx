@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
+import Placeholder from 'assets/placeholder.png';
 
 type GridSectionType = {
   data: { id: string; name: string; img: string; slug: string }[];
@@ -28,7 +29,6 @@ const GridSection = ({ data = [], linkUrl = '' }: GridSectionType) => {
                     src={img}
                     alt={name}
                     layout='fill'
-                    sizes='100vw'
                     objectFit='cover'
                   />
                 </div>

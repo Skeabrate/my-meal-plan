@@ -39,6 +39,7 @@ export const Grid = styled.section`
       position: relative;
       height: 280px;
       border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
+      background-color: ${({ theme }) => theme.colors.grey};
 
       img {
         transition: scale 0.3s ease-in-out;
