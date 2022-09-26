@@ -39,6 +39,7 @@ export const GlobaStyles = createGlobalStyle`
 				bottom: -2px;
 				z-index: -1;
 				border-radius: 1rem;
+				box-shadow: 0 0 0 1px white, 0 0 0 2px ${({ theme }) => theme.colors.lightOrange};
 			}
 		}
 		
