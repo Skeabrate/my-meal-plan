@@ -22,23 +22,26 @@ const Category = ({ category }: { category: string }) => {
   const { strCategory, strCategoryDescription, strCategoryThumb } = categoryDetails;
 
   return (
-    <div>
+    <>
       <Styled.Intro>
-        <div>
+        <article>
           <header>
             <h1>{strCategory}</h1>
           </header>
 
           <p>{strCategoryDescription}</p>
-        </div>
+        </article>
 
         <Image
           src={strCategoryThumb}
           alt={strCategory}
-          width='400'
-          height='400'
+          width='280'
+          height='280'
+          objectFit='contain'
         />
       </Styled.Intro>
+
+      <h2>Available meals:</h2>
 
       <GridSection
         data={mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => ({
@@ -49,7 +52,7 @@ const Category = ({ category }: { category: string }) => {
         }))}
         linkUrl='meal'
       />
-    </div>
+    </>
   );
 };
 

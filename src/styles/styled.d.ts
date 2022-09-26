@@ -6,6 +6,7 @@ declare module 'styled-components' {
       blue: string;
       green: string;
       orange: string;
+      lightOrange: string;
       grey: string;
       lightGrey: string;
     };
@@ -14,8 +15,8 @@ declare module 'styled-components' {
       lato: string;
     };
     fontSize: {
-      h1Desktop: string;
-      h1Mobile: string;
+      headingDesktop: string;
+      headingMobile: string;
       abrilDesktop: string;
       paragraph: string;
       caption: string;

@@ -25,7 +25,7 @@ const GridSection = ({ data = [], linkUrl = '' }: GridSectionType) => {
                 />
               </div>
 
-              <h2>{name}</h2>
+              <h3>{name}</h3>
             </a>
           </Link>
         </article>

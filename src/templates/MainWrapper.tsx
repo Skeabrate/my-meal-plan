@@ -6,16 +6,8 @@ const Main = styled.main`
   max-width: 1400px;
   margin: 0 auto;
 
-  h1 {
-    margin-bottom: 20px;
-  }
-
   ${({ theme }) => theme.mq.desktop} {
     padding: 6rem;
-
-    h1 {
-      margin-bottom: 40px;
-    }
   }
 `;
 

@@ -5,6 +5,7 @@ export const theme: DefaultTheme = {
     blue: '#585A6D',
     green: '#21A179',
     orange: '#C44900',
+    lightOrange: '#FF711F',
     grey: '#d8d8d8 ',
     lightGrey: '#F0F0F0',
   },
@@ -13,8 +14,8 @@ export const theme: DefaultTheme = {
     lato: '"Lato", sans-serif',
   },
   fontSize: {
-    h1Desktop: '5rem',
-    h1Mobile: '3rem',
+    headingDesktop: '5rem',
+    headingMobile: '3rem',
     abrilDesktop: '2rem',
     paragraph: '1.6rem',
     caption: '1.2rem',
