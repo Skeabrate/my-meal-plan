@@ -14,11 +14,7 @@ const GridSection = ({ data = [], linkUrl = '' }: GridSectionType) => {
 
   const { currentData } = usePaginate(data, loadingRef);
 
-  useEffect(() => {
-    console.log('mount');
-
-    return () => console.log('unmount');
-  }, []);
+  const displayLoadingRef = currentData.length < data.length;
 
   return (
     <>
@@ -44,12 +40,7 @@ const GridSection = ({ data = [], linkUrl = '' }: GridSectionType) => {
         ))}
       </Styled.Grid>
 
-      {currentData.length < data.length && (
-        <div
-          style={{ width: '100px', height: '20px', background: 'red' }}
-          ref={loadingRef}
-        />
-      )}
+      {displayLoadingRef && <div ref={loadingRef} />}
     </>
   );
 };
