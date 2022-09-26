@@ -1,9 +1,18 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+	from {
+		opacity: 0;
+	} to {
+		opacity: 1;
+	}
+`;
 
 export const Grid = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 3rem;
+  min-height: 300px;
 
   article {
     border: 1px solid ${({ theme }) => theme.colors.grey};
@@ -11,6 +20,8 @@ export const Grid = styled.section`
     transition: border-color 0.2s ease-in-out;
     text-align: center;
     overflow: hidden;
+
+    animation: ${fadeIn} 1s forwards;
 
     a {
       text-decoration: none;
