@@ -13,12 +13,13 @@ const StyledFooter = styled.footer`
   align-items: center;
   text-align: center;
   position: relative;
+  font-style: italic;
 
   &:after {
     content: '';
     position: absolute;
     top: 30px;
-    width: 100%;
+    width: 80%;
     max-width: 1400px;
     height: 1px;
     background-color: ${({ theme }) => theme.colors.grey};

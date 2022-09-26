@@ -54,6 +54,12 @@ export const Grid = styled.section`
     }
   }
 
+  ${({ theme }) => theme.mq.tablet} {
+    article {
+      max-width: 400px;
+    }
+  }
+
   ${({ theme }) => theme.mq.desktop} {
     grid-gap: 5rem 3rem;
   }
