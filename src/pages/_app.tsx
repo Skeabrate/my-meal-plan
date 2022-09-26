@@ -9,6 +9,7 @@ import NavBar from 'components/NavBar/NavBar';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
 import HeadComponent from 'components/HeadComponent/HeadComponent';
 import MainWrapper from 'templates/MainWrapper';
+import Footer from 'components/Footer/Footer';
 
 type PageProps = {
   dehydratedState?: DehydratedState;
@@ -32,6 +33,7 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
             <MainWrapper>
               <Component {...pageProps} />
             </MainWrapper>
+            <Footer />
           </ResizeWindowProvider>
         </ThemeProvider>
       </Hydrate>
