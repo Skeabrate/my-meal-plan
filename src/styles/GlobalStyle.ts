@@ -27,6 +27,10 @@ export const GlobaStyles = createGlobalStyle`
 			font-size: ${({ theme }) => theme.fontSize.h1Mobile};
 		}
 
+		h2{
+			font-size: 2rem;
+		}
+
 		${({ theme }) => theme.mq.tablet} {
 			h1{
 				font-size: ${({ theme }) => theme.fontSize.h1Desktop};

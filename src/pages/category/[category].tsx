@@ -7,6 +7,7 @@ import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMealsByCategory';
+import GridSection from 'components/GridSection/GridSection';
 
 const Category = ({ category }: { category: string }) => {
   const { categories } = useFetchCategories();
@@ -34,28 +35,20 @@ const Category = ({ category }: { category: string }) => {
         <Image
           src={strCategoryThumb}
           alt={strCategory}
-          width={400}
-          height={400}
+          width='400'
+          height='400'
         />
       </Styled.Intro>
 
-      <section>
-        {mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => (
-          <article key={idMeal}>
-            <Link href={`/meal/${idMeal}`}>
-              <a>
-                <Image
-                  src={strMealThumb}
-                  alt={strMeal}
-                  width='300'
-                  height='300'
-                />
-                <h2>{strMeal}</h2>
-              </a>
-            </Link>
-          </article>
-        ))}
-      </section>
+      <GridSection
+        data={mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => ({
+          id: idMeal,
+          name: strMeal,
+          img: strMealThumb,
+          slug: idMeal,
+        }))}
+        linkUrl='meal'
+      />
     </div>
   );
 };

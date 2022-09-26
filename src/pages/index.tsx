@@ -1,9 +1,7 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
 import { dehydrate, QueryClient } from 'react-query';
-import * as Styled from 'assets/styles/index.styles';
 import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
+import GridSection from 'components/GridSection/GridSection';
 
 function Home() {
   const { categories, error } = useFetchCategories();
@@ -17,25 +15,15 @@ function Home() {
           <h2>Sorry we couldn't find any categories.</h2>
         </div>
       ) : (
-        <Styled.Categories>
-          {categories?.map(({ idCategory, strCategory, strCategoryThumb }) => (
-            <article key={idCategory}>
-              <Link href={`/category/${strCategory}`}>
-                <a>
-                  <Image
-                    src={strCategoryThumb}
-                    alt={strCategory}
-                    width={240}
-                    height={240}
-                    objectFit='contain'
-                  />
-
-                  <h2>{strCategory}</h2>
-                </a>
-              </Link>
-            </article>
-          ))}
-        </Styled.Categories>
+        <GridSection
+          data={categories.map(({ idCategory, strCategory, strCategoryThumb }) => ({
+            id: idCategory,
+            name: strCategory,
+            img: strCategoryThumb,
+            slug: strCategory,
+          }))}
+          linkUrl='category'
+        />
       )}
     </>
   );
