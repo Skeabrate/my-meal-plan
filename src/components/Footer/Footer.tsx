@@ -12,6 +12,17 @@ const StyledFooter = styled.footer`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    max-width: 1400px;
+    height: 1px;
+    background-color: ${({ theme }) => theme.colors.grey};
+  }
 
   a {
     padding-bottom: 1rem;
