@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { NextPage } from 'next';
 import { fetchCategories } from 'hooks/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
@@ -23,13 +23,18 @@ const Meal = ({ mealId }: { mealId: string }) => {
     [mealById]
   );
 
+  const getInstructions = useMemo(
+    () => mealById[0].strInstructions.split('.').filter((item) => item),
+    [mealById]
+  );
+
   const mealDetails = {
     name: mealById[0].strMeal,
     category: mealById[0].strCategory,
-    instructions: mealById[0].strInstructions.split('.').filter((item) => item),
     area: mealById[0].strArea,
     imgUrl: mealById[0].strMealThumb,
     youtubeUrl: mealById[0].strYoutube,
+    instructions: getInstructions,
     ingredients: getIngredients,
   };
 
