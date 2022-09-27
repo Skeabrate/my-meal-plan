@@ -33,6 +33,13 @@ export const SlideBar = styled.div<SlideBarType>`
       display: flex;
       align-items: center;
       pointer-events: ${({ $isLinkDisabled }) => $isLinkDisabled && 'none'};
+
+      &:focus {
+        outline: none;
+        text-decoration: underline;
+        color: ${({ theme }) => theme.colors.orange};
+        scale: 1.1;
+      }
     }
   }
 `;
