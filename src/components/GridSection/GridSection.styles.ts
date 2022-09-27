@@ -45,6 +45,8 @@ export const Grid = styled.section`
 
       &:focus {
         text-decoration: underline;
+        outline: none;
+        color: ${({ theme }) => theme.colors.orange};
       }
     }
 

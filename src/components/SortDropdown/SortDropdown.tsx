@@ -57,21 +57,15 @@ const SortDropdown = ({
   }, [loadingFilters, handleDropdown]);
 
   return (
-    <Styled.Wrapper
-      tabIndex={1}
-      ref={dropdownRef}
-    >
+    <Styled.Wrapper ref={dropdownRef}>
       {option ? option : 'Sort By:'}
 
       {toggleDropdown && (
         <Styled.DropdownList>
-          {items.map((item) => (
-            <li
-              key={item}
-              onClick={() => setOption(item)}
-            >
-              {item}
-            </li>
+          {items.map((item, index) => (
+            <Styled.DropdownListItem key={item}>
+              <button onClick={() => setOption(item)}>{item}</button>
+            </Styled.DropdownListItem>
           ))}
         </Styled.DropdownList>
       )}
