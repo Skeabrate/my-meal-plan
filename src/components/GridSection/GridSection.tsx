@@ -1,44 +1,67 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
-import Placeholder from 'assets/placeholder.png';
+import SortDropdown from 'components/SortDropdown/SortDropdown';
 
-type GridSectionType = {
-  data: { id: string; name: string; img: string; slug: string }[];
-  linkUrl: string;
+export type DataItemType = {
+  id: string;
+  name: string;
+  img: string;
+  slug: string;
 };
 
-const GridSection = ({ data = [], linkUrl = '' }: GridSectionType) => {
-  const loadingRef = useRef<HTMLDivElement>(null);
+type GridSectionType = {
+  data: DataItemType[];
+  linkUrl: string;
+  label: string;
+};
 
+const GridSection = ({ data = [], linkUrl = '', label }: GridSectionType) => {
+  const [loadingFilters, setLoadingFilters] = useState(false);
+
+  const loadingRef = useRef<HTMLDivElement>(null);
   const { currentData } = usePaginate(data, loadingRef);
 
   const displayLoadingRef = currentData.length < data.length;
 
   return (
     <>
-      <Styled.Grid>
-        {currentData.map(({ id, name, img, slug }) => (
-          <article key={id}>
-            <Link href={`/${linkUrl}/${slug}`}>
-              <a>
-                <div>
-                  <Image
-                    src={img}
-                    alt={name}
-                    layout='fill'
-                    objectFit='cover'
-                  />
-                </div>
+      <Styled.Header>
+        <h2>{label}</h2>
 
-                <h3>{name}</h3>
-              </a>
-            </Link>
-          </article>
-        ))}
-      </Styled.Grid>
+        <SortDropdown
+          data={data}
+          loadingFilters={loadingFilters}
+          setLoadingFilters={setLoadingFilters}
+        />
+      </Styled.Header>
+
+      {loadingFilters ? (
+        <div style={{ height: '400px' }}></div>
+      ) : (
+        <Styled.Grid>
+          {currentData.map(({ id, name, img, slug }) => (
+            <article key={id}>
+              <Link href={`/${linkUrl}/${slug}`}>
+                <a>
+                  <div>
+                    <Image
+                      src={img}
+                      alt={name}
+                      layout='fill'
+                      objectFit='cover'
+                    />
+                  </div>
+
+                  <h3>{name}</h3>
+                </a>
+              </Link>
+            </article>
+          ))}
+        </Styled.Grid>
+      )}
 
       {displayLoadingRef && <div ref={loadingRef} />}
     </>

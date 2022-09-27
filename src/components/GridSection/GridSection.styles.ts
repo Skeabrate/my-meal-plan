@@ -8,6 +8,21 @@ const fadeIn = keyframes`
 	}
 `;
 
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  h2 {
+    margin: 0;
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    margin-bottom: 6rem;
+  }
+`;
+
 export const Grid = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -27,6 +42,10 @@ export const Grid = styled.section`
       text-decoration: none;
       color: black;
       height: 100%;
+
+      &:focus {
+        text-decoration: underline;
+      }
     }
 
     h3 {

@@ -8,13 +8,7 @@ function Home() {
 
   return (
     <>
-      <h1>Available categories:</h1>
-
-      {error ? (
-        <div style={{ paddingTop: '30px' }}>
-          <h2>Sorry we couldn't find any categories.</h2>
-        </div>
-      ) : (
+      {error ? null : (
         <GridSection
           data={categories.map(({ idCategory, strCategory, strCategoryThumb }) => ({
             id: idCategory,
@@ -23,6 +17,7 @@ function Home() {
             slug: strCategory,
           }))}
           linkUrl='category'
+          label='Categories:'
         />
       )}
     </>

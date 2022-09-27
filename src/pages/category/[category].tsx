@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { NextPage } from 'next';
 import * as Styled from 'assets/styles/category.styles';
 import { fetchCategories, useFetchCategories } from 'hooks/useFetchCategories';
@@ -41,8 +40,6 @@ const Category = ({ category }: { category: string }) => {
         />
       </Styled.Intro>
 
-      <h2>Available meals:</h2>
-
       <GridSection
         data={mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => ({
           id: idMeal,
@@ -51,6 +48,7 @@ const Category = ({ category }: { category: string }) => {
           slug: idMeal,
         }))}
         linkUrl='meal'
+        label='Meals:'
       />
     </>
   );
