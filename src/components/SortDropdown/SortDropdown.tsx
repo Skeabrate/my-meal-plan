@@ -16,7 +16,7 @@ const SortDropdown = ({
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [option, setOption] = useState('');
 
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleDropdown = useCallback(
     (e: any) => {
@@ -57,12 +57,18 @@ const SortDropdown = ({
   }, [loadingFilters, handleDropdown]);
 
   return (
-    <Styled.Wrapper ref={dropdownRef}>
-      {option ? option : 'Sort By:'}
+    <Styled.Wrapper
+      ref={dropdownRef}
+      role='button'
+      aria-pressed={toggleDropdown}
+      tabIndex={0}
+      onKeyDown={(e) => e.keyCode === 13 && setToggleDropdown((state) => !state)}
+    >
+      {option || 'Sort By:'}
 
       {toggleDropdown && (
         <Styled.DropdownList>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <Styled.DropdownListItem key={item}>
               <button onClick={() => setOption(item)}>{item}</button>
             </Styled.DropdownListItem>

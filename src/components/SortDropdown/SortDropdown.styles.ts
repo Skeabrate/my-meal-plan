@@ -10,7 +10,7 @@ const fadedIn = keyframes`
 	}
 `;
 
-export const Wrapper = styled.button`
+export const Wrapper = styled.div`
   border: 1px solid black;
   width: 150px;
   height: 50px;
@@ -21,6 +21,7 @@ export const Wrapper = styled.button`
   font-size: 1.5rem;
   position: relative;
   background-color: white;
+  cursor: pointer;
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.orange};
