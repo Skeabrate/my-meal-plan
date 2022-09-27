@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { NextPage } from 'next';
 import { fetchCategories } from 'hooks/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
@@ -6,61 +6,50 @@ import { fetchMealById, useFetchMealById } from 'hooks/useFetchMealById';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
-  const {
-    strMeal,
-    strInstructions,
-    strCategory,
-    strArea,
-    strMealThumb,
-    strYoutube,
-    strIngredient1,
-    strIngredient2,
-    strIngredient3,
-    strIngredient4,
-    strIngredient5,
-    strIngredient6,
-    strIngredient7,
-    strIngredient8,
-    strIngredient9,
-    strIngredient10,
-    strIngredient11,
-    strIngredient12,
-    strIngredient13,
-    strIngredient14,
-    strIngredient15,
-    strIngredient16,
-    strIngredient17,
-    strIngredient18,
-    strIngredient19,
-    strIngredient20,
-    strMeasure1,
-    strMeasure2,
-    strMeasure3,
-    strMeasure4,
-    strMeasure5,
-    strMeasure6,
-    strMeasure7,
-    strMeasure8,
-    strMeasure9,
-    strMeasure10,
-    strMeasure11,
-    strMeasure12,
-    strMeasure13,
-    strMeasure14,
-    strMeasure15,
-    strMeasure16,
-    strMeasure17,
-    strMeasure18,
-    strMeasure19,
-    strMeasure20,
-  } = mealById[0];
+
+  const getIngredients = useMemo(
+    () =>
+      Object.entries(mealById[0]).reduce((acc, [key, value]) => {
+        if (key.includes('strIngredient') && value?.trim()) {
+          acc.push({ id: key.split('strIngredient')[1], name: value });
+        }
+        if (key.includes('strMeasure') && value?.trim()) {
+          const index = +key.split('strMeasure')[1];
+          acc[index - 1].value = value;
+        }
+
+        return acc;
+      }, [] as any),
+    [mealById]
+  );
+
+  const mealDetails = {
+    name: mealById[0].strMeal,
+    category: mealById[0].strCategory,
+    instructions: mealById[0].strInstructions.split('.').filter((item) => item),
+    area: mealById[0].strArea,
+    imgUrl: mealById[0].strMealThumb,
+    youtubeUrl: mealById[0].strYoutube,
+    ingredients: getIngredients,
+  };
 
   return (
-    <main>
-      <header>
-        <h1>{strMeal}</h1>
-      </header>
-    </main>
+    <>
+      <section>
+        <header>
+          <h1>{mealDetails.name}</h1>
+        </header>
+
+        <article>
+          {mealDetails.instructions.map((item, index) => (
+            <div key={index}>
+              <h3>Step {index + 1}</h3>
+              <p>{item}.</p>
+            </div>
+          ))}
+        </article>
+      </section>
+    </>
   );
 };
 

@@ -12,13 +12,13 @@ const fadedIn = keyframes`
 
 export const Wrapper = styled.div`
   border: 1px solid black;
-  width: 150px;
-  height: 50px;
+  width: 100px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   position: relative;
   background-color: white;
   cursor: pointer;
@@ -31,14 +31,21 @@ export const Wrapper = styled.div`
     border-color: ${({ theme }) => theme.colors.orange};
     outline: 2px solid ${({ theme }) => theme.colors.orange};
   }
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 150px;
+    height: 50px;
+    font-size: 1.6rem;
+  }
 `;
 
 export const DropdownList = styled.ul`
   position: absolute;
-  top: 115%;
+  top: calc(100% + 6px);
+  left: -1px;
   border: 1px solid black;
   list-style: none;
-  width: 100%;
+  width: calc(100% + 2px);
   z-index: 1;
   background-color: white;
   animation: ${fadedIn} 0.2s forwards;
@@ -50,12 +57,11 @@ export const DropdownListItem = styled.li`
   }
 
   button {
+    height: 40px;
     width: 100%;
-    height: 100%;
-    padding: 15px 20px;
     background-color: white;
     border: none;
-    text-align: left;
+    text-align: center;
 
     &:hover {
       background-color: ${({ theme }) => theme.colors.lightGrey};
@@ -63,6 +69,14 @@ export const DropdownListItem = styled.li`
 
     &:focus {
       outline: 2px solid ${({ theme }) => theme.colors.orange};
+    }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    button {
+      height: 50px;
+      padding: 15px 20px;
+      text-align: left;
     }
   }
 `;
