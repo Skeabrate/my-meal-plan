@@ -8,6 +8,8 @@ import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
+import { SearchBarContext } from 'context/SearchBarContext';
+import { disablePageScroll } from 'utils/disablePageScroll';
 
 const links = [
   {
@@ -28,19 +30,13 @@ const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState<null | boolean>(null);
 
   const { windowHeight } = useContext(ResizeWindowContext);
+  const { toggleSearchBar } = useContext(SearchBarContext);
 
   const router = useRouter();
 
   const toggleCart = () => {
     setIsCartOpen((state) => {
-      if (state) {
-        document.body.removeAttribute('style');
-      } else {
-        document.body.setAttribute(
-          'style',
-          'position: fixed; top: 0; width: 100%; overflow: hidden'
-        );
-      }
+      disablePageScroll(!state);
       return !state;
     });
   };
@@ -89,14 +85,14 @@ const NavBar = () => {
 
           <Styled.NavSubItems $isCartOpen={isCartOpen}>
             <li>
-              <Link
+              <button
                 aria-label='search'
-                href='/search'
+                onClick={toggleSearchBar}
               >
                 <a>
                   <SearchSvg />
                 </a>
-              </Link>
+              </button>
             </li>
             <li>
               <Link

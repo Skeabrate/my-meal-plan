@@ -223,8 +223,11 @@ export const NavSubItems = styled.ul<MenuProps>`
 		`;
   }};
 
-  li {
+  li,
+  button {
     height: 100%;
+    border: none;
+    background-color: transparent;
 
     a {
       width: 80px;

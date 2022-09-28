@@ -10,7 +10,7 @@ function Home() {
     <>
       {error ? null : (
         <GridSection
-          data={categories.map(({ idCategory, strCategory, strCategoryThumb }) => ({
+          data={categories?.map(({ idCategory, strCategory, strCategoryThumb }) => ({
             id: idCategory,
             name: strCategory,
             img: strCategoryThumb,

@@ -10,6 +10,8 @@ import ResizeWindowProvider from 'context/ResizeWindowContext';
 import HeadComponent from 'components/HeadComponent/HeadComponent';
 import MainWrapper from 'templates/MainWrapper';
 import Footer from 'components/Footer/Footer';
+import SearchBarProvider from 'context/SearchBarContext';
+import SearchBar from 'components/SearchBar/SearchBar';
 
 type PageProps = {
   dehydratedState?: DehydratedState;
@@ -28,12 +30,15 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
         <ThemeProvider theme={theme}>
           <GlobaStyles />
           <ResizeWindowProvider>
-            <HeadComponent />
-            <NavBar />
-            <MainWrapper>
-              <Component {...pageProps} />
-            </MainWrapper>
-            <Footer />
+            <SearchBarProvider>
+              <SearchBar />
+              <HeadComponent />
+              <NavBar />
+              <MainWrapper>
+                <Component {...pageProps} />
+              </MainWrapper>
+              <Footer />
+            </SearchBarProvider>
           </ResizeWindowProvider>
         </ThemeProvider>
       </Hydrate>
