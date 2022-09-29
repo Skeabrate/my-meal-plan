@@ -20,5 +20,5 @@ export const useSearchResults = () => {
     }
   };
 
-  return { searchResults, setSearchResults, error, getSearchResults };
+  return { searchResults, setSearchResults, error, setError, getSearchResults };
 };

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './SearchBar.styles';
@@ -9,20 +9,21 @@ import { useSearchResults } from 'hooks/useSearchResults';
 import { usePathChange } from 'hooks/usePathChange';
 
 const SearchBar = () => {
-  const { searchResults, setSearchResults, error, getSearchResults } = useSearchResults();
+  const { searchResults, setSearchResults, error, setError, getSearchResults } = useSearchResults();
   const { isSearchBarOpen, toggleSearchBar } = useContext(SearchBarContext);
 
   const debouncedResults = useMemo(() => debounce(getSearchResults, 700), [getSearchResults]);
 
-  const handleCloseSearchBar = useCallback(() => {
+  const handleCloseSearchBar = () => {
     setSearchResults(null);
+    setError(null);
     toggleSearchBar();
-  }, [setSearchResults, toggleSearchBar]);
+  };
 
   usePathChange(isSearchBarOpen ? handleCloseSearchBar : () => {});
 
   const emptySearchInput = searchResults === null;
-  const noMatchingResults = error || (!emptySearchInput && searchResults.length === 0);
+  const noMatchingResults = !emptySearchInput && searchResults.length === 0;
   const matchingResults = !emptySearchInput && searchResults.length > 0;
 
   return isSearchBarOpen ? (
@@ -47,6 +48,7 @@ const SearchBar = () => {
         </Styled.InputWrapper>
 
         <Styled.Results>
+          {error && <p>An error occured while fetching meals.</p>}
           {noMatchingResults && <p>We couldn't find any meals.</p>}
           {matchingResults && (
             <>
