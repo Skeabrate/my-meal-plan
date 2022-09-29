@@ -58,21 +58,23 @@ const SearchBar = () => {
                   key={idMeal}
                 >
                   <a>
-                    <div>
-                      <Image
-                        src={strMealThumb}
-                        alt={strMeal}
-                        height={100}
-                        width={100}
-                        object-fit='cover'
-                      />
+                    <Styled.FoundItem>
+                      <div>
+                        <Image
+                          src={strMealThumb}
+                          alt={strMeal}
+                          height={100}
+                          width={100}
+                          object-fit='contain'
+                        />
+                      </div>
 
                       <ul>
                         <li>{strMeal}</li>
                         <li>{strCategory}</li>
                         <li>{strArea}</li>
                       </ul>
-                    </div>
+                    </Styled.FoundItem>
                   </a>
                 </Link>
               ))}
