@@ -19,7 +19,7 @@ const SearchBar = () => {
     toggleSearchBar();
   }, [setSearchResults, toggleSearchBar]);
 
-  usePathChange(handleCloseSearchBar);
+  usePathChange(isSearchBarOpen ? handleCloseSearchBar : () => {});
 
   const emptySearchInput = searchResults === null;
   const noMatchingResults = error || (!emptySearchInput && searchResults.length === 0);

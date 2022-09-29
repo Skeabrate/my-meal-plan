@@ -10,6 +10,7 @@ import CategoriesBar from './CategoriesBar/CategoriesBar';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 import { SearchBarContext } from 'context/SearchBarContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
+import { usePathChange } from 'hooks/usePathChange';
 
 const links = [
   {
@@ -40,6 +41,8 @@ const NavBar = () => {
       return !state;
     });
   };
+
+  usePathChange(isCartOpen ? toggleCart : () => {});
 
   return (
     <nav>

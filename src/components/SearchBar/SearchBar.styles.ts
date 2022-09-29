@@ -131,12 +131,13 @@ export const Results = styled.div`
 
   ul {
     list-style: none;
-
+    padding-block: 10px;
     height: 100%;
 
     li {
       font-size: ${({ theme }) => theme.fontSize.caption};
       font-style: italic;
+      margin-bottom: 4px;
 
       &:first-child {
         font-weight: 600;
@@ -175,10 +176,6 @@ export const Results = styled.div`
 
     ul {
       padding-block: 15px;
-
-      li {
-        margin-bottom: 4px;
-      }
     }
   }
 `;
