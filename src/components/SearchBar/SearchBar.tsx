@@ -1,60 +1,83 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import * as Styled from './SearchBar.styles';
+import CloseSvg from 'assets/SVG/Close.svg';
 import { SearchBarContext } from 'context/SearchBarContext';
-import axios from 'axios';
 import { debounce } from 'utils/debounce';
-import { MealType } from 'types/MealType';
+import { useSearchResults } from 'hooks/useSearchResults';
+import { usePathChange } from 'hooks/usePathChange';
 
 const SearchBar = () => {
-  const [searchResults, setSearchResults] = useState<MealType[] | null>(null);
-  const [error, setError] = useState<any>(null);
-
+  const { searchResults, setSearchResults, error, getSearchResults } = useSearchResults();
   const { isSearchBarOpen, toggleSearchBar } = useContext(SearchBarContext);
 
-  const handleInputValue = async (e: any) => {
-    if (e.target.value) {
-      try {
-        const res = await axios.get(`${process.env.FETCH_MEAL_BY_NAME}${e.target.value}`);
-        setSearchResults(res.data.meals || []);
-      } catch (err) {
-        console.log(err);
-        setError(err);
-      }
-    } else {
-      setSearchResults(null);
-    }
-  };
+  const debouncedResults = useMemo(() => debounce(getSearchResults, 700), [getSearchResults]);
 
-  const debouncedResults = useMemo(() => debounce(handleInputValue, 700), []);
+  const handleCloseSearchBar = useCallback(() => {
+    setSearchResults(null);
+    toggleSearchBar();
+  }, [setSearchResults, toggleSearchBar]);
+
+  usePathChange(handleCloseSearchBar);
 
   const emptySearchInput = searchResults === null;
   const noMatchingResults = error || (!emptySearchInput && searchResults.length === 0);
   const matchingResults = !emptySearchInput && searchResults.length > 0;
 
   return isSearchBarOpen ? (
-    <Styled.SearchBar>
-      <Styled.Background />
+    <Styled.SearchBar $isSearchBarOpen={isSearchBarOpen}>
+      <Styled.Background
+        role='button'
+        aria-label='close search bar'
+        onClick={handleCloseSearchBar}
+      />
 
-      <Styled.InputWrapper>
-        <input
-          type='text'
-          autoFocus
-          onChange={debouncedResults}
-        />
+      <Styled.SearchBarInner>
+        <Styled.InputWrapper>
+          <input
+            type='text'
+            placeholder='Search...'
+            autoFocus
+            onChange={debouncedResults}
+          />
+          <button onClick={handleCloseSearchBar}>
+            <CloseSvg />
+          </button>
+        </Styled.InputWrapper>
 
-        <button onClick={toggleSearchBar}>close</button>
-      </Styled.InputWrapper>
+        <Styled.Results>
+          {noMatchingResults && <p>We couldn't find any meals.</p>}
+          {matchingResults && (
+            <>
+              {searchResults.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
+                <Link
+                  href={`/meal/${idMeal}`}
+                  key={idMeal}
+                >
+                  <a>
+                    <div>
+                      <Image
+                        src={strMealThumb}
+                        alt={strMeal}
+                        height={100}
+                        width={100}
+                        object-fit='cover'
+                      />
 
-      <Styled.Results>
-        {noMatchingResults && <p>We couldn't find any meals.</p>}
-        {matchingResults && (
-          <div>
-            {searchResults.map(({ idMeal, strMeal }) => (
-              <p key={idMeal}>{strMeal}</p>
-            ))}
-          </div>
-        )}
-      </Styled.Results>
+                      <ul>
+                        <li>{strMeal}</li>
+                        <li>{strCategory}</li>
+                        <li>{strArea}</li>
+                      </ul>
+                    </div>
+                  </a>
+                </Link>
+              ))}
+            </>
+          )}
+        </Styled.Results>
+      </Styled.SearchBarInner>
     </Styled.SearchBar>
   ) : null;
 };
