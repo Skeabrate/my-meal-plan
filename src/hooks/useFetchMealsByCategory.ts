@@ -18,7 +18,9 @@ export const useFetchMealsByCategory = (category: string) => {
     data: mealsByCategory,
     isLoading,
     error,
-  } = useQuery('fetchMealsByCategory', () => fetchMealsByCategory(category));
+  } = useQuery(['fetchMealsByCategory', category], () => fetchMealsByCategory(category), {
+    enabled: !!category,
+  });
 
   return { mealsByCategory, isLoading, error } as {
     mealsByCategory: MealByCategoryType[];

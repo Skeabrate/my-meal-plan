@@ -17,23 +17,20 @@ const Category = ({ category }: { category: string }) => {
     [categories, category]
   );
 
-  if (!categoryDetails) return;
-  const { strCategory, strCategoryDescription, strCategoryThumb } = categoryDetails;
-
   return (
     <>
       <Styled.Intro>
         <article>
           <header>
-            <h1>{strCategory}</h1>
+            <h1>{categoryDetails?.strCategory}</h1>
           </header>
 
-          <p>{strCategoryDescription}</p>
+          <p>{categoryDetails?.strCategoryDescription}</p>
         </article>
 
         <Image
-          src={strCategoryThumb}
-          alt={strCategory}
+          src={categoryDetails?.strCategoryThumb || ''}
+          alt={categoryDetails?.strCategory}
           width='280'
           height='280'
           objectFit='contain'
@@ -73,7 +70,7 @@ export async function getStaticProps(context: { params: { category: string } }) 
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery('fetchCategories', fetchCategories);
-  await queryClient.prefetchQuery('fetchMealsByCategory', () =>
+  await queryClient.prefetchQuery(['fetchMealsByCategory', context.params.category], () =>
     fetchMealsByCategory(context.params.category)
   );
 
