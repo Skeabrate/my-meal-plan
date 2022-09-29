@@ -18,10 +18,7 @@ export const useFetchMealsByCategory = (category: string) => {
     data: mealsByCategory,
     isLoading,
     error,
-  } = useQuery('fetchMealsByCategory', () => fetchMealsByCategory(category), {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-  });
+  } = useQuery('fetchMealsByCategory', () => fetchMealsByCategory(category));
 
   return { mealsByCategory, isLoading, error } as {
     mealsByCategory: MealByCategoryType[];
