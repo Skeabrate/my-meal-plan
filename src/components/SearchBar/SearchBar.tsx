@@ -6,32 +6,23 @@ import CloseSvg from 'assets/SVG/Close.svg';
 import { SearchBarContext } from 'context/SearchBarContext';
 import { debounce } from 'utils/debounce';
 import { useSearchResults } from 'hooks/useSearchResults';
-import { usePathChange } from 'hooks/usePathChange';
 
 const SearchBar = () => {
-  const { searchResults, setSearchResults, error, setError, getSearchResults } = useSearchResults();
+  const { searchResults, error, getSearchResults } = useSearchResults();
   const { isSearchBarOpen, toggleSearchBar } = useContext(SearchBarContext);
 
   const debouncedResults = useMemo(() => debounce(getSearchResults, 700), [getSearchResults]);
-
-  const handleCloseSearchBar = () => {
-    setSearchResults(null);
-    setError(null);
-    toggleSearchBar();
-  };
-
-  usePathChange(isSearchBarOpen ? handleCloseSearchBar : () => {});
 
   const emptySearchInput = searchResults === null;
   const noMatchingResults = !emptySearchInput && searchResults.length === 0;
   const matchingResults = !emptySearchInput && searchResults.length > 0;
 
-  return isSearchBarOpen ? (
+  return (
     <Styled.SearchBar $isSearchBarOpen={isSearchBarOpen}>
       <Styled.Background
         role='button'
         aria-label='close search bar'
-        onClick={handleCloseSearchBar}
+        onClick={toggleSearchBar}
       />
 
       <Styled.SearchBarInner>
@@ -42,7 +33,7 @@ const SearchBar = () => {
             autoFocus
             onChange={debouncedResults}
           />
-          <button onClick={handleCloseSearchBar}>
+          <button onClick={toggleSearchBar}>
             <CloseSvg />
           </button>
         </Styled.InputWrapper>
@@ -83,7 +74,7 @@ const SearchBar = () => {
         </Styled.Results>
       </Styled.SearchBarInner>
     </Styled.SearchBar>
-  ) : null;
+  );
 };
 
 export default SearchBar;

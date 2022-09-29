@@ -6,5 +6,5 @@ export const usePathChange = (handlePathChange: () => void) => {
 
   useEffect(() => {
     handlePathChange();
-  }, [router.asPath]);
+  }, [router]);
 };

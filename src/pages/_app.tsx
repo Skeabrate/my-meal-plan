@@ -5,13 +5,13 @@ import { Hydrate, QueryClient, QueryClientProvider, DehydratedState } from 'reac
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
 import { GlobaStyles } from 'styles/GlobalStyle';
-import NavBar from 'components/NavBar/NavBar';
-import ResizeWindowProvider from 'context/ResizeWindowContext';
-import HeadComponent from 'components/HeadComponent/HeadComponent';
-import MainWrapper from 'templates/MainWrapper';
-import Footer from 'components/Footer/Footer';
 import SearchBarProvider from 'context/SearchBarContext';
-import SearchBar from 'components/SearchBar/SearchBar';
+import ResizeWindowProvider from 'context/ResizeWindowContext';
+import MainWrapper from 'templates/MainWrapper';
+import NavBar from 'components/NavBar/NavBar';
+import HeadComponent from 'components/HeadComponent/HeadComponent';
+import Footer from 'components/Footer/Footer';
+import SearchBarWrapper from 'components/SearchBar/SearchBarWrapper';
 
 type PageProps = {
   dehydratedState?: DehydratedState;
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
           <GlobaStyles />
           <ResizeWindowProvider>
             <SearchBarProvider>
-              <SearchBar />
+              <SearchBarWrapper />
               <HeadComponent />
               <NavBar />
               <MainWrapper>
