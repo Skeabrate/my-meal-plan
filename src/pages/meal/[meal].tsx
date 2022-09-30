@@ -14,9 +14,6 @@ const Meal = ({ mealId }: { mealId: string }) => {
     mealById[0]
   );
 
-  const [activeDetails, setActiveDetails] =
-    useState<{ id: number; firstValue: string; secondValue: string }[]>(instructions);
-
   const detailsList = [
     {
       label: 'Instruction:',
@@ -27,6 +24,10 @@ const Meal = ({ mealId }: { mealId: string }) => {
       data: ingredients,
     },
   ];
+
+  const [activeDetails, setActiveDetails] = useState<
+    { id: number; firstValue: string; secondValue: string }[]
+  >(detailsList[0].data);
 
   return (
     <div>
