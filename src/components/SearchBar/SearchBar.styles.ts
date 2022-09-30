@@ -84,6 +84,11 @@ export const Results = styled.div`
   padding: 10px;
   max-height: calc(100vh - 130px);
 
+  div,
+  p {
+    ${({ theme }) => theme.fadeInAnimation(0.4)};
+  }
+
   a {
     color: black;
     text-decoration: none;

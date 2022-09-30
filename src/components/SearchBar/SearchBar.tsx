@@ -42,7 +42,7 @@ const SearchBar = () => {
           {error && <p>An error occured while fetching meals.</p>}
           {noMatchingResults && <p>We couldn't find any meals.</p>}
           {matchingResults && (
-            <>
+            <div>
               {searchResults.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
                 <Link
                   href={`/meal/${idMeal}`}
@@ -69,7 +69,7 @@ const SearchBar = () => {
                   </a>
                 </Link>
               ))}
-            </>
+            </div>
           )}
         </Styled.Results>
       </Styled.SearchBarInner>
