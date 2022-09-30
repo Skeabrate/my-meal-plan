@@ -65,7 +65,7 @@ export const InputWrapper = styled.div`
   animation-delay: 0.2s;
 
   input {
-    border-radius: 5px;
+    border-radius: 0px;
     border: 2px solid ${({ theme }) => theme.colors.blue};
     height: 100%;
     padding: 0 15px;

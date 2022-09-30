@@ -38,7 +38,6 @@ export const GlobaStyles = createGlobalStyle`
 				left: 0;
 				bottom: -2px;
 				z-index: -1;
-				border-radius: 1rem;
 				box-shadow: 0 0 0 1px white, 0 0 0 2px ${({ theme }) => theme.colors.lightOrange};
 			}
 		}
@@ -54,9 +53,9 @@ export const GlobaStyles = createGlobalStyle`
 				margin-bottom: 6rem;
 
 				&:after{
-					height: 10px;
-					left: -10px;
-					bottom: -6px;
+					height: 5px;
+					left: 0;
+					bottom: 0;
 				}
 			}
 		}

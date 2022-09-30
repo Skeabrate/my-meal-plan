@@ -33,7 +33,6 @@ export const Grid = styled.section`
 
   article {
     border: 1px solid ${({ theme }) => theme.colors.grey};
-    border-radius: 1rem;
     transition: border-color 0.2s ease-in-out;
     text-align: center;
     overflow: hidden;

@@ -24,7 +24,6 @@ export const Intro = styled.section`
     background-color: ${({ theme }) => theme.colors.green};
     padding: 2rem;
     color: white;
-    border-radius: 1rem;
     line-height: 1.5;
     box-shadow: 0 0 0 1px white, 0 0 0 2px ${({ theme }) => theme.colors.green};
     animation: ${slideIn} 0.6s forwards;

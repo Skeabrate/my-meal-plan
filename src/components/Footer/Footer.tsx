@@ -76,10 +76,7 @@ const Footer = () => {
         </a>
       </Link>
 
-      <p>
-        &copy; {new Date().getFullYear()} Sebastian Świeczkowski
-        <span style={{ display: 'block' }}>All rights reserved</span>
-      </p>
+      <p>&copy; {new Date().getFullYear()} Sebastian Świeczkowski</p>
     </StyledFooter>
   );
 };
