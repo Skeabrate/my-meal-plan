@@ -1,14 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const slideIn = keyframes`
-	from{
-		transform: translateX(-10px);
-		opacity: 0;
-	} to {
-		transform: translateX(0);
-		opacity: 1;
-	}
-`;
+import styled from 'styled-components';
 
 export const Intro = styled.section`
   display: grid;
@@ -26,7 +16,7 @@ export const Intro = styled.section`
     color: white;
     line-height: 1.5;
     ${({ theme }) => theme.boxShadow(theme.colors.green)};
-    animation: ${slideIn} 0.6s forwards;
+    ${({ theme }) => theme.slideInAnimation()};
   }
 
   ${({ theme }) => theme.mq.tablet} {

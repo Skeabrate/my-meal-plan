@@ -33,7 +33,7 @@ export const GlobaStyles = createGlobalStyle`
 			&:after{
 				content: '';
 				position: absolute;
-				width: 100%;
+				width: 60%;
 				height: 4px;
 				background-color: ${({ theme }) => theme.colors.lightOrange};
 				left: 0;

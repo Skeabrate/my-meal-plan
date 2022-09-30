@@ -28,5 +28,7 @@ declare module 'styled-components' {
       huge: string;
     };
     boxShadow: Function;
+    fadeInAnimation: Function;
+    slideInAnimation: Function;
   }
 }

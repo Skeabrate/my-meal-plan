@@ -1,22 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const fadeIn = keyframes`
-	from{
-		opacity: 0;
-	} to {
-		opacity: 1;
-	}
-`;
-
-const slideIn = keyframes`
-	from {
-		opacity: 0;
-		transform: translateY(-10px);
-	} to{
-		opacity: 1;
-		transform: translateY(0);
-	}
-`;
+import styled from 'styled-components';
 
 export const SearchBar = styled.div<{ $isSearchBarOpen: boolean }>`
   position: fixed;
@@ -30,7 +12,7 @@ export const SearchBar = styled.div<{ $isSearchBarOpen: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: ${fadeIn} forwards 0.4s;
+  ${({ theme }) => theme.fadeInAnimation(0.4)};
 `;
 
 export const Background = styled.div`
@@ -61,8 +43,8 @@ export const InputWrapper = styled.div`
   height: 40px;
   position: relative;
   opacity: 0;
-  animation: ${slideIn} forwards 0.2s;
   animation-delay: 0.2s;
+  ${({ theme }) => theme.fadeInAnimation(0.6)};
 
   input {
     border-radius: 0px;

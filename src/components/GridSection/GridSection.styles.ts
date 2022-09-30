@@ -1,14 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const fadeIn = keyframes`
-	from {
-		opacity: 0;
-		transform: translateY(-6px);
-	} to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-`;
+import styled from 'styled-components';
 
 export const Header = styled.div`
   display: flex;
@@ -36,8 +26,9 @@ export const Grid = styled.section`
     transition: border-color 0.2s ease-in-out;
     text-align: center;
     overflow: hidden;
-
-    animation: ${fadeIn} 0.8s forwards;
+    opacity: 0;
+    ${({ theme }) => theme.fadeInAnimation()};
+    animation-delay: 0.2s;
 
     a {
       text-decoration: none;

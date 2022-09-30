@@ -1,14 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const fadedIn = keyframes`
-	from {
-		opacity: 0;
-		transform: translateY(-10px);
-	} to{
-		opacity: 1;
-		transform: translateY(0);
-	}
-`;
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   border: 1px solid black;
@@ -48,7 +38,7 @@ export const DropdownList = styled.ul`
   width: calc(100% + 2px);
   z-index: 1;
   background-color: white;
-  animation: ${fadedIn} 0.2s forwards;
+  ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;
 
 export const DropdownListItem = styled.li`
