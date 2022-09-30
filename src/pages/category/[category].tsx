@@ -69,15 +69,17 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: { params: { category: string } }) {
   const queryClient = new QueryClient();
 
+  const category = context.params.category;
+
   await queryClient.prefetchQuery('fetchCategories', fetchCategories);
-  await queryClient.prefetchQuery(['fetchMealsByCategory', context.params.category], () =>
-    fetchMealsByCategory(context.params.category)
+  await queryClient.prefetchQuery(['fetchMealsByCategory', category], () =>
+    fetchMealsByCategory(category)
   );
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      category: context.params.category,
+      category,
     },
   };
 }

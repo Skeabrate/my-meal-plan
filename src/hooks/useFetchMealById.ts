@@ -18,9 +18,8 @@ export const useFetchMealById = (mealId: string) => {
     data: mealById,
     isLoading,
     error,
-  } = useQuery('fetchMealById', () => fetchMealById(mealId), {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+  } = useQuery(['fetchMealById', mealId], () => fetchMealById(mealId), {
+    enabled: !!mealId,
   });
 
   return { mealById, isLoading, error } as { mealById: MealType[] } & ApiResponseType;

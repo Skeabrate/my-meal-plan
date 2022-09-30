@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
@@ -14,20 +14,27 @@ const Meal = ({ mealId }: { mealId: string }) => {
     mealById[0]
   );
 
-  const detailsList = [
-    {
-      label: 'Instruction:',
-      data: instructions,
-    },
-    {
-      label: 'Ingredients:',
-      data: ingredients,
-    },
-  ];
+  const detailsList = useMemo(
+    () => [
+      {
+        label: 'Instruction:',
+        data: instructions,
+      },
+      {
+        label: 'Ingredients:',
+        data: ingredients,
+      },
+    ],
+    [ingredients, instructions]
+  );
 
   const [activeDetails, setActiveDetails] = useState<
     { id: number; firstValue: string; secondValue: string }[]
-  >(detailsList[0].data);
+  >([]);
+
+  useEffect(() => {
+    setActiveDetails(detailsList[0].data);
+  }, [detailsList]);
 
   return (
     <div>
@@ -100,7 +107,7 @@ export async function getServerSideProps(context: { params: { meal: string } }) 
   const mealId = context.params.meal;
 
   await queryClient.prefetchQuery('fetchCategories', fetchCategories);
-  await queryClient.prefetchQuery('fetchMealById', () => fetchMealById(mealId));
+  await queryClient.prefetchQuery(['fetchMealById', mealId], () => fetchMealById(mealId));
 
   return {
     props: {
