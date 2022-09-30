@@ -25,7 +25,7 @@ export const Intro = styled.section`
     padding: 2rem;
     color: white;
     line-height: 1.5;
-    box-shadow: 0 0 0 1px white, 0 0 0 2px ${({ theme }) => theme.colors.green};
+    ${({ theme }) => theme.boxShadow(theme.colors.green)};
     animation: ${slideIn} 0.6s forwards;
   }
 

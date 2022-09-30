@@ -28,17 +28,18 @@ export const GlobaStyles = createGlobalStyle`
 			margin-bottom: 3rem;
 			position: relative;
 			width: fit-content;
+			line-height: 1.2;
 
 			&:after{
 				content: '';
 				position: absolute;
-				width: 80%;
+				width: 100%;
 				height: 4px;
 				background-color: ${({ theme }) => theme.colors.lightOrange};
 				left: 0;
-				bottom: -2px;
+				bottom: -6px;
 				z-index: -1;
-				box-shadow: 0 0 0 1px white, 0 0 0 2px ${({ theme }) => theme.colors.lightOrange};
+				${({ theme }) => theme.boxShadow(theme.colors.lightOrange)};
 			}
 		}
 		
@@ -54,8 +55,6 @@ export const GlobaStyles = createGlobalStyle`
 
 				&:after{
 					height: 5px;
-					left: 0;
-					bottom: 0;
 				}
 			}
 		}

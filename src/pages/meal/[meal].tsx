@@ -1,84 +1,95 @@
-import React, { useMemo } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { NextPage } from 'next';
+import * as Styled from 'assets/styles/meal.styles';
 import { fetchCategories } from 'hooks/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealById, useFetchMealById } from 'hooks/useFetchMealById';
+import { useGetMealDetails } from 'hooks/useGetMealDetails';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
-
-  const getIngredients = useMemo(
-    () =>
-      Object.entries(mealById[0]).reduce((acc, [key, value]) => {
-        if (key.includes('strIngredient') && value?.trim()) {
-          acc.push({ id: key.split('strIngredient')[1], name: value, measure: '' });
-        }
-        if (key.includes('strMeasure') && value?.trim()) {
-          const index = +key.split('strMeasure')[1];
-          acc[index - 1].measure = value;
-        }
-
-        return acc;
-      }, [] as { id: string; name: string; measure: string }[]),
-    [mealById]
+  const { name, category, area, imgUrl, youtubeUrl, instructions, ingredients } = useGetMealDetails(
+    mealById[0]
   );
 
-  const getInstructions = useMemo(
-    () => mealById[0].strInstructions.split('.').filter((item) => item),
-    [mealById]
-  );
+  const [activeDetails, setActiveDetails] =
+    useState<{ id: number; firstValue: string; secondValue: string }[]>(instructions);
 
-  const mealDetails = {
-    name: mealById[0].strMeal,
-    category: mealById[0].strCategory,
-    area: mealById[0].strArea,
-    imgUrl: mealById[0].strMealThumb,
-    youtubeUrl: mealById[0].strYoutube,
-    instructions: getInstructions,
-    ingredients: getIngredients,
-  };
+  const detailsList = [
+    {
+      label: 'Instruction:',
+      data: instructions,
+    },
+    {
+      label: 'Ingredients:',
+      data: ingredients,
+    },
+  ];
 
   return (
-    <section>
-      <header>
-        <h1>{mealDetails.name}</h1>
-      </header>
+    <div>
+      <Styled.Header>
+        <h1>{name}</h1>
 
-      <p>Category: {mealDetails.category}</p>
-      <p>Area: {mealDetails.area}</p>
-      <Image
-        src={mealDetails.imgUrl}
-        alt={mealDetails.name}
-        width={500}
-        height={500}
-        object-fit='contain'
-      />
+        <div>
+          <p>
+            Category:
+            <span>
+              <Link href={`/category/${category}`}>{category}</Link>
+            </span>
+          </p>
+          <p>
+            Area: <span>{area}</span>
+          </p>
+        </div>
+      </Styled.Header>
 
-      <article>
-        <h2>Ingredients:</h2>
-
-        {mealDetails.ingredients.map(({ id, name, measure }) => (
-          <div
-            key={id}
-            style={{ marginBottom: '10px' }}
-          >
-            <p>Name: {name}</p>
-            <p>Measure: {measure}</p>
+      <Styled.MealGrid>
+        <Styled.Gallery>
+          <div>
+            <Image
+              src={imgUrl}
+              alt={name}
+              layout='fill'
+              objectFit='cover'
+            />
           </div>
-        ))}
-      </article>
 
-      <article>
-        <h2>Instruction:</h2>
-        {mealDetails.instructions.map((item, index) => (
-          <div key={item}>
-            <h3>Step {index + 1}</h3>
-            <p>{item}.</p>
-          </div>
-        ))}
-      </article>
-    </section>
+          <iframe
+            title={name}
+            width='100%'
+            height='250px'
+            src={`https://www.youtube.com/embed/${youtubeUrl}`}
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+            allowFullScreen
+          />
+        </Styled.Gallery>
+
+        <Styled.DetailsWrapper>
+          <Styled.DetailsBar>
+            {detailsList.map(({ label, data }) => (
+              <Styled.SwitchDetailsButton
+                key={label}
+                onClick={() => setActiveDetails(data)}
+                $isActive={activeDetails === data}
+              >
+                {label}
+              </Styled.SwitchDetailsButton>
+            ))}
+          </Styled.DetailsBar>
+
+          <Styled.Details $areIngredientsActive={activeDetails === ingredients}>
+            {activeDetails.map(({ id, firstValue, secondValue }) => (
+              <p key={id}>
+                <span>{firstValue}</span> {secondValue}
+              </p>
+            ))}
+          </Styled.Details>
+        </Styled.DetailsWrapper>
+      </Styled.MealGrid>
+    </div>
   );
 };
 

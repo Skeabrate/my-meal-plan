@@ -27,5 +27,6 @@ declare module 'styled-components' {
       bigDesktop: string;
       huge: string;
     };
+    boxShadow: Function;
   }
 }

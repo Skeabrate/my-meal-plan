@@ -28,7 +28,7 @@ export const Header = styled.div`
 export const Grid = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-gap: 3rem;
+  grid-gap: 4rem;
   min-height: 300px;
 
   article {
@@ -81,9 +81,5 @@ export const Grid = styled.section`
     article {
       max-width: 400px;
     }
-  }
-
-  ${({ theme }) => theme.mq.desktop} {
-    grid-gap: 5rem 3rem;
   }
 `;
