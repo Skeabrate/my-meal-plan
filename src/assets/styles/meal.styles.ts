@@ -103,6 +103,7 @@ export const SwitchDetailsButton = styled.button<{ $isActive: boolean }>`
 
 export const Details = styled.div<{ $areIngredientsActive: boolean }>`
   padding: 20px 0;
+
   ${({ theme }) => theme.fadeInAnimation()};
 
   p {
@@ -129,5 +130,11 @@ export const Details = styled.div<{ $areIngredientsActive: boolean }>`
     p {
       padding: 20px 30px;
     }
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    overflow-y: auto;
+    max-height: calc(100vh - 90px);
+    margin-block: 10px;
   }
 `;

@@ -107,20 +107,6 @@ export const Results = styled.div`
     text-align: center;
   }
 
-  ::-webkit-scrollbar-track {
-    background-color: white;
-  }
-  ::-webkit-scrollbar {
-    width: 12px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.grey};
-    border-radius: 100px;
-    border: 3px solid white;
-    background-clip: padding-box;
-  }
-
   ${({ theme }) => theme.mq.tablet} {
     padding: 10px 20px;
     max-height: calc(100vh - 170px);
