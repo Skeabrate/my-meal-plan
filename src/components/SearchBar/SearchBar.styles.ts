@@ -44,7 +44,7 @@ export const InputWrapper = styled.div`
   position: relative;
   opacity: 0;
   animation-delay: 0.2s;
-  ${({ theme }) => theme.fadeInAnimation(0.6)};
+  ${({ theme }) => theme.fadeInAnimation()};
 
   input {
     border-radius: 0px;

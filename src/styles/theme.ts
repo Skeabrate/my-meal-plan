@@ -29,7 +29,7 @@ export const theme: DefaultTheme = {
   boxShadow: (color: string) => css`
     box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};
   `,
-  fadeInAnimation: (duration = 0.8) => {
+  fadeInAnimation: (duration = 0.6) => {
     const fadeInAnimation = keyframes`
 			from {
 				opacity: 0;
@@ -45,7 +45,7 @@ export const theme: DefaultTheme = {
     `;
   },
 
-  slideInAnimation: (duration = 0.8) => {
+  slideInAnimation: (duration = 0.6) => {
     const SlideInAnimation = keyframes`
 			from{
 				opacity: 0;
