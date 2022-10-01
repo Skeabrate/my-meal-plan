@@ -6,10 +6,12 @@ import CloseSvg from 'assets/SVG/Close.svg';
 import { SearchBarContext } from 'context/SearchBarContext';
 import { debounce } from 'utils/debounce';
 import { useSearchResults } from 'hooks/useSearchResults';
+import { ResizeWindowContext } from 'context/ResizeWindowContext';
 
 const SearchBar = () => {
   const { searchResults, error, getSearchResults } = useSearchResults();
   const { isSearchBarOpen, toggleSearchBar } = useContext(SearchBarContext);
+  const { windowHeight } = useContext(ResizeWindowContext);
 
   const debouncedResults = useMemo(() => debounce(getSearchResults, 700), [getSearchResults]);
 
@@ -38,7 +40,7 @@ const SearchBar = () => {
           </button>
         </Styled.InputWrapper>
 
-        <Styled.Results>
+        <Styled.Results $windowHeight={windowHeight}>
           {error && <p>An error occured while fetching meals.</p>}
           {noMatchingResults && <p>We couldn't find any meals.</p>}
           {matchingResults && (

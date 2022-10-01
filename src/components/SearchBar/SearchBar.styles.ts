@@ -24,13 +24,17 @@ export const Background = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
-  opacity: 0.7;
+  opacity: 0.9;
   z-index: -1;
+
+  ${({ theme }) => theme.mq.tablet} {
+    opacity: 0.7;
+  }
 `;
 
 export const SearchBarInner = styled.div`
-  width: 360px;
-  padding: 40px;
+  width: 100%;
+  padding: 40px 20px;
   background: white;
 
   ${({ theme }) => theme.mq.tablet} {
@@ -41,9 +45,10 @@ export const SearchBarInner = styled.div`
 
 export const InputWrapper = styled.div`
   height: 40px;
-  position: relative;
+  width: 100%;
   opacity: 0;
   animation-delay: 0.2s;
+  position: relative;
   ${({ theme }) => theme.fadeInAnimation()};
 
   input {
@@ -61,6 +66,7 @@ export const InputWrapper = styled.div`
 
   button {
     height: calc(100% - 6px);
+    width: fit-content;
     border: none;
     position: absolute;
     right: 3px;
@@ -78,11 +84,10 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const Results = styled.div`
+export const Results = styled.div<{ $windowHeight: number }>`
   margin-top: 10px;
   overflow-y: auto;
-  padding: 10px;
-  max-height: calc(100vh - 130px);
+  max-height: ${({ $windowHeight }) => $windowHeight - 130}px;
 
   div,
   p {
