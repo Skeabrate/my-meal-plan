@@ -17,7 +17,7 @@ type GridSectionType = {
   data: DataItemType[];
   linkUrl: string;
   label: string;
-  enableFavorites: boolean;
+  enableFavorites?: boolean;
 };
 
 const GridSection = ({ data = [], linkUrl = '', label, enableFavorites }: GridSectionType) => {

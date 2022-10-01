@@ -28,7 +28,7 @@ const StyledFavoritesButton = styled.button`
 `;
 
 const FavoritesButton = () => {
-  const isFavorite = true;
+  const isFavorite = false;
 
   const handleFavorites = () => {};
 
