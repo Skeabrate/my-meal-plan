@@ -46,6 +46,7 @@ const Category = ({ category }: { category: string }) => {
         }))}
         linkUrl='meal'
         label='Meals:'
+        enableFavorites
       />
     </>
   );

@@ -27,6 +27,7 @@ export const Grid = styled.section`
     text-align: center;
     overflow: hidden;
     opacity: 0;
+    position: relative;
     ${({ theme }) => theme.fadeInAnimation()};
     animation-delay: 0.2s;
 
@@ -55,12 +56,16 @@ export const Grid = styled.section`
       background-color: ${({ theme }) => theme.colors.grey};
 
       img {
-        transition: scale 0.3s ease-in-out;
+        transition: scale 0.4s ease-in-out;
       }
     }
 
     &:hover {
-      border-color: ${({ theme }) => theme.colors.orange};
+      ${({ theme }) => theme.boxShadow(theme.colors.grey)}
+
+      a {
+        text-decoration: underline;
+      }
 
       img {
         scale: 1.05;

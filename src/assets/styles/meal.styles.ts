@@ -65,29 +65,6 @@ export const Gallery = styled.article`
     height: 350px;
     background-color: ${({ theme }) => theme.colors.grey};
     margin-bottom: 1rem;
-
-    button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: ${({ theme }) => theme.colors.lightOrange};
-      border: none;
-      transition: background-color 0.1s ease-in-out;
-      padding: 15px;
-
-      svg {
-        path {
-          fill: white;
-        }
-      }
-
-      &:hover {
-        background-color: ${({ theme }) => theme.colors.orange};
-      }
-    }
   }
 
   ${({ theme }) => theme.mq.tablet} {
