@@ -4,7 +4,7 @@ export const theme: DefaultTheme = {
   colors: {
     blue: '#585A6D',
     green: '#21A179',
-    orange: '#C44900',
+    orange: '#F55A00',
     lightOrange: '#FF711F',
     grey: '#d8d8d8',
     lightGrey: '#F0F0F0',

@@ -7,6 +7,8 @@ import { fetchCategories } from 'hooks/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealById, useFetchMealById } from 'hooks/useFetchMealById';
 import { useGetMealDetails } from 'hooks/useGetMealDetails';
+import MarkedSvg from 'assets/SVG/Marked.svg';
+import UnMarkedSvg from 'assets/SVG/UnMarked.svg';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
@@ -63,6 +65,10 @@ const Meal = ({ mealId }: { mealId: string }) => {
               layout='fill'
               objectFit='cover'
             />
+
+            <button>
+              <UnMarkedSvg />
+            </button>
           </div>
 
           <iframe

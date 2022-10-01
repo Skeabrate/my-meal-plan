@@ -38,6 +38,9 @@ export const Header = styled.header`
 
   ${({ theme }) => theme.mq.tablet} {
     margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     div {
       width: fit-content;
@@ -62,6 +65,29 @@ export const Gallery = styled.article`
     height: 350px;
     background-color: ${({ theme }) => theme.colors.grey};
     margin-bottom: 1rem;
+
+    button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: ${({ theme }) => theme.colors.lightOrange};
+      border: none;
+      transition: background-color 0.1s ease-in-out;
+      padding: 15px;
+
+      svg {
+        path {
+          fill: white;
+        }
+      }
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.orange};
+      }
+    }
   }
 
   ${({ theme }) => theme.mq.tablet} {
@@ -99,6 +125,10 @@ export const SwitchDetailsButton = styled.button<{ $isActive: boolean }>`
   background-color: ${({ $isActive, theme }) => ($isActive ? theme.colors.green : 'white')};
   color: ${({ $isActive }) => ($isActive ? 'white' : 'black')};
   box-shadow: inset 0 0 0 1px white;
+
+  &:hover {
+    background-color: ${({ $isActive, theme }) => !$isActive && theme.colors.lightGrey};
+  }
 `;
 
 export const Details = styled.div<{ $areIngredientsActive: boolean }>`
