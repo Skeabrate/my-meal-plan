@@ -34,7 +34,7 @@ export const Background = styled.div`
 
 export const SearchBarInner = styled.div`
   width: 100%;
-  padding: 40px 20px;
+  padding: 20px;
   background: white;
 
   ${({ theme }) => theme.mq.tablet} {
@@ -46,32 +46,26 @@ export const SearchBarInner = styled.div`
 export const InputWrapper = styled.div`
   height: 40px;
   width: 100%;
+  display: flex;
+  gap: 6px;
   opacity: 0;
   animation-delay: 0.2s;
   position: relative;
   ${({ theme }) => theme.fadeInAnimation()};
 
   input {
-    border-radius: 0px;
-    border: 2px solid ${({ theme }) => theme.colors.blue};
-    height: 100%;
     padding: 0 15px;
-    width: 100%;
+    height: 100%;
+    width: calc(100% - 42px);
 
     &:focus {
-      box-shadow: 0 0 0 2px white, 0 0 0 3px ${({ theme }) => theme.colors.green};
+      ${({ theme }) => theme.boxShadow(theme.colors.green)}
       outline: none;
     }
   }
 
   button {
-    height: calc(100% - 6px);
-    width: fit-content;
-    border: none;
-    position: absolute;
-    right: 3px;
-    top: 3px;
-    background: transparent;
+    height: 100%;
 
     svg {
       width: 100%;
@@ -81,6 +75,13 @@ export const InputWrapper = styled.div`
         fill: ${({ theme }) => theme.colors.blue};
       }
     }
+  }
+
+  button,
+  input {
+    border-radius: 0px;
+    border: 2px solid ${({ theme }) => theme.colors.blue};
+    background-color: transparent;
   }
 `;
 
