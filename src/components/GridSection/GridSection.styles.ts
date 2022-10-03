@@ -18,9 +18,8 @@ export const Header = styled.div`
 
 export const Grid = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-gap: 4rem;
-  min-height: 300px;
 
   article {
     border: 1px solid ${({ theme }) => theme.colors.grey};
@@ -71,12 +70,6 @@ export const Grid = styled.section`
       img {
         scale: 1.05;
       }
-    }
-  }
-
-  ${({ theme }) => theme.mq.tablet} {
-    article {
-      max-width: 400px;
     }
   }
 `;
