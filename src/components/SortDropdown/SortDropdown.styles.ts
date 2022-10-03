@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.orange};
+    ${({ theme }) => theme.boxShadow(theme.colors.orange)};
   }
 
   &:focus {

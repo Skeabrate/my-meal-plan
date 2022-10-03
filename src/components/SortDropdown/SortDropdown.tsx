@@ -70,7 +70,12 @@ const SortDropdown = ({
         <Styled.DropdownList>
           {items.map((item) => (
             <Styled.DropdownListItem key={item}>
-              <button onClick={() => setOption(item)}>{item}</button>
+              <button
+                onKeyDown={(e) => e.keyCode === 13 && setOption(item)}
+                onClick={() => setOption(item)}
+              >
+                {item}
+              </button>
             </Styled.DropdownListItem>
           ))}
         </Styled.DropdownList>
