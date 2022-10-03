@@ -1,4 +1,12 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, keyframes } from 'styled-components';
+
+const scaleAnimation = keyframes`
+	from{
+		transform: scaleX(0);
+	} to {
+		transform: scaleX(1);
+	}
+`;
 
 export const GlobaStyles = createGlobalStyle`
 	*, *::after, *::before{
@@ -29,6 +37,7 @@ export const GlobaStyles = createGlobalStyle`
 			position: relative;
 			width: fit-content;
 			line-height: 1.2;
+			z-index: 1;
 
 			&:after{
 				content: '';
@@ -37,8 +46,12 @@ export const GlobaStyles = createGlobalStyle`
 				height: 4px;
 				background-color: ${({ theme }) => theme.colors.orange};
 				left: 0;
-				bottom: -6px;
+				bottom: -4px;
+				z-index: -1;
 				${({ theme }) => theme.boxShadow(theme.colors.orange)};
+				transform: scaleX(0);
+				transform-origin: 0 0; 
+				animation: ${scaleAnimation} .4s .3s forwards;
 			}
 		}
 		
