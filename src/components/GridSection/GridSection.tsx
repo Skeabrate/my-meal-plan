@@ -44,7 +44,7 @@ const GridSection = ({
 
   const loadingState = loadingFilters || loadingData;
   const errorState = error.value;
-  const displaySortDropdownState = !error.value || currentData.length > 1;
+  const displaySortDropdownState = !error.value && currentData.length > 1;
   const displayLoadingRefState = currentData.length < data.length;
 
   return (
