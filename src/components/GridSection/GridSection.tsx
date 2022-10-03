@@ -44,6 +44,7 @@ const GridSection = ({
 
   const loadingState = loadingFilters || loadingData;
   const errorState = error.value;
+  const displaySortDropdownState = !error.value || currentData.length > 1;
   const displayLoadingRefState = currentData.length < data.length;
 
   return (
@@ -51,7 +52,7 @@ const GridSection = ({
       <Styled.Header>
         {label.isMain ? <h1>{label.value}</h1> : <h2>{label.value}</h2>}
 
-        {!error.value && (
+        {displaySortDropdownState && (
           <SortDropdown
             data={data}
             loadingFilters={loadingFilters}
