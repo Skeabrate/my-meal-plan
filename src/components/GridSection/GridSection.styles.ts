@@ -63,10 +63,6 @@ export const Grid = styled.section`
     &:hover {
       ${({ theme }) => theme.boxShadow(theme.colors.grey)}
 
-      a {
-        text-decoration: underline;
-      }
-
       img {
         scale: 1.05;
       }
