@@ -10,7 +10,7 @@ export const FavoritesButton = styled.button`
   background-color: ${({ theme }) => theme.colors.orange};
   border: none;
   transition: background-color 0.1s ease-in-out;
-  padding: 10px;
+  padding: 6px;
   z-index: 99;
 
   svg {
