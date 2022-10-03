@@ -1,14 +1,20 @@
 import React, { useMemo, useState } from 'react';
 
+type FavoriteItem = {
+  id: string;
+  name: string;
+  img: string;
+};
+
 type FavoritesContextType = {
-  favorites: string[];
+  favorites: FavoriteItem[];
   setFavorites: Function;
 };
 
 export const FavoritesContext = React.createContext({} as FavoritesContextType);
 
 export default function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
 
   const value = useMemo(
     () => ({

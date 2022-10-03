@@ -7,6 +7,7 @@ import { theme } from 'styles/theme';
 import { GlobaStyles } from 'styles/GlobalStyle';
 import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
+import FavoritesProvider from 'context/FavoritesContext';
 import MainWrapper from 'templates/MainWrapper';
 import NavBar from 'components/NavBar/NavBar';
 import HeadComponent from 'components/HeadComponent/HeadComponent';
@@ -30,15 +31,17 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
         <ThemeProvider theme={theme}>
           <GlobaStyles />
           <ResizeWindowProvider>
-            <SearchBarProvider>
-              <SearchBarWrapper />
-              <HeadComponent />
-              <NavBar />
-              <MainWrapper>
-                <Component {...pageProps} />
-              </MainWrapper>
-              <Footer />
-            </SearchBarProvider>
+            <FavoritesProvider>
+              <SearchBarProvider>
+                <SearchBarWrapper />
+                <HeadComponent />
+                <NavBar />
+                <MainWrapper>
+                  <Component {...pageProps} />
+                </MainWrapper>
+                <Footer />
+              </SearchBarProvider>
+            </FavoritesProvider>
           </ResizeWindowProvider>
         </ThemeProvider>
       </Hydrate>

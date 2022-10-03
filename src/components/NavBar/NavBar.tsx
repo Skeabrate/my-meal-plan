@@ -9,6 +9,7 @@ import SearchSvg from 'assets/SVG/Search.svg';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 import { SearchBarContext } from 'context/SearchBarContext';
+import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
 
@@ -20,6 +21,7 @@ const links = [
   {
     href: '/favorites',
     name: 'Favorites',
+    isFavorite: true,
   },
   {
     href: '/meal-plan',
@@ -32,6 +34,7 @@ const NavBar = () => {
 
   const { windowHeight } = useContext(ResizeWindowContext);
   const { toggleSearchBar } = useContext(SearchBarContext);
+  const { favorites } = useContext(FavoritesContext);
 
   const router = useRouter();
 
@@ -75,13 +78,16 @@ const NavBar = () => {
           $isCartOpen={isCartOpen}
         >
           <Styled.NavLinks $isCartOpen={isCartOpen}>
-            {links.map(({ href, name }) => (
+            {links.map(({ href, name, isFavorite }) => (
               <Styled.NavLink
                 $isActive={router.pathname === href}
+                $isFavorite={isFavorite}
                 $isCartOpen={isCartOpen}
                 key={href}
               >
-                <Link href={href}>{name}</Link>
+                <Link href={href}>
+                  <a data-favorite={favorites.length}>{name}</a>
+                </Link>
               </Styled.NavLink>
             ))}
           </Styled.NavLinks>

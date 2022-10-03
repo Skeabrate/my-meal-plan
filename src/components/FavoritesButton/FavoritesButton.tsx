@@ -10,9 +10,9 @@ const StyledFavoritesButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.lightOrange};
+  background-color: ${({ theme }) => theme.colors.orange};
   border: none;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   padding: 10px;
   z-index: 99;
 
@@ -23,7 +23,7 @@ const StyledFavoritesButton = styled.button`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.orange};
+    background-color: #ff7e33;
   }
 `;
 

@@ -174,7 +174,7 @@ export const NavLinks = styled.ul<MenuProps>`
   width: 100%;
 `;
 
-export const NavLink = styled.li<MenuProps & { $isActive: boolean }>`
+export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,15 +187,38 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean }>`
     width: 100%;
     height: 60px;
     color: black;
-    text-decoration: none;
-    color: ${({ $isActive, theme }) => ($isActive ? theme.colors.orange : 'black')};
+    text-decoration: ${({ $isActive }) => ($isActive ? 'underline' : 'none')};
+    text-underline-offset: 2px;
     font-size: ${({ theme }) => theme.fontSize.abrilDesktop};
     opacity: ${({ $isCartOpen }) => ($isCartOpen ? 1 : 0)};
     transition: opacity 0.5s ease-in-out;
     transition-delay: ${({ $isCartOpen }) => ($isCartOpen ? '0.5s' : '0.2s')};
+    position: relative;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    a[data-favorite]::after {
+      content: attr(data-favorite);
+      display: ${({ $isFavorite }) => ($isFavorite ? 'flex' : 'none')};
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: absolute;
+      top: 50%;
+      transform: translateY(calc(-50% - 6px));
+      right: -4px;
+      width: 24px;
+      height: 24px;
+      font-size: ${({ theme }) => theme.fontSize.caption};
+      font-family: ${({ theme }) => theme.fontFamily.lato};
+      background: ${({ theme }) => theme.colors.orange};
+      border-radius: 100px;
+      z-index: -1;
+      font-weight: 600;
     }
   }
 `;

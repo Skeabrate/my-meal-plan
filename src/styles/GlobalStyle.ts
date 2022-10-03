@@ -35,11 +35,11 @@ export const GlobaStyles = createGlobalStyle`
 				position: absolute;
 				width: 60%;
 				height: 4px;
-				background-color: ${({ theme }) => theme.colors.lightOrange};
+				background-color: ${({ theme }) => theme.colors.orange};
 				left: 0;
 				bottom: -6px;
 				z-index: -1;
-				${({ theme }) => theme.boxShadow(theme.colors.lightOrange)};
+				${({ theme }) => theme.boxShadow(theme.colors.orange)};
 			}
 		}
 		
