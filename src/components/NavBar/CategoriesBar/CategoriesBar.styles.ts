@@ -2,10 +2,10 @@ import styled, { keyframes } from 'styled-components';
 
 const scaleAnimation = keyframes`
 	from{
-		transform: scale(0);
+		scale: 0;
 		opacity: 0;
 	} to {
-		transform: scale(1);
+		scale: 1;
 		opacity: 1;
 	}
 `;
@@ -30,13 +30,13 @@ export const Wrapper = styled.div`
         font-weight: 600;
         font-size: ${({ theme }) => theme.fontSize.caption};
         letter-spacing: 0.5px;
-        transition: scale 0.2s ease-in-out;
-        transform: scale(0);
+        transition: transform 0.2s ease-in-out;
+        scale: 0;
         opacity: 0;
-        animation: ${scaleAnimation} 0.6s forwards;
+        animation: ${scaleAnimation} 0.5s forwards;
 
         &:hover {
-          scale: 1.1;
+          transform: scale(1.1);
         }
       }
 

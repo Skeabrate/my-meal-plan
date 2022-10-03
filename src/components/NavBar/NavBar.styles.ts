@@ -1,5 +1,15 @@
 import styled, { css, keyframes } from 'styled-components';
 
+const scaleAnimation = keyframes`
+	from{
+		opacity: 0;
+		transform: translateY(calc(-50% - 10px)) scale(0);
+	} to {
+		opacity: 1;
+		transform: translateY(calc(-50% - 10px)) scale(1);
+	}
+`;
+
 type MenuProps = {
   $isCartOpen: null | boolean;
 };
@@ -209,7 +219,6 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
       color: white;
       position: absolute;
       top: 50%;
-      transform: translateY(calc(-50% - 10px));
       right: -8px;
       width: 24px;
       height: 24px;
@@ -219,6 +228,10 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
       border-radius: 100px;
       z-index: -1;
       font-weight: 600;
+      transform-origin: center;
+      opacity: 0;
+      animation: ${scaleAnimation} 0.4s forwards;
+      animation-delay: 2s;
     }
   }
 `;
