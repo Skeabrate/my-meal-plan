@@ -5,14 +5,16 @@ import { fetchCategories } from 'hooks/useFetchCategories';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { fetchFavoriteMealsById } from 'utils/fetchFavoriteMealsById';
 import { MealType } from 'types/MealType';
+import GridSection from 'components/GridSection/GridSection';
 
 function Favorites() {
   const [favoritesDetails, setFavoritesDetails] = useState<MealType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const { favorites } = useContext(FavoritesContext);
 
   const getFavoritesMeals = useCallback(async (meals: string[]) => {
+    setLoading(true);
     const mealsById = (await fetchFavoriteMealsById(meals)).filter((item) => item.idMeal);
     setFavoritesDetails(mealsById);
     setLoading(false);
@@ -23,19 +25,22 @@ function Favorites() {
   }, [favorites, getFavoritesMeals]);
 
   return (
-    <div>
-      <h1>Favorites</h1>
-
-      {loading ? (
-        <p>Loading ...</p>
-      ) : (
-        <div>
-          {favoritesDetails.map((item) => (
-            <div key={item.idMeal}>{item.strMeal}</div>
-          ))}
-        </div>
-      )}
-    </div>
+    <GridSection
+      data={favoritesDetails.map(({ idMeal, strMeal, strMealThumb }) => ({
+        id: idMeal,
+        name: strMeal,
+        img: strMealThumb,
+        slug: idMeal,
+      }))}
+      linkUrl='meal'
+      label={{ value: 'Favorites:', isMain: true }}
+      enableFavorites
+      loadingData={loading}
+      error={{
+        value: !favoritesDetails.length,
+        fallbackMessage: `You don't have any favorites yet.`,
+      }}
+    />
   );
 }
 export async function getStaticProps() {

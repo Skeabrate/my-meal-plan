@@ -6,6 +6,7 @@ export const Header = styled.div`
   align-items: center;
   margin-bottom: 3rem;
 
+  h1,
   h2 {
     margin: 0;
   }
@@ -77,5 +78,21 @@ export const Grid = styled.section`
     article {
       max-width: 400px;
     }
+  }
+`;
+
+export const Loading = styled.p`
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Error = styled.p`
+  height: 400px;
+  font-style: italic;
+
+  ${({ theme }) => theme.mq.tablet} {
+    font-size: 1.8rem;
   }
 `;

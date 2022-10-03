@@ -9,7 +9,7 @@ import { fetchMealsByCategory, useFetchMealsByCategory } from 'hooks/useFetchMea
 import GridSection from 'components/GridSection/GridSection';
 
 const Category = ({ category }: { category: string }) => {
-  const { categories } = useFetchCategories();
+  const { categories, isLoading, error } = useFetchCategories();
   const { mealsByCategory } = useFetchMealsByCategory(category);
 
   const categoryDetails = useMemo(
@@ -45,8 +45,13 @@ const Category = ({ category }: { category: string }) => {
           slug: idMeal,
         }))}
         linkUrl='meal'
-        label='Meals:'
+        label={{ value: 'Meals:' }}
         enableFavorites
+        loadingData={isLoading}
+        error={{
+          value: error,
+          fallbackMessage: `We couldn't load any meals.`,
+        }}
       />
     </>
   );

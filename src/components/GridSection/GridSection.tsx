@@ -16,32 +16,53 @@ export type DataItemType = {
 type GridSectionType = {
   data: DataItemType[];
   linkUrl: string;
-  label: string;
+  label: {
+    value: string;
+    isMain?: boolean;
+  };
+  error: {
+    value: unknown;
+    fallbackMessage: string;
+  };
+  loadingData?: boolean;
   enableFavorites?: boolean;
 };
 
-const GridSection = ({ data = [], linkUrl = '', label, enableFavorites }: GridSectionType) => {
+const GridSection = ({
+  data = [],
+  linkUrl = '',
+  label,
+  enableFavorites,
+  loadingData,
+  error,
+}: GridSectionType) => {
   const [loadingFilters, setLoadingFilters] = useState(false);
 
   const loadingRef = useRef<HTMLDivElement>(null);
   const { currentData } = usePaginate(data, loadingRef);
 
-  const displayLoadingRef = currentData.length < data.length;
+  const loadingState = loadingFilters || loadingData;
+  const errorState = error.value;
+  const displayLoadingRefState = currentData.length < data.length;
 
   return (
     <>
       <Styled.Header>
-        <h2>{label}</h2>
+        {label.isMain ? <h1>{label.value}</h1> : <h2>{label.value}</h2>}
 
-        <SortDropdown
-          data={data}
-          loadingFilters={loadingFilters}
-          setLoadingFilters={setLoadingFilters}
-        />
+        {!error.value && (
+          <SortDropdown
+            data={data}
+            loadingFilters={loadingFilters}
+            setLoadingFilters={setLoadingFilters}
+          />
+        )}
       </Styled.Header>
 
-      {loadingFilters ? (
-        <div style={{ height: '400px' }}></div>
+      {loadingState ? (
+        <Styled.Loading>Loading ... </Styled.Loading>
+      ) : errorState ? (
+        <Styled.Error>{error.fallbackMessage}</Styled.Error>
       ) : (
         <Styled.Grid>
           {currentData.map(({ id, name, img, slug }) => (
@@ -66,7 +87,7 @@ const GridSection = ({ data = [], linkUrl = '', label, enableFavorites }: GridSe
         </Styled.Grid>
       )}
 
-      {displayLoadingRef && <div ref={loadingRef} />}
+      {displayLoadingRefState && <div ref={loadingRef} />}
     </>
   );
 };
