@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { fetchFavoriteMealsById } from 'utils/fetchFavoriteMealsById';
 
 function tryParseJSONObject(jsonString: string) {
   try {
@@ -13,8 +14,8 @@ function tryParseJSONObject(jsonString: string) {
   return false;
 }
 
-export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
-  const [favorites, setFavorites] = useState<T>(() => {
+export function useLocalStorage(key: string, initialValue: string[]) {
+  const [favorites, setFavorites] = useState(() => {
     if (typeof window !== 'undefined') {
       const localStorageValue = localStorage.getItem(key);
       if (localStorageValue && tryParseJSONObject(localStorageValue)) {
@@ -22,10 +23,30 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
       } else return initialValue;
     } else return initialValue;
   });
+  const [favoritesLength, setFavoritesLength] = useState(0);
+
+  const validateLocalStorage = async () => {
+    const check = await fetchFavoriteMealsById(favorites);
+    setFavorites(
+      check.reduce((acc, item) => {
+        if (item.idMeal) acc.push(item.idMeal);
+        return acc;
+      }, [] as string[])
+    );
+  };
+
+  useEffect(() => {
+    validateLocalStorage();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(favorites));
+    setFavoritesLength(favorites.length);
   }, [key, favorites]);
 
-  return [favorites, setFavorites] as [typeof favorites, typeof setFavorites];
+  return [favorites, favoritesLength, setFavorites] as [
+    typeof favorites,
+    typeof favoritesLength,
+    typeof setFavorites
+  ];
 }

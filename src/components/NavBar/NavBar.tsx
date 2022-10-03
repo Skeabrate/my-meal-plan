@@ -34,7 +34,7 @@ const NavBar = () => {
 
   const { windowHeight } = useContext(ResizeWindowContext);
   const { toggleSearchBar } = useContext(SearchBarContext);
-  const { favorites } = useContext(FavoritesContext);
+  const { favoritesLength } = useContext(FavoritesContext);
 
   const router = useRouter();
 
@@ -86,7 +86,7 @@ const NavBar = () => {
                 key={href}
               >
                 <Link href={href}>
-                  <a data-favorite={favorites.length}>{name}</a>
+                  <a data-favorite={favoritesLength}>{name}</a>
                 </Link>
               </Styled.NavLink>
             ))}

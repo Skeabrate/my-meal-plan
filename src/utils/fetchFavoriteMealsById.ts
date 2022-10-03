@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { MealType } from 'types/MealType';
 
-export const fetchFavoriteMealsById = async (meals: string[]) => {
+export const fetchFavoriteMealsById = async (meals: string[] = []) => {
   const mealsById = meals.map((meal) =>
     axios
       .get(`${process.env.FETCH_MEAL_BY_ID}${meal}`)

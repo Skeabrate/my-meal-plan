@@ -1,24 +1,26 @@
 import { useLocalStorage } from 'hooks/useLocalStorage';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 type FavoriteItem = string;
 
 type FavoritesContextType = {
   favorites: FavoriteItem[];
+  favoritesLength: number;
   setFavorites: React.Dispatch<React.SetStateAction<FavoriteItem[]>>;
 };
 
 export const FavoritesContext = React.createContext({} as FavoritesContextType);
 
 export default function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favorites, setFavorites] = useLocalStorage<FavoriteItem[]>('favorites', []);
+  const [favorites, favoritesLength, setFavorites] = useLocalStorage('favorites', []);
 
   const value = useMemo(
     () => ({
       favorites,
+      favoritesLength,
       setFavorites,
     }),
-    [favorites, setFavorites]
+    [favorites, favoritesLength, setFavorites]
   );
 
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
