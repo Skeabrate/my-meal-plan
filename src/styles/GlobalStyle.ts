@@ -38,7 +38,6 @@ export const GlobaStyles = createGlobalStyle`
 				background-color: ${({ theme }) => theme.colors.orange};
 				left: 0;
 				bottom: -6px;
-				z-index: -1;
 				${({ theme }) => theme.boxShadow(theme.colors.orange)};
 			}
 		}
