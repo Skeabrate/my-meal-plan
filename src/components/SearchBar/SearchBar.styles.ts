@@ -65,7 +65,8 @@ export const InputWrapper = styled.div`
   }
 
   button {
-    height: 100%;
+    height: 40px;
+    width: 40px;
 
     svg {
       width: 100%;

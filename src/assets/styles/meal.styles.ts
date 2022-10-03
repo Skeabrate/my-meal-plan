@@ -4,11 +4,10 @@ export const Header = styled.header`
   margin-bottom: 2rem;
 
   h1 {
-    margin: 0;
+    margin: 0 0 2rem 0;
   }
 
   div {
-    margin-top: 20px;
     background-color: ${({ theme }) => theme.colors.green};
     padding: 10px 20px;
     color: white;
@@ -37,10 +36,14 @@ export const Header = styled.header`
   }
 
   ${({ theme }) => theme.mq.tablet} {
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    h1 {
+      margin: 0 2rem 0 0;
+    }
 
     div {
       width: fit-content;
