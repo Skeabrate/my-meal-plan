@@ -46,7 +46,7 @@ const GridSection = ({ data = [], linkUrl = '', label, enableFavorites }: GridSe
         <Styled.Grid>
           {currentData.map(({ id, name, img, slug }) => (
             <article key={id}>
-              {enableFavorites && <FavoritesButton />}
+              {enableFavorites && <FavoritesButton mealId={id} />}
               <Link href={`/${linkUrl}/${slug}`}>
                 <a>
                   <div>

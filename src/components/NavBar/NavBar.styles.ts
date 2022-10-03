@@ -209,8 +209,8 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
       color: white;
       position: absolute;
       top: 50%;
-      transform: translateY(calc(-50% - 6px));
-      right: -4px;
+      transform: translateY(calc(-50% - 10px));
+      right: -8px;
       width: 24px;
       height: 24px;
       font-size: ${({ theme }) => theme.fontSize.caption};

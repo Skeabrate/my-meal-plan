@@ -1,45 +1,33 @@
-import React from 'react';
-import styled from 'styled-components';
+import { useContext, useMemo } from 'react';
+import * as Styled from './FavoritesButton.styles';
+import { FavoritesContext } from 'context/FavoritesContext';
 import MarkedSvg from 'assets/SVG/Marked.svg';
 import UnMarkedSvg from 'assets/SVG/UnMarked.svg';
 
-const StyledFavoritesButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.orange};
-  border: none;
-  transition: background-color 0.1s ease-in-out;
-  padding: 10px;
-  z-index: 99;
+const FavoritesButton = ({ mealId }: { mealId: string }) => {
+  const { favorites, setFavorites } = useContext(FavoritesContext);
 
-  svg {
-    path {
-      fill: white;
+  const isMealAlreadyFavorite = useMemo(
+    () => favorites.some((item) => item === mealId),
+    [favorites, mealId]
+  );
+
+  const handleFavorites = () => {
+    if (isMealAlreadyFavorite) {
+      setFavorites((state) => state.filter((item) => item !== mealId));
+    } else {
+      setFavorites((state) => [...state, mealId]);
     }
-  }
-
-  &:hover {
-    background-color: #ff7e33;
-  }
-`;
-
-const FavoritesButton = () => {
-  const isFavorite = false;
-
-  const handleFavorites = () => {};
+  };
 
   return (
-    <StyledFavoritesButton
+    <Styled.FavoritesButton
       onClick={handleFavorites}
       aira-label='Add meal to favorites'
       title='Add to favorites'
     >
-      {isFavorite ? <MarkedSvg /> : <UnMarkedSvg />}
-    </StyledFavoritesButton>
+      {isMealAlreadyFavorite ? <MarkedSvg /> : <UnMarkedSvg />}
+    </Styled.FavoritesButton>
   );
 };
 

@@ -32,6 +32,7 @@ export const useGetMealDetails = (mealDetails: MealType) => {
   );
 
   return {
+    id: mealDetails.idMeal,
     name: mealDetails.strMeal,
     category: mealDetails.strCategory,
     area: mealDetails.strArea,

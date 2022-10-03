@@ -1,14 +1,10 @@
 import React, { useMemo, useState } from 'react';
 
-type FavoriteItem = {
-  id: string;
-  name: string;
-  img: string;
-};
+type FavoriteItem = string;
 
 type FavoritesContextType = {
   favorites: FavoriteItem[];
-  setFavorites: Function;
+  setFavorites: React.Dispatch<React.SetStateAction<FavoriteItem[]>>;
 };
 
 export const FavoritesContext = React.createContext({} as FavoritesContextType);

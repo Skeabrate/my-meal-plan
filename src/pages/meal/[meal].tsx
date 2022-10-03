@@ -11,9 +11,8 @@ import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
-  const { name, category, area, imgUrl, youtubeUrl, instructions, ingredients } = useGetMealDetails(
-    mealById[0]
-  );
+  const { id, name, category, area, imgUrl, youtubeUrl, instructions, ingredients } =
+    useGetMealDetails(mealById[0]);
 
   const detailsList = useMemo(
     () => [
@@ -65,7 +64,7 @@ const Meal = ({ mealId }: { mealId: string }) => {
               objectFit='cover'
             />
 
-            <FavoritesButton />
+            <FavoritesButton mealId={id} />
           </div>
 
           <iframe
