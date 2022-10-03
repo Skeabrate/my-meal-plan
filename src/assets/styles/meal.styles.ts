@@ -13,7 +13,7 @@ export const Header = styled.header`
     color: white;
     width: 100%;
     ${({ theme }) => theme.boxShadow(theme.colors.green)};
-    ${({ theme }) => theme.slideInAnimation()};
+    ${({ theme }) => theme.fadeInAnimation()};
   }
 
   p {
