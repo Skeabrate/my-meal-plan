@@ -1,4 +1,8 @@
 export type ApiResponseType = {
   isLoading: boolean;
-  error: unknown;
+  error:
+    | {
+        message?: string;
+      }
+    | any;
 };

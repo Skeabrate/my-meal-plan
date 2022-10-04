@@ -5,7 +5,7 @@ import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
 import SortDropdown from 'components/SortDropdown/SortDropdown';
 import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
-import { ClipLoader } from 'react-spinners';
+import Loading from 'components/Loading/Loading';
 
 export type DataItemType = {
   id: string;
@@ -62,9 +62,7 @@ const GridSection = ({
       </Styled.Header>
 
       {loadingState ? (
-        <Styled.Loading>
-          <ClipLoader />
-        </Styled.Loading>
+        <Loading />
       ) : errorState ? (
         <Styled.Error>{error.fallbackMessage}</Styled.Error>
       ) : (

@@ -1,19 +1,22 @@
-import { useContext, useMemo } from 'react';
+import { useState, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './SearchBar.styles';
 import CloseSvg from 'assets/SVG/Close.svg';
 import { SearchBarContext } from 'context/SearchBarContext';
-import { debounce } from 'utils/debounce';
-import { useSearchResults } from 'hooks/useSearchResults';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
+import { useFetchSearchResults } from 'api/useFetchSearchResults';
+import useDebouncedValue from 'hooks/useDebouncedValue';
+import Loading from 'components/Loading/Loading';
 
 const SearchBar = () => {
-  const { searchResults, error, getSearchResults } = useSearchResults();
+  const [inputValue, setInputValue] = useState('');
+
+  const debouncedResults = useDebouncedValue(inputValue, 700);
+  const { searchResults, isLoading, error } = useFetchSearchResults(debouncedResults);
+
   const { isSearchBarOpen, toggleSearchBar } = useContext(SearchBarContext);
   const { windowHeight } = useContext(ResizeWindowContext);
-
-  const debouncedResults = useMemo(() => debounce(getSearchResults, 700), [getSearchResults]);
 
   const emptySearchInput = searchResults === null;
   const noMatchingResults = !emptySearchInput && searchResults.length === 0;
@@ -30,10 +33,11 @@ const SearchBar = () => {
       <Styled.SearchBarInner>
         <Styled.InputWrapper>
           <input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             type='text'
             placeholder='Search...'
             autoFocus
-            onChange={debouncedResults}
           />
           <button onClick={toggleSearchBar}>
             <CloseSvg />
@@ -41,7 +45,8 @@ const SearchBar = () => {
         </Styled.InputWrapper>
 
         <Styled.Results $windowHeight={windowHeight}>
-          {error && <p>An error occured while fetching meals.</p>}
+          {isLoading && <Loading />}
+          {error?.message && <p>An error occured while fetching meals.</p>}
           {noMatchingResults && <p>We couldn't find any meals.</p>}
           {matchingResults && (
             <div>

@@ -70,13 +70,6 @@ export const Grid = styled.section`
   }
 `;
 
-export const Loading = styled.p`
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const Error = styled.p`
   height: 400px;
   font-style: italic;
