@@ -13,14 +13,16 @@ const Results = ({ inputValue }: { inputValue: string }) => {
   const { searchResults, isLoading, error } = useFetchSearchResults(debouncedInputValue);
   const { windowHeight } = useContext(ResizeWindowContext);
 
+  const loading = isLoading;
+  const errorOccured = error?.message;
   const emptySearchInput = searchResults === null;
   const noMatchingResults = !emptySearchInput && searchResults.length === 0;
   const matchingResults = !emptySearchInput && searchResults.length > 0;
 
   return (
     <Styled.Results $windowHeight={windowHeight}>
-      {isLoading && <Loading />}
-      {error?.message && <p>An error occured while fetching meals.</p>}
+      {loading && <Loading />}
+      {errorOccured && <p>An error occured while fetching meals.</p>}
       {noMatchingResults && <p>We couldn't find any meals.</p>}
       {matchingResults && (
         <div>
