@@ -1,32 +1,18 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import type { NextPage } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchCategories } from 'hooks/useFetchCategories';
 import { FavoritesContext } from 'context/FavoritesContext';
-import { fetchFavoriteMealsById } from 'utils/fetchFavoriteMealsById';
-import { MealType } from 'types/MealType';
 import GridSection from 'components/GridSection/GridSection';
+import { useFetchFavorites } from 'hooks/useFetchFavorites';
 
 function Favorites() {
-  const [favoritesDetails, setFavoritesDetails] = useState<MealType[]>([]);
-  const [loading, setLoading] = useState(false);
-
   const { favorites } = useContext(FavoritesContext);
-
-  const getFavoritesMeals = useCallback(async (meals: string[]) => {
-    setLoading(true);
-    const mealsById = (await fetchFavoriteMealsById(meals)).filter((item) => item.idMeal);
-    setFavoritesDetails(mealsById);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    getFavoritesMeals(favorites);
-  }, [favorites, getFavoritesMeals]);
+  const { favoritesById, isLoading, error } = useFetchFavorites(favorites);
 
   return (
     <GridSection
-      data={favoritesDetails.map(({ idMeal, strMeal, strMealThumb }) => ({
+      data={favoritesById?.map(({ idMeal, strMeal, strMealThumb }) => ({
         id: idMeal,
         name: strMeal,
         img: strMealThumb,
@@ -35,9 +21,9 @@ function Favorites() {
       linkUrl='meal'
       label={{ value: 'Favorites:', isMain: true }}
       enableFavorites
-      loadingData={loading}
+      loadingData={isLoading}
       error={{
-        value: !favoritesDetails.length,
+        value: !favoritesById?.length || error,
         fallbackMessage: `You don't have any favorites yet.`,
       }}
     />

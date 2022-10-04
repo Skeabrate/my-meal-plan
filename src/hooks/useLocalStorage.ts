@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchFavoriteMealsById } from 'utils/fetchFavoriteMealsById';
+import { fetchFavorites } from 'hooks/useFetchFavorites';
 
 function tryParseJSONObject(jsonString: string) {
   try {
@@ -26,7 +26,7 @@ export function useLocalStorage(key: string, initialValue: string[]) {
   const [favoritesLength, setFavoritesLength] = useState(0);
 
   const validateLocalStorage = async () => {
-    const check = await fetchFavoriteMealsById(favorites);
+    const check = await fetchFavorites(favorites);
     setFavorites(
       check.reduce((acc, item) => {
         if (item.idMeal) acc.push(item.idMeal);
