@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import * as Styled from './CategoriesBar.styles';
-import { useFetchCategories } from 'hooks/useFetchCategories';
+import { useFetchCategories } from 'api/useFetchCategories';
 import SlideBar from 'components/SlideBar/SlideBar';
 
 const CategoriesBar = () => {

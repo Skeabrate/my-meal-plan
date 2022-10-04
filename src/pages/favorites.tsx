@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import type { NextPage } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
-import { fetchCategories } from 'hooks/useFetchCategories';
+import { fetchCategories } from 'api/useFetchCategories';
 import { FavoritesContext } from 'context/FavoritesContext';
 import GridSection from 'components/GridSection/GridSection';
-import { useFetchFavorites } from 'hooks/useFetchFavorites';
+import { useFetchFavorites } from 'api/useFetchFavorites';
 
 function Favorites() {
   const { favorites } = useContext(FavoritesContext);

@@ -24,6 +24,7 @@
 			"utils/*": ["src/utils/*"],
 			"context/*": ["src/context/*"],
 			"templates/*": ["src/templates/*"],
+			"api/*": ["src/api/*"],
 		}
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],

@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import * as Styled from 'assets/styles/meal.styles';
-import { fetchCategories } from 'hooks/useFetchCategories';
+import { fetchCategories } from 'api/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
-import { fetchMealById, useFetchMealById } from 'hooks/useFetchMealById';
+import { fetchMealById, useFetchMealById } from 'api/useFetchMealById';
 import { useGetMealDetails } from 'hooks/useGetMealDetails';
 import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 

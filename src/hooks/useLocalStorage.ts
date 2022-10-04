@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchFavorites } from 'hooks/useFetchFavorites';
+import { fetchFavorites } from 'api/useFetchFavorites';
 
 function tryParseJSONObject(jsonString: string) {
   try {
@@ -37,6 +37,7 @@ export function useLocalStorage(key: string, initialValue: string[]) {
 
   useEffect(() => {
     validateLocalStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
