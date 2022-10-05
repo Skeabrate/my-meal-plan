@@ -29,5 +29,6 @@ declare module 'styled-components' {
     boxShadow: Function;
     fadeInAnimation: Function;
     slideInAnimation: Function;
+    loadingAnimation: Function;
   }
 }

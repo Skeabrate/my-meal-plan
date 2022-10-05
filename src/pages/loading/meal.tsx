@@ -6,9 +6,9 @@ import * as Styled from 'assets/styles/loading-meal.styles';
 const Loading = () => {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   router.replace(`/meal/${router.query.id}`);
-  // });
+  useEffect(() => {
+    router.replace(`/meal/${router.query.id}`);
+  });
 
   return (
     <Styled.Wrapper>

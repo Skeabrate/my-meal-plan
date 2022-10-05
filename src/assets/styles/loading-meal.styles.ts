@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-// TODO: replace color to lightGrey, add animations
 export const Wrapper = styled.div`
   p {
     background-color: ${({ theme }) => theme.colors.lightGrey};
+    ${({ theme }) => theme.loadingAnimation()};
   }
 `;
 

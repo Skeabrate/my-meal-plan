@@ -43,7 +43,6 @@ export const theme: DefaultTheme = {
       animation: ${fadeInAnimation} ${duration}s forwards;
     `;
   },
-
   slideInAnimation: (duration = 0.6) => {
     const SlideInAnimation = keyframes`
 			from{
@@ -57,6 +56,19 @@ export const theme: DefaultTheme = {
 
     return css`
       animation: ${SlideInAnimation} ${duration}s forwards;
+    `;
+  },
+  loadingAnimation: () => {
+    const loadingAnimation = keyframes`
+			from {
+				opacity: 0.4;
+			} to {
+				opacity: 1;
+			}
+		`;
+
+    return css`
+      animation: ${loadingAnimation} 0.8s linear infinite alternate;
     `;
   },
 };
