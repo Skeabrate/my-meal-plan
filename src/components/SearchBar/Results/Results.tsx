@@ -6,6 +6,7 @@ import { useFetchSearchResults } from 'api/useFetchSearchResults';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 import useDebouncedValue from 'hooks/useDebouncedValue';
 import Loading from 'components/Loading/Loading';
+import ImageLoading from 'components/ImageLoading/ImageLoading';
 
 const Results = ({ inputValue }: { inputValue: string }) => {
   const debouncedInputValue = useDebouncedValue(inputValue, 700);
@@ -22,8 +23,8 @@ const Results = ({ inputValue }: { inputValue: string }) => {
   return (
     <Styled.Results $windowHeight={windowHeight}>
       {loading && <Loading />}
-      {errorOccured && <p>An error occured while fetching meals.</p>}
-      {noMatchingResults && <p>We couldn't find any meals.</p>}
+      {errorOccured && <Styled.Error>An error occured while fetching meals.</Styled.Error>}
+      {noMatchingResults && <Styled.Error>We couldn't find any meals.</Styled.Error>}
       {matchingResults && (
         <div>
           {searchResults.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
@@ -33,15 +34,15 @@ const Results = ({ inputValue }: { inputValue: string }) => {
             >
               <a>
                 <Styled.FoundItem>
-                  <div>
-                    <Image
-                      src={strMealThumb}
-                      alt={strMeal}
-                      height={100}
-                      width={100}
-                      objectFit='contain'
-                    />
-                  </div>
+                  <ImageLoading
+                    options={{
+                      src: strMealThumb,
+                      alt: strMeal,
+                      height: 100,
+                      width: 100,
+                      objectFit: 'contain',
+                    }}
+                  />
 
                   <ul>
                     <li>{strMeal}</li>

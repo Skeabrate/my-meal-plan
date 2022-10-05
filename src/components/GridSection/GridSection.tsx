@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
 import SortDropdown from 'components/SortDropdown/SortDropdown';
 import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 import Loading from 'components/Loading/Loading';
+import ImageLoading from 'components/ImageLoading/ImageLoading';
 
 export type DataItemType = {
   id: string;
@@ -73,11 +73,13 @@ const GridSection = ({
               <Link href={linkUrl + slug}>
                 <a>
                   <div>
-                    <Image
-                      src={img}
-                      alt={name}
-                      layout='fill'
-                      objectFit='cover'
+                    <ImageLoading
+                      options={{
+                        src: img,
+                        alt: name,
+                        layout: 'fill',
+                        objectFit: 'cover',
+                      }}
                     />
                   </div>
 

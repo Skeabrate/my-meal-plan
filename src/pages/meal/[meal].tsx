@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import * as Styled from 'assets/styles/meal.styles';
@@ -11,6 +10,7 @@ import MealDetails from 'components/MealDetails/MealDetails';
 import Instruction from 'components/MealDetails/tabs/Instruction';
 import Ingredients from 'components/MealDetails/tabs/Ingredients';
 import Steps from 'components/MealDetails/tabs/Steps';
+import ImageLoading from 'components/ImageLoading/ImageLoading';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
@@ -37,16 +37,16 @@ const Meal = ({ mealId }: { mealId: string }) => {
 
       <Styled.MealGrid>
         <Styled.Gallery>
-          <div>
-            <Image
-              src={imgUrl}
-              alt={name}
-              layout='fill'
-              objectFit='cover'
-            />
-
+          <ImageLoading
+            options={{
+              src: imgUrl,
+              alt: name,
+              layout: 'fill',
+              objectFit: 'cover',
+            }}
+          >
             <FavoritesButton mealId={id} />
-          </div>
+          </ImageLoading>
 
           <iframe
             title={name}

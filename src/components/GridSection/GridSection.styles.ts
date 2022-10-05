@@ -23,13 +23,13 @@ export const Grid = styled.section`
 
   article {
     border: 1px solid ${({ theme }) => theme.colors.grey};
-    transition: border-color 0.2s ease-in-out;
     text-align: center;
     overflow: hidden;
     opacity: 0;
     position: relative;
     ${({ theme }) => theme.fadeInAnimation()};
     animation-delay: 0.2s;
+    transition: box-shadow 0.4s ease-in-out;
 
     a {
       text-decoration: none;
@@ -49,19 +49,16 @@ export const Grid = styled.section`
     }
 
     div {
-      overflow: hidden;
-      position: relative;
       height: 280px;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
-      background-color: ${({ theme }) => theme.colors.grey};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 
       img {
-        transition: scale 0.4s ease-in-out;
+        transition: scale 0.4s ease-in-out, opacity 0.4s ease-in-out;
       }
     }
 
     &:hover {
-      ${({ theme }) => theme.boxShadow(theme.colors.grey)}
+      box-shadow: 0px 0px 35px -25px rgba(0, 0, 0, 1);
 
       img {
         scale: 1.05;

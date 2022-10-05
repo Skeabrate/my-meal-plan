@@ -5,11 +5,6 @@ export const Results = styled.div<{ $windowHeight: number }>`
   overflow-y: auto;
   height: ${({ $windowHeight }) => $windowHeight - 130}px;
 
-  div,
-  p {
-    ${({ theme }) => theme.fadeInAnimation(0.4)};
-  }
-
   a {
     color: black;
     text-decoration: none;
@@ -17,15 +12,6 @@ export const Results = styled.div<{ $windowHeight: number }>`
     &:last-child div {
       border: none;
     }
-
-    &:hover div {
-      background-color: ${({ theme }) => theme.colors.lightGrey};
-    }
-  }
-
-  p {
-    margin-top: 10px;
-    text-align: center;
   }
 
   ${({ theme }) => theme.mq.tablet} {
@@ -35,6 +21,12 @@ export const Results = styled.div<{ $windowHeight: number }>`
   }
 `;
 
+export const Error = styled.p`
+  margin-top: 10px;
+  text-align: center;
+  ${({ theme }) => theme.fadeInAnimation(0.4)};
+`;
+
 export const FoundItem = styled.div`
   padding: 20px 10px;
   display: grid;
@@ -42,11 +34,6 @@ export const FoundItem = styled.div`
   gap: 14px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
   transition: background-color 0.1s ease-in-out;
-
-  div {
-    background-color: ${({ theme }) => theme.colors.grey};
-    display: flex;
-  }
 
   ul {
     list-style: none;
@@ -66,6 +53,10 @@ export const FoundItem = styled.div`
         font-style: normal;
       }
     }
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.lightGrey};
   }
 
   ${({ theme }) => theme.mq.tablet} {

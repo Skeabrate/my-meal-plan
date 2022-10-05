@@ -66,10 +66,8 @@ export const Gallery = styled.section`
   gap: 1rem;
 
   div {
-    position: relative;
     width: 100%;
     height: 350px;
-    background-color: ${({ theme }) => theme.colors.grey};
   }
 
   ${({ theme }) => theme.mq.tablet} {
