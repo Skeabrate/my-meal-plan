@@ -1,4 +1,3 @@
-import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
@@ -8,33 +7,15 @@ import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealById, useFetchMealById } from 'api/useFetchMealById';
 import { useGetMealDetails } from 'hooks/useGetMealDetails';
 import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
+import MealDetails from 'components/MealDetails/MealDetails';
+import Instruction from 'components/MealDetails/tabs/Instruction';
+import Ingredients from 'components/MealDetails/tabs/Ingredients';
+import Steps from 'components/MealDetails/tabs/Steps';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
-  const { id, name, category, area, imgUrl, youtubeUrl, instructions, ingredients } =
+  const { id, name, category, area, imgUrl, youtubeUrl, instructions, steps, ingredients } =
     useGetMealDetails(mealById[0]);
-
-  const detailsList = useMemo(
-    () => [
-      {
-        label: 'Instruction:',
-        data: instructions,
-      },
-      {
-        label: 'Ingredients:',
-        data: ingredients,
-      },
-    ],
-    [ingredients, instructions]
-  );
-
-  const [activeDetails, setActiveDetails] = useState<
-    { id: number; firstValue: string; secondValue: string }[]
-  >([]);
-
-  useEffect(() => {
-    setActiveDetails(detailsList[0].data);
-  }, [detailsList]);
 
   return (
     <div>
@@ -77,27 +58,22 @@ const Meal = ({ mealId }: { mealId: string }) => {
           />
         </Styled.Gallery>
 
-        <Styled.DetailsWrapper>
-          <Styled.DetailsBar>
-            {detailsList.map(({ label, data }) => (
-              <Styled.SwitchDetailsButton
-                key={label}
-                onClick={() => setActiveDetails(data)}
-                $isActive={activeDetails === data}
-              >
-                {label}
-              </Styled.SwitchDetailsButton>
-            ))}
-          </Styled.DetailsBar>
-
-          <Styled.Details $areIngredientsActive={activeDetails === ingredients}>
-            {activeDetails.map(({ id, firstValue, secondValue }) => (
-              <p key={id}>
-                <span>{firstValue}</span> {secondValue}
-              </p>
-            ))}
-          </Styled.Details>
-        </Styled.DetailsWrapper>
+        <MealDetails
+          tabs={[
+            {
+              label: 'Ingredients',
+              Component: <Ingredients ingredients={ingredients} />,
+            },
+            {
+              label: 'Cooking',
+              Component: <Steps steps={steps} />,
+            },
+            {
+              label: 'Instruction',
+              Component: <Instruction instruction={instructions} />,
+            },
+          ]}
+        />
       </Styled.MealGrid>
     </div>
   );

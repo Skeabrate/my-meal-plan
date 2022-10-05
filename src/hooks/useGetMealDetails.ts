@@ -1,35 +1,40 @@
 import { useMemo } from 'react';
 import { MealType } from 'types/MealType';
 
+export type IngredientType = { id: number; ingredient: string; measure: string };
+export type StepType = { id: number; step: string; description: string };
+
 export const useGetMealDetails = (mealDetails: MealType) => {
   const getIngredients = useMemo(
     () =>
       Object.entries(mealDetails).reduce((acc, [key, value]) => {
         if (key.includes('strIngredient') && value?.trim()) {
-          acc.push({ id: +key.split('strIngredient')[1], firstValue: value, secondValue: '' });
+          acc.push({ id: +key.split('strIngredient')[1], ingredient: value, measure: '' });
         }
         if (key.includes('strMeasure') && value?.trim()) {
           const index = +key.split('strMeasure')[1];
-          acc[index - 1].secondValue = value;
+          acc[index - 1].measure = value;
         }
 
         return acc;
-      }, [] as { id: number; firstValue: string; secondValue: string }[]),
+      }, [] as IngredientType[]),
     [mealDetails]
   );
 
-  const getInstruction = useMemo(
+  const getSteps = useMemo(
     () =>
       mealDetails.strInstructions
         .split('.')
         .filter((item) => item)
         .map((item, index) => ({
           id: index,
-          firstValue: `Step ${index + 1}:`,
-          secondValue: item,
-        })),
+          step: index < 9 ? `0${index + 1}` : `${index + 1}`,
+          description: `${item.trim()}.`,
+        })) as StepType[],
     [mealDetails]
   );
+
+  const getYoutubeUrl = mealDetails.strYoutube.slice(32);
 
   return {
     id: mealDetails.idMeal,
@@ -37,8 +42,9 @@ export const useGetMealDetails = (mealDetails: MealType) => {
     category: mealDetails.strCategory,
     area: mealDetails.strArea,
     imgUrl: mealDetails.strMealThumb,
-    youtubeUrl: mealDetails.strYoutube.slice(32),
-    instructions: getInstruction,
+    youtubeUrl: getYoutubeUrl,
+    instructions: mealDetails.strInstructions,
+    steps: getSteps,
     ingredients: getIngredients,
   };
 };
