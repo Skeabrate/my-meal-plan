@@ -53,7 +53,7 @@ export const Grid = styled.section`
       border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 
       img {
-        transition: scale 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        transition: scale 0.4s ease-in-out;
       }
     }
 

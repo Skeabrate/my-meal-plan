@@ -36,9 +36,7 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
                 <SearchBarWrapper />
                 <HeadComponent />
                 <NavBar />
-                <MainWrapper>
-                  <Component {...pageProps} />
-                </MainWrapper>
+                <Component {...pageProps} />
                 <Footer />
               </SearchBarProvider>
             </FavoritesProvider>

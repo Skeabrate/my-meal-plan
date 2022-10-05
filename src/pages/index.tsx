@@ -2,12 +2,13 @@ import type { NextPage } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchCategories, useFetchCategories } from 'api/useFetchCategories';
 import GridSection from 'components/GridSection/GridSection';
+import MainWrapper from 'templates/MainWrapper';
 
 function Home() {
   const { categories, isLoading, error } = useFetchCategories();
 
   return (
-    <>
+    <MainWrapper>
       <GridSection
         data={categories?.map(({ idCategory, strCategory, strCategoryThumb }) => ({
           id: idCategory,
@@ -23,7 +24,7 @@ function Home() {
           fallbackMessage: `We couldn't load any categories.`,
         }}
       />
-    </>
+    </MainWrapper>
   );
 }
 
