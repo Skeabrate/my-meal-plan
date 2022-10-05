@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { NextPage } from 'next';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 
 const Loading = () => {
-  const { id } = router.query;
+  const router = useRouter();
 
   useEffect(() => {
-    router.replace(`/meal/${id}`);
+    router.replace(`/meal/${router.query.id}`);
   });
 
   return <div>Loading...</div>;
