@@ -15,7 +15,7 @@ function Home() {
           img: strCategoryThumb,
           slug: strCategory,
         }))}
-        linkUrl='category'
+        linkUrl='/category/'
         label={{ value: 'Categories:', isMain: true }}
         loadingData={isLoading}
         error={{

@@ -70,7 +70,7 @@ const GridSection = ({
           {currentData.map(({ id, name, img, slug }) => (
             <article key={id}>
               {enableFavorites && <FavoritesButton mealId={id} />}
-              <Link href={`/${linkUrl}/${slug}`}>
+              <Link href={linkUrl + slug}>
                 <a>
                   <div>
                     <Image

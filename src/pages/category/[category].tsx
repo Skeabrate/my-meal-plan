@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { NextPage } from 'next';
 import * as Styled from 'assets/styles/category.styles';
@@ -44,7 +44,7 @@ const Category = ({ category }: { category: string }) => {
           img: strMealThumb,
           slug: idMeal,
         }))}
-        linkUrl='meal'
+        linkUrl='/loading/meal?id='
         label={{ value: 'Meals:' }}
         enableFavorites
         loadingData={isLoading}
