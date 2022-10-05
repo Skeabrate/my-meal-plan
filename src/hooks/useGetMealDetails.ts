@@ -25,7 +25,7 @@ export const useGetMealDetails = (mealDetails: MealType) => {
     () =>
       mealDetails.strInstructions
         .split('.')
-        .filter((item) => item)
+        .filter((item) => item && item.trim())
         .map((item, index) => ({
           id: index,
           step: index < 9 ? `0${index + 1}` : `${index + 1}`,
