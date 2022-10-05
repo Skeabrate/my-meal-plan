@@ -231,7 +231,7 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
       transform-origin: center;
       opacity: 0;
       animation: ${scaleAnimation} 0.4s forwards;
-      animation-delay: 2s;
+      animation-delay: 1.4s;
     }
   }
 `;

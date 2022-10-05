@@ -16,7 +16,7 @@ const StyledMain = styled.main<{ $disableAnimation?: boolean }>`
   ${({ $disableAnimation }) =>
     !$disableAnimation &&
     css`
-      animation: ${appearAnimation} 0.4s forwards;
+      animation: ${appearAnimation} 0.3s forwards;
     `}
 
   ${({ theme }) => theme.mq.desktop} {

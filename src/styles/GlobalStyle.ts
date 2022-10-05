@@ -51,7 +51,7 @@ export const GlobaStyles = createGlobalStyle`
 				${({ theme }) => theme.boxShadow(theme.colors.orange)};
 				transform: scaleX(0);
 				transform-origin: 0 0; 
-				animation: ${scaleAnimation} .4s .3s forwards;
+				animation: ${scaleAnimation} .6s .1s forwards;
 			}
 		}
 		

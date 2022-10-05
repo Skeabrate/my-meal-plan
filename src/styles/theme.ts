@@ -28,7 +28,7 @@ export const theme: DefaultTheme = {
   boxShadow: (color: string) => css`
     box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};
   `,
-  fadeInAnimation: (duration = 0.6) => {
+  fadeInAnimation: (duration = 0.6, delay = 0.1) => {
     const fadeInAnimation = keyframes`
 			from {
 				opacity: 0;
@@ -40,10 +40,12 @@ export const theme: DefaultTheme = {
 		`;
 
     return css`
+      opacity: 0;
       animation: ${fadeInAnimation} ${duration}s forwards;
+      animation-delay: ${delay}s;
     `;
   },
-  slideInAnimation: (duration = 0.6) => {
+  slideInAnimation: (duration = 0.6, delay = 0.1) => {
     const SlideInAnimation = keyframes`
 			from{
 				opacity: 0;
@@ -55,7 +57,9 @@ export const theme: DefaultTheme = {
 		`;
 
     return css`
+      opacity: 0;
       animation: ${SlideInAnimation} ${duration}s forwards;
+      animation-delay: ${delay}s;
     `;
   },
   loadingAnimation: () => {

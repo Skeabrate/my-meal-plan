@@ -12,7 +12,7 @@ const CategoriesBar = () => {
     <Styled.Wrapper>
       <SlideBar>
         {categories?.map(({ idCategory, strCategory }) => {
-          animationDelay = +(animationDelay + 0.1).toFixed(2);
+          animationDelay = +(animationDelay + 0.05).toFixed(2);
           return (
             <li key={idCategory}>
               <Link href={`/category/${strCategory}`}>

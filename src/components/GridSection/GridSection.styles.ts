@@ -28,7 +28,6 @@ export const Grid = styled.section`
     opacity: 0;
     position: relative;
     ${({ theme }) => theme.fadeInAnimation()};
-    animation-delay: 0.2s;
     transition: box-shadow 0.4s ease-in-out;
 
     a {
