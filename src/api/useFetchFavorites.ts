@@ -23,6 +23,7 @@ export const useFetchFavorites = (meals: MealsTableType) => {
     error,
   } = useQuery(['fetchFavorites', meals], () => fetchFavorites(meals), {
     enabled: !!meals,
+    refetchOnWindowFocus: false,
   });
 
   return { favoritesById, isLoading, error } as { favoritesById: MealType[] } & ApiResponseType;

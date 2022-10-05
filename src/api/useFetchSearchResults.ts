@@ -20,6 +20,7 @@ export const useFetchSearchResults = (inputValue: string) => {
     error,
   } = useQuery(['fetchSearchResults', inputValue], () => fetchSearchResuts(inputValue), {
     enabled: !!inputValue,
+    refetchOnWindowFocus: false,
   });
 
   return { searchResults, isLoading, error } as {

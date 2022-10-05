@@ -20,6 +20,7 @@ export const useFetchMealsByCategory = (category: string) => {
     error,
   } = useQuery(['fetchMealsByCategory', category], () => fetchMealsByCategory(category), {
     enabled: !!category,
+    refetchOnWindowFocus: false,
   });
 
   return { mealsByCategory, isLoading, error } as {
