@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 const StyledSteps = styled.article`
   details {
-    text-align: center;
-
     summary {
       font-family: ${({ theme }) => theme.fontFamily.abril};
       font-size: 2rem;
