@@ -1,5 +1,5 @@
-import { useLocalStorage } from 'hooks/useLocalStorage';
 import React, { useMemo } from 'react';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 type FavoriteItem = string;
 

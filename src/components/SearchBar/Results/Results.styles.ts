@@ -24,7 +24,7 @@ export const Results = styled.div<{ $windowHeight: number }>`
 export const Error = styled.p`
   margin-top: 10px;
   text-align: center;
-  ${({ theme }) => theme.fadeInAnimation(0.4, 0)};
+  ${({ theme }) => theme.fadeInAnimation(0.4)};
 `;
 
 export const FoundItem = styled.div`
@@ -34,7 +34,7 @@ export const FoundItem = styled.div`
   gap: 14px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
   transition: background-color 0.1s ease-in-out;
-  ${({ theme }) => theme.fadeInAnimation(0.4, 0)};
+  ${({ theme }) => theme.fadeInAnimation(0.4)};
 
   ul {
     list-style: none;

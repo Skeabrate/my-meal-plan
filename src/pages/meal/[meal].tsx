@@ -11,7 +11,6 @@ import Instruction from 'components/MealDetails/tabs/Instruction';
 import Ingredients from 'components/MealDetails/tabs/Ingredients';
 import Steps from 'components/MealDetails/tabs/Steps';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
-import MainWrapper from 'templates/MainWrapper';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
@@ -19,7 +18,7 @@ const Meal = ({ mealId }: { mealId: string }) => {
     useGetMealDetails(mealById[0]);
 
   return (
-    <MainWrapper>
+    <>
       <Styled.Header>
         <h1>{name}</h1>
 
@@ -76,7 +75,7 @@ const Meal = ({ mealId }: { mealId: string }) => {
           ]}
         />
       </Styled.MealGrid>
-    </MainWrapper>
+    </>
   );
 };
 

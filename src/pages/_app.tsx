@@ -3,8 +3,8 @@ import { NextPageContext } from 'next';
 import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider, DehydratedState } from 'react-query';
 import { ThemeProvider } from 'styled-components';
-import { theme } from 'styles/theme';
-import { GlobaStyles } from 'styles/GlobalStyle';
+import { theme } from 'assets/styles/theme/theme';
+import { GlobaStyles } from 'assets/styles/theme/GlobalStyle';
 import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
 import FavoritesProvider from 'context/FavoritesContext';
@@ -36,7 +36,9 @@ function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
                 <SearchBarWrapper />
                 <HeadComponent />
                 <NavBar />
-                <Component {...pageProps} />
+                <MainWrapper>
+                  <Component {...pageProps} />
+                </MainWrapper>
                 <Footer />
               </SearchBarProvider>
             </FavoritesProvider>

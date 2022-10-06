@@ -7,7 +7,6 @@ import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'api/useFetchMealsByCategory';
 import GridSection from 'components/GridSection/GridSection';
-import MainWrapper from 'templates/MainWrapper';
 
 const Category = ({ category }: { category: string }) => {
   const { categories, isLoading, error } = useFetchCategories();
@@ -19,7 +18,7 @@ const Category = ({ category }: { category: string }) => {
   );
 
   return (
-    <MainWrapper>
+    <>
       <Styled.Intro>
         <article>
           <header>
@@ -54,7 +53,7 @@ const Category = ({ category }: { category: string }) => {
           fallbackMessage: `We couldn't load any meals.`,
         }}
       />
-    </MainWrapper>
+    </>
   );
 };
 

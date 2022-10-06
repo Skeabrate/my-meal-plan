@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';

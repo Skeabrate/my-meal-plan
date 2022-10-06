@@ -53,7 +53,7 @@ export const DetailsWrapper = styled.div`
   padding: 20px 0;
 
   article {
-    ${({ theme }) => theme.fadeInAnimation(0.4, 0)};
+    ${({ theme }) => theme.fadeInAnimation(0.4)};
   }
 
   ${({ theme }) => theme.mq.tablet} {

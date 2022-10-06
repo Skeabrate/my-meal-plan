@@ -1,4 +1,3 @@
-import React from 'react';
 import { IngredientType } from 'hooks/useGetMealDetails';
 import styled from 'styled-components';
 

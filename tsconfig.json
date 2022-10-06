@@ -20,7 +20,6 @@
       "hooks/*": ["src/hooks/*"],
       "types/*": ["src/types/*"],
 			"assets/*": ["src/assets/*"],
-			"styles/*": ["src/styles/*"],
 			"utils/*": ["src/utils/*"],
 			"context/*": ["src/context/*"],
 			"templates/*": ["src/templates/*"],

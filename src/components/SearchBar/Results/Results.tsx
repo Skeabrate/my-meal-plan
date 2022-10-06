@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import * as Styled from './Results.styles';
 import { useFetchSearchResults } from 'api/useFetchSearchResults';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
@@ -29,7 +28,7 @@ const Results = ({ inputValue }: { inputValue: string }) => {
         <div>
           {searchResults.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
             <Link
-              href={`/meal/${idMeal}`}
+              href={`/loading/meal?id=${idMeal}`}
               key={idMeal}
             >
               <a>

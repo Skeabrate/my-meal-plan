@@ -12,7 +12,7 @@ export const SearchBar = styled.div<{ $isSearchBarOpen: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${({ theme }) => theme.fadeInAnimation(0.4, 0)};
+  ${({ theme }) => theme.fadeInAnimation(0.4)};
 `;
 
 export const Background = styled.div`
@@ -51,6 +51,7 @@ export const InputWrapper = styled.div`
   opacity: 0;
   position: relative;
   ${({ theme }) => theme.fadeInAnimation(0.4)};
+  animation-delay: 0.2s;
 
   input {
     padding: 0 15px;

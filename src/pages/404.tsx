@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Styled from 'assets/styles/notFound.styles';
 
 const Custom400 = () => {

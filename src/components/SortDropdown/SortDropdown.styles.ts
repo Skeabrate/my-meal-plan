@@ -39,7 +39,7 @@ export const DropdownList = styled.ul`
   width: calc(100% + 2px);
   z-index: 1;
   background-color: white;
-  ${({ theme }) => theme.fadeInAnimation(0.2, 0)};
+  ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;
 
 export const DropdownListItem = styled.li`

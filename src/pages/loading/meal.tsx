@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import * as Styled from 'assets/styles/loading-meal.styles';
-import MainWrapper from 'templates/MainWrapper';
 
 const Loading = () => {
   const router = useRouter();
@@ -12,46 +11,44 @@ const Loading = () => {
   });
 
   return (
-    <MainWrapper disableAnimation>
-      <Styled.Wrapper>
-        <Styled.Header>
+    <Styled.Wrapper>
+      <Styled.Header>
+        <p></p>
+        <p></p>
+      </Styled.Header>
+
+      <Styled.Content>
+        <Styled.Gallery>
           <p></p>
           <p></p>
-        </Styled.Header>
+        </Styled.Gallery>
 
-        <Styled.Content>
-          <Styled.Gallery>
+        <Styled.Tabs>
+          <div>
             <p></p>
             <p></p>
-          </Styled.Gallery>
+            <p></p>
+          </div>
 
-          <Styled.Tabs>
-            <div>
-              <p></p>
-              <p></p>
-              <p></p>
-            </div>
-
-            <div>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-            </div>
-          </Styled.Tabs>
-        </Styled.Content>
-      </Styled.Wrapper>
-    </MainWrapper>
+          <div>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+          </div>
+        </Styled.Tabs>
+      </Styled.Content>
+    </Styled.Wrapper>
   );
 };
 
