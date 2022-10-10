@@ -2,13 +2,6 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    colors: {
-      blue: string;
-      green: string;
-      orange: string;
-      grey: string;
-      lightGrey: string;
-    };
     fontFamily: {
       abril: string;
       lato: string;
@@ -31,4 +24,15 @@ declare module 'styled-components' {
     slideInAnimation: Function;
     loadingAnimation: Function;
   }
+}
+
+export interface ColorsType {
+  type: string;
+  colors: {
+    blue: string;
+    green: string;
+    orange: string;
+    grey: string;
+    lightGrey: string;
+  };
 }

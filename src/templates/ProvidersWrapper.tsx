@@ -1,12 +1,12 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { PageProps } from 'types/PagePropsType';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'assets/styles/theme/theme';
-import { GlobaStyles } from 'assets/styles/theme/GlobalStyle';
 import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
-import FavoritesProvider from 'context/FavoritesContext';
+
+const FavoritesProvider = dynamic(() => import('context/FavoritesContext'), { ssr: false });
+const ThemeWrapper = dynamic(() => import('./ThemeWrapper'), { ssr: false });
 
 const ProvidersWrapper = ({
   children,
@@ -20,14 +20,13 @@ const ProvidersWrapper = ({
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <GlobaStyles />
+        <ThemeWrapper>
           <ResizeWindowProvider>
             <FavoritesProvider>
               <SearchBarProvider>{children}</SearchBarProvider>
             </FavoritesProvider>
           </ResizeWindowProvider>
-        </ThemeProvider>
+        </ThemeWrapper>
       </Hydrate>
     </QueryClientProvider>
   );

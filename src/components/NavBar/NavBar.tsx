@@ -12,6 +12,7 @@ import { SearchBarContext } from 'context/SearchBarContext';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
+import SwitchThemeButton from 'components/SwitchThemeButton/SwitchThemeButton';
 
 const links = [
   {
@@ -34,7 +35,7 @@ const NavBar = () => {
 
   const { windowHeight } = useContext(ResizeWindowContext);
   const { toggleSearchBar } = useContext(SearchBarContext);
-  const { favoritesLength } = useContext(FavoritesContext);
+  const { favorites } = useContext(FavoritesContext);
 
   const router = useRouter();
 
@@ -86,13 +87,16 @@ const NavBar = () => {
                 key={href}
               >
                 <Link href={href}>
-                  <a data-favorite={favoritesLength}>{name}</a>
+                  <a data-favorite={favorites.length}>{name}</a>
                 </Link>
               </Styled.NavLink>
             ))}
           </Styled.NavLinks>
 
           <Styled.NavSubItems $isCartOpen={isCartOpen}>
+            <li>
+              <SwitchThemeButton />
+            </li>
             <li>
               <button
                 aria-label='search'
