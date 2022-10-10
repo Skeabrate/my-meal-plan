@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ThemeContext } from 'templates/ThemeWrapper';
+import { ThemeContext } from 'context/ThemeContext';
 
 const SwitchThemeButton = () => {
   const { switchThemeStyle } = useContext(ThemeContext);

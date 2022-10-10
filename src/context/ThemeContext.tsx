@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as ThemeStyledComponentsProvider } from 'styled-components';
 import { darkTheme, lightTheme, theme } from 'assets/styles/theme/theme';
 import { GlobaStyles } from 'assets/styles/theme/GlobalStyle';
 import { useLocalStorage } from 'hooks/useLocalStorage';
@@ -10,7 +10,7 @@ type ThemeContextType = {
 
 export const ThemeContext = React.createContext({} as ThemeContextType);
 
-const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { state: themeStyle, setState: setThemeStyle } = useLocalStorage('theme', lightTheme.type);
 
   const switchThemeStyle = useCallback(() => {
@@ -39,12 +39,10 @@ const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={value}>
-      <ThemeProvider theme={themeHandler}>
+      <ThemeStyledComponentsProvider theme={themeHandler}>
         <GlobaStyles />
         {children}
-      </ThemeProvider>
+      </ThemeStyledComponentsProvider>
     </ThemeContext.Provider>
   );
-};
-
-export default ThemeWrapper;
+}
