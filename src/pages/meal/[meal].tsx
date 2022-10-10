@@ -50,9 +50,9 @@ const Meal = ({ mealId }: { mealId: string }) => {
 
           <iframe
             title={name}
+            src={youtubeUrl}
             width='100%'
             height='250px'
-            src={`https://www.youtube.com/embed/${youtubeUrl}`}
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
             allowFullScreen
           />

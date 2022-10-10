@@ -34,7 +34,7 @@ export const useGetMealDetails = (mealDetails: MealType) => {
     [mealDetails]
   );
 
-  const getYoutubeUrl = mealDetails.strYoutube.slice(32);
+  const getYoutubeUrl = `https://www.youtube.com/embed/${mealDetails.strYoutube.slice(32)}`;
 
   return {
     id: mealDetails.idMeal,
