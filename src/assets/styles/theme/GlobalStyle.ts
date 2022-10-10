@@ -96,6 +96,7 @@ export const GlobaStyles = createGlobalStyle`
 		}
 	}
 
+	// prevent focusing inputs on mobile devices
 	input[type="color"],
 	input[type="date"],
 	input[type="datetime"],

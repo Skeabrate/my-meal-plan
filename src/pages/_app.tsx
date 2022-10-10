@@ -1,51 +1,22 @@
-import React from 'react';
-import { NextPageContext } from 'next';
-import type { AppProps } from 'next/app';
-import { Hydrate, QueryClient, QueryClientProvider, DehydratedState } from 'react-query';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'assets/styles/theme/theme';
-import { GlobaStyles } from 'assets/styles/theme/GlobalStyle';
-import SearchBarProvider from 'context/SearchBarContext';
-import ResizeWindowProvider from 'context/ResizeWindowContext';
-import FavoritesProvider from 'context/FavoritesContext';
-import MainWrapper from 'templates/MainWrapper';
-import NavBar from 'components/NavBar/NavBar';
-import HeadComponent from 'components/HeadComponent/HeadComponent';
-import Footer from 'components/Footer/Footer';
+import { ExtendedAppProps, PageProps } from 'types/PagePropsType';
+import PageWrapper from 'templates/PageWrapper';
+import ProvidersWrapper from 'templates/ProvidersWrapper';
 import SearchBarWrapper from 'components/SearchBar/SearchBarWrapper';
-
-type PageProps = {
-  dehydratedState?: DehydratedState;
-};
-
-type ExtendedAppProps<P = {}> = {
-  err?: NextPageContext['err'];
-} & AppProps<P>;
+import HeadComponent from 'components/HeadComponent/HeadComponent';
+import NavBar from 'components/NavBar/NavBar';
+import Footer from 'components/Footer/Footer';
 
 function MyApp({ Component, pageProps }: ExtendedAppProps<PageProps>) {
-  const [queryClient] = React.useState(() => new QueryClient());
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <GlobaStyles />
-          <ResizeWindowProvider>
-            <FavoritesProvider>
-              <SearchBarProvider>
-                <SearchBarWrapper />
-                <HeadComponent />
-                <NavBar />
-                <MainWrapper>
-                  <Component {...pageProps} />
-                </MainWrapper>
-                <Footer />
-              </SearchBarProvider>
-            </FavoritesProvider>
-          </ResizeWindowProvider>
-        </ThemeProvider>
-      </Hydrate>
-    </QueryClientProvider>
+    <ProvidersWrapper pageProps={pageProps}>
+      <SearchBarWrapper />
+      <HeadComponent />
+      <NavBar />
+      <PageWrapper>
+        <Component {...pageProps} />
+      </PageWrapper>
+      <Footer />
+    </ProvidersWrapper>
   );
 }
 

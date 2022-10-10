@@ -25,7 +25,7 @@ export const theme: DefaultTheme = {
     bigDesktop: '@media (min-width: 1280px)',
     huge: '@media (min-width: 1440px)',
   },
-  boxShadow: (color: string) => css`
+  boxShadow: (color: string = 'white') => css`
     box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};
   `,
   fadeInAnimation: (duration = 0.6) => {
