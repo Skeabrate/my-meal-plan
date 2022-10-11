@@ -65,7 +65,7 @@ const buttonStyle = css`
   width: 36px;
   transition-duration: 0.5s;
   border-radius: 100px;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.secondFont};
 `;
 
 export const HambuergerMenu = styled.button<MenuProps>`
@@ -259,7 +259,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-color: ${({ theme }) => theme.colors.lightGrey};
+  background-color: ${({ theme }) => theme.colors.secondBackground};
   transition: all 0.4s ease-in-out;
   ${({ $isCartOpen }) => {
     if ($isCartOpen)

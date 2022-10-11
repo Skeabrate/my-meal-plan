@@ -42,7 +42,7 @@ export const Button = styled.button<{ $isActive: boolean }>`
   margin-bottom: 2px;
 
   &:hover {
-    background-color: ${({ $isActive, theme }) => !$isActive && theme.colors.lightGrey};
+    background-color: ${({ $isActive, theme }) => !$isActive && theme.colors.secondBackground};
   }
 
   ${({ theme }) => theme.mq.tablet} {

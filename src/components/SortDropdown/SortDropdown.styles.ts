@@ -55,7 +55,7 @@ export const DropdownListItem = styled.li`
     text-align: center;
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.lightGrey};
+      background-color: ${({ theme }) => theme.colors.secondBackground};
     }
 
     &:focus {

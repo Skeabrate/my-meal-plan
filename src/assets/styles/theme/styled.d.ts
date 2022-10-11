@@ -3,13 +3,13 @@ import 'styled-components';
 export interface ColorsType {
   themeType: string;
   colors: {
-    blue: string;
+    background: string;
+    secondBackground: string;
+    font: string;
+    secondFont: string;
+    border: string;
     green: string;
     orange: string;
-    grey: string;
-    lightGrey: string;
-    background: string;
-    font: string;
   };
   boxShadow: Function;
 }

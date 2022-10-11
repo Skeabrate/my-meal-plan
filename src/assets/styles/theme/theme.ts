@@ -1,48 +1,51 @@
 import { css, DefaultTheme, keyframes } from 'styled-components';
 import { ColorsType } from './styled';
 
+const lightThemeBackground = '#FFFFFF';
+const darkThemeBackground = '#1E1F1F';
+
 export const lightTheme: ColorsType = {
   themeType: 'light',
   colors: {
-    blue: '#585A6D',
+    background: lightThemeBackground,
+    secondBackground: '#F0F0F0',
+    font: '#000000',
+    secondFont: '#585A6D',
+    border: '#d8d8d8',
     green: '#21A179',
     orange: '#FF640A',
-    grey: '#d8d8d8',
-    lightGrey: '#F0F0F0',
-    background: '#FFFFFF',
-    font: '#000000',
   },
   boxShadow: (color: string) => css`
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 2px ${color};
+    box-shadow: 0 0 0 1px ${lightThemeBackground}, 0 0 0 2px ${color};
   `,
 };
 
 export const darkTheme: ColorsType = {
   themeType: 'dark',
   colors: {
-    blue: '#B6B9B9',
+    background: darkThemeBackground,
+    secondBackground: '#141515',
+    font: '#FFFFFF',
+    secondFont: '#B6B9B9',
+    border: '#323434',
     green: '#21A179',
     orange: '#FF640A',
-    grey: '#323434',
-    lightGrey: '#141515',
-    background: '#1E1F1F',
-    font: '#FFFFFF',
   },
   boxShadow: (color: string) => css`
-    box-shadow: 0 0 0 1px #000000, 0 0 0 2px ${color};
+    box-shadow: 0 0 0 1px ${darkThemeBackground}, 0 0 0 2px ${color};
   `,
 };
 
 export const theme: DefaultTheme = {
   themeType: '',
   colors: {
-    blue: '',
+    background: '',
+    secondBackground: '',
+    font: '',
+    secondFont: '',
+    border: '',
     green: '',
     orange: '',
-    grey: '',
-    lightGrey: '',
-    background: '',
-    font: '',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

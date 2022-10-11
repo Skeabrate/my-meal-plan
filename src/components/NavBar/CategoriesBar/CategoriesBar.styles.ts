@@ -11,8 +11,8 @@ const scaleAnimation = keyframes`
 `;
 
 export const Wrapper = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
-  border-top: 1px solid ${({ theme }) => theme.colors.grey};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   overflow: hidden;
   width: 100%;
   height: 62px;
@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
 
       a {
         padding-inline: 30px;
-        color: ${({ theme }) => theme.colors.blue};
+        color: ${({ theme }) => theme.colors.secondFont};
         text-decoration: none;
         font-weight: 600;
         font-size: ${({ theme }) => theme.fontSize.caption};
@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
       &:not(:first-child)::after {
         content: '';
         position: absolute;
-        background-color: ${({ theme }) => theme.colors.grey};
+        background-color: ${({ theme }) => theme.colors.border};
         width: 4px;
         height: 4px;
         border-radius: 100px;

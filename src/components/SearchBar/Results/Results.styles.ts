@@ -32,7 +32,7 @@ export const FoundItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 14px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   transition: background-color 0.1s ease-in-out;
   ${({ theme }) => theme.fadeInAnimation(0.4)};
 
@@ -57,7 +57,7 @@ export const FoundItem = styled.div`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.lightGrey};
+    background-color: ${({ theme }) => theme.colors.secondBackground};
   }
 
   ${({ theme }) => theme.mq.tablet} {

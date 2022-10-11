@@ -73,7 +73,7 @@ export const InputWrapper = styled.div`
       height: 100%;
 
       path {
-        fill: ${({ theme }) => theme.colors.blue};
+        fill: ${({ theme }) => theme.colors.secondBackground};
       }
     }
   }
@@ -81,7 +81,7 @@ export const InputWrapper = styled.div`
   button,
   input {
     border-radius: 0px;
-    border: 2px solid ${({ theme }) => theme.colors.blue};
+    border: 2px solid ${({ theme }) => theme.colors.secondBackground};
     background-color: transparent;
   }
 `;

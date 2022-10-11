@@ -6,7 +6,7 @@ const StyledIngredients = styled.article`
   p {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   }
 
   div {

@@ -88,17 +88,13 @@ export const GlobaStyles = createGlobalStyle`
 			height: 8px;
 		}
 		::-webkit-scrollbar-thumb {
-			background: ${({ theme }) => theme.colors.grey};
+			background: ${({ theme }) => theme.colors.border};
 			border-radius: 100px;
 			border: 3px solid ${({ theme }) => theme.colors.background};
 			background-clip: padding-box;
 
-			&:hover {
-				background-color: #c0c0c0;
-			}
-
 			&:active {
-				background-color: ${({ theme }) => theme.colors.blue};
+				background-color: ${({ theme }) => theme.colors.secondBackground};
 			}
 		}
 	}

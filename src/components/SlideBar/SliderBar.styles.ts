@@ -70,7 +70,7 @@ export const Arrow = styled.button<ArrowType>`
     transition: transform 0.2s ease-in-out;
 
     path {
-      fill: ${({ theme }) => theme.colors.blue};
+      fill: ${({ theme }) => theme.colors.secondFont};
       transition: fill 0.2s ease-in-out;
     }
   }

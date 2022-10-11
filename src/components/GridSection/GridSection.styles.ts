@@ -22,7 +22,7 @@ export const Grid = styled.section`
   grid-gap: 4rem;
 
   article {
-    border: 1px solid ${({ theme }) => theme.colors.grey};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     text-align: center;
     overflow: hidden;
     opacity: 0;
@@ -49,7 +49,7 @@ export const Grid = styled.section`
 
     div {
       height: 280px;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
       img {
         transition: scale 0.4s ease-in-out;
