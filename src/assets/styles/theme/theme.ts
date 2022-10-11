@@ -2,7 +2,7 @@ import { css, DefaultTheme, keyframes } from 'styled-components';
 import { ColorsType } from './styled';
 
 export const lightTheme: ColorsType = {
-  type: 'light',
+  themeType: 'light',
   colors: {
     blue: '#585A6D',
     green: '#21A179',
@@ -13,7 +13,7 @@ export const lightTheme: ColorsType = {
 };
 
 export const darkTheme: ColorsType = {
-  type: 'dark',
+  themeType: 'dark',
   colors: {
     blue: '#585A6D',
     green: '#21A179',
@@ -24,6 +24,14 @@ export const darkTheme: ColorsType = {
 };
 
 export const theme: DefaultTheme = {
+  themeType: '',
+  colors: {
+    blue: '',
+    green: '',
+    orange: '',
+    grey: '',
+    lightGrey: '',
+  },
   fontFamily: {
     abril: '"Abril Fatface", cursive',
     lato: '"Lato", sans-serif',

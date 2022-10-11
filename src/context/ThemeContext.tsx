@@ -11,14 +11,17 @@ type ThemeContextType = {
 export const ThemeContext = React.createContext({} as ThemeContextType);
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const { state: themeStyle, setState: setThemeStyle } = useLocalStorage('theme', lightTheme.type);
+  const { state: themeStyle, setState: setThemeStyle } = useLocalStorage(
+    'theme',
+    lightTheme.themeType
+  );
 
   const switchThemeStyle = useCallback(() => {
     setThemeStyle((state) =>
-      state === darkTheme.type
-        ? lightTheme.type
-        : state === lightTheme.type
-        ? darkTheme.type
+      state === darkTheme.themeType
+        ? lightTheme.themeType
+        : state === lightTheme.themeType
+        ? darkTheme.themeType
         : state
     );
   }, [setThemeStyle]);
@@ -31,10 +34,10 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   );
 
   const themeHandler =
-    themeStyle === lightTheme.type
-      ? { ...lightTheme, ...theme }
-      : themeStyle === darkTheme.type
-      ? { ...darkTheme, ...theme }
+    themeStyle === lightTheme.themeType
+      ? { ...theme, ...lightTheme }
+      : themeStyle === darkTheme.themeType
+      ? { ...theme, ...darkTheme }
       : theme;
 
   return (
