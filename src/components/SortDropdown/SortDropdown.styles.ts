@@ -40,6 +40,7 @@ export const DropdownList = styled.ul`
   border: 1px solid ${({ theme }) => theme.colors.font};
   background-color: ${({ theme }) => theme.colors.background};
   ${({ theme }) => theme.fadeInAnimation(0.2)};
+  box-shadow: 0px 0px 15px -10px ${({ theme }) => theme.colors.font};
 `;
 
 export const DropdownListItem = styled.li`

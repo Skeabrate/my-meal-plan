@@ -54,7 +54,7 @@ const SortDropdown = ({
     return () => {
       document.removeEventListener('click', handleDropdown);
     };
-  }, [loadingFilters, handleDropdown]);
+  }, [handleDropdown]);
 
   return (
     <Styled.Wrapper

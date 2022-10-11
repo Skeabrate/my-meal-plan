@@ -57,7 +57,7 @@ export const Grid = styled.section`
     }
 
     &:hover {
-      box-shadow: 0px 0px 35px -25px rgba(0, 0, 0, 1);
+      box-shadow: 0px 0px 40px -30px ${({ theme }) => theme.colors.font};
 
       img {
         scale: 1.05;
