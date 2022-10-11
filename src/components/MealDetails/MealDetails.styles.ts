@@ -35,9 +35,10 @@ export const Button = styled.button<{ $isActive: boolean }>`
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.caption};
   transition: background-color 0.1s ease-in-out;
-  background-color: ${({ $isActive, theme }) => ($isActive ? theme.colors.green : 'white')};
-  color: ${({ $isActive }) => ($isActive ? 'white' : 'black')};
-  box-shadow: 0 0 0 1px white;
+  background-color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.green : theme.colors.background};
+  color: ${({ $isActive, theme }) => ($isActive ? 'white' : theme.colors.font)};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.background};
   margin-bottom: 2px;
 
   &:hover {

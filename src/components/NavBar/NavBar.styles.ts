@@ -43,12 +43,29 @@ export const NavBar = styled.div`
   }
 `;
 
-const buttonStyle = (isCartOpen: boolean | null) => css`
+export const Logo = styled.a`
+  display: flex;
+  position: relative;
+  z-index: 9999;
+  ${({ theme }) => theme.boxShadow('white')};
+
+  img {
+    height: 60px !important;
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    img {
+      height: unset !important;
+    }
+  }
+`;
+
+const buttonStyle = css`
   height: 4px;
   width: 36px;
-  background-color: ${({ theme }) => (isCartOpen ? theme.colors.orange : theme.colors.blue)};
   transition-duration: 0.5s;
   border-radius: 100px;
+  background-color: ${({ theme }) => theme.colors.blue};
 `;
 
 export const HambuergerMenu = styled.button<MenuProps>`
@@ -63,7 +80,7 @@ export const HambuergerMenu = styled.button<MenuProps>`
   border: none;
 
   div {
-    ${({ $isCartOpen }) => buttonStyle($isCartOpen)};
+    ${buttonStyle}
 
     position: relative;
     ${({ $isCartOpen }) => $isCartOpen && `transform: rotateZ(-180deg);`};
@@ -73,7 +90,7 @@ export const HambuergerMenu = styled.button<MenuProps>`
       position: absolute;
       left: 0;
       top: -12px;
-      ${({ $isCartOpen }) => buttonStyle($isCartOpen)};
+      ${buttonStyle}
       ${({ $isCartOpen }) =>
         $isCartOpen && `transform: rotateZ(-45deg) scaleX(0.75) translate(-12px, -4px);`};
     }
@@ -83,7 +100,7 @@ export const HambuergerMenu = styled.button<MenuProps>`
       position: absolute;
       left: 0;
       bottom: -12px;
-      ${({ $isCartOpen }) => buttonStyle($isCartOpen)};
+      ${buttonStyle}
       ${({ $isCartOpen }) =>
         $isCartOpen && `transform: rotateZ(45deg) scaleX(0.75) translate(-12px, 4px);`};
     }
@@ -122,10 +139,10 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   width: 100%;
   height: ${({ $windowHeight }) => `calc(${$windowHeight}px - ${navBarMobileHeight})`};
   min-height: 300px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.background};
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 999;
 
   transform: ${({ $isCartOpen }) =>
     $isCartOpen === false ? 'translateX(0)' : 'translateX(-100%)'};
@@ -196,7 +213,7 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
     align-items: center;
     width: 100%;
     height: 60px;
-    color: black;
+    color: ${({ theme }) => theme.colors.font};
     text-decoration: ${({ $isActive }) => ($isActive ? 'underline' : 'none')};
     text-underline-offset: 2px;
     font-size: ${({ theme }) => theme.fontSize.abrilDesktop};
@@ -274,6 +291,7 @@ export const NavSubItems = styled.ul<MenuProps>`
     }
 
     svg path {
+      fill: ${({ theme }) => theme.colors.font};
       transition: all 0.2s ease-in-out;
     }
 
@@ -283,7 +301,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   }
 
   ${({ theme }) => theme.mq.tablet} {
-    background-color: white;
+    background-color: ${({ theme }) => theme.colors.background};
     transform: unset;
     transition: unset;
     opacity: 1;

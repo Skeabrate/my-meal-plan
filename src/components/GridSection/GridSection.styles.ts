@@ -32,7 +32,7 @@ export const Grid = styled.section`
 
     a {
       text-decoration: none;
-      color: black;
+      color: ${({ theme }) => theme.colors.font};
       height: 100%;
 
       &:focus {

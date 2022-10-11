@@ -26,6 +26,8 @@ export const GlobaStyles = createGlobalStyle`
 		margin: 0;
 		font-family: ${({ theme }) => theme.fontFamily.lato};
 		font-size: ${({ theme }) => theme.fontSize.paragraph};
+		background-color: ${({ theme }) => theme.colors.background};
+		color: ${({ theme }) => theme.colors.font};
 
 		h1, h2, h3,	h4, h5, h6{
 			font-family: ${({ theme }) => theme.fontFamily.abril};
@@ -74,7 +76,7 @@ export const GlobaStyles = createGlobalStyle`
 
 	* {
 		::-webkit-scrollbar-track {
-			background-color: white;
+			background-color: ${({ theme }) => theme.colors.background};
 		}
 		::-webkit-scrollbar {
 			width: 14px;
@@ -83,7 +85,7 @@ export const GlobaStyles = createGlobalStyle`
 		::-webkit-scrollbar-thumb {
 			background: ${({ theme }) => theme.colors.grey};
 			border-radius: 100px;
-			border: 3px solid white;
+			border: 3px solid ${({ theme }) => theme.colors.background};
 			background-clip: padding-box;
 
 			&:hover {

@@ -21,7 +21,12 @@ export const Footer = styled.footer`
   }
 
   a {
-    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+
+    &:first-child {
+      ${({ theme }) => theme.boxShadow('white')}
+    }
   }
 
   p {
@@ -34,6 +39,7 @@ export const Footer = styled.footer`
 
   svg {
     path {
+      fill: ${({ theme }) => theme.colors.font};
       transition: fill 0.2s ease-in-out;
     }
 

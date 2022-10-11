@@ -46,8 +46,8 @@ export const SlideBar = styled.div<SlideBarType>`
 
 export const Arrow = styled.button<ArrowType>`
   position: absolute;
-  background: white;
-  box-shadow: 0 0 40px 20px white;
+  background: ${({ theme }) => theme.colors.background};
+  box-shadow: 0 0 40px 20px ${({ theme }) => theme.colors.background};
   width: 50px;
   height: 100%;
   display: flex;
@@ -70,6 +70,7 @@ export const Arrow = styled.button<ArrowType>`
     transition: transform 0.2s ease-in-out;
 
     path {
+      fill: ${({ theme }) => theme.colors.blue};
       transition: fill 0.2s ease-in-out;
     }
   }

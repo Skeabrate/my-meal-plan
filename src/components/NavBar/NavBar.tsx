@@ -55,7 +55,7 @@ const NavBar = () => {
           href='/'
           aria-label='navigate to homepage'
         >
-          <a>
+          <Styled.Logo>
             <Image
               src={LogoSrc}
               alt='My Meal Plan'
@@ -63,7 +63,7 @@ const NavBar = () => {
               height='80'
               width='128'
             />
-          </a>
+          </Styled.Logo>
         </Link>
 
         <Styled.HambuergerMenu

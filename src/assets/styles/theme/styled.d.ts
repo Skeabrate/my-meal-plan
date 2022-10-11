@@ -8,7 +8,10 @@ export interface ColorsType {
     orange: string;
     grey: string;
     lightGrey: string;
+    background: string;
+    font: string;
   };
+  boxShadow: Function;
 }
 
 declare module 'styled-components' {

@@ -9,18 +9,28 @@ export const lightTheme: ColorsType = {
     orange: '#FF640A',
     grey: '#d8d8d8',
     lightGrey: '#F0F0F0',
+    background: '#FFFFFF',
+    font: '#000000',
   },
+  boxShadow: (color: string) => css`
+    box-shadow: 0 0 0 1px #ffffff, 0 0 0 2px ${color};
+  `,
 };
 
 export const darkTheme: ColorsType = {
   themeType: 'dark',
   colors: {
-    blue: '#585A6D',
+    blue: '#B6B9B9',
     green: '#21A179',
-    orange: '#000000',
-    grey: '#d8d8d8',
-    lightGrey: '#F0F0F0',
+    orange: '#FF640A',
+    grey: '#323434',
+    lightGrey: '#141515',
+    background: '#1E1F1F',
+    font: '#FFFFFF',
   },
+  boxShadow: (color: string) => css`
+    box-shadow: 0 0 0 1px #000000, 0 0 0 2px ${color};
+  `,
 };
 
 export const theme: DefaultTheme = {
@@ -31,6 +41,8 @@ export const theme: DefaultTheme = {
     orange: '',
     grey: '',
     lightGrey: '',
+    background: '',
+    font: '',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',
@@ -49,9 +61,7 @@ export const theme: DefaultTheme = {
     bigDesktop: '@media (min-width: 1280px)',
     huge: '@media (min-width: 1440px)',
   },
-  boxShadow: (color: string = 'white') => css`
-    box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};
-  `,
+  boxShadow: () => {},
   fadeInAnimation: (duration = 0.6) => {
     const fadeInAnimation = keyframes`
 			from {
