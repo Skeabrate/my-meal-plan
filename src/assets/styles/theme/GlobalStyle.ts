@@ -29,6 +29,11 @@ export const GlobaStyles = createGlobalStyle`
 		background-color: ${({ theme }) => theme.colors.background};
 		color: ${({ theme }) => theme.colors.font};
 
+		button, a{
+			cursor: pointer;
+			color: ${({ theme }) => theme.colors.font};
+		}
+
 		h1, h2, h3,	h4, h5, h6{
 			font-family: ${({ theme }) => theme.fontFamily.abril};
 		}
@@ -118,7 +123,5 @@ export const GlobaStyles = createGlobalStyle`
 		font-size: 16px;
 	}
 
-	button, a{
-		cursor: pointer;
-	}
+	
 `;

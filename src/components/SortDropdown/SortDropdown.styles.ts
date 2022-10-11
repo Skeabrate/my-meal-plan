@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  border: 1px solid black;
   width: 100px;
   height: 40px;
   display: flex;
@@ -10,7 +9,8 @@ export const Wrapper = styled.div`
   font-weight: 600;
   font-size: 1.2rem;
   position: relative;
-  background-color: white;
+  border: 1px solid ${({ theme }) => theme.colors.font};
+  background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
 
   &:hover {
@@ -34,11 +34,11 @@ export const DropdownList = styled.ul`
   position: absolute;
   top: calc(100% + 6px);
   left: -1px;
-  border: 1px solid black;
   list-style: none;
   width: calc(100% + 2px);
   z-index: 1;
-  background-color: white;
+  border: 1px solid ${({ theme }) => theme.colors.font};
+  background-color: ${({ theme }) => theme.colors.background};
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;
 
@@ -50,7 +50,7 @@ export const DropdownListItem = styled.li`
   button {
     height: 40px;
     width: 100%;
-    background-color: white;
+    background-color: ${({ theme }) => theme.colors.background};
     border: none;
     text-align: center;
 
