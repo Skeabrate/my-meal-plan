@@ -1,54 +1,46 @@
 import { css, DefaultTheme, keyframes } from 'styled-components';
-import { ColorsType } from './styled';
+import { ThemeVariantsType } from './styled';
 
 const lightThemeBackground = '#FFFFFF';
 const darkThemeBackground = '#323434';
 
-export const lightTheme: ColorsType = {
-  themeType: 'light',
-  colors: {
-    background: lightThemeBackground,
-    secondBackground: '#F0F0F0',
-    font: '#000000',
-    secondFont: '#585A6D',
-    border: '#d8d8d8',
-    green: '#21A179',
-    orange: '#FF640A',
-    red: '#B70A01',
+export const themeVariants: ThemeVariantsType = {
+  light: {
+    colors: {
+      background: lightThemeBackground,
+      secondBackground: '#F0F0F0',
+      font: '#000000',
+      secondFont: '#585A6D',
+      border: '#d8d8d8',
+    },
+    boxShadow: (color: string) => css`
+      box-shadow: 0 0 0 1px ${lightThemeBackground}, 0 0 0 2px ${color};
+    `,
   },
-  boxShadow: (color: string) => css`
-    box-shadow: 0 0 0 1px ${lightThemeBackground}, 0 0 0 2px ${color};
-  `,
-};
-
-export const darkTheme: ColorsType = {
-  themeType: 'dark',
-  colors: {
-    background: darkThemeBackground,
-    secondBackground: '#282A2A',
-    font: '#FFFFFF',
-    secondFont: '#C1C3C3',
-    border: '#464949',
-    green: '#21A179',
-    orange: '#FF640A',
-    red: '#B70A01',
+  dark: {
+    colors: {
+      background: darkThemeBackground,
+      secondBackground: '#282A2A',
+      font: '#FFFFFF',
+      secondFont: '#C1C3C3',
+      border: '#464949',
+    },
+    boxShadow: (color: string) => css`
+      box-shadow: 0 0 0 1px ${darkThemeBackground}, 0 0 0 2px ${color};
+    `,
   },
-  boxShadow: (color: string) => css`
-    box-shadow: 0 0 0 1px ${darkThemeBackground}, 0 0 0 2px ${color};
-  `,
 };
 
 export const theme: DefaultTheme = {
-  themeType: '',
   colors: {
     background: '',
     secondBackground: '',
     font: '',
     secondFont: '',
     border: '',
-    green: '',
-    orange: '',
-    red: '',
+    green: '#21A179',
+    orange: '#FF640A',
+    red: '#B70A01',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

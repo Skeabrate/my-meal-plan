@@ -1,22 +1,29 @@
 import 'styled-components';
 
-export interface ColorsType {
-  themeType: string;
-  colors: {
-    background: string;
-    secondBackground: string;
-    font: string;
-    secondFont: string;
-    border: string;
-    green: string;
-    orange: string;
-    red: string;
+export type ThemeVariantsType = {
+  light: {
+    colors: {};
+    boxShadow: Function;
   };
-  boxShadow: Function;
-}
+  dark: {
+    colors: {};
+    boxShadow: Function;
+  };
+};
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends ColorsType {
+  export interface DefaultTheme {
+    colors: {
+      background: string;
+      secondBackground: string;
+      font: string;
+      secondFont: string;
+      border: string;
+      green: string;
+      orange: string;
+      red: string;
+    };
+    boxShadow: Function;
     fontFamily: {
       abril: string;
       lato: string;
