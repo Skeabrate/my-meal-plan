@@ -11,7 +11,7 @@ export const FavoritesButton = styled.button`
   border: none;
   transition: background-color 0.1s ease-in-out;
   padding: 6px;
-  z-index: 999;
+  z-index: 99;
 
   svg {
     path {
