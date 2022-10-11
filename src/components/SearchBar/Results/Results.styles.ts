@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const Results = styled.div<{ $windowHeight: number }>`
   margin-top: 10px;
   overflow-y: auto;
-  height: ${({ $windowHeight }) => $windowHeight - 130}px;
+  height: ${({ $windowHeight }) => $windowHeight - 90}px;
 
   a {
-    color: black;
     text-decoration: none;
 
     &:last-child div {

@@ -23,9 +23,9 @@ export const Background = styled.div`
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: white;
   opacity: 0.9;
   z-index: -1;
+  background-color: ${({ theme }) => theme.colors.background};
 
   ${({ theme }) => theme.mq.tablet} {
     opacity: 0.7;
@@ -35,7 +35,7 @@ export const Background = styled.div`
 export const SearchBarInner = styled.div`
   width: 100%;
   padding: 20px;
-  background: white;
+  background: ${({ theme }) => theme.colors.background};
 
   ${({ theme }) => theme.mq.tablet} {
     width: 600px;
@@ -57,6 +57,7 @@ export const InputWrapper = styled.div`
     padding: 0 15px;
     height: 100%;
     width: calc(100% - 42px);
+    border: 1px solid red;
 
     &:focus {
       ${({ theme }) => theme.boxShadow(theme.colors.green)}
@@ -73,7 +74,7 @@ export const InputWrapper = styled.div`
       height: 100%;
 
       path {
-        fill: ${({ theme }) => theme.colors.secondBackground};
+        fill: ${({ theme }) => theme.colors.secondFont};
       }
     }
   }
@@ -81,7 +82,7 @@ export const InputWrapper = styled.div`
   button,
   input {
     border-radius: 0px;
-    border: 2px solid ${({ theme }) => theme.colors.secondBackground};
+    border: 2px solid ${({ theme }) => theme.colors.secondFont};
     background-color: transparent;
   }
 `;

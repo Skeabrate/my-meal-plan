@@ -117,6 +117,7 @@ export const GlobaStyles = createGlobalStyle`
 	select:focus,
 	textarea {
 		font-size: 16px;
+		color: ${({ theme }) => theme.colors.font}
 	}
 
 	
