@@ -67,6 +67,11 @@ export const GlobaStyles = createGlobalStyle`
 			font-weight: 400;
 		}
 
+		*::selection {
+			background-color: ${({ theme }) => theme.colors.red};
+			color: #FFF;
+		}
+
 		${({ theme }) => theme.mq.tablet} {
 			h1, h2{
 				font-size: ${({ theme }) => theme.fontSize.headingDesktop};

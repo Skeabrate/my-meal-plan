@@ -60,7 +60,7 @@ export const InputWrapper = styled.div`
     border: 1px solid red;
 
     &:focus {
-      ${({ theme }) => theme.boxShadow(theme.colors.green)}
+      ${({ theme }) => theme.boxShadow(theme.colors.red)}
       outline: none;
     }
   }

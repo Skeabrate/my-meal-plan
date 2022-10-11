@@ -14,6 +14,7 @@ export const lightTheme: ColorsType = {
     border: '#d8d8d8',
     green: '#21A179',
     orange: '#FF640A',
+    red: '#B70A01',
   },
   boxShadow: (color: string) => css`
     box-shadow: 0 0 0 1px ${lightThemeBackground}, 0 0 0 2px ${color};
@@ -30,6 +31,7 @@ export const darkTheme: ColorsType = {
     border: '#464949',
     green: '#21A179',
     orange: '#FF640A',
+    red: '#B70A01',
   },
   boxShadow: (color: string) => css`
     box-shadow: 0 0 0 1px ${darkThemeBackground}, 0 0 0 2px ${color};
@@ -46,6 +48,7 @@ export const theme: DefaultTheme = {
     border: '',
     green: '',
     orange: '',
+    red: '',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

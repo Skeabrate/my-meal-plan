@@ -10,6 +10,7 @@ export interface ColorsType {
     border: string;
     green: string;
     orange: string;
+    red: string;
   };
   boxShadow: Function;
 }
