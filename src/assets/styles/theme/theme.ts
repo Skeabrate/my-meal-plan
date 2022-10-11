@@ -2,7 +2,7 @@ import { css, DefaultTheme, keyframes } from 'styled-components';
 import { ColorsType } from './styled';
 
 const lightThemeBackground = '#FFFFFF';
-const darkThemeBackground = '#1E1F1F';
+const darkThemeBackground = '#323434';
 
 export const lightTheme: ColorsType = {
   themeType: 'light',
@@ -24,10 +24,10 @@ export const darkTheme: ColorsType = {
   themeType: 'dark',
   colors: {
     background: darkThemeBackground,
-    secondBackground: '#141515',
+    secondBackground: '#282A2A',
     font: '#FFFFFF',
-    secondFont: '#B6B9B9',
-    border: '#323434',
+    secondFont: '#C1C3C3',
+    border: '#464949',
     green: '#21A179',
     orange: '#FF640A',
   },
