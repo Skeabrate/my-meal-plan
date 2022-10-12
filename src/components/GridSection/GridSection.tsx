@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
-import SortDropdown from 'components/SortDropdown/SortDropdown';
+import SortDropdown from 'components/Dropdowns/SortDropdown';
 import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 import Loading from 'components/Loading/Loading';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
@@ -54,8 +54,7 @@ const GridSection = ({
 
         {displaySortDropdownState && (
           <SortDropdown
-            data={data}
-            loadingFilters={loadingFilters}
+            itemsToSort={data}
             setLoadingFilters={setLoadingFilters}
           />
         )}
