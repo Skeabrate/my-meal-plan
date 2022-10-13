@@ -20,6 +20,6 @@ export const FavoritesButton = styled.button`
   }
 
   &:hover {
-    background-color: #ff7e33;
+    background-color: hsl(22, 100%, 60%);
   }
 `;

@@ -1,17 +1,17 @@
 import { css, DefaultTheme, keyframes } from 'styled-components';
 import { ThemeVariantsType } from './styled';
 
-const lightThemeBackground = '#FFFFFF';
-const darkThemeBackground = '#323434';
+const lightThemeBackground = 'hsl(0, 0%, 100%)';
+const darkThemeBackground = '	hsl(180, 2%, 20%)';
 
 export const themeVariants: ThemeVariantsType = {
   light: {
     colors: {
       background: lightThemeBackground,
-      secondBackground: '#F0F0F0',
-      font: '#000000',
-      secondFont: '#585A6D',
-      border: '#d8d8d8',
+      secondBackground: '	hsl(0, 0%, 94%)',
+      font: 'hsl(0, 0%, 0%)',
+      secondFont: 'hsl(234, 11%, 39%)',
+      border: 'hsl(0, 0%, 85%)',
     },
     boxShadow: (color: string) => css`
       box-shadow: 0 0 0 1px ${lightThemeBackground}, 0 0 0 2px ${color};
@@ -20,10 +20,10 @@ export const themeVariants: ThemeVariantsType = {
   dark: {
     colors: {
       background: darkThemeBackground,
-      secondBackground: '#282A2A',
-      font: '#FFFFFF',
-      secondFont: '#C1C3C3',
-      border: '#464949',
+      secondBackground: 'hsl(180, 2%, 16%)',
+      font: '	hsl(0, 0%, 100%)',
+      secondFont: 'hsl(180, 2%, 76%)',
+      border: 'hsl(180, 2%, 28%)',
     },
     boxShadow: (color: string) => css`
       box-shadow: 0 0 0 1px ${darkThemeBackground}, 0 0 0 2px ${color};
@@ -38,9 +38,9 @@ export const theme: DefaultTheme = {
     font: '',
     secondFont: '',
     border: '',
-    green: '#21A179',
-    orange: '#FF640A',
-    red: '#B70A01',
+    green: 'hsl(161, 66%, 38%)',
+    orange: 'hsl(22, 100%, 52%)',
+    red: 'hsl(3, 100%, 36%)',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

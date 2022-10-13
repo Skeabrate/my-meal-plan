@@ -69,7 +69,7 @@ export const GlobaStyles = createGlobalStyle`
 
 		*::selection {
 			background-color: ${({ theme }) => theme.colors.red};
-			color: #FFF;
+			color: hsl(0, 0%, 100%);
 		}
 
 		${({ theme }) => theme.mq.tablet} {
