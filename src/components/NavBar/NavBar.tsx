@@ -12,7 +12,7 @@ import { SearchBarContext } from 'context/SearchBarContext';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
-import SwitchThemeButton from 'components/SwitchThemeButton/SwitchThemeButton';
+import ThemeDropdown from 'components/Dropdowns/ThemeDropdown';
 
 const links = [
   {
@@ -95,7 +95,7 @@ const NavBar = () => {
 
           <Styled.NavSubItems $isCartOpen={isCartOpen}>
             <li>
-              <SwitchThemeButton />
+              <ThemeDropdown />
             </li>
             <li>
               <button

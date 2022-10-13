@@ -165,31 +165,6 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
     display: flex;
     flex-direction: row;
     transform: unset;
-
-    ul {
-      flex-direction: row;
-      width: unset;
-      height: 100%;
-
-      &:first-child {
-        width: 100%;
-        justify-content: center;
-      }
-
-      li {
-        width: unset;
-
-        a {
-          margin-inline: 10px;
-          height: 100%;
-          width: unset;
-          padding-inline: 10px;
-          opacity: 1;
-          transform: unset;
-          transition: unset;
-        }
-      }
-    }
   }
 `;
 
@@ -199,6 +174,30 @@ export const NavLinks = styled.ul<MenuProps>`
   justify-content: space-evenly;
   height: 100%;
   width: 100%;
+
+  ${({ theme }) => theme.mq.tablet} {
+    flex-direction: row;
+    width: unset;
+    height: 100%;
+    gap: 30px;
+
+    &:first-child {
+      width: 100%;
+      justify-content: center;
+    }
+
+    li {
+      width: unset;
+
+      a {
+        height: 100%;
+        width: unset;
+        opacity: 1;
+        transform: unset;
+        transition: unset;
+      }
+    }
+  }
 `;
 
 export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?: boolean }>`
@@ -236,7 +235,7 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
       color: white;
       position: absolute;
       top: 50%;
-      right: -8px;
+      right: -14px;
       width: 24px;
       height: 24px;
       font-size: ${({ theme }) => theme.fontSize.caption};
@@ -281,23 +280,22 @@ export const NavSubItems = styled.ul<MenuProps>`
     height: 100%;
     border: none;
     background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
 
     a {
-      width: 80px;
+      width: 100%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+  }
 
-    svg path {
-      fill: ${({ theme }) => theme.colors.font};
-      transition: all 0.2s ease-in-out;
-    }
-
-    &:hover svg path {
-      fill: ${({ theme }) => theme.colors.orange};
-    }
+  li:hover a svg path {
+    fill: ${({ theme }) => theme.colors.orange};
   }
 
   ${({ theme }) => theme.mq.tablet} {
@@ -305,5 +303,6 @@ export const NavSubItems = styled.ul<MenuProps>`
     transform: unset;
     transition: unset;
     opacity: 1;
+    width: unset;
   }
 `;

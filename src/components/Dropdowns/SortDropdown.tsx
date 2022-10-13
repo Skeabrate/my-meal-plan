@@ -1,8 +1,37 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { DataItemType } from 'components/GridSection/GridSection';
 import Dropdown from './Dropdown/Dropdown';
+import styled from 'styled-components';
 
-const options = ['Name: A - Z', 'Name: Z - A'];
+const StyledSortDropdown = styled.div`
+  div {
+    width: 100px;
+    height: 40px;
+    border: 1px solid ${({ theme }) => theme.colors.font};
+
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.orange};
+      ${({ theme }) => theme.boxShadow(theme.colors.orange)};
+    }
+
+    &:focus {
+      border-color: ${({ theme }) => theme.colors.orange};
+      outline: 2px solid ${({ theme }) => theme.colors.orange};
+    }
+
+    ${({ theme }) => theme.mq.tablet} {
+      width: 150px;
+      height: 50px;
+      font-size: 1.6rem;
+
+      button {
+        padding: 15px 20px;
+      }
+    }
+  }
+`;
+
+const options = [{ value: 'Name: A - Z' }, { value: 'Name: Z - A' }];
 
 type SortDropdownType = {
   itemsToSort: DataItemType[];
@@ -16,9 +45,9 @@ const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
     (data: DataItemType[], option: string) => {
       setLoadingFilters(true);
 
-      if (option === options[0]) {
+      if (option === options[0].value) {
         data.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (option === options[1]) {
+      } else if (option === options[1].value) {
         data.sort((a, b) => -1 * a.name.localeCompare(b.name));
       }
 
@@ -34,12 +63,14 @@ const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
   }, [dropdownValue, filtersHandler, itemsToSort]);
 
   return (
-    <Dropdown
-      label='Sort by:'
-      options={options}
-      dropdownValue={dropdownValue}
-      setDropdownValue={setDropdownValue}
-    />
+    <StyledSortDropdown>
+      <Dropdown
+        label='Sort by:'
+        options={options}
+        dropdownValue={dropdownValue}
+        setDropdownValue={setDropdownValue}
+      />
+    </StyledSortDropdown>
   );
 };
 
