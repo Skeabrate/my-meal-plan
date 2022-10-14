@@ -69,7 +69,7 @@ const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
 
   useEffect(() => {
     if (dropdownValue) filtersHandler(itemsToSort, dropdownValue.value);
-  }, [dropdownValue, itemsToSort]);
+  }, [dropdownValue, filtersHandler, itemsToSort]);
 
   return (
     <StyledSortDropdown>
