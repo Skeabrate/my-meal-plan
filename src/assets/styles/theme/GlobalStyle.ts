@@ -29,6 +29,10 @@ export const GlobaStyles = createGlobalStyle`
 		background-color: ${({ theme }) => theme.colors.background};
 		color: ${({ theme }) => theme.colors.font};
 
+		svg path{
+			fill: ${({ theme }) => theme.colors.font};
+		}
+
 		button, a{
 			cursor: pointer;
 			color: ${({ theme }) => theme.colors.font};

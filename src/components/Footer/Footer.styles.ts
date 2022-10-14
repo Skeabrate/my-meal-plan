@@ -39,7 +39,6 @@ export const Footer = styled.footer`
 
   svg {
     path {
-      fill: ${({ theme }) => theme.colors.font};
       transition: fill 0.2s ease-in-out;
     }
 

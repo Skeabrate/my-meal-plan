@@ -291,7 +291,7 @@ export const NavSubItem = styled.li`
 
   &:not(:first-child):hover {
     svg path {
-      fill: red;
+      fill: ${({ theme }) => theme.colors.orange};
     }
   }
 
