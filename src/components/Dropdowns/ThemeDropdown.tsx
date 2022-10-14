@@ -24,12 +24,8 @@ const StyledThemeDropdown = styled.div`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondBackground};
 
-    p {
-      display: flex;
-
-      span {
-        display: none;
-      }
+    p span {
+      display: none;
     }
 
     ul {
@@ -41,21 +37,11 @@ const StyledThemeDropdown = styled.div`
         width: 100%;
 
         button {
-          display: grid;
-          grid-template-columns: 50px 1fr;
-          place-content: center;
-          width: 100%;
-
-          span {
-            text-align: left;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-          }
+          display: flex;
+          align-items: center;
 
           svg {
-            margin: 0 auto;
+            margin: 0 13px;
           }
         }
       }

@@ -286,11 +286,14 @@ export const NavSubItems = styled.ul<MenuProps>`
 
 export const NavSubItem = styled.li`
   background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
   width: 60px;
+
+  &:not(:first-child):hover {
+    svg path {
+      fill: red;
+    }
+  }
 
   a,
   button {

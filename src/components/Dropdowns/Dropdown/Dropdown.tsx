@@ -57,7 +57,7 @@ const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownT
       tabIndex={0}
       onKeyDown={(e) => e.keyCode === 13 && setToggleDropdown((state) => !state)}
     >
-      <p>{getLabel}</p>
+      <Styled.Label>{getLabel}</Styled.Label>
 
       {toggleDropdown && (
         <Styled.DropdownList>

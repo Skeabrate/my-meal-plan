@@ -9,16 +9,20 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
 
-  p {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   ${({ theme }) => theme.mq.tablet} {
     font-size: 1.6rem;
+  }
+`;
+
+export const Label = styled.p`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover svg path {
+    fill: ${({ theme }) => theme.colors.orange};
   }
 `;
 
