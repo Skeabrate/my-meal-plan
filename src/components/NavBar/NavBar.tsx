@@ -94,10 +94,10 @@ const NavBar = () => {
           </Styled.NavLinks>
 
           <Styled.NavSubItems $isCartOpen={isCartOpen}>
-            <li>
+            <Styled.NavSubItem>
               <ThemeDropdown />
-            </li>
-            <li>
+            </Styled.NavSubItem>
+            <Styled.NavSubItem>
               <button
                 aria-label='search'
                 onClick={toggleSearchBar}
@@ -106,8 +106,8 @@ const NavBar = () => {
                   <SearchSvg />
                 </a>
               </button>
-            </li>
-            <li>
+            </Styled.NavSubItem>
+            <Styled.NavSubItem>
               <Link
                 aria-label='profile'
                 href='/profile'
@@ -116,7 +116,7 @@ const NavBar = () => {
                   <ProfileSvg />
                 </a>
               </Link>
-            </li>
+            </Styled.NavSubItem>
           </Styled.NavSubItems>
         </Styled.SlideCart>
       </Styled.NavBar>

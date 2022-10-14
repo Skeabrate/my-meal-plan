@@ -9,6 +9,10 @@ const StyledSortDropdown = styled.div`
     height: 40px;
     border: 1px solid ${({ theme }) => theme.colors.font};
 
+    button {
+      text-align: center;
+    }
+
     &:hover {
       border-color: ${({ theme }) => theme.colors.orange};
       ${({ theme }) => theme.boxShadow(theme.colors.orange)};
@@ -26,6 +30,7 @@ const StyledSortDropdown = styled.div`
 
       button {
         padding: 15px 20px;
+        text-align: left;
       }
     }
   }

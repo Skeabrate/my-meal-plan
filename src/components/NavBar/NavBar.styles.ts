@@ -275,34 +275,34 @@ export const NavSubItems = styled.ul<MenuProps>`
 		`;
   }};
 
-  li,
-  button {
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-
-    a {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-  li:hover a svg path {
-    fill: ${({ theme }) => theme.colors.orange};
-  }
-
   ${({ theme }) => theme.mq.tablet} {
     background-color: ${({ theme }) => theme.colors.background};
     transform: unset;
     transition: unset;
     opacity: 1;
     width: unset;
+  }
+`;
+
+export const NavSubItem = styled.li`
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 60px;
+
+  a,
+  button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;

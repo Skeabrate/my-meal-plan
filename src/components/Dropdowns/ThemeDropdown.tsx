@@ -18,14 +18,15 @@ const fadeInReverseAnimation = keyframes`
 
 const StyledThemeDropdown = styled.div`
   height: 100%;
+  width: 100%;
 
   div {
-    width: 60px;
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondBackground};
 
     p {
       display: flex;
+
       span {
         display: none;
       }
@@ -42,10 +43,15 @@ const StyledThemeDropdown = styled.div`
         button {
           display: grid;
           grid-template-columns: 50px 1fr;
+          place-content: center;
           width: 100%;
 
           span {
             text-align: left;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
           }
 
           svg {

@@ -9,8 +9,12 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
 
-  &:hover p svg path {
-    fill: ${({ theme }) => theme.colors.orange};
+  p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   ${({ theme }) => theme.mq.tablet} {
@@ -44,7 +48,6 @@ export const DropdownListItem = styled.li`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.background};
     border: none;
-    text-align: center;
 
     &:hover {
       background-color: ${({ theme }) => theme.colors.secondBackground};
@@ -62,7 +65,6 @@ export const DropdownListItem = styled.li`
   ${({ theme }) => theme.mq.tablet} {
     button {
       height: 50px;
-      text-align: left;
     }
   }
 `;
