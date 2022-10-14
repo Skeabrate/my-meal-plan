@@ -1,14 +1,20 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as Styled from './Dropdown.styles';
+import { DropdownValueType } from './useDropdownValue';
 
 type DropdownType = {
   label?: string;
-  options: { value: string; Component?: React.ReactNode }[];
-  dropdownValue: string;
-  setDropdownValue: React.Dispatch<React.SetStateAction<string>>;
+  options: { id: number; value: string; Component?: React.ReactNode }[];
+  dropdownValue: DropdownValueType;
+  setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType>>;
 };
 
-const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownType) => {
+const Dropdown: React.FunctionComponent<DropdownType> = ({
+  label,
+  options,
+  dropdownValue,
+  setDropdownValue,
+}) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,7 +42,8 @@ const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownT
 
   const getLabel = useMemo(
     () =>
-      (options.find((option) => option.value === dropdownValue)?.Component ?? dropdownValue) ||
+      (options.find((option) => option.id === dropdownValue?.id)?.Component ??
+        dropdownValue?.value) ||
       label,
     [dropdownValue, label, options]
   );
@@ -47,7 +54,7 @@ const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownT
     return () => {
       document.removeEventListener('click', handleDropdown);
     };
-  }, [handleDropdown, setDropdownValue]);
+  }, [handleDropdown]);
 
   return (
     <Styled.Wrapper
@@ -61,11 +68,11 @@ const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownT
 
       {toggleDropdown && (
         <Styled.DropdownList>
-          {options.map(({ value, Component }) => (
-            <Styled.DropdownListItem key={value}>
+          {options.map(({ id, value, Component }) => (
+            <Styled.DropdownListItem key={id}>
               <button
-                onKeyDown={(e) => e.keyCode === 13 && setDropdownValue(value)}
-                onClick={() => setDropdownValue(value)}
+                onKeyDown={(e) => e.keyCode === 13 && setDropdownValue({ id, value })}
+                onClick={() => setDropdownValue({ id, value })}
               >
                 {Component || value}
               </button>

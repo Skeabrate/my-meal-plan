@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { ThemeContext } from 'context/ThemeContext';
+import { isSystemThemeSettingSetToDark, ThemeContext, ThemeTypes } from 'context/ThemeContext';
 import Dropdown from './Dropdown/Dropdown';
+import { useDropdownValue } from './Dropdown/useDropdownValue';
 import LightSvg from 'assets/SVG/Light.svg';
 import DarkSvg from 'assets/SVG/Dark.svg';
 import SystemSvg from 'assets/SVG/System.svg';
@@ -62,7 +63,8 @@ const StyledThemeDropdown = styled.div`
 
 const options = [
   {
-    value: 'light',
+    id: 0,
+    value: ThemeTypes.Light,
     Component: (
       <>
         <LightSvg /> <span>light</span>
@@ -70,7 +72,8 @@ const options = [
     ),
   },
   {
-    value: 'dark',
+    id: 1,
+    value: ThemeTypes.Dark,
     Component: (
       <>
         <DarkSvg /> <span>dark</span>
@@ -78,7 +81,8 @@ const options = [
     ),
   },
   {
-    value: 'system',
+    id: 2,
+    value: isSystemThemeSettingSetToDark ? ThemeTypes.Dark : ThemeTypes.Light,
     Component: (
       <>
         <SystemSvg /> <span>system</span>
@@ -88,18 +92,24 @@ const options = [
 ];
 
 const ThemeDropdown = () => {
-  const [dropdownValue, setDropdownValue] = useState(options[0].value);
+  const { themeStyle, setThemeStyle } = useContext(ThemeContext);
+  const initialDropdownValue = options.find((option) => option.value === themeStyle) as {
+    id: number;
+    value: ThemeTypes;
+  };
 
-  const { switchThemeStyle } = useContext(ThemeContext);
+  const { dropdownValue, setDropdownValue } = useDropdownValue({
+    id: initialDropdownValue.id,
+    value: initialDropdownValue.value,
+  });
 
   useEffect(() => {
-    console.log(dropdownValue);
-  }, [dropdownValue]);
+    if (dropdownValue) setThemeStyle(dropdownValue.value);
+  }, [dropdownValue, setThemeStyle]);
 
   return (
     <StyledThemeDropdown>
       <Dropdown
-        label='tets'
         options={options}
         dropdownValue={dropdownValue}
         setDropdownValue={setDropdownValue}

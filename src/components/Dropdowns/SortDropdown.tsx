@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import styled from 'styled-components';
 import { DataItemType } from 'components/GridSection/GridSection';
 import Dropdown from './Dropdown/Dropdown';
-import styled from 'styled-components';
+import { useDropdownValue } from './Dropdown/useDropdownValue';
 
 const StyledSortDropdown = styled.div`
   div {
@@ -36,7 +37,10 @@ const StyledSortDropdown = styled.div`
   }
 `;
 
-const options = [{ value: 'Name: A - Z' }, { value: 'Name: Z - A' }];
+const options = [
+  { id: 0, value: 'Name: A - Z' },
+  { id: 1, value: 'Name: Z - A' },
+];
 
 type SortDropdownType = {
   itemsToSort: DataItemType[];
@@ -44,15 +48,15 @@ type SortDropdownType = {
 };
 
 const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
-  const [dropdownValue, setDropdownValue] = useState('');
+  const { dropdownValue, setDropdownValue } = useDropdownValue();
 
   const filtersHandler = useCallback(
-    (data: DataItemType[], option: string) => {
+    (data: DataItemType[], dropdownValue: string) => {
       setLoadingFilters(true);
 
-      if (option === options[0].value) {
+      if (dropdownValue === options[0].value) {
         data.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (option === options[1].value) {
+      } else if (dropdownValue === options[1].value) {
         data.sort((a, b) => -1 * a.name.localeCompare(b.name));
       }
 
@@ -64,7 +68,7 @@ const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
   );
 
   useEffect(() => {
-    if (dropdownValue) filtersHandler(itemsToSort, dropdownValue);
+    if (dropdownValue) filtersHandler(itemsToSort, dropdownValue.value);
   }, [dropdownValue, filtersHandler, itemsToSort]);
 
   return (

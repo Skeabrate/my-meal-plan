@@ -259,7 +259,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   width: 100%;
   height: 100px;
   background-color: ${({ theme }) => theme.colors.secondBackground};
-  transition: all 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   ${({ $isCartOpen }) => {
     if ($isCartOpen)
       return `
