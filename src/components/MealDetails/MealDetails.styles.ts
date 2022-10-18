@@ -36,13 +36,13 @@ export const Button = styled.button<{ $isActive: boolean }>`
   font-size: ${({ theme }) => theme.fontSize.caption};
   transition: background-color 0.1s ease-in-out;
   background-color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.green : theme.colors.background};
-  color: ${({ $isActive, theme }) => ($isActive ? 'white' : theme.colors.font)};
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.background};
+    $isActive ? theme.colors.green : theme.themeColors.background};
+  color: ${({ $isActive, theme }) => ($isActive ? 'white' : theme.themeColors.font)};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.themeColors.background};
   margin-bottom: 2px;
 
   &:hover {
-    background-color: ${({ $isActive, theme }) => !$isActive && theme.colors.secondBackground};
+    background-color: ${({ $isActive, theme }) => !$isActive && theme.themeColors.secondBackground};
   }
 
   ${({ theme }) => theme.mq.tablet} {

@@ -8,7 +8,7 @@ const StyledSteps = styled.article`
       font-size: 2rem;
       cursor: pointer;
       padding: 20px;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.secondBackground};
+      border-bottom: 1px solid ${({ theme }) => theme.themeColors.secondBackground};
 
       &:hover {
         text-decoration: underline;
@@ -16,7 +16,7 @@ const StyledSteps = styled.article`
     }
 
     p {
-      background-color: ${({ theme }) => theme.colors.secondBackground};
+      background-color: ${({ theme }) => theme.themeColors.secondBackground};
       padding: 19px 20px 20px;
     }
   }

@@ -26,16 +26,16 @@ export const GlobaStyles = createGlobalStyle`
 		margin: 0;
 		font-family: ${({ theme }) => theme.fontFamily.lato};
 		font-size: ${({ theme }) => theme.fontSize.paragraph};
-		background-color: ${({ theme }) => theme.colors.background};
-		color: ${({ theme }) => theme.colors.font};
+		background-color: ${({ theme }) => theme.themeColors.background};
+		color: ${({ theme }) => theme.themeColors.font};
 
 		svg path{
-			fill: ${({ theme }) => theme.colors.font};
+			fill: ${({ theme }) => theme.themeColors.font};
 		}
 
 		button, a{
 			cursor: pointer;
-			color: ${({ theme }) => theme.colors.font};
+			color: ${({ theme }) => theme.themeColors.font};
 		}
 
 		h1, h2, h3,	h4, h5, h6{
@@ -90,20 +90,20 @@ export const GlobaStyles = createGlobalStyle`
 
 	* {
 		::-webkit-scrollbar-track {
-			background-color: ${({ theme }) => theme.colors.background};
+			background-color: ${({ theme }) => theme.themeColors.background};
 		}
 		::-webkit-scrollbar {
 			width: 14px;
 			height: 8px;
 		}
 		::-webkit-scrollbar-thumb {
-			background: ${({ theme }) => theme.colors.border};
+			background: ${({ theme }) => theme.themeColors.border};
 			border-radius: 100px;
-			border: 3px solid ${({ theme }) => theme.colors.background};
+			border: 3px solid ${({ theme }) => theme.themeColors.background};
 			background-clip: padding-box;
 
 			&:active {
-				background-color: ${({ theme }) => theme.colors.secondBackground};
+				background-color: ${({ theme }) => theme.themeColors.secondBackground};
 			}
 		}
 	}
@@ -126,7 +126,7 @@ export const GlobaStyles = createGlobalStyle`
 	select:focus,
 	textarea {
 		font-size: 16px;
-		color: ${({ theme }) => theme.colors.font}
+		color: ${({ theme }) => theme.themeColors.font}
 	}
 
 	

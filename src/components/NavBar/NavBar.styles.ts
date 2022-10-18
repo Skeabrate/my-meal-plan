@@ -65,7 +65,7 @@ const buttonStyle = css`
   width: 36px;
   transition-duration: 0.5s;
   border-radius: 100px;
-  background-color: ${({ theme }) => theme.colors.secondFont};
+  background-color: ${({ theme }) => theme.themeColors.secondFont};
 `;
 
 export const HambuergerMenu = styled.button<MenuProps>`
@@ -139,7 +139,7 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   width: 100%;
   height: ${({ $windowHeight }) => `calc(${$windowHeight}px - ${navBarMobileHeight})`};
   min-height: 300px;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.themeColors.background};
   display: flex;
   flex-direction: column;
   z-index: 999;
@@ -212,7 +212,7 @@ export const NavLink = styled.li<MenuProps & { $isActive: boolean; $isFavorite?:
     align-items: center;
     width: 100%;
     height: 60px;
-    color: ${({ theme }) => theme.colors.font};
+    color: ${({ theme }) => theme.themeColors.font};
     text-decoration: ${({ $isActive }) => ($isActive ? 'underline' : 'none')};
     text-underline-offset: 2px;
     font-size: ${({ theme }) => theme.fontSize.abrilDesktop};
@@ -258,7 +258,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-color: ${({ theme }) => theme.colors.secondBackground};
+  background-color: ${({ theme }) => theme.themeColors.secondBackground};
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   ${({ $isCartOpen }) => {
     if ($isCartOpen)
@@ -276,7 +276,7 @@ export const NavSubItems = styled.ul<MenuProps>`
   }};
 
   ${({ theme }) => theme.mq.tablet} {
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.themeColors.background};
     transform: unset;
     transition: unset;
     opacity: 1;

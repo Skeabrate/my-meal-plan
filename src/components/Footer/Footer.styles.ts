@@ -17,7 +17,7 @@ export const Footer = styled.footer`
     width: 80%;
     max-width: 1400px;
     height: 1px;
-    background-color: ${({ theme }) => theme.colors.border};
+    background-color: ${({ theme }) => theme.themeColors.border};
   }
 
   a {

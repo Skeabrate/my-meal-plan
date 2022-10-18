@@ -9,7 +9,7 @@ const StyledSortDropdown = styled.div`
   height: 40px;
 
   div {
-    border: 1px solid ${({ theme }) => theme.colors.font};
+    border: 1px solid ${({ theme }) => theme.themeColors.font};
 
     button {
       text-align: center;

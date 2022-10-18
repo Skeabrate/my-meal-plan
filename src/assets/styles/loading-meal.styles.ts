@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   p {
-    background-color: ${({ theme }) => theme.colors.secondBackground};
+    background-color: ${({ theme }) => theme.themeColors.secondBackground};
     ${({ theme }) => theme.loadingAnimation()};
   }
 `;
@@ -18,7 +18,7 @@ export const Header = styled.div`
     }
 
     &:last-child {
-      background-color: ${({ theme }) => theme.colors.border};
+      background-color: ${({ theme }) => theme.themeColors.border};
       height: 60px;
       width: 100%;
     }
@@ -52,7 +52,7 @@ export const Content = styled.div`
 
 export const Gallery = styled.div`
   p {
-    background-color: ${({ theme }) => theme.colors.border};
+    background-color: ${({ theme }) => theme.themeColors.border};
 
     &:first-child {
       height: 350px;
@@ -89,7 +89,7 @@ export const Tabs = styled.div`
 
     p {
       height: 60px;
-      background-color: ${({ theme }) => theme.colors.border};
+      background-color: ${({ theme }) => theme.themeColors.border};
     }
   }
 

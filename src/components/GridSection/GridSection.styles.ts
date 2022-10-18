@@ -22,7 +22,7 @@ export const Grid = styled.section`
   grid-gap: 4rem;
 
   article {
-    border: 1px solid ${({ theme }) => theme.colors.border};
+    border: 1px solid ${({ theme }) => theme.themeColors.border};
     text-align: center;
     overflow: hidden;
     opacity: 0;
@@ -32,7 +32,7 @@ export const Grid = styled.section`
 
     a {
       text-decoration: none;
-      color: ${({ theme }) => theme.colors.font};
+      color: ${({ theme }) => theme.themeColors.font};
       height: 100%;
 
       &:focus {
@@ -49,7 +49,7 @@ export const Grid = styled.section`
 
     div {
       height: 280px;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+      border-bottom: 1px solid ${({ theme }) => theme.themeColors.border};
 
       img {
         transition: scale 0.4s ease-in-out;
@@ -57,7 +57,7 @@ export const Grid = styled.section`
     }
 
     &:hover {
-      box-shadow: 0px 0px 40px -30px ${({ theme }) => theme.colors.font};
+      box-shadow: 0px 0px 40px -30px ${({ theme }) => theme.themeColors.font};
 
       img {
         scale: 1.05;

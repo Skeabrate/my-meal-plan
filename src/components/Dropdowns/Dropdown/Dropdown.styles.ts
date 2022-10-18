@@ -19,7 +19,7 @@ export const Label = styled.p`
   display: flex;
   position: relative;
   z-index: -1;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.themeColors.background};
 
   &:hover svg path {
     fill: ${({ theme }) => theme.colors.orange};
@@ -33,8 +33,8 @@ export const DropdownList = styled.ul`
   list-style: none;
   width: calc(100% + 2px);
   z-index: 1;
-  border: 1px solid ${({ theme }) => theme.colors.font};
-  background-color: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.themeColors.font};
+  background-color: ${({ theme }) => theme.themeColors.background};
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;
 
@@ -50,11 +50,11 @@ export const DropdownListItem = styled.li`
   button {
     height: 40px;
     width: 100%;
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.themeColors.background};
     border: none;
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.secondBackground};
+      background-color: ${({ theme }) => theme.themeColors.secondBackground};
 
       svg path {
         fill: ${({ theme }) => theme.colors.orange};

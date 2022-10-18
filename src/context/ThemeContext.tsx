@@ -3,7 +3,6 @@ import { ThemeProvider as ThemeStyledComponentsProvider } from 'styled-component
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import { theme, themeVariants } from 'assets/styles/theme/theme';
 import { GlobaStyles } from 'assets/styles/theme/GlobalStyle';
-import { ThemeVariantsType } from 'assets/styles/theme/styled';
 
 export enum ThemeTypes {
   Light = 'light',
@@ -30,14 +29,13 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     initialThemeBasedOnSystemSettings
   );
 
-  const getNewTheme = useMemo(() => {
-    const getThemeVariant = themeVariants[themeStyle as keyof ThemeVariantsType];
-    return {
+  const getNewTheme = useMemo(
+    () => ({
       ...theme,
-      colors: { ...theme.colors, ...getThemeVariant.colors },
-      boxShadow: getThemeVariant.boxShadow,
-    };
-  }, [themeStyle]);
+      ...themeVariants[themeStyle],
+    }),
+    [themeStyle]
+  );
 
   const value = useMemo(
     () => ({

@@ -23,7 +23,7 @@ const StyledThemeDropdown = styled.div`
 
   div {
     p {
-      background-color: ${({ theme }) => theme.colors.secondBackground};
+      background-color: ${({ theme }) => theme.themeColors.secondBackground};
 
       span {
         display: none;
@@ -53,7 +53,7 @@ const StyledThemeDropdown = styled.div`
   ${({ theme }) => theme.mq.tablet} {
     div {
       p {
-        background-color: ${({ theme }) => theme.colors.background};
+        background-color: ${({ theme }) => theme.themeColors.background};
       }
 
       ul {

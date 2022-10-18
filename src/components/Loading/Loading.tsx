@@ -12,7 +12,7 @@ export const StyledLoading = styled.p<{ $height: number }>`
 const Loading = ({ height = 400 }: { height?: number }) => {
   return (
     <StyledLoading $height={height}>
-      <ClipLoader color={theme.colors.font} />
+      <ClipLoader color={theme.themeColors.font} />
     </StyledLoading>
   );
 };

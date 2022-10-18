@@ -1,29 +1,23 @@
 import 'styled-components';
 
-export type ThemeVariantsType = {
-  light: {
-    colors: {};
-    boxShadow: Function;
+export interface ThemeVariant {
+  themeColors: {
+    background: string;
+    secondBackground: string;
+    font: string;
+    secondFont: string;
+    border: string;
   };
-  dark: {
-    colors: {};
-    boxShadow: Function;
-  };
-};
+  boxShadow: (color: string) => FlattenSimpleInterpolation;
+}
 
 declare module 'styled-components' {
-  export interface DefaultTheme {
+  export interface DefaultTheme extends ThemeVariant {
     colors: {
-      background: string;
-      secondBackground: string;
-      font: string;
-      secondFont: string;
-      border: string;
       green: string;
       orange: string;
       red: string;
     };
-    boxShadow: Function;
     fontFamily: {
       abril: string;
       lato: string;
@@ -41,9 +35,8 @@ declare module 'styled-components' {
       bigDesktop: string;
       huge: string;
     };
-    boxShadow: Function;
-    fadeInAnimation: Function;
-    slideInAnimation: Function;
-    loadingAnimation: Function;
+    fadeInAnimation: (duration?: number) => FlattenSimpleInterpolation;
+    slideInAnimation: (duration?: number) => FlattenSimpleInterpolation;
+    loadingAnimation: () => FlattenSimpleInterpolation;
   }
 }

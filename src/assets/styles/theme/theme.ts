@@ -1,12 +1,12 @@
 import { css, DefaultTheme, keyframes } from 'styled-components';
-import { ThemeVariantsType } from './styled';
+import { ThemeVariant } from './styled';
 
 const lightThemeBackground = 'hsl(0, 0%, 100%)';
 const darkThemeBackground = '	hsl(180, 2%, 20%)';
 
-export const themeVariants: ThemeVariantsType = {
+export const themeVariants: { light: ThemeVariant; dark: ThemeVariant } = {
   light: {
-    colors: {
+    themeColors: {
       background: lightThemeBackground,
       secondBackground: '	hsl(0, 0%, 94%)',
       font: 'hsl(0, 0%, 0%)',
@@ -18,7 +18,7 @@ export const themeVariants: ThemeVariantsType = {
     `,
   },
   dark: {
-    colors: {
+    themeColors: {
       background: darkThemeBackground,
       secondBackground: 'hsl(180, 2%, 16%)',
       font: '	hsl(0, 0%, 100%)',
@@ -32,12 +32,8 @@ export const themeVariants: ThemeVariantsType = {
 };
 
 export const theme: DefaultTheme = {
+  ...themeVariants.light,
   colors: {
-    background: '',
-    secondBackground: '',
-    font: '',
-    secondFont: '',
-    border: '',
     green: 'hsl(161, 66%, 38%)',
     orange: 'hsl(22, 100%, 52%)',
     red: 'hsl(3, 100%, 36%)',
@@ -59,7 +55,6 @@ export const theme: DefaultTheme = {
     bigDesktop: '@media (min-width: 1280px)',
     huge: '@media (min-width: 1440px)',
   },
-  boxShadow: () => {},
   fadeInAnimation: (duration = 0.6) => {
     const fadeInAnimation = keyframes`
 			from {

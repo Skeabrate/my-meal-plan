@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const NotFound = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.themeColors.background};
   display: flex;
   flex-direction: column;
   justify-content: center;
