@@ -93,14 +93,11 @@ const options = [
 
 const ThemeDropdown = () => {
   const { themeStyle, setThemeStyle } = useContext(ThemeContext);
-  const initialDropdownValue = options.find((option) => option.value === themeStyle) as {
-    id: number;
-    value: ThemeTypes;
-  };
+  const initialDropdownValue = options.find((option) => option.value === themeStyle);
 
   const { dropdownValue, setDropdownValue } = useDropdownValue({
-    id: initialDropdownValue.id,
-    value: initialDropdownValue.value,
+    id: initialDropdownValue!.id,
+    value: initialDropdownValue!.value,
   });
 
   useEffect(() => {
