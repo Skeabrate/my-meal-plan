@@ -1,13 +1,26 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as Styled from './Dropdown.styles';
-import { DropdownValueType } from './useDropdownValue';
 
-type DropdownType = {
-  label?: string;
-  options: { id: number; value: string; Component?: React.ReactNode }[];
-  dropdownValue: DropdownValueType;
-  setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType>>;
+type DropdownValueType = {
+  id: number;
+  value: any;
 };
+
+// label or dropdownValue must be provided
+type DropdownType = {
+  options: { id: number; value: string; Component?: React.ReactNode }[];
+} & (
+  | {
+      label?: string;
+      dropdownValue: DropdownValueType;
+      setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType>>;
+    }
+  | {
+      label: string;
+      dropdownValue: DropdownValueType | undefined;
+      setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType | undefined>>;
+    }
+);
 
 const Dropdown: React.FunctionComponent<DropdownType> = ({
   label,

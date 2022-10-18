@@ -101,7 +101,7 @@ const ThemeDropdown = () => {
   });
 
   useEffect(() => {
-    if (dropdownValue) setThemeStyle(dropdownValue.value);
+    setThemeStyle(dropdownValue.value);
   }, [dropdownValue, setThemeStyle]);
 
   return (

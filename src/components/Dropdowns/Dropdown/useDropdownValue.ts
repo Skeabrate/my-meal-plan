@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
-export type DropdownValueType =
+type Id =
   | {
       id: number;
-      value: any;
     }
   | undefined;
 
-export const useDropdownValue = (initialDropdownValue: DropdownValueType = undefined) => {
+export const useDropdownValue = <T extends Id>(initialDropdownValue: T) => {
   const [dropdownValue, setDropdownValue] = useState(initialDropdownValue);
 
   return { dropdownValue, setDropdownValue };

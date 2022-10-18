@@ -48,7 +48,9 @@ type SortDropdownType = {
 };
 
 const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
-  const { dropdownValue, setDropdownValue } = useDropdownValue();
+  const { dropdownValue, setDropdownValue } = useDropdownValue<
+    { id: number; value: string } | undefined
+  >(undefined);
 
   const filtersHandler = useCallback(
     (data: DataItemType[], dropdownValue: string) => {
