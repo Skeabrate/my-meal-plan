@@ -288,6 +288,7 @@ export const NavSubItem = styled.li`
   background-color: transparent;
   height: 100%;
   width: 60px;
+  z-index: 1;
 
   &:not(:first-child):hover {
     svg path {

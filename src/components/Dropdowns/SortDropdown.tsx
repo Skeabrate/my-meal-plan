@@ -5,9 +5,10 @@ import Dropdown from './Dropdown/Dropdown';
 import { useDropdownValue } from './Dropdown/useDropdownValue';
 
 const StyledSortDropdown = styled.div`
+  width: 100px;
+  height: 40px;
+
   div {
-    width: 100px;
-    height: 40px;
     border: 1px solid ${({ theme }) => theme.colors.font};
 
     button {
@@ -23,16 +24,15 @@ const StyledSortDropdown = styled.div`
       border-color: ${({ theme }) => theme.colors.orange};
       outline: 2px solid ${({ theme }) => theme.colors.orange};
     }
+  }
 
-    ${({ theme }) => theme.mq.tablet} {
-      width: 150px;
-      height: 50px;
-      font-size: 1.6rem;
+  ${({ theme }) => theme.mq.tablet} {
+    width: 150px;
+    height: 50px;
 
-      button {
-        padding: 15px 20px;
-        text-align: left;
-      }
+    div button {
+      padding: 15px 20px;
+      text-align: left;
     }
   }
 `;

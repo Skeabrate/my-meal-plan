@@ -6,8 +6,9 @@ export const Wrapper = styled.div`
   align-items: center;
   font-size: 1.2rem;
   position: relative;
-  background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
+  width: 100%;
+  height: 100%;
 
   ${({ theme }) => theme.mq.tablet} {
     font-size: 1.6rem;
@@ -15,11 +16,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Label = styled.p`
-  width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  z-index: -1;
+  background-color: ${({ theme }) => theme.colors.background};
 
   &:hover svg path {
     fill: ${({ theme }) => theme.colors.orange};

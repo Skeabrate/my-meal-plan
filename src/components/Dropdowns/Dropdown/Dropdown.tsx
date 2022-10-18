@@ -32,21 +32,8 @@ const Dropdown: React.FunctionComponent<DropdownType> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const checkIfDropdownChildIsClicked = (dropdownChildList: HTMLCollection, eventTarget: Element) =>
-    Array.from(dropdownChildList).reduce((check, child) => {
-      if (eventTarget === child) check = true;
-      return check;
-    }, false);
-
   const handleDropdown = useCallback((e: any) => {
-    const isDropdownClicked =
-      (dropdownRef.current &&
-        (e.target === dropdownRef.current ||
-          checkIfDropdownChildIsClicked(dropdownRef.current?.children[0].children, e.target) ||
-          e.target === dropdownRef.current?.children[0])) ||
-      e.target === dropdownRef.current?.children[0]?.children[0]?.children[0];
-
-    if (isDropdownClicked) {
+    if (dropdownRef.current && e.target === dropdownRef.current) {
       setToggleDropdown((state) => !state);
     } else {
       setToggleDropdown(false);

@@ -22,11 +22,12 @@ const StyledThemeDropdown = styled.div`
   width: 100%;
 
   div {
-    height: 100%;
-    background-color: ${({ theme }) => theme.colors.secondBackground};
+    p {
+      background-color: ${({ theme }) => theme.colors.secondBackground};
 
-    p span {
-      display: none;
+      span {
+        display: none;
+      }
     }
 
     ul {
@@ -51,7 +52,9 @@ const StyledThemeDropdown = styled.div`
 
   ${({ theme }) => theme.mq.tablet} {
     div {
-      background-color: ${({ theme }) => theme.colors.background};
+      p {
+        background-color: ${({ theme }) => theme.colors.background};
+      }
 
       ul {
         top: 90px;
