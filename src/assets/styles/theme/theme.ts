@@ -4,11 +4,9 @@ import { ThemeVariant } from './styled';
 const lightThemeBackground = 'hsl(0, 0%, 100%)';
 const darkThemeBackground = '	hsl(180, 2%, 20%)';
 
-type ThemeVariants = {
-  [key: string]: ThemeVariant;
-};
+type ThemeVariantName = 'light' | 'dark';
 
-export const themeVariants: ThemeVariants = {
+export const themeVariants: Record<ThemeVariantName, ThemeVariant> = {
   light: {
     themeColors: {
       background: lightThemeBackground,
