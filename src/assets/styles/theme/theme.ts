@@ -4,7 +4,11 @@ import { ThemeVariant } from './styled';
 const lightThemeBackground = 'hsl(0, 0%, 100%)';
 const darkThemeBackground = '	hsl(180, 2%, 20%)';
 
-export const themeVariants: { light: ThemeVariant; dark: ThemeVariant } = {
+type ThemeVariants = {
+  [key: string]: ThemeVariant;
+};
+
+export const themeVariants: ThemeVariants = {
   light: {
     themeColors: {
       background: lightThemeBackground,
