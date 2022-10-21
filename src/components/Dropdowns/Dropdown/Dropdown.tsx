@@ -27,7 +27,7 @@ const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownT
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleDropdown = useCallback((e: any) => {
+  const handleDropdown = useCallback((e: MouseEvent) => {
     if (dropdownRef.current && e.target === dropdownRef.current) {
       setToggleDropdown((state) => !state);
     } else {
