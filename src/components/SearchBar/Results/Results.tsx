@@ -24,7 +24,7 @@ const Results = ({ inputValue }: { inputValue: string }) => {
     <Styled.Results $windowHeight={windowHeight}>
       {loading && <Loading />}
       {errorOccured && <Styled.Error>An error occured while fetching meals.</Styled.Error>}
-      {noMatchingResults && <Styled.Error>We couldn't find any meals.</Styled.Error>}
+      {noMatchingResults && <Styled.Error>No matching meals.</Styled.Error>}
       {matchingResults && (
         <div>
           {searchResults.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (

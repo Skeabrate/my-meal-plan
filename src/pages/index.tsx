@@ -19,7 +19,7 @@ function Home() {
       loadingData={isLoading}
       error={{
         value: error,
-        fallbackMessage: `We couldn't load any categories.`,
+        fallbackMessage: `No categories found.`,
       }}
     />
   );

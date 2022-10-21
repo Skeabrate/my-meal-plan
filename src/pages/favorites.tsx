@@ -24,7 +24,7 @@ function Favorites() {
       loadingData={isLoading}
       error={{
         value: !favoritesById?.length || error,
-        fallbackMessage: `You don't have any favorites yet.`,
+        fallbackMessage: `You don't have favorite meals yet.`,
       }}
     />
   );

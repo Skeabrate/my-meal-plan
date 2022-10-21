@@ -1,28 +1,33 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as Styled from './Dropdown.styles';
 
-type DropdownValueType = {
+type DropdownValueType<T> = {
   id: number;
-  value: any;
+  value: T;
 };
 
 // label or dropdownValue must be provided
-type DropdownType = {
-  options: { id: number; value: string; Component?: React.ReactNode }[];
+type DropdownType<T> = {
+  options: { id: number; value: T; Component?: React.ReactNode }[];
 } & (
   | {
       label?: string;
-      dropdownValue: DropdownValueType;
-      setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType>>;
+      dropdownValue: DropdownValueType<T>;
+      setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType<T>>>;
     }
   | {
       label: string;
-      dropdownValue: DropdownValueType | undefined;
-      setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType | undefined>>;
+      dropdownValue: DropdownValueType<T> | undefined;
+      setDropdownValue: React.Dispatch<React.SetStateAction<DropdownValueType<T> | undefined>>;
     }
 );
 
-const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownType) => {
+const Dropdown = <T extends string>({
+  label,
+  options,
+  dropdownValue,
+  setDropdownValue,
+}: DropdownType<T>) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
