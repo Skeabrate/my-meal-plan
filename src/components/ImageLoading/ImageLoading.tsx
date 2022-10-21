@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import React from 'react';
 import * as Styled from './ImageLoading.styles';
 
-const ImageLoading = ({ options, children }: any) => {
+const ImageLoading = ({ options, children }: { options: any; children?: React.ReactNode }) => {
   return (
     <Styled.ImageLoading>
       <Image

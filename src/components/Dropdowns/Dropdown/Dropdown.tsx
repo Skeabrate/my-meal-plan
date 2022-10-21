@@ -22,12 +22,7 @@ type DropdownType = {
     }
 );
 
-const Dropdown: React.FunctionComponent<DropdownType> = ({
-  label,
-  options,
-  dropdownValue,
-  setDropdownValue,
-}) => {
+const Dropdown = ({ label, options, dropdownValue, setDropdownValue }: DropdownType) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
