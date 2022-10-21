@@ -5,7 +5,8 @@ export const usePathChange = (handlePathChange: () => void) => {
   const router = useRouter();
 
   useEffect(() => {
-    handlePathChange();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+    router.events.on('routeChangeStart', handlePathChange);
+
+    return () => router.events.off('routeChangeStart', handlePathChange);
+  }, [handlePathChange, router.events]);
 };
