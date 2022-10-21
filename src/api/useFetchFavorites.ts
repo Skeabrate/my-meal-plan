@@ -10,7 +10,7 @@ export const fetchFavorites = async (meals: MealsTableType = []) => {
     axios
       .get(`${process.env.FETCH_MEAL_BY_ID}${mealId}`)
       .then((mealDetails) => mealDetails?.data?.meals[0])
-      .catch((err) => err)
+      .catch((err) => console.log(axios.isAxiosError(err) && err.message))
   );
 
   return await Promise.all(mealsById);

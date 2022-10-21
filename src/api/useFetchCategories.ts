@@ -9,6 +9,7 @@ export const fetchCategories = async () => {
 
     return res?.data?.categories;
   } catch (err) {
+    console.log(axios.isAxiosError(err) && err.message);
     throw new Error('Something went wrong');
   }
 };

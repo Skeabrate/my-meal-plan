@@ -25,16 +25,13 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
   const getSliderTransformX = (ref: HTMLUListElement) =>
     parseInt(window.getComputedStyle(ref).getPropertyValue('transform').split(',')[4].trim());
 
-  const startSliding = (e: any) => {
-    const doesScreenSupportTouchEvents = window.matchMedia('(pointer: coarse)').matches;
-    if (!doesScreenSupportTouchEvents) e.preventDefault();
-
+  const startSliding = (eventStartingPosition: number) => {
     listRef.current && (listRef.current.style.transition = 'none');
 
     setSlider((state) => ({
       ...state,
       isSliderMoving: true,
-      startPosition: e.pageX ?? e.touches[0].clientX,
+      startPosition: eventStartingPosition,
       endPosition: listRef.current ? getSliderTransformX(listRef.current) : 0,
     }));
   };
@@ -47,14 +44,14 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
       isLinkDisabled: false,
     }));
 
-  const updateSliderPostion = (e: any) => {
+  const updateSliderPostion = (eventCurrentPosition: number) => {
     if (!slider.isSliderMoving || !listRef.current) return;
 
     const isSliderSmallerThanWindowWidth =
       listRef.current.getBoundingClientRect().width < windowWidth;
     if (isSliderSmallerThanWindowWidth) return;
 
-    const currentPosition = e.pageX ?? e.touches[0].clientX;
+    const currentPosition = eventCurrentPosition;
     let diff = currentPosition - slider.startPosition;
     listRef.current.style.transform = `translateX(${slider.endPosition + diff}px)`;
 
@@ -167,15 +164,18 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
       <ul
         ref={listRef}
         // Desktop
-        onMouseDown={startSliding}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          startSliding(e.pageX);
+        }}
         onMouseUp={cancelSliding}
         onMouseLeave={cancelSliding}
-        onMouseMove={updateSliderPostion}
+        onMouseMove={(e) => updateSliderPostion(e.pageX)}
         // Mobile
-        onTouchStart={startSliding}
+        onTouchStart={(e) => startSliding(e.touches[0].clientX)}
         onTouchEnd={cancelSliding}
         onTouchCancel={cancelSliding}
-        onTouchMove={updateSliderPostion}
+        onTouchMove={(e) => updateSliderPostion(e.touches[0].clientX)}
       >
         {children}
       </ul>

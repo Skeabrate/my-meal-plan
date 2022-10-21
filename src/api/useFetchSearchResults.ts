@@ -8,7 +8,7 @@ export const fetchSearchResuts = async (inputValue: string) => {
     const searchResults = await axios.get(`${process.env.FETCH_MEAL_BY_NAME}${inputValue}`);
     return searchResults.data.meals ?? [];
   } catch (err) {
-    console.log(err);
+    console.log(axios.isAxiosError(err) && err.message);
     throw new Error('Something went wrong');
   }
 };

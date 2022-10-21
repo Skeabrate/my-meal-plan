@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 
 const ITEMS_PER_PAGE = 8;
 
-export const usePaginate = (data: any[], loadingRef: { current: HTMLDivElement | null }) => {
+export const usePaginate = <T>(data: T[], loadingRef: { current: HTMLDivElement | null }) => {
   const [itemsCount, setItemsCount] = useState(ITEMS_PER_PAGE);
 
   const currentData = data.slice(0, itemsCount);
@@ -15,7 +15,7 @@ export const usePaginate = (data: any[], loadingRef: { current: HTMLDivElement |
     };
   }, []);
 
-  const callbackFunction = (entries: any) => {
+  const callbackFunction = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
     if (entry.isIntersecting) {
       setItemsCount((state) => state + ITEMS_PER_PAGE);

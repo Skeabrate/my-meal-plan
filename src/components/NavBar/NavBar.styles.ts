@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes, Keyframes } from 'styled-components';
 
 const scaleAnimation = keyframes`
 	from{
@@ -127,7 +127,7 @@ const animateSlideCartOut = keyframes`
 	}	
 `;
 
-const animationSlideCartHelper = (animation: any, delay: string = '0s') => css`
+const animationSlideCartHelper = (animation: Keyframes, delay: string = '0s') => css`
   animation: ${animation} 0.6s forwards;
   animation-delay: ${delay};
 `;

@@ -1,8 +1,6 @@
+import { AxiosError } from 'axios';
+
 export type ApiResponseType = {
   isLoading: boolean;
-  error:
-    | {
-        message?: string;
-      }
-    | any;
+  error: AxiosError;
 };
