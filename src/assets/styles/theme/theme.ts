@@ -1,6 +1,8 @@
 import { css, DefaultTheme, keyframes } from 'styled-components';
 import { ThemeVariant } from './styled';
 
+const styled = { keyframes };
+
 const lightThemeBackground = 'hsl(0, 0%, 100%)';
 const darkThemeBackground = '	hsl(180, 2%, 20%)';
 
@@ -58,43 +60,46 @@ export const theme: DefaultTheme = {
     huge: '@media (min-width: 1440px)',
   },
   fadeInAnimation: (duration = 0.6) => {
-    const fadeInAnimation = keyframes`
-			from {
-				opacity: 0;
-				transform: translateY(-10px);
-			} to{
-				opacity: 1;
-				transform: translateY(0);
-			}
-		`;
+    const fadeInAnimation = styled.keyframes`
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    `;
 
     return css`
       animation: ${fadeInAnimation} ${duration}s forwards;
     `;
   },
   slideInAnimation: (duration = 0.6) => {
-    const SlideInAnimation = keyframes`
-			from{
-				opacity: 0;
-				transform: translateX(-10px);
-			} to {
-				opacity: 1;
-				transform: translateX(0);
-			}
-		`;
+    const SlideInAnimation = styled.keyframes`
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    `;
 
     return css`
       animation: ${SlideInAnimation} ${duration}s forwards;
     `;
   },
   loadingAnimation: () => {
-    const loadingAnimation = keyframes`
-			from {
-				opacity: 0.4;
-			} to {
-				opacity: 1;
-			}
-		`;
+    const loadingAnimation = styled.keyframes`
+      from {
+        opacity: 0.4;
+      }
+      to {
+        opacity: 1;
+      }
+    `;
 
     return css`
       animation: ${loadingAnimation} 0.6s linear infinite alternate;

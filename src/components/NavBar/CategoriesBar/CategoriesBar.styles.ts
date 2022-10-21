@@ -1,13 +1,16 @@
-import styled, { keyframes } from 'styled-components';
+import styles, { keyframes } from 'styled-components';
 
-const scaleAnimation = keyframes`
-	from{
-		scale: 0;
-		opacity: 0;
-	} to {
-		scale: 1;
-		opacity: 1;
-	}
+const styled = { keyframes, ...styles };
+
+const scaleAnimation = styled.keyframes`
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
 `;
 
 export const Wrapper = styled.div`

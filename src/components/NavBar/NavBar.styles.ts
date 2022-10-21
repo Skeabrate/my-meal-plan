@@ -1,13 +1,16 @@
-import styled, { css, keyframes, Keyframes } from 'styled-components';
+import styles, { css, keyframes, Keyframes } from 'styled-components';
 
-const scaleAnimation = keyframes`
-	from{
-		opacity: 0;
-		transform: translateY(calc(-50% - 10px)) scale(0);
-	} to {
-		opacity: 1;
-		transform: translateY(calc(-50% - 10px)) scale(1);
-	}
+const styled = { keyframes, ...styles };
+
+const scaleAnimation = styled.keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(calc(-50% - 10px)) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(calc(-50% - 10px)) scale(1);
+  }
 `;
 
 type MenuProps = {
@@ -111,20 +114,22 @@ export const HambuergerMenu = styled.button<MenuProps>`
   }
 `;
 
-const animateSlideCartIn = keyframes`
-	from{
-		transform: translateX(-100%);
-	} to {
-		transform: translateX(0);
-	}	
+const animateSlideCartIn = styled.keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 `;
 
-const animateSlideCartOut = keyframes`
-	from{
-		transform: translateX(0);
-	} to {
-		transform: translateX(100%);
-	}	
+const animateSlideCartOut = styled.keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 `;
 
 const animationSlideCartHelper = (animation: Keyframes, delay: string = '0s') => css`

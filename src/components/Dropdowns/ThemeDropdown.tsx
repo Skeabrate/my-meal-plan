@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styles, { keyframes } from 'styled-components';
 import { isSystemThemeSettingSetToDark, ThemeContext, ThemeTypes } from 'context/ThemeContext';
 import Dropdown from './Dropdown/Dropdown';
 import { useDropdownValue } from './Dropdown/useDropdownValue';
@@ -7,14 +7,17 @@ import LightSvg from 'assets/SVG/Light.svg';
 import DarkSvg from 'assets/SVG/Dark.svg';
 import SystemSvg from 'assets/SVG/System.svg';
 
-const fadeInReverseAnimation = keyframes`
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	} to{
-		opacity: 1;
-		transform: translateY(0);
-	}
+const styled = { keyframes, ...styles };
+
+const fadeInReverseAnimation = styled.keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 const StyledThemeDropdown = styled.div`
