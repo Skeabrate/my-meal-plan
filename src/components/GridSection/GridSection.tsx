@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
 import SortDropdown from 'components/Dropdowns/SortDropdown';
@@ -72,14 +73,14 @@ const GridSection = ({
               <Link href={linkUrl + slug}>
                 <a>
                   <div>
-                    <ImageLoading
-                      options={{
-                        src: img,
-                        alt: name,
-                        layout: 'fill',
-                        objectFit: 'cover',
-                      }}
-                    />
+                    <ImageLoading>
+                      <Image
+                        src={img}
+                        alt={name}
+                        layout={'fill'}
+                        objectFit={'cover'}
+                      />
+                    </ImageLoading>
                   </div>
 
                   <h3>{name}</h3>

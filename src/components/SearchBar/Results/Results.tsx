@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as Styled from './Results.styles';
 import { useFetchSearchResults } from 'api/useFetchSearchResults';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
@@ -33,15 +34,15 @@ const Results = ({ inputValue }: { inputValue: string }) => {
             >
               <a>
                 <Styled.FoundItem>
-                  <ImageLoading
-                    options={{
-                      src: strMealThumb,
-                      alt: strMeal,
-                      height: 100,
-                      width: 100,
-                      objectFit: 'contain',
-                    }}
-                  />
+                  <ImageLoading>
+                    <Image
+                      src={strMealThumb}
+                      alt={strMeal}
+                      height={100}
+                      width={100}
+                      objectFit={'contain'}
+                    />
+                  </ImageLoading>
 
                   <ul>
                     <li>{strMeal}</li>

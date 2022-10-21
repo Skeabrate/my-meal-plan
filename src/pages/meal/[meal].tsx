@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import * as Styled from 'assets/styles/meal.styles';
 import { fetchCategories } from 'api/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
@@ -37,14 +38,13 @@ const Meal = ({ mealId }: { mealId: string }) => {
 
       <Styled.MealGrid>
         <Styled.Gallery>
-          <ImageLoading
-            options={{
-              src: imgUrl,
-              alt: name,
-              layout: 'fill',
-              objectFit: 'cover',
-            }}
-          >
+          <ImageLoading>
+            <Image
+              src={imgUrl}
+              alt={name}
+              layout={'fill'}
+              objectFit={'cover'}
+            />
             <FavoritesButton mealId={id} />
           </ImageLoading>
 
