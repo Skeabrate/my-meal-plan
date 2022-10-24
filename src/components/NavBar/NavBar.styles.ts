@@ -315,3 +315,10 @@ export const NavSubItem = styled.li`
     align-items: center;
   }
 `;
+
+export const ProfileImage = styled.div`
+  border-radius: 100px;
+  overflow: hidden;
+  display: flex;
+  object-fit: contain;
+`;

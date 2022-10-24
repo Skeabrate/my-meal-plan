@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['www.themealdb.com'],
+    domains: ['www.themealdb.com', 'avatars.githubusercontent.com'],
   },
   env: {
     FETCH_CATEGORIES: process.env.FETCH_CATEGORIES,

@@ -12,6 +12,7 @@ import { SearchBarContext } from 'context/SearchBarContext';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
+import { useSession } from 'next-auth/react';
 import ThemeDropdown from 'components/Dropdowns/ThemeDropdown';
 
 const links = [
@@ -36,6 +37,8 @@ const NavBar = () => {
   const { windowHeight } = useContext(ResizeWindowContext);
   const { toggleSearchBar } = useContext(SearchBarContext);
   const { favorites } = useContext(FavoritesContext);
+
+  const { data: session } = useSession();
 
   const router = useRouter();
 
@@ -110,10 +113,21 @@ const NavBar = () => {
             <Styled.NavSubItem>
               <Link
                 aria-label='go to login page'
-                href='/login'
+                href={session ? '/profile' : '/login'}
               >
                 <a>
-                  <ProfileSvg />
+                  {session?.user.image ? (
+                    <Styled.ProfileImage>
+                      <Image
+                        src={session.user.image}
+                        alt={session.user.name!}
+                        height='40'
+                        width='40'
+                      />
+                    </Styled.ProfileImage>
+                  ) : (
+                    <ProfileSvg />
+                  )}
                 </a>
               </Link>
             </Styled.NavSubItem>
