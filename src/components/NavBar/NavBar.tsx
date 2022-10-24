@@ -109,8 +109,8 @@ const NavBar = () => {
             </Styled.NavSubItem>
             <Styled.NavSubItem>
               <Link
-                aria-label='profile'
-                href='/profile'
+                aria-label='go to login page'
+                href='/login'
               >
                 <a>
                   <ProfileSvg />
