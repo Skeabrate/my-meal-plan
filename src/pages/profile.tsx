@@ -16,12 +16,14 @@ const Profile = () => {
     <div>
       <h1>Signed in</h1>
 
-      <Image
-        src={data?.user.image!}
-        alt={data?.user.name!}
-        height='200'
-        width='200'
-      />
+      {data?.user.image && (
+        <Image
+          src={data?.user.image}
+          alt={data?.user.name || data?.user.email!}
+          height='200'
+          width='200'
+        />
+      )}
 
       <p>{data?.user.name}</p>
       <p>{data?.user.email}</p>
