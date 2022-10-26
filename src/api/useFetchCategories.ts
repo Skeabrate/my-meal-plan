@@ -5,7 +5,7 @@ import { CategoryType } from 'types/CategoryType';
 
 export const fetchCategories = async () => {
   try {
-    const res = await axios.get(process.env.FETCH_CATEGORIES || '');
+    const res = await axios.get(process.env.FETCH_CATEGORIES!);
 
     return res?.data?.categories;
   } catch (err) {
