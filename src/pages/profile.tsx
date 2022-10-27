@@ -3,9 +3,17 @@ import Image from 'next/image';
 import { GetServerSidePropsContext } from 'next';
 import { getSession, signOut, useSession } from 'next-auth/react';
 import Loading from 'components/Loading/Loading';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Profile = () => {
   const { data, status } = useSession();
+  const router = useRouter();
+
+  const deleteAccount = async () => {
+    const res = await axios.get(`/api/deleteAccount?query=${data?.user.email}`);
+    if (res.status === 200) router.push('/api/auth/signin');
+  };
 
   return status === 'loading' ? (
     <div>
@@ -28,6 +36,8 @@ const Profile = () => {
       <p>{data?.user.email}</p>
 
       <button onClick={() => signOut()}>Sign out</button>
+      <br />
+      <button onClick={deleteAccount}>Delete Account</button>
     </div>
   );
 };
