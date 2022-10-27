@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
-import { fetchCategories, useFetchCategories } from 'api/useFetchCategories';
+import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategories';
 import GridSection from 'components/GridSection/GridSection';
 
 function Home() {

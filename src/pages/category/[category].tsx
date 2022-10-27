@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import { NextPage } from 'next';
 import * as Styled from 'assets/styles/category.styles';
-import { fetchCategories, useFetchCategories } from 'api/useFetchCategories';
+import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
-import { fetchMealsByCategory, useFetchMealsByCategory } from 'api/useFetchMealsByCategory';
+import { fetchMealsByCategory, useFetchMealsByCategory } from 'api/mealdb/useFetchMealsByCategory';
 import GridSection from 'components/GridSection/GridSection';
 
 const Category = ({ category }: { category: string }) => {

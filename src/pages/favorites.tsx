@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import type { NextPage } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
-import { fetchCategories } from 'api/useFetchCategories';
-import { useFetchFavorites } from 'api/useFetchFavorites';
+import { fetchCategories } from 'api/mealdb/useFetchCategories';
+import { useFetchFavorites } from 'api/mealdb/useFetchFavorites';
 import { FavoritesContext } from 'context/FavoritesContext';
 import GridSection from 'components/GridSection/GridSection';
 

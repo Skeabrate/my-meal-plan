@@ -3,41 +3,41 @@ import Image from 'next/image';
 import { GetServerSidePropsContext } from 'next';
 import { getSession, signOut, useSession } from 'next-auth/react';
 import Loading from 'components/Loading/Loading';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import useDeleteAcount from 'api/pscale/useDeleteAcount';
 
 const Profile = () => {
   const { data, status } = useSession();
-  const router = useRouter();
+  const { deleteAccount, isLoading, error } = useDeleteAcount();
 
-  const deleteAccount = async () => {
-    const res = await axios.get(`/api/deleteAccount?query=${data?.user.email}`);
-    if (res.status === 200) router.push('/api/auth/signin');
-  };
-
-  return status === 'loading' ? (
+  return (
     <div>
-      <Loading />
-    </div>
-  ) : (
-    <div>
-      <h1>Signed in</h1>
+      {status === 'loading' ? (
+        <Loading />
+      ) : (
+        <>
+          <h1>Signed in</h1>
 
-      {data?.user.image && (
-        <Image
-          src={data?.user.image}
-          alt={data?.user.name || data?.user.email!}
-          height='200'
-          width='200'
-        />
+          {data?.user.image && (
+            <Image
+              src={data?.user.image}
+              alt={data?.user.name || data?.user.email!}
+              height='200'
+              width='200'
+            />
+          )}
+
+          <p>{data?.user.name}</p>
+          <p>{data?.user.email}</p>
+
+          <button onClick={() => signOut()}>Sign out</button>
+          <br />
+          <button onClick={() => data?.user.email && deleteAccount(data?.user.email)}>
+            {isLoading ? <Loading height={40} /> : 'Delete Account'}
+          </button>
+
+          {error ? <p>{error}</p> : null}
+        </>
       )}
-
-      <p>{data?.user.name}</p>
-      <p>{data?.user.email}</p>
-
-      <button onClick={() => signOut()}>Sign out</button>
-      <br />
-      <button onClick={deleteAccount}>Delete Account</button>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './Results.styles';
-import { useFetchSearchResults } from 'api/useFetchSearchResults';
+import { useFetchSearchResults } from 'api/mealdb/useFetchSearchResults';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 import useDebouncedValue from 'hooks/useDebouncedValue';
 import Loading from 'components/Loading/Loading';
