@@ -1,6 +1,8 @@
-import { ClipLoader } from 'react-spinners';
+import { useContext } from 'react';
 import styled from 'styled-components';
-import { theme } from 'assets/styles/theme/theme';
+import { ClipLoader } from 'react-spinners';
+import { themeVariants } from 'assets/styles/theme/theme';
+import { ThemeContext } from 'context/ThemeContext';
 
 export const StyledLoading = styled.p<{ $height: number }>`
   height: ${({ $height }) => $height}px;
@@ -10,9 +12,11 @@ export const StyledLoading = styled.p<{ $height: number }>`
 `;
 
 const Loading = ({ height = 400 }: { height?: number }) => {
+  const { themeStyle } = useContext(ThemeContext);
+
   return (
     <StyledLoading $height={height}>
-      <ClipLoader color={theme.themeColors.font} />
+      <ClipLoader color={themeVariants[themeStyle].themeColors.font} />
     </StyledLoading>
   );
 };
