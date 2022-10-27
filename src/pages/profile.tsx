@@ -9,6 +9,12 @@ const Profile = () => {
   const { data, status } = useSession();
   const { deleteAccount, isLoading, error } = useDeleteAcount();
 
+  const deleteAccountConfirmation = () => {
+    if (confirm('Are you sure you want to delete your account?') && data?.user.email) {
+      deleteAccount(data?.user.email);
+    }
+  };
+
   return (
     <div>
       {status === 'loading' ? (
@@ -31,7 +37,7 @@ const Profile = () => {
 
           <button onClick={() => signOut()}>Sign out</button>
           <br />
-          <button onClick={() => data?.user.email && deleteAccount(data?.user.email)}>
+          <button onClick={deleteAccountConfirmation}>
             {isLoading ? <Loading height={40} /> : 'Delete Account'}
           </button>
 
