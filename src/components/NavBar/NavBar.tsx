@@ -113,7 +113,7 @@ const NavBar = () => {
             <Styled.NavSubItem>
               <Link
                 aria-label='go to login page'
-                href={session ? '/profile' : '/login'}
+                href={session ? '/profile' : '/api/auth/signin'}
               >
                 <a>
                   {session?.user.image ? (

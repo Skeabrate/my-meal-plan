@@ -1,9 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { GetServerSidePropsContext } from 'next';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession, signOut, useSession } from 'next-auth/react';
 import Loading from 'components/Loading/Loading';
-import LoginButton from 'components/LoginButton/LoginButton';
 
 const Profile = () => {
   const { data, status } = useSession();
@@ -28,7 +27,7 @@ const Profile = () => {
       <p>{data?.user.name}</p>
       <p>{data?.user.email}</p>
 
-      <LoginButton />
+      <button onClick={() => signOut()}>Sign out</button>
     </div>
   );
 };
@@ -39,7 +38,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/api/auth/signin',
         permanent: false,
       },
     };
