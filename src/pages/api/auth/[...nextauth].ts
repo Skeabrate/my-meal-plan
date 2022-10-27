@@ -29,4 +29,8 @@ export default NextAuth({
     }),
   ],
   secret: process.env.SECRET,
+  theme: {
+    colorScheme: 'light',
+    logo: `${process.env.NEXTAUTH_URL}_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.b62f5a48.png&w=256&q=75`,
+  },
 });
