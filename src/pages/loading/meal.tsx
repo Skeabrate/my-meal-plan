@@ -12,6 +12,7 @@ const Loading = () => {
 
   return (
     <Styled.Wrapper>
+      <Styled.GoBack />
       <Styled.Header>
         <p></p>
         <p></p>

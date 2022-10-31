@@ -6,6 +6,7 @@ import { PageProps } from 'types/PagePropsType';
 import { SessionProvider } from 'next-auth/react';
 import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
+import HistoryProvider from 'context/HistoryContext';
 const FavoritesProvider = dynamic(() => import('context/FavoritesContext'), { ssr: false });
 const ThemeProvider = dynamic(() => import('context/ThemeContext'), { ssr: false });
 
@@ -23,11 +24,13 @@ const ProvidersWrapper = ({
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ThemeProvider>
-            <ResizeWindowProvider>
-              <FavoritesProvider>
-                <SearchBarProvider>{children}</SearchBarProvider>
-              </FavoritesProvider>
-            </ResizeWindowProvider>
+            <HistoryProvider>
+              <ResizeWindowProvider>
+                <FavoritesProvider>
+                  <SearchBarProvider>{children}</SearchBarProvider>
+                </FavoritesProvider>
+              </ResizeWindowProvider>
+            </HistoryProvider>
           </ThemeProvider>
         </Hydrate>
       </QueryClientProvider>

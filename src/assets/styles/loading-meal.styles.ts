@@ -7,6 +7,12 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const GoBack = styled.p`
+  width: 80px;
+  height: 30px;
+  margin-bottom: 10px;
+`;
+
 export const Header = styled.div`
   margin-bottom: 20px;
 

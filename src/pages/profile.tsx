@@ -2,8 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import { GetServerSidePropsContext } from 'next';
 import { getSession, signOut, useSession } from 'next-auth/react';
-import Loading from 'components/Loading/Loading';
 import useDeleteAcount from 'api/pscale/useDeleteAcount';
+import Loading from 'components/Loading/Loading';
+import GoBackButton from 'components/GoBackButton/GoBackButton';
 
 const Profile = () => {
   const { data, status } = useSession();
@@ -16,35 +17,39 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      {status === 'loading' ? (
-        <Loading />
-      ) : (
-        <>
-          <h1>Signed in</h1>
+    <>
+      <GoBackButton />
 
-          {data?.user.image && (
-            <Image
-              src={data?.user.image}
-              alt={data?.user.name || data?.user.email!}
-              height='200'
-              width='200'
-            />
-          )}
+      <div>
+        {status === 'loading' ? (
+          <Loading />
+        ) : (
+          <>
+            <h1>Signed in</h1>
 
-          <p>{data?.user.name}</p>
-          <p>{data?.user.email}</p>
+            {data?.user.image && (
+              <Image
+                src={data?.user.image}
+                alt={data?.user.name || data?.user.email!}
+                height='200'
+                width='200'
+              />
+            )}
 
-          <button onClick={() => signOut()}>Sign out</button>
-          <br />
-          <button onClick={deleteAccountConfirmation}>
-            {isLoading ? <Loading height={40} /> : 'Delete Account'}
-          </button>
+            <p>{data?.user.name}</p>
+            <p>{data?.user.email}</p>
 
-          {error ? <p>{error}</p> : null}
-        </>
-      )}
-    </div>
+            <button onClick={() => signOut()}>Sign out</button>
+            <br />
+            <button onClick={deleteAccountConfirmation}>
+              {isLoading ? <Loading height={40} /> : 'Delete Account'}
+            </button>
+
+            {error ? <p>{error}</p> : null}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import Instruction from 'components/MealDetails/tabs/Instruction';
 import Ingredients from 'components/MealDetails/tabs/Ingredients';
 import Steps from 'components/MealDetails/tabs/Steps';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
+import GoBackButton from 'components/GoBackButton/GoBackButton';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
@@ -20,6 +21,8 @@ const Meal = ({ mealId }: { mealId: string }) => {
 
   return (
     <>
+      <GoBackButton />
+
       <Styled.Header>
         <h1>{name}</h1>
 

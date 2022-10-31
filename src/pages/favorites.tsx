@@ -5,28 +5,33 @@ import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { useFetchFavorites } from 'api/mealdb/useFetchFavorites';
 import { FavoritesContext } from 'context/FavoritesContext';
 import GridSection from 'components/GridSection/GridSection';
+import GoBackButton from 'components/GoBackButton/GoBackButton';
 
 function Favorites() {
   const { favorites } = useContext(FavoritesContext);
   const { favoritesById, isLoading, error } = useFetchFavorites(favorites);
 
   return (
-    <GridSection
-      data={favoritesById?.map(({ idMeal, strMeal, strMealThumb }) => ({
-        id: idMeal,
-        name: strMeal,
-        img: strMealThumb,
-        slug: idMeal,
-      }))}
-      linkUrl='/loading/meal?id='
-      label={{ value: 'Favorites:', isMain: true }}
-      enableFavorites
-      loadingData={isLoading}
-      error={{
-        value: !favoritesById?.length || error,
-        fallbackMessage: `You don't have favorite meals yet.`,
-      }}
-    />
+    <>
+      <GoBackButton />
+
+      <GridSection
+        data={favoritesById?.map(({ idMeal, strMeal, strMealThumb }) => ({
+          id: idMeal,
+          name: strMeal,
+          img: strMealThumb,
+          slug: idMeal,
+        }))}
+        linkUrl='/loading/meal?id='
+        label={{ value: 'Favorites:', isMain: true }}
+        enableFavorites
+        loadingData={isLoading}
+        error={{
+          value: !favoritesById?.length || error,
+          fallbackMessage: `You don't have favorite meals yet.`,
+        }}
+      />
+    </>
   );
 }
 export async function getStaticProps() {

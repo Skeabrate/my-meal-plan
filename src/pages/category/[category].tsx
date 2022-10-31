@@ -7,6 +7,7 @@ import { CategoryType } from 'types/CategoryType';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'api/mealdb/useFetchMealsByCategory';
 import GridSection from 'components/GridSection/GridSection';
+import GoBackButton from 'components/GoBackButton/GoBackButton';
 
 const Category = ({ category }: { category: string }) => {
   const { categories, isLoading, error } = useFetchCategories();
@@ -19,6 +20,8 @@ const Category = ({ category }: { category: string }) => {
 
   return (
     <>
+      <GoBackButton />
+
       <Styled.Intro>
         <article>
           <header>
