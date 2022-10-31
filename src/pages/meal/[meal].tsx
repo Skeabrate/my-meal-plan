@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import * as Styled from 'assets/styles/meal.styles';
+import * as Styled from 'styles/meal.styles';
 import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealById, useFetchMealById } from 'api/mealdb/useFetchMealById';

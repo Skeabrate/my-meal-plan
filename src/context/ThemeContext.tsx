@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { ThemeProvider as ThemeStyledComponentsProvider } from 'styled-components';
 import { useLocalStorage } from 'hooks/useLocalStorage';
-import { theme, themeVariants } from 'assets/styles/theme/theme';
-import { GlobaStyles } from 'assets/styles/theme/GlobalStyle';
+import { theme, themeVariants } from 'styles/theme/theme';
+import { GlobaStyles } from 'styles/theme/GlobalStyle';
 
 export enum ThemeTypes {
   Light = 'light',

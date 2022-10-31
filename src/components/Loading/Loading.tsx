@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { ClipLoader } from 'react-spinners';
-import { themeVariants } from 'assets/styles/theme/theme';
+import { themeVariants } from 'styles/theme/theme';
 import { ThemeContext } from 'context/ThemeContext';
 
 export const StyledLoading = styled.p<{ $height: number }>`

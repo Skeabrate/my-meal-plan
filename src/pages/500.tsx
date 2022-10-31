@@ -1,4 +1,4 @@
-import * as Styled from 'assets/styles/notFound.styles';
+import * as Styled from 'styles/notFound.styles';
 
 const Custom500 = () => {
   return (

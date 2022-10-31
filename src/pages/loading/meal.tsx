@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import * as Styled from 'assets/styles/loading-meal.styles';
+import * as Styled from 'styles/loading-meal.styles';
 
 const Loading = () => {
   const router = useRouter();
