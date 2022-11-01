@@ -1,54 +1,21 @@
-import React from 'react';
-import Image from 'next/image';
 import { GetServerSidePropsContext } from 'next';
-import { getSession, signOut, useSession } from 'next-auth/react';
-import useDeleteAcount from 'api/pscale/useDeleteAcount';
-import Loading from 'components/Loading/Loading';
+import { getSession } from 'next-auth/react';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import ProfileDetails from 'components/ProfileDetails/ProfileDetails';
+import Overwiew from 'components/ProfileDetails/tabs/Overwiew';
+import MealPlans from 'components/ProfileDetails/tabs/MealPlans';
 
 const Profile = () => {
-  const { data, status } = useSession();
-  const { deleteAccount, isLoading, error } = useDeleteAcount();
-
-  const deleteAccountConfirmation = () => {
-    if (confirm('Are you sure you want to delete your account?') && data?.user.email) {
-      deleteAccount(data?.user.email);
-    }
-  };
-
   return (
     <>
       <GoBackButton />
 
-      <div>
-        {status === 'loading' ? (
-          <Loading />
-        ) : (
-          <>
-            <h1>Signed in</h1>
-
-            {data?.user.image && (
-              <Image
-                src={data?.user.image}
-                alt={data?.user.name || data?.user.email!}
-                height='200'
-                width='200'
-              />
-            )}
-
-            <p>{data?.user.name}</p>
-            <p>{data?.user.email}</p>
-
-            <button onClick={() => signOut()}>Sign out</button>
-            <br />
-            <button onClick={deleteAccountConfirmation}>
-              {isLoading ? <Loading height={40} /> : 'Delete Account'}
-            </button>
-
-            {error ? <p>{error}</p> : null}
-          </>
-        )}
-      </div>
+      <ProfileDetails
+        tabs={[
+          { label: 'Overwiew', Component: <Overwiew /> },
+          { label: 'Meal Plans', Component: <MealPlans /> },
+        ]}
+      />
     </>
   );
 };

@@ -1,19 +1,8 @@
-import { useMemo, useState, ReactNode } from 'react';
 import * as Styled from './MealDetails.styles';
+import { useTabs, TabsType } from 'hooks/useTabs';
 
-type MealDetailsType = {
-  tabs: {
-    label: string;
-    Component: ReactNode;
-  }[];
-};
-
-const MealDetails = ({ tabs = [] }: MealDetailsType) => {
-  const [activeDetails, setActiveDetails] = useState(tabs[0]?.label);
-  const selectedTab = useMemo(
-    () => tabs.find((tab) => tab.label === activeDetails)?.Component,
-    [tabs, activeDetails]
-  );
+const MealDetails = ({ tabs }: { tabs: TabsType }) => {
+  const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
 
   return (
     <Styled.MealDetails>
@@ -30,7 +19,7 @@ const MealDetails = ({ tabs = [] }: MealDetailsType) => {
         ))}
       </Styled.ButtonsBar>
 
-      <Styled.DetailsWrapper>{selectedTab}</Styled.DetailsWrapper>
+      <Styled.Tab>{selectedTab}</Styled.Tab>
     </Styled.MealDetails>
   );
 };

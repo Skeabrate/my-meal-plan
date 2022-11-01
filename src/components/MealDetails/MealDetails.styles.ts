@@ -50,7 +50,7 @@ export const Button = styled.button<{ $isActive: boolean }>`
   }
 `;
 
-export const DetailsWrapper = styled.div`
+export const Tab = styled.div`
   padding: 20px 0;
 
   article {
