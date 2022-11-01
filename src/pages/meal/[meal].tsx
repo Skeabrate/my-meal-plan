@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { NextPage } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 import * as Styled from 'styles/meal.styles';
 import { fetchCategories } from 'api/mealdb/useFetchCategories';
@@ -82,13 +83,13 @@ const Meal = ({ mealId }: { mealId: string }) => {
   );
 };
 
-export async function getServerSideProps(context: { params: { meal: string } }) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const queryClient = new QueryClient();
 
-  const mealId = context.params.meal;
+  const mealId = context.params?.meal;
 
   await queryClient.prefetchQuery('fetchCategories', fetchCategories);
-  await queryClient.prefetchQuery(['fetchMealById', mealId], () => fetchMealById(mealId));
+  await queryClient.prefetchQuery(['fetchMealById', mealId], () => fetchMealById(mealId as string));
 
   return {
     props: {

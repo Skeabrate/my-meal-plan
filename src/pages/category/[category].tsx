@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Image from 'next/image';
-import { NextPage } from 'next';
+import { GetStaticPropsContext, NextPage } from 'next';
 import * as Styled from 'styles/category.styles';
 import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategories';
 import { CategoryType } from 'types/CategoryType';
@@ -75,14 +75,14 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context: { params: { category: string } }) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   const queryClient = new QueryClient();
 
-  const category = context.params.category;
+  const category = context.params?.category;
 
   await queryClient.prefetchQuery('fetchCategories', fetchCategories);
   await queryClient.prefetchQuery(['fetchMealsByCategory', category], () =>
-    fetchMealsByCategory(category)
+    fetchMealsByCategory(category as string)
   );
 
   return {
