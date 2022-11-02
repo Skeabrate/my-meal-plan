@@ -6,6 +6,7 @@ const StyledSteps = styled.article`
     summary {
       font-family: ${({ theme }) => theme.fontFamily.abril};
       font-size: 2rem;
+      font-style: italic;
       cursor: pointer;
       padding: 20px;
       border-bottom: 1px solid ${({ theme }) => theme.themeColors.secondBackground};
