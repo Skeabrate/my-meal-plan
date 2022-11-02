@@ -13,8 +13,13 @@ export const FavoritesButton = styled.button`
   padding: 6px;
   z-index: 99;
 
-  svg path {
-    fill: white;
+  svg {
+    height: 24px;
+    width: 24px;
+
+    path {
+      fill: white;
+    }
   }
 
   &:hover {

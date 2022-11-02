@@ -1,14 +1,14 @@
 import * as Styled from './MealDetails.styles';
-import { useTabs, TabsType } from 'hooks/useTabs';
+import { useTabs, TabType } from 'hooks/useTabs';
 
-const MealDetails = ({ tabs }: { tabs: TabsType }) => {
+const MealDetails = ({ tabs }: { tabs: TabType[] }) => {
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
 
   return (
     <Styled.MealDetails>
       <Styled.ButtonsBar>
-        {tabs.map(({ label }) => (
-          <h2 key={label}>
+        {tabs.map(({ id, label }) => (
+          <h2 key={id}>
             <Styled.Button
               onClick={() => setActiveDetails(label)}
               $isActive={activeDetails === label}

@@ -4,6 +4,8 @@ import GoBackButton from 'components/GoBackButton/GoBackButton';
 import ProfileDetails from 'components/ProfileDetails/ProfileDetails';
 import Overwiew from 'components/ProfileDetails/tabs/Overwiew';
 import MealPlans from 'components/ProfileDetails/tabs/MealPlans';
+import ProfileSvg from 'assets/SVG/Profile.svg';
+import MealSvg from 'assets/SVG/Meal.svg';
 
 const Profile = () => {
   return (
@@ -12,8 +14,30 @@ const Profile = () => {
 
       <ProfileDetails
         tabs={[
-          { label: 'Overwiew', Component: <Overwiew /> },
-          { label: 'Meal Plans', Component: <MealPlans /> },
+          {
+            id: 0,
+            label: (
+              <>
+                <span>
+                  <ProfileSvg />
+                </span>
+                Overwiew
+              </>
+            ),
+            Component: <Overwiew />,
+          },
+          {
+            id: 1,
+            label: (
+              <>
+                <span>
+                  <MealSvg />
+                </span>
+                Meal Plans
+              </>
+            ),
+            Component: <MealPlans />,
+          },
         ]}
       />
     </>

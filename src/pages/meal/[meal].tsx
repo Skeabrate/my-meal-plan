@@ -65,14 +65,17 @@ const Meal = ({ mealId }: { mealId: string }) => {
         <MealDetails
           tabs={[
             {
+              id: 0,
               label: 'Ingredients',
               Component: <Ingredients ingredients={ingredients} />,
             },
             {
+              id: 1,
               label: 'Cooking',
               Component: <Steps steps={steps} />,
             },
             {
+              id: 2,
               label: 'Instruction',
               Component: <Instruction instruction={instructions} />,
             },

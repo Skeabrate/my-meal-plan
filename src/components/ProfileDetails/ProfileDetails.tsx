@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import * as Styled from './ProfileDetails.styles';
-import { useTabs, TabsType } from 'hooks/useTabs';
+import { useTabs, TabType } from 'hooks/useTabs';
+import FavoritesSvg from 'assets/SVG/Marked.svg';
+import LogoutSvg from 'assets/SVG/Logout.svg';
 
-const ProfileDetails = ({ tabs }: { tabs: TabsType }) => {
+const ProfileDetails = ({ tabs }: { tabs: TabType[] }) => {
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
 
   return (
     <Styled.ProfileDetails>
       <Styled.Options>
-        {tabs.map(({ label }) => (
-          <li key={label}>
+        {tabs.map(({ id, label }) => (
+          <li key={id}>
             <Styled.Button
               onClick={() => setActiveDetails(label)}
               $isActive={activeDetails === label}
@@ -21,11 +23,23 @@ const ProfileDetails = ({ tabs }: { tabs: TabsType }) => {
         ))}
 
         <li>
-          <Link href='/favorites'>Favorites</Link>
+          <Link href='/favorites'>
+            <a>
+              <span>
+                <FavoritesSvg />
+              </span>
+              Favorites
+            </a>
+          </Link>
         </li>
-        <li>
-          <button onClick={() => signOut()}>Logout</button>
-        </li>
+        <Styled.Logout>
+          <button onClick={() => signOut()}>
+            <span>
+              <LogoutSvg />
+            </span>
+            Logout
+          </button>
+        </Styled.Logout>
       </Styled.Options>
 
       <Styled.Tab>{selectedTab}</Styled.Tab>
