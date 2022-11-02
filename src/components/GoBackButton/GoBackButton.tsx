@@ -16,9 +16,16 @@ const StyledGoBackButton = styled.button`
 
   svg {
     width: 20px;
+    transition: 0.2s ease-in-out;
 
     path {
       fill: ${({ theme }) => theme.themeColors.secondFont};
+    }
+  }
+
+  &:hover {
+    svg {
+      transform: translateX(-2px);
     }
   }
 `;
