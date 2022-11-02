@@ -91,8 +91,7 @@ export const Options = styled.ul`
       font-size: ${({ theme }) => theme.fontSize.paragraph};
 
       &::after {
-        width: 6px;
-        height: 6px;
+        display: none;
       }
     }
   }

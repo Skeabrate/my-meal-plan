@@ -295,6 +295,15 @@ export const NavSubItem = styled.li`
   width: 60px;
   z-index: 1;
 
+  svg {
+    height: 24px;
+    width: 24px;
+
+    path {
+      fill: ${({ theme }) => theme.themeColors.font};
+    }
+  }
+
   &:not(:first-child):hover {
     svg path {
       fill: ${({ theme }) => theme.colors.orange};
