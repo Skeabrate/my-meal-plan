@@ -18,26 +18,28 @@ const Overwiew = () => {
   ) : (
     <section>
       <header>
-        <h2>Overwiew</h2>
+        <h1>Profile Information:</h1>
       </header>
 
-      {data?.user.image && (
-        <Image
-          src={data?.user.image}
-          alt={data?.user.name || data?.user.email!}
-          height='200'
-          width='200'
-        />
-      )}
+      <article>
+        {data?.user.image && (
+          <Image
+            src={data?.user.image}
+            alt={data?.user.name || data?.user.email!}
+            height='200'
+            width='200'
+          />
+        )}
 
-      <p>{data?.user.name}</p>
-      <p>{data?.user.email}</p>
+        <p>{data?.user.name}</p>
+        <p>{data?.user.email}</p>
 
-      <button onClick={deleteAccountConfirmation}>
-        {isLoading ? <Loading height={40} /> : 'Delete Account'}
-      </button>
+        <button onClick={deleteAccountConfirmation}>
+          {isLoading ? <Loading height={40} /> : 'Delete Account'}
+        </button>
 
-      {error ? <p>{error}</p> : null}
+        {error ? <p>{error}</p> : null}
+      </article>
     </section>
   );
 };

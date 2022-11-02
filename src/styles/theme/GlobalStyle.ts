@@ -52,6 +52,7 @@ export const GlobaStyles = styled.createGlobalStyle`
     h5,
     h6 {
       font-family: ${({ theme }) => theme.fontFamily.abril};
+      font-style: italic;
     }
 
     h1,

@@ -4,10 +4,10 @@ const MealPlans = () => {
   return (
     <section>
       <header>
-        <h2>Meal plans</h2>
+        <h1>My Meal Plans:</h1>
       </header>
 
-      <p>
+      <article>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente animi voluptatibus sunt
         eveniet itaque quod exercitationem velit dolores, molestias nemo molestiae officiis nesciunt
         accusantium in explicabo magni natus, beatae quis necessitatibus praesentium ipsa assumenda
@@ -17,7 +17,7 @@ const MealPlans = () => {
         quae, eligendi, animi vel eveniet magni ipsam repudiandae eos unde architecto ab
         exercitationem reprehenderit nulla quis. Quo, saepe? Eos, excepturi. Vero asperiores animi
         blanditiis esse, laborum exercitationem.
-      </p>
+      </article>
     </section>
   );
 };

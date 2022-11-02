@@ -10,8 +10,8 @@ const MealDetails = ({ tabs }: { tabs: TabType[] }) => {
         {tabs.map(({ id, label }) => (
           <h2 key={id}>
             <Styled.Button
-              onClick={() => setActiveDetails(label)}
-              $isActive={activeDetails === label}
+              onClick={() => setActiveDetails(id)}
+              $isActive={activeDetails === id}
             >
               {label}
             </Styled.Button>

@@ -7,9 +7,9 @@ export type TabType = {
 };
 
 export const useTabs = (tabs: TabType[]) => {
-  const [activeDetails, setActiveDetails] = useState(tabs[0]?.label);
+  const [activeDetails, setActiveDetails] = useState(tabs[0].id);
   const selectedTab = useMemo(
-    () => tabs.find((tab) => tab.label === activeDetails)?.Component,
+    () => tabs.find((tab) => tab.id === activeDetails)?.Component,
     [tabs, activeDetails]
   );
 
