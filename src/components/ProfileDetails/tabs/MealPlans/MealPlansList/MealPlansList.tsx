@@ -65,6 +65,8 @@ const MealPlansList = ({
       )}
 
       <Styled.AddMealPlanButton
+        aria-label='Add meal plan'
+        title='Add meal plan'
         onClick={() => setIsAddMealPLanInputOpen((isInputOpen) => !isInputOpen)}
       >
         <PlusSvg />
