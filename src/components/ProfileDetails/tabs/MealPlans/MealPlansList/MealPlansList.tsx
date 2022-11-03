@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { MealPlan } from '../MealPlans';
+import * as Styled from './MealPlansList.styles';
 
 const MealPlansList = ({
   mealPlans,
@@ -18,7 +19,7 @@ const MealPlansList = ({
     e.preventDefault();
     if (inputValue.current?.value) {
       setMealPlans((dbMealPlans) => [...dbMealPlans, { id: 3, name: inputValue.current!.value }]);
-      setCurrentMealPlan({ id: 3, name: inputValue.current!.value });
+      setIsAddMealPLanInputOpen(false);
     }
   };
 
@@ -31,6 +32,7 @@ const MealPlansList = ({
             type='text'
             ref={inputValue}
             required
+            maxLength={50}
           />
           <input
             type='submit'
@@ -40,16 +42,20 @@ const MealPlansList = ({
       )}
 
       {mealPlans.length ? (
-        <ul>
-          {mealPlans.map((mealPlan) => (
-            <li
-              key={mealPlan.id}
-              onClick={() => setCurrentMealPlan(mealPlan)}
-            >
-              {mealPlan.name}
+        <Styled.MealPlansList>
+          {mealPlans.map((mealPlan, index) => (
+            <li key={mealPlan.id}>
+              <Styled.ListItem onClick={() => setCurrentMealPlan(mealPlan)}>
+                <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
+                {mealPlan.name}
+              </Styled.ListItem>
+
+              <Styled.OptionsButton onClick={() => console.log('options')}>
+                opts
+              </Styled.OptionsButton>
             </li>
           ))}
-        </ul>
+        </Styled.MealPlansList>
       ) : (
         <>
           <h3>You don't have any meal plans yet.</h3>
