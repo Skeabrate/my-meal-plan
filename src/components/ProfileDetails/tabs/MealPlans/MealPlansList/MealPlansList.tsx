@@ -24,6 +24,12 @@ const MealPlansList = ({
     }
   };
 
+  const deleteMealPlan = (mealPlanId: number, mealPlanName: string) => {
+    if (confirm(`Do you want to delete meal plan: ${mealPlanName}?`)) {
+      setMealPlans((currentMealPlans) => currentMealPlans.filter((i) => i.id !== mealPlanId));
+    }
+  };
+
   return (
     <div>
       {isAddMealPLanInputOpen && (
@@ -51,8 +57,8 @@ const MealPlansList = ({
                 {mealPlan.name}
               </Styled.ListItem>
 
-              <Styled.OptionsButton onClick={() => console.log('options')}>
-                opts
+              <Styled.OptionsButton onClick={() => deleteMealPlan(mealPlan.id, mealPlan.name)}>
+                <PlusSvg />
               </Styled.OptionsButton>
             </li>
           ))}

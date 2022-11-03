@@ -1,10 +1,45 @@
 import styled from 'styled-components';
 
+export const OptionsButton = styled.button`
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.1s ease-in-out;
+
+  svg {
+    height: 24px;
+    width: 24px;
+    transform: rotate(45deg);
+    transition: 0.1s ease-in-out;
+
+    path {
+      fill: ${({ theme }) => theme.colors.red};
+    }
+  }
+
+  &:hover {
+    svg {
+      scale: 1.1;
+    }
+  }
+`;
+
 export const MealPlansList = styled.ul`
   list-style: none;
 
   li {
-    display: flex;
+    position: relative;
+
+    &:hover ${OptionsButton} {
+      opacity: 1;
+      visibility: visible;
+    }
 
     &:last-child button {
       border: none;
@@ -37,10 +72,6 @@ export const ListItem = styled.button`
   }
 `;
 
-export const OptionsButton = styled.button`
-  width: 60px;
-`;
-
 export const AddMealPlanButton = styled.button`
   display: flex;
   justify-content: center;
@@ -48,8 +79,9 @@ export const AddMealPlanButton = styled.button`
   width: 100%;
   background: transparent;
   border: none;
-  padding: 10px 0;
-  margin: 10px 0;
+  padding: 20px 0;
+  margin: 20px 0;
+  position: relative;
 
   svg {
     height: 46px;
@@ -59,6 +91,15 @@ export const AddMealPlanButton = styled.button`
     path {
       fill: ${({ theme }) => theme.colors.orange};
     }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 70%;
+    height: 1px;
+    background-color: ${({ theme }) => theme.themeColors.border};
   }
 
   &:hover {
