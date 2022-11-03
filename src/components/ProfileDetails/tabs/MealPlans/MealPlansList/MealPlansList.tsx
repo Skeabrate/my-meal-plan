@@ -25,7 +25,7 @@ const MealPlansList = ({
   };
 
   const deleteMealPlan = (mealPlanId: number, mealPlanName: string) => {
-    if (confirm(`Do you want to delete meal plan: ${mealPlanName}?`)) {
+    if (confirm(`Do you want to delete ${mealPlanName}?`)) {
       setMealPlans((currentMealPlans) => currentMealPlans.filter((i) => i.id !== mealPlanId));
     }
   };
@@ -33,19 +33,17 @@ const MealPlansList = ({
   return (
     <div>
       {isAddMealPLanInputOpen && (
-        <form onSubmit={addNewMealPlan}>
-          <input
+        <Styled.AddMealPlanForm onSubmit={addNewMealPlan}>
+          <Styled.AddMealPlanInput
             aria-label='add meal plan:'
             type='text'
             ref={inputValue}
             required
             maxLength={50}
+            placeholder='Meal Plan Name...'
+            autoFocus
           />
-          <input
-            type='submit'
-            value='Submit'
-          />
-        </form>
+        </Styled.AddMealPlanForm>
       )}
 
       {mealPlans.length ? (
@@ -71,9 +69,10 @@ const MealPlansList = ({
       )}
 
       <Styled.AddMealPlanButton
+        onClick={() => setIsAddMealPLanInputOpen((isInputOpen) => !isInputOpen)}
         aria-label='Add meal plan'
         title='Add meal plan'
-        onClick={() => setIsAddMealPLanInputOpen((isInputOpen) => !isInputOpen)}
+        $isAddMealPLanInputOpen={isAddMealPLanInputOpen}
       >
         <PlusSvg />
       </Styled.AddMealPlanButton>

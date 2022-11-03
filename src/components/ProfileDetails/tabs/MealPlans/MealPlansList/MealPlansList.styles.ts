@@ -72,7 +72,7 @@ export const ListItem = styled.button`
   }
 `;
 
-export const AddMealPlanButton = styled.button`
+export const AddMealPlanButton = styled.button<{ $isAddMealPLanInputOpen: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,10 +86,13 @@ export const AddMealPlanButton = styled.button`
   svg {
     height: 46px;
     width: 46px;
-    transition: 0.1s ease-in-out;
+    transform: ${({ $isAddMealPLanInputOpen }) => $isAddMealPLanInputOpen && 'rotate(135deg)'};
+    transition: scale 0.2s ease-in-out, transform 0.6s cubic-bezier(0.3, 0, 0, 1);
 
     path {
-      fill: ${({ theme }) => theme.colors.orange};
+      fill: ${({ theme, $isAddMealPLanInputOpen }) =>
+        $isAddMealPLanInputOpen ? theme.colors.red : theme.colors.orange};
+      transition: 0.2s ease-in-out;
     }
   }
 
@@ -107,8 +110,24 @@ export const AddMealPlanButton = styled.button`
       scale: 1.1;
 
       path {
-        fill: hsl(22, 100%, 48%);
+        fill: ${({ $isAddMealPLanInputOpen }) =>
+          $isAddMealPLanInputOpen ? 'hsl(3, 100%, 36%)' : 'hsl(22, 100%, 48%)'};
       }
     }
+  }
+`;
+
+export const AddMealPlanForm = styled.form`
+  ${({ theme }) => theme.fadeInAnimation(0.2)}
+`;
+
+export const AddMealPlanInput = styled.input`
+  border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
+  padding: 10px;
+  margin-bottom: 10px;
+
+  &:focus {
+    outline: none;
+    ${({ theme }) => theme.boxShadow(theme.colors.red)}
   }
 `;
