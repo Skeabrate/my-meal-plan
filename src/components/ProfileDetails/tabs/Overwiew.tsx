@@ -26,8 +26,8 @@ const Overwiew = () => {
           <Image
             src={data?.user.image}
             alt={data?.user.name || data?.user.email!}
-            height='60'
-            width='60'
+            height='140'
+            width='140'
           />
         )}
 

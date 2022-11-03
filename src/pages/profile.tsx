@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import { getSession } from 'next-auth/react';
 import ProfileDetails from 'components/ProfileDetails/ProfileDetails';
 import Overwiew from 'components/ProfileDetails/tabs/Overwiew';
-import MealPlans from 'components/ProfileDetails/tabs/MealPlans';
+import MealPlans from 'components/ProfileDetails/tabs/MealPlans/MealPlans';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import MealSvg from 'assets/SVG/Meal.svg';
 
