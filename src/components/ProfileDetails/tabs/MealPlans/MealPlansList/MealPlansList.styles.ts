@@ -5,6 +5,10 @@ export const MealPlansList = styled.ul`
 
   li {
     display: flex;
+
+    &:last-child button {
+      border: none;
+    }
   }
 `;
 
@@ -35,4 +39,35 @@ export const ListItem = styled.button`
 
 export const OptionsButton = styled.button`
   width: 60px;
+`;
+
+export const AddMealPlanButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  margin: 10px 0;
+
+  svg {
+    height: 46px;
+    width: 46px;
+    transition: 0.1s ease-in-out;
+
+    path {
+      fill: ${({ theme }) => theme.colors.orange};
+    }
+  }
+
+  &:hover {
+    svg {
+      scale: 1.1;
+
+      path {
+        fill: hsl(22, 100%, 48%);
+      }
+    }
+  }
 `;

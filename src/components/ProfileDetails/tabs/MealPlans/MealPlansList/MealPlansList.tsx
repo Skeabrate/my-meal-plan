@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { MealPlan } from '../MealPlans';
 import * as Styled from './MealPlansList.styles';
+import { MealPlan } from '../MealPlans';
+import PlusSvg from 'assets/SVG/Plus.svg';
 
 const MealPlansList = ({
   mealPlans,
@@ -63,7 +64,11 @@ const MealPlansList = ({
         </>
       )}
 
-      <button onClick={() => setIsAddMealPLanInputOpen(true)}>Add meal plan</button>
+      <Styled.AddMealPlanButton
+        onClick={() => setIsAddMealPLanInputOpen((isInputOpen) => !isInputOpen)}
+      >
+        <PlusSvg />
+      </Styled.AddMealPlanButton>
     </div>
   );
 };
