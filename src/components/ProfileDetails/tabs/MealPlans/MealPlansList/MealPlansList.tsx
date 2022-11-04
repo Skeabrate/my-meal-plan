@@ -12,8 +12,23 @@ const MealPlansList = () => {
 
   const addNewMealPlan = (e: any) => {
     e.preventDefault();
+
     if (inputValue.current?.value) {
-      setMealPlans((dbMealPlans) => [...dbMealPlans, { id: 3, name: inputValue.current!.value }]);
+      const newMealPlan = {
+        id: 0,
+        name: inputValue.current?.value,
+        days: {
+          mon: [],
+          tue: [],
+          wed: [],
+          thu: [],
+          fri: [],
+          sat: [],
+          sun: [],
+        },
+      };
+
+      setMealPlans((dbMealPlans) => [...dbMealPlans, newMealPlan]);
       setIsAddMealPLanInputOpen(false);
     }
   };

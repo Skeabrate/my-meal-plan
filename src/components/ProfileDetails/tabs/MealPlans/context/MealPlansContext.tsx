@@ -1,14 +1,55 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
+export type DayType = { id: number; mealPlan: string; meals: string[] };
+
 export type MealPlan = {
   id: number;
   name: string;
+  days: {
+    mon: DayType[];
+    tue: DayType[];
+    wed: DayType[];
+    thu: DayType[];
+    fri: DayType[];
+    sat: DayType[];
+    sun: DayType[];
+  };
 };
 
 const dbData: MealPlan[] = [
-  { id: 0, name: 'First meal plan' },
-  { id: 1, name: 'Second meal plan' },
-  { id: 2, name: 'Third meal plan' },
+  {
+    id: 0,
+    name: 'Vegetarian',
+    days: {
+      mon: [
+        { id: 0, mealPlan: 'Breakfast', meals: ['52870', '52785', '52971'] },
+        { id: 1, mealPlan: 'Dinner', meals: ['53025', '53012'] },
+      ],
+      tue: [{ id: 0, mealPlan: 'Breakfast', meals: ['53025', '53012'] }],
+      wed: [],
+      thu: [],
+      fri: [],
+      sat: [],
+      sun: [],
+    },
+  },
+  {
+    id: 1,
+    name: 'Cheat Meal',
+    days: {
+      mon: [
+        { id: 0, mealPlan: 'Cheat Breakfast', meals: ['52990', '52768'] },
+        { id: 1, mealPlan: 'Cheat Dinner', meals: ['52853', '52989', '52905'] },
+        { id: 2, mealPlan: 'Cheat Supper', meals: ['52854'] },
+      ],
+      tue: [],
+      wed: [],
+      thu: [],
+      fri: [],
+      sat: [],
+      sun: [],
+    },
+  },
 ];
 
 type MealPlansContextType = {
@@ -29,6 +70,7 @@ export default function MealPlansProvider({ children }: { children: React.ReactN
     (mealPlanId: number) => {
       if (confirm('Do you want to delete this meal plan?')) {
         setMealPlans((currentMealPlans) => currentMealPlans.filter((i) => i.id !== mealPlanId));
+        setCurrentMealPlan(undefined);
       }
     },
     [setMealPlans]

@@ -2,9 +2,34 @@ import React, { useContext } from 'react';
 import * as Styled from './CurrentMealPlan.styles';
 import { MealPlansContext } from '../context/MealPlansContext';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import { useTabs } from 'hooks/useTabs';
+
+const MealPlan = ({ mealPlan }: { mealPlan: { mealPlan: string; meals: string[] }[] }) => {
+  return (
+    <div>
+      {mealPlan.map(({ mealPlan, meals }) => (
+        <div key={mealPlan}>
+          <p>{mealPlan}</p>
+          <ul>
+            {meals.map((mealId) => (
+              <li key={mealId}>{mealId}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const CurrentMealPlan = () => {
   const { currentMealPlan, setCurrentMealPlan, deleteMealPlan } = useContext(MealPlansContext);
+  const days = Object.entries(currentMealPlan!.days).map(([key, mealPlan], index) => ({
+    id: index,
+    label: key,
+    Component: <MealPlan mealPlan={mealPlan} />,
+  }));
+
+  const { activeDetails, selectedTab, setActiveDetails } = useTabs(days);
 
   return (
     <>
@@ -20,7 +45,20 @@ const CurrentMealPlan = () => {
         </Styled.DeleteButton>
       </Styled.MealPlanTitle>
 
-      <p>monday tuesday</p>
+      <Styled.DaysBar>
+        {days.map(({ id, label }) => (
+          <li key={id}>
+            <button
+              style={{ background: id === activeDetails ? 'red' : 'transparent' }}
+              onClick={() => setActiveDetails(id)}
+            >
+              {label}
+            </button>
+          </li>
+        ))}
+      </Styled.DaysBar>
+
+      <p>{selectedTab}</p>
     </>
   );
 };

@@ -30,3 +30,9 @@ export const DeleteButton = styled.button`
     color: ${({ theme }) => theme.colors.redHover};
   }
 `;
+
+export const DaysBar = styled.ul`
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+`;
