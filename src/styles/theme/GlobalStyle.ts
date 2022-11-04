@@ -145,6 +145,7 @@ export const GlobaStyles = styled.createGlobalStyle`
   textarea {
     font-size: 16px;
     color: ${({ theme }) => theme.themeColors.font};
+    background-color: ${({ theme }) => theme.themeColors.background};
   }
 
   input:focus {

@@ -15,6 +15,7 @@ const StyledGoBackButton = styled.button`
   color: ${({ theme }) => theme.themeColors.secondFont};
 
   svg {
+    height: 20px;
     width: 20px;
     transition: 0.1s ease-in-out;
 
@@ -30,13 +31,13 @@ const StyledGoBackButton = styled.button`
   }
 `;
 
-const GoBackButton = () => {
+const GoBackButton = ({ label = 'Back', callback }: { label?: string; callback?: () => void }) => {
   const { goBack } = useContext(HistoryContext);
 
   return (
-    <StyledGoBackButton onClick={goBack}>
+    <StyledGoBackButton onClick={callback || goBack}>
       <Arrow />
-      Back
+      {label}
     </StyledGoBackButton>
   );
 };

@@ -1,17 +1,26 @@
-import React from 'react';
-import { MealPlan } from '../MealPlans';
+import React, { useContext } from 'react';
+import * as Styled from './CurrentMealPlan.styles';
+import { MealPlansContext } from '../context/MealPlansContext';
+import GoBackButton from 'components/GoBackButton/GoBackButton';
 
-const CurrentMealPlan = ({
-  currentMealPlan,
-  setCurrentMealPlan,
-}: {
-  currentMealPlan: MealPlan;
-  setCurrentMealPlan: React.Dispatch<React.SetStateAction<MealPlan | undefined>>;
-}) => {
+const CurrentMealPlan = () => {
+  const { currentMealPlan, setCurrentMealPlan, deleteMealPlan } = useContext(MealPlansContext);
+
   return (
     <>
-      <button onClick={() => setCurrentMealPlan(undefined)}>Go back to Meal Plans list</button>
-      <h3>{currentMealPlan.name}</h3>
+      <GoBackButton
+        label='Back to meal plans list'
+        callback={() => setCurrentMealPlan(undefined)}
+      />
+
+      <Styled.MealPlanTitle>
+        <h2>{currentMealPlan!.name}</h2>
+        <Styled.DeleteButton onClick={() => deleteMealPlan(currentMealPlan!.id)}>
+          Delete meal plan
+        </Styled.DeleteButton>
+      </Styled.MealPlanTitle>
+
+      <p>monday tuesday</p>
     </>
   );
 };

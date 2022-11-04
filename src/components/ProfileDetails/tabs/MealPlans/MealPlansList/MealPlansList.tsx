@@ -1,18 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import * as Styled from './MealPlansList.styles';
-import { MealPlan } from '../MealPlans';
+import { MealPlansContext } from '../context/MealPlansContext';
 import PlusSvg from 'assets/SVG/Plus.svg';
 
-const MealPlansList = ({
-  mealPlans,
-  setCurrentMealPlan,
-  setMealPlans,
-}: {
-  mealPlans: MealPlan[];
-  setCurrentMealPlan: React.Dispatch<React.SetStateAction<undefined | MealPlan>>;
-  setMealPlans: React.Dispatch<React.SetStateAction<MealPlan[]>>;
-}) => {
+const MealPlansList = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
+  const { mealPlans, setMealPlans, setCurrentMealPlan, deleteMealPlan } =
+    useContext(MealPlansContext);
 
   const inputValue = useRef<HTMLInputElement>(null);
 
@@ -21,12 +15,6 @@ const MealPlansList = ({
     if (inputValue.current?.value) {
       setMealPlans((dbMealPlans) => [...dbMealPlans, { id: 3, name: inputValue.current!.value }]);
       setIsAddMealPLanInputOpen(false);
-    }
-  };
-
-  const deleteMealPlan = (mealPlanId: number, mealPlanName: string) => {
-    if (confirm(`Do you want to delete ${mealPlanName}?`)) {
-      setMealPlans((currentMealPlans) => currentMealPlans.filter((i) => i.id !== mealPlanId));
     }
   };
 
@@ -56,7 +44,9 @@ const MealPlansList = ({
               </Styled.ListItem>
 
               <Styled.DeleteMealPLanButton
-                onClick={() => deleteMealPlan(mealPlan.id, mealPlan.name)}
+                aria-label='delete meal plan'
+                title='Delete meal plan'
+                onClick={() => deleteMealPlan(mealPlan.id)}
               >
                 <PlusSvg />
               </Styled.DeleteMealPLanButton>
