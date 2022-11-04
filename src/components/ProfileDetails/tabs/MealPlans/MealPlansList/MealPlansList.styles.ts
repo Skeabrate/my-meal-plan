@@ -78,15 +78,15 @@ export const ListItem = styled.button`
 `;
 
 export const AddMealPlanButton = styled.button<{ $isAddMealPLanInputOpen: boolean }>`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 200px;
   background: transparent;
   border: none;
   padding: 20px 0;
-  margin: 20px 0;
-  position: relative;
+  margin: 20px auto;
 
   svg {
     height: 46px;
@@ -105,7 +105,9 @@ export const AddMealPlanButton = styled.button<{ $isAddMealPLanInputOpen: boolea
     content: '';
     position: absolute;
     top: 0;
-    width: 70%;
+    min-width: 200px;
+    width: 30vw;
+    max-width: 600px;
     height: 1px;
     background-color: ${({ theme }) => theme.themeColors.border};
   }
