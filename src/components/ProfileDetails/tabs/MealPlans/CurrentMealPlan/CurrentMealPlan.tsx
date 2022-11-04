@@ -48,12 +48,12 @@ const CurrentMealPlan = () => {
       <Styled.DaysBar>
         {days.map(({ id, label }) => (
           <li key={id}>
-            <button
-              style={{ background: id === activeDetails ? 'red' : 'transparent' }}
+            <Styled.DaysBarButton
+              $isActive={id === activeDetails}
               onClick={() => setActiveDetails(id)}
             >
               {label}
-            </button>
+            </Styled.DaysBarButton>
           </li>
         ))}
       </Styled.DaysBar>
