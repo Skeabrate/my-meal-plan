@@ -40,7 +40,9 @@ export const theme: DefaultTheme = {
   colors: {
     green: 'hsl(161, 66%, 38%)',
     orange: 'hsl(22, 100%, 52%)',
-    red: 'hsl(3, 100%, 40%)',
+    orangeHover: 'hsl(22, 100%, 58%)',
+    red: 'hsl(3, 100%, 44%)',
+    redHover: 'hsl(3, 100%, 48%)',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

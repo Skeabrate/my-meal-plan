@@ -23,6 +23,6 @@ export const FavoritesButton = styled.button`
   }
 
   &:hover {
-    background-color: hsl(22, 100%, 60%);
+    background-color: ${({ theme }) => theme.colors.orangeHover};
   }
 `;

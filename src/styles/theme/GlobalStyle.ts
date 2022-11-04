@@ -146,4 +146,9 @@ export const GlobaStyles = styled.createGlobalStyle`
     font-size: 16px;
     color: ${({ theme }) => theme.themeColors.font};
   }
+
+  input:focus {
+    outline: none;
+    ${({ theme }) => theme.boxShadow(theme.colors.orange)}
+  }
 `;

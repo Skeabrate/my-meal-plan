@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const OptionsButton = styled.button`
+export const DeleteMealPLanButton = styled.button`
   position: absolute;
   right: 0;
   top: 0;
@@ -20,12 +20,17 @@ export const OptionsButton = styled.button`
 
     path {
       fill: ${({ theme }) => theme.colors.red};
+      transition: 0.1s ease-in-out;
     }
   }
 
   &:hover {
     svg {
       scale: 1.1;
+
+      path {
+        fill: ${({ theme }) => theme.colors.redHover};
+      }
     }
   }
 `;
@@ -36,7 +41,7 @@ export const MealPlansList = styled.ul`
   li {
     position: relative;
 
-    &:hover ${OptionsButton} {
+    &:hover ${DeleteMealPLanButton} {
       opacity: 1;
       visibility: visible;
     }
@@ -110,8 +115,8 @@ export const AddMealPlanButton = styled.button<{ $isAddMealPLanInputOpen: boolea
       scale: 1.1;
 
       path {
-        fill: ${({ $isAddMealPLanInputOpen }) =>
-          $isAddMealPLanInputOpen ? 'hsl(3, 100%, 36%)' : 'hsl(22, 100%, 48%)'};
+        fill: ${({ theme, $isAddMealPLanInputOpen }) =>
+          $isAddMealPLanInputOpen ? theme.colors.redHover : theme.colors.orangeHover};
       }
     }
   }
@@ -125,9 +130,4 @@ export const AddMealPlanInput = styled.input`
   border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
   padding: 10px;
   margin-bottom: 10px;
-
-  &:focus {
-    outline: none;
-    ${({ theme }) => theme.boxShadow(theme.colors.red)}
-  }
 `;

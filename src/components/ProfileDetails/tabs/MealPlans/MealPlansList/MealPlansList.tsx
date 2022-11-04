@@ -55,9 +55,11 @@ const MealPlansList = ({
                 {mealPlan.name}
               </Styled.ListItem>
 
-              <Styled.OptionsButton onClick={() => deleteMealPlan(mealPlan.id, mealPlan.name)}>
+              <Styled.DeleteMealPLanButton
+                onClick={() => deleteMealPlan(mealPlan.id, mealPlan.name)}
+              >
                 <PlusSvg />
-              </Styled.OptionsButton>
+              </Styled.DeleteMealPLanButton>
             </li>
           ))}
         </Styled.MealPlansList>

@@ -58,11 +58,6 @@ export const InputWrapper = styled.div`
     height: 100%;
     width: calc(100% - 42px);
     border: 1px solid red;
-
-    &:focus {
-      ${({ theme }) => theme.boxShadow(theme.colors.red)}
-      outline: none;
-    }
   }
 
   button {
