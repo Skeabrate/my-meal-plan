@@ -5,7 +5,7 @@ import { MealType } from 'types/MealType';
 
 type MealPlansInCurrentDayType = { id: number; mealPlan: string; meals: string[] }[];
 
-export const fetchMealPlanMeals = async (mealPlansInCurrentDay: MealPlansInCurrentDayType) => {
+export const fetchMealPlans = async (mealPlansInCurrentDay: MealPlansInCurrentDayType) => {
   const fetchedMeals = mealPlansInCurrentDay.map((mealPlan) => ({
     id: mealPlan.id,
     mealPlan: mealPlan.mealPlan,
@@ -24,14 +24,14 @@ export const fetchMealPlanMeals = async (mealPlansInCurrentDay: MealPlansInCurre
   return fetchedMeals as any;
 };
 
-export const useFetchMealPlanMeals = (mealPlansInCurrentDay: MealPlansInCurrentDayType) => {
+export const useFetchMealPlans = (mealPlansInCurrentDay: MealPlansInCurrentDayType) => {
   const {
     data: fetchedMealPlans,
     isLoading,
     error,
   } = useQuery(
-    ['fetchMealPlanMeals', mealPlansInCurrentDay],
-    () => fetchMealPlanMeals(mealPlansInCurrentDay),
+    ['fetchMealPlans', mealPlansInCurrentDay],
+    () => fetchMealPlans(mealPlansInCurrentDay),
     {
       enabled: !!mealPlansInCurrentDay,
       refetchOnWindowFocus: false,

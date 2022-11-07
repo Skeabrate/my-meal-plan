@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import * as Styled from './MealPlan.styles';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useFetchMealPlanMeals } from 'api/mealdb/useFetchMealPlanMeals';
+import { useFetchMealPlans } from 'api/mealdb/useFetchMealPlanMeals';
 import { MealPlansContext } from '../../context/MealPlansContext';
 import OpenInput from 'components/OpenInput/OpenInput';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
@@ -15,7 +15,7 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
 
   const mealPlansInCurrentDay =
     currentMealPlan?.days[activeDay as keyof typeof currentMealPlan.days] || [];
-  const { fetchedMealPlans, isLoading, error } = useFetchMealPlanMeals(mealPlansInCurrentDay);
+  const { fetchedMealPlans, isLoading, error } = useFetchMealPlans(mealPlansInCurrentDay);
 
   const addNewMealSection = (inputValue: string) => {
     setMealPlans((plans) => {
