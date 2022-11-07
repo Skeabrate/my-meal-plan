@@ -64,13 +64,3 @@ export const DaysBarButton = styled.button<{ $isActive: boolean }>`
     font-size: 1.4rem;
   }
 `;
-
-export const AddMealsSectionButton = styled.button`
-  border: none;
-  background: transparent;
-  font-style: italic;
-  text-decoration: underline;
-  color: ${({ theme }) => theme.colors.green};
-  padding-block: 15px;
-  display: block;
-`;
