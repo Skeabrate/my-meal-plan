@@ -6,6 +6,7 @@ import { MealPlansContext } from '../../context/MealPlansContext';
 import OpenInput from 'components/OpenInput/OpenInput';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import Loading from 'components/Loading/Loading';
+import Link from 'next/link';
 
 const MealPlan = ({ activeDay }: { activeDay: string }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
@@ -24,13 +25,26 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
             mealPlan: inputValue,
             meals: [],
           });
-
-          return plan;
-        } else return plan;
+        }
+        return plan;
       });
     });
 
     setIsInputOpen(false);
+  };
+
+  const deleteMeal = (mealPlanId: number, mealId: string) => {
+    setMealPlans((plans) => {
+      return plans.map((plan) => {
+        if (plan.id === currentMealPlan?.id) {
+          const mealPlanToChange = plan.days[activeDay as keyof typeof plan.days].find(
+            (p) => p.id === mealPlanId
+          );
+          mealPlanToChange!.meals = mealPlanToChange!.meals.filter((id) => id !== mealId);
+        }
+        return plan;
+      });
+    });
   };
 
   return (
@@ -55,20 +69,28 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
         <p>Error occured.</p>
       ) : fetchedMealPlans.length ? (
         fetchedMealPlans.map(({ id, mealPlan, meals }) => (
-          <Styled.MealPlan key={mealPlan}>
+          <Styled.MealPlan key={id}>
             <h3>{mealPlan}</h3>
             <ul>
               {meals.map(({ idMeal, strMeal, strMealThumb }) => (
                 <li key={idMeal}>
-                  <ImageLoading>
-                    <Image
-                      src={strMealThumb}
-                      alt={strMeal}
-                      width={150}
-                      height={150}
-                    />
-                  </ImageLoading>
-                  {strMeal}
+                  <Link href={`/meal/${idMeal}`}>
+                    <a>
+                      <ImageLoading>
+                        <Image
+                          src={strMealThumb}
+                          alt={strMeal}
+                          width={150}
+                          height={150}
+                        />
+                      </ImageLoading>
+                    </a>
+                  </Link>
+
+                  <p>
+                    {strMeal}
+                    <button onClick={() => deleteMeal(id, idMeal)}>Delete</button>
+                  </p>
                 </li>
               ))}
             </ul>

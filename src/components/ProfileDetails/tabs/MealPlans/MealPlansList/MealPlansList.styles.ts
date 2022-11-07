@@ -60,6 +60,7 @@ export const ListItem = styled.button`
   width: 100%;
   padding: 15px;
   font-size: 2rem;
+  text-transform: capitalize;
   word-break: break-word;
   background-color: ${({ theme }) => theme.themeColors.background};
   border: none;

@@ -14,6 +14,7 @@ export const MealPlan = styled.div`
     font-style: normal;
     font-size: 2rem;
     margin-bottom: 12px;
+    text-transform: capitalize;
   }
 
   ul {
@@ -22,9 +23,27 @@ export const MealPlan = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     grid-gap: 1rem;
 
-    li {
+    li,
+    button {
       font-size: ${({ theme }) => theme.fontSize.caption};
+    }
+
+    li {
       font-weight: 600;
+
+      p {
+        padding: 2px 4px;
+      }
+
+      button {
+        display: block;
+        background: transparent;
+        border: none;
+        color: ${({ theme }) => theme.colors.red};
+        text-decoration: underline;
+        font-style: italic;
+        padding-top: 2px;
+      }
     }
   }
 
