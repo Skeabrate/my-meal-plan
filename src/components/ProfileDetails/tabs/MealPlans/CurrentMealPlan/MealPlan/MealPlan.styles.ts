@@ -31,18 +31,17 @@ export const MealPlan = styled.div`
     li {
       font-weight: 600;
 
-      p {
-        padding: 2px 4px;
+      span {
+        display: block;
+        padding: 3px 3px 0 3px;
       }
 
-      button {
-        display: block;
-        background: transparent;
-        border: none;
-        color: ${({ theme }) => theme.colors.red};
-        text-decoration: underline;
-        font-style: italic;
-        padding-top: 2px;
+      img {
+        transition: scale 0.2s ease-in-out;
+
+        &:hover {
+          scale: 1.05;
+        }
       }
     }
   }
@@ -50,14 +49,4 @@ export const MealPlan = styled.div`
   ${({ theme }) => theme.mq.tablet} {
     padding: 20px 10px;
   }
-`;
-
-export const AddMealsSectionButton = styled.button`
-  border: none;
-  background: transparent;
-  font-style: italic;
-  text-decoration: underline;
-  color: ${({ theme }) => theme.colors.green};
-  padding-block: 15px;
-  display: block;
 `;

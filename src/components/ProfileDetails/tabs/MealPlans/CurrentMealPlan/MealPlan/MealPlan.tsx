@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react';
 import * as Styled from './MealPlan.styles';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useFetchMealPlanMeals } from 'api/mealdb/useFetchMealPlanMeals';
 import { MealPlansContext } from '../../context/MealPlansContext';
 import OpenInput from 'components/OpenInput/OpenInput';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import Loading from 'components/Loading/Loading';
-import Link from 'next/link';
+import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 
 const MealPlan = ({ activeDay }: { activeDay: string }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
@@ -50,9 +51,13 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
   return (
     <div>
       <div>
-        <Styled.AddMealsSectionButton onClick={() => setIsInputOpen((isOpen) => !isOpen)}>
-          Add new meals section
-        </Styled.AddMealsSectionButton>
+        <div style={{ padding: '15px 0 10px' }}>
+          <UnderlinedButton
+            label='Add new meals section'
+            onClick={() => setIsInputOpen((isOpen) => !isOpen)}
+            isGreen
+          />
+        </div>
 
         {isInputOpen && (
           <OpenInput
@@ -87,10 +92,11 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
                     </a>
                   </Link>
 
-                  <p>
-                    {strMeal}
-                    <button onClick={() => deleteMeal(id, idMeal)}>Delete</button>
-                  </p>
+                  <span>{strMeal}</span>
+                  <UnderlinedButton
+                    label='Delete'
+                    onClick={() => deleteMeal(id, idMeal)}
+                  />
                 </li>
               ))}
             </ul>

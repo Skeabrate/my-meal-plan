@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import * as Styled from './CurrentMealPlan.styles';
 import { useTabs } from 'hooks/useTabs';
 import { MealPlansContext } from '../context/MealPlansContext';
-import GoBackButton from 'components/GoBackButton/GoBackButton';
 import MealPlan from './MealPlan/MealPlan';
+import GoBackButton from 'components/GoBackButton/GoBackButton';
+import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 
 const CurrentMealPlan = () => {
   const [activeDaysHelper, setActiveDaysHelper] = useState(0);
@@ -29,9 +30,10 @@ const CurrentMealPlan = () => {
 
       <Styled.MealPlanTitle>
         <h2>{currentMealPlan!.name}</h2>
-        <Styled.DeleteButton onClick={() => deleteMealPlan(currentMealPlan!.id)}>
-          Delete meal plan
-        </Styled.DeleteButton>
+        <UnderlinedButton
+          label='Delete meal plan'
+          onClick={() => deleteMealPlan(currentMealPlan!.id)}
+        />
       </Styled.MealPlanTitle>
 
       <Styled.DaysBar>

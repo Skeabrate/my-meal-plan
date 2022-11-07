@@ -19,18 +19,6 @@ export const MealPlanTitle = styled.div`
   }
 `;
 
-export const DeleteButton = styled.button`
-  background-color: ${({ theme }) => theme.themeColors.background};
-  border: none;
-  color: ${({ theme }) => theme.colors.red};
-  text-decoration: underline;
-  font-style: italic;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.redHover};
-  }
-`;
-
 export const DaysBar = styled.ul`
   list-style: none;
   display: flex;
