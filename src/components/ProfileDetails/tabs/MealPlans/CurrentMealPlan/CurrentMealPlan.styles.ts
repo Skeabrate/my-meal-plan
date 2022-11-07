@@ -51,7 +51,7 @@ export const DaysBarButton = styled.button<{ $isActive: boolean }>`
   text-transform: capitalize;
   font-size: ${({ theme }) => theme.fontSize.caption};
   border: none;
-  padding: 8px 12px;
+  padding: 8px;
   transition: background-color 0.1s ease-in-out;
   width: 100%;
   height: 100%;
@@ -63,4 +63,14 @@ export const DaysBarButton = styled.button<{ $isActive: boolean }>`
   ${({ theme }) => theme.mq.tablet} {
     font-size: 1.4rem;
   }
+`;
+
+export const AddMealsSectionButton = styled.button`
+  border: none;
+  background: transparent;
+  font-style: italic;
+  text-decoration: underline;
+  color: ${({ theme }) => theme.colors.green};
+  padding-block: 15px;
+  display: block;
 `;

@@ -123,13 +123,3 @@ export const AddMealPlanButton = styled.button<{ $isAddMealPLanInputOpen: boolea
     }
   }
 `;
-
-export const AddMealPlanForm = styled.form`
-  ${({ theme }) => theme.fadeInAnimation(0.2)}
-`;
-
-export const AddMealPlanInput = styled.input`
-  border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
-  padding: 10px;
-  margin-bottom: 10px;
-`;

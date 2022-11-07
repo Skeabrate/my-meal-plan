@@ -1,22 +1,19 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as Styled from './MealPlansList.styles';
 import { MealPlansContext } from '../context/MealPlansContext';
 import PlusSvg from 'assets/SVG/Plus.svg';
+import OpenInput from 'components/OpenInput/OpenInput';
 
 const MealPlansList = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
   const { mealPlans, setMealPlans, setCurrentMealPlan, deleteMealPlan } =
     useContext(MealPlansContext);
 
-  const inputValue = useRef<HTMLInputElement>(null);
-
-  const addNewMealPlan = (e: any) => {
-    e.preventDefault();
-
-    if (inputValue.current?.value) {
+  const addNewMealPlan = (inputValue: string) => {
+    if (inputValue) {
       const newMealPlan = {
         id: 0,
-        name: inputValue.current?.value,
+        name: inputValue,
         days: {
           mon: [],
           tue: [],
@@ -36,17 +33,11 @@ const MealPlansList = () => {
   return (
     <div>
       {isAddMealPLanInputOpen && (
-        <Styled.AddMealPlanForm onSubmit={addNewMealPlan}>
-          <Styled.AddMealPlanInput
-            aria-label='add meal plan:'
-            type='text'
-            ref={inputValue}
-            required
-            maxLength={50}
-            placeholder='Meal Plan Name...'
-            autoFocus
-          />
-        </Styled.AddMealPlanForm>
+        <OpenInput
+          label='Add meal plan'
+          placeholder='Meal plan name...'
+          updateMealPLans={addNewMealPlan}
+        />
       )}
 
       {mealPlans.length ? (
