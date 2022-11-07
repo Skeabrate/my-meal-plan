@@ -5,8 +5,39 @@ import { useTabs, TabType } from 'hooks/useTabs';
 import FavoritesSvg from 'assets/SVG/Marked.svg';
 import LogoutSvg from 'assets/SVG/Logout.svg';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import Overwiew from 'components/ProfileDetails/tabs/Overwiew';
+import MealPlans from 'components/ProfileDetails/tabs/MealPlans/MealPlans';
+import ProfileSvg from 'assets/SVG/Profile.svg';
+import MealSvg from 'assets/SVG/Meal.svg';
 
-const ProfileDetails = ({ tabs }: { tabs: TabType[] }) => {
+const ProfileDetails = () => {
+  const tabs = [
+    {
+      id: 0,
+      label: (
+        <>
+          <span>
+            <ProfileSvg />
+          </span>
+          Overwiew
+        </>
+      ),
+      Component: <Overwiew />,
+    },
+    {
+      id: 1,
+      label: (
+        <>
+          <span>
+            <MealSvg />
+          </span>
+          Meal Plans
+        </>
+      ),
+      Component: <MealPlans />,
+    },
+  ];
+
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
 
   return (
