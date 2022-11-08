@@ -47,6 +47,7 @@ export const OptionsButton = styled.button`
 
 export const OptionsDropdown = styled.ul`
   position: absolute;
+  z-index: 10;
   top: 100%;
   right: 0;
   width: max-content;

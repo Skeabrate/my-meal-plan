@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import * as Styled from './OptionsDropdown.styles';
 import SearchSVG from 'assets/SVG/Search.svg';
 import FavoritesSVG from 'assets/SVG/Marked.svg';
 import PlusSVG from 'assets/SVG/Plus.svg';
+import { SearchBarContext } from 'context/SearchBarContext';
 
 const OptionsDropdown = ({ deleteHandler }: { deleteHandler: () => void }) => {
   const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
+  const { toggleSearchBar } = useContext(SearchBarContext);
 
   const dropdownOpenRef = useRef(null);
 
@@ -39,7 +41,7 @@ const OptionsDropdown = ({ deleteHandler }: { deleteHandler: () => void }) => {
       {isOptionsDropdownOpen && (
         <Styled.OptionsDropdown>
           <li>
-            <button>
+            <button onClick={toggleSearchBar}>
               <SearchSVG />
               <span>Search for a meal</span>
             </button>
