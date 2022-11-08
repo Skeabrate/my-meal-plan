@@ -30,10 +30,6 @@ export const NavBar = styled.div`
 
   a {
     display: flex;
-
-    img {
-      height: 60px !important;
-    }
   }
 
   ${({ theme }) => theme.mq.tablet} {
