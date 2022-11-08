@@ -57,10 +57,13 @@ export const OptionsDropdown = styled.ul`
   list-style: none;
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 
-  button {
+  button,
+  a {
     width: 100%;
     padding: 10px 10px;
     text-align: left;
+    font-size: ${({ theme }) => theme.fontSize.caption};
+    text-decoration: none;
     border: none;
     background-color: transparent;
     transition: 0.1s ease-in-out;

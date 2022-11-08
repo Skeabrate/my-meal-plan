@@ -4,6 +4,7 @@ import SearchSVG from 'assets/SVG/Search.svg';
 import FavoritesSVG from 'assets/SVG/Marked.svg';
 import PlusSVG from 'assets/SVG/Plus.svg';
 import { SearchBarContext } from 'context/SearchBarContext';
+import Link from 'next/link';
 
 const OptionsDropdown = ({ deleteHandler }: { deleteHandler: () => void }) => {
   const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
@@ -47,10 +48,12 @@ const OptionsDropdown = ({ deleteHandler }: { deleteHandler: () => void }) => {
             </button>
           </li>
           <li>
-            <button>
-              <FavoritesSVG />
-              <span>Add from favorites</span>
-            </button>
+            <Link href='/favorites'>
+              <a>
+                <FavoritesSVG />
+                <span>Add from favorites</span>
+              </a>
+            </Link>
           </li>
           <li>
             <button onClick={deleteHandler}>
