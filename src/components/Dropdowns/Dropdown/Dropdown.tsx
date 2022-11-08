@@ -60,6 +60,7 @@ const Dropdown = <T extends string>({
     <Styled.Wrapper
       ref={dropdownRef}
       role='button'
+      aria-label='open dropdown'
       aria-pressed={toggleDropdown}
       tabIndex={0}
       onKeyDown={(e) => e.keyCode === 13 && setToggleDropdown((state) => !state)}

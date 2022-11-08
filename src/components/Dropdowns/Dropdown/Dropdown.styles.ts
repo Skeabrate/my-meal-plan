@@ -33,7 +33,7 @@ export const DropdownList = styled.ul`
   list-style: none;
   width: calc(100% + 2px);
   z-index: 1;
-  border: 1px solid ${({ theme }) => theme.themeColors.border};
+  border: 1px solid ${({ theme }) => theme.themeColors.font};
   background-color: ${({ theme }) => theme.themeColors.background};
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as Styled from './MealsSection.styles';
@@ -6,6 +6,7 @@ import { MealPlansContext } from '../../../context/MealPlansContext';
 import { FetchedMealType } from 'api/mealdb/useFetchMealPlanMeals';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
+import OptionsDropdown from 'components/Dropdowns/OptionsDropdown/OptionsDropdown';
 
 const MealsSection = ({
   mealsSection,
@@ -14,8 +15,6 @@ const MealsSection = ({
   mealsSection: FetchedMealType;
   activeDay: string;
 }) => {
-  const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
-
   const { currentMealPlan, setMealPlans } = useContext(MealPlansContext);
 
   const deleteMeal = (mealPlanId: number, mealId: string) => {
@@ -32,26 +31,18 @@ const MealsSection = ({
     });
   };
 
+  const deleteMealsSection = () => {
+    console.log(currentMealPlan);
+  };
+
   return (
     <Styled.MealPlan>
       <Styled.Header>
         <h3>{mealsSection.mealPlan}</h3>
-        <Styled.OptionsButton onClick={() => setIsOptionsDropdownOpen((isOpen) => !isOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
-
-          {isOptionsDropdownOpen && (
-            <ul>
-              <li>Search for a meal</li>
-              <li>Add from favorites</li>
-              <li>Delete meal section</li>
-            </ul>
-          )}
-        </Styled.OptionsButton>
+        <OptionsDropdown />
       </Styled.Header>
 
-      <ul>
+      <Styled.MealsGrid>
         {mealsSection.meals.map(({ idMeal, strMeal, strMealThumb }) => (
           <li key={idMeal}>
             <Link href={`/meal/${idMeal}`}>
@@ -74,7 +65,7 @@ const MealsSection = ({
             />
           </li>
         ))}
-      </ul>
+      </Styled.MealsGrid>
     </Styled.MealPlan>
   );
 };
