@@ -1,46 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import * as Styled from './MealPlansList.styles';
-import { useRouter } from 'next/router';
-import { MealPlansContext } from '../context/MealPlansContext';
+import { MealPlansContext } from '../../../context/MealPlansContext';
+import { useMealPlanPathChange } from '../../../hooks/useMealPlanPathChange';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import OpenInput from 'components/OpenInput/OpenInput';
-import { useMealPlanPathChange } from '../hooks/useMealPlanPathChange';
+import Loading from 'components/Loading/Loading';
 
 const MealPlansList = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
-  const { mealPlans, setMealPlans, deleteMealPlan } = useContext(MealPlansContext);
+  const { mealPlans, addNewMealPlan, deleteMealPlan } = useContext(MealPlansContext);
 
-  const router = useRouter();
-  useMealPlanPathChange();
+  const { loadingMealPlan, changeMealPlanPath } = useMealPlanPathChange();
 
-  const addNewMealPlan = (inputValue: string) => {
-    if (inputValue) {
-      const newMealPlan = {
-        id: 3,
-        name: inputValue,
-        days: {
-          mon: [],
-          tue: [],
-          wed: [],
-          thu: [],
-          fri: [],
-          sat: [],
-          sun: [],
-        },
-      };
-
-      setMealPlans((dbMealPlans) => [...dbMealPlans, newMealPlan]);
-      setIsAddMealPLanInputOpen(false);
-    }
-  };
-
-  return (
-    <div>
+  return loadingMealPlan ? (
+    <Loading />
+  ) : (
+    <>
       {isAddMealPLanInputOpen && (
         <OpenInput
           label='Add meal plan'
           placeholder='Meal plan name...'
-          updateMealPLans={addNewMealPlan}
+          updateMealPLans={(inputValue) => {
+            addNewMealPlan(inputValue);
+            setIsAddMealPLanInputOpen(false);
+          }}
         />
       )}
 
@@ -48,13 +31,7 @@ const MealPlansList = () => {
         <Styled.MealPlansList>
           {mealPlans.map((mealPlan, index) => (
             <li key={mealPlan.id}>
-              <Styled.ListItem
-                onClick={() => {
-                  router.push({
-                    query: { ...router.query, planId: mealPlan.id },
-                  });
-                }}
-              >
+              <Styled.ListItem onClick={() => changeMealPlanPath(mealPlan.id)}>
                 <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
                 {mealPlan.name}
               </Styled.ListItem>
@@ -84,7 +61,7 @@ const MealPlansList = () => {
       >
         <PlusSvg />
       </Styled.AddMealPlanButton>
-    </div>
+    </>
   );
 };
 

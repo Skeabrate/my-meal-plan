@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as Styled from './MealsSection.styles';
-import { MealPlansContext } from '../../../context/MealPlansContext';
+import { MealPlansContext } from '../../../../../context/MealPlansContext';
 import { FetchedMealType } from 'api/mealdb/useFetchMealPlanMeals';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
@@ -15,41 +15,15 @@ const MealsSection = ({
   mealsSection: FetchedMealType;
   activeDay: string;
 }) => {
-  const { currentMealPlan, setMealPlans } = useContext(MealPlansContext);
-
-  const deleteMeal = (mealPlanId: number, mealId: string) => {
-    setMealPlans((plans) => {
-      return plans.map((plan) => {
-        if (plan.id === currentMealPlan?.id) {
-          const mealPlanToChange = plan.days[activeDay as keyof typeof plan.days].find(
-            (p) => p.id === mealPlanId
-          );
-          mealPlanToChange!.meals = mealPlanToChange!.meals.filter((id) => id !== mealId);
-        }
-        return plan;
-      });
-    });
-  };
-
-  const deleteMealsSection = () => {
-    setMealPlans((plans) => {
-      return plans.map((plan) => {
-        if (plan.id === currentMealPlan?.id) {
-          plan.days[activeDay as keyof typeof plan.days] = plan.days[
-            activeDay as keyof typeof plan.days
-          ].filter((p) => p.mealPlan !== mealsSection.mealPlan);
-        }
-
-        return plan;
-      });
-    });
-  };
+  const { deleteMealsSection, deleteMealFromMealsSection } = useContext(MealPlansContext);
 
   return (
     <Styled.MealPlan>
       <Styled.Header>
         <h3>{mealsSection.mealPlan}</h3>
-        <OptionsDropdown deleteHandler={deleteMealsSection} />
+        <OptionsDropdown
+          deleteHandler={() => deleteMealsSection(mealsSection.mealPlan, activeDay)}
+        />
       </Styled.Header>
 
       <Styled.MealsGrid>
@@ -71,7 +45,7 @@ const MealsSection = ({
             <span>{strMeal}</span>
             <UnderlinedButton
               label='Delete'
-              onClick={() => deleteMeal(mealsSection.id, idMeal)}
+              onClick={() => deleteMealFromMealsSection(mealsSection.id, idMeal, activeDay)}
             />
           </li>
         ))}

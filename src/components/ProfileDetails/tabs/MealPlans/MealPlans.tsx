@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import MealPlansProvider, { MealPlansContext } from './context/MealPlansContext';
+import MealPlansProvider, { MealPlansContext } from '../../context/MealPlansContext';
 import CurrentMealPlan from './CurrentMealPlan/CurrentMealPlan';
 import MealPlansList from './MealPlansList/MealPlansList';
 

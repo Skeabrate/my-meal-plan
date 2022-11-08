@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useFetchMealPlans } from 'api/mealdb/useFetchMealPlanMeals';
-import { MealPlansContext } from '../../context/MealPlansContext';
+import { MealPlansContext } from '../../../../context/MealPlansContext';
 import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
@@ -9,28 +9,11 @@ import MealsSection from './MealsSection/MealsSection';
 const MealPlan = ({ activeDay }: { activeDay: string }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
-  const { currentMealPlan, setMealPlans } = useContext(MealPlansContext);
+  const { currentMealPlan, addNewMealSection } = useContext(MealPlansContext);
 
   const mealPlansInCurrentDay =
     currentMealPlan?.days[activeDay as keyof typeof currentMealPlan.days] || [];
   const { fetchedMealPlans, isLoading, error } = useFetchMealPlans(mealPlansInCurrentDay);
-
-  const addNewMealSection = (inputValue: string) => {
-    setMealPlans((plans) => {
-      return plans.map((plan) => {
-        if (plan.id === currentMealPlan?.id) {
-          plan.days[activeDay as keyof typeof plan.days].push({
-            id: 123,
-            mealPlan: inputValue,
-            meals: [],
-          });
-        }
-        return plan;
-      });
-    });
-
-    setIsInputOpen(false);
-  };
 
   return (
     <div>
@@ -46,7 +29,10 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
         {isInputOpen && (
           <OpenInput
             label='Add new meal section'
-            updateMealPLans={addNewMealSection}
+            updateMealPLans={(inputValue) => {
+              addNewMealSection(inputValue, activeDay);
+              setIsInputOpen(false);
+            }}
             placeholder='E.g. Breakfast...'
           />
         )}

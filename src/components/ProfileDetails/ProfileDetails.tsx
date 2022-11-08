@@ -1,9 +1,9 @@
+import { useMemo } from 'react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
-import { useEffect, useMemo } from 'react';
-import { useRouter } from 'next/router';
 import * as Styled from './ProfileDetails.styles';
 import { useTabs } from 'hooks/useTabs';
+import { useProfileDetailsPathChange } from './hooks/useProfileDetailsPathChange';
 import FavoritesSvg from 'assets/SVG/Marked.svg';
 import LogoutSvg from 'assets/SVG/Logout.svg';
 import ProfileSvg from 'assets/SVG/Profile.svg';
@@ -11,6 +11,7 @@ import MealSvg from 'assets/SVG/Meal.svg';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
 import Overwiew from 'components/ProfileDetails/tabs/Overwiew';
 import MealPlans from 'components/ProfileDetails/tabs/MealPlans/MealPlans';
+import Loading from 'components/Loading/Loading';
 
 const ProfileDetails = () => {
   const tabs = useMemo(
@@ -44,14 +45,7 @@ const ProfileDetails = () => {
   );
 
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    const newTab = tabs.find((tab) => tab.label.props.children[1] === router.query?.activeTab)?.id;
-
-    newTab ? setActiveDetails(newTab) : setActiveDetails(tabs[0].id);
-  }, [router.query, tabs, setActiveDetails]);
+  const { loadingTab, changeTabPath } = useProfileDetailsPathChange(tabs, setActiveDetails);
 
   return (
     <Styled.ProfileDetails>
@@ -64,12 +58,7 @@ const ProfileDetails = () => {
           {tabs.map(({ id, label }) => (
             <li key={id}>
               <Styled.Button
-                onClick={() => {
-                  router.push({
-                    query: { activeTab: label.props.children[1] },
-                  });
-                  setActiveDetails(id);
-                }}
+                onClick={() => changeTabPath(label.props.children[1])}
                 $isActive={activeDetails === id}
               >
                 {label}
@@ -98,7 +87,18 @@ const ProfileDetails = () => {
         </Styled.Options>
       </Styled.SideBar>
 
-      <Styled.Tab>{selectedTab}</Styled.Tab>
+      <Styled.Tab>
+        {loadingTab ? (
+          <section>
+            <header>
+              <h1></h1>
+            </header>
+            <Loading />
+          </section>
+        ) : (
+          selectedTab
+        )}
+      </Styled.Tab>
     </Styled.ProfileDetails>
   );
 };

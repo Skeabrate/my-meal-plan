@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import * as Styled from './CurrentMealPlan.styles';
 import { useTabs } from 'hooks/useTabs';
-import { MealPlansContext } from '../context/MealPlansContext';
+import { MealPlansContext } from '../../../context/MealPlansContext';
+import { useMealPlanPathChange } from '../../../hooks/useMealPlanPathChange';
 import MealPlan from './MealPlan/MealPlan';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
-import { useMealPlanPathChange } from '../hooks/useMealPlanPathChange';
 
 const CurrentMealPlan = () => {
   const [activeDaysHelper, setActiveDaysHelper] = useState(0);
@@ -20,7 +20,6 @@ const CurrentMealPlan = () => {
   }));
 
   const { activeDetails, selectedTab, setActiveDetails } = useTabs(days);
-
   useMealPlanPathChange();
 
   return (
