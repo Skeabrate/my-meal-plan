@@ -26,8 +26,8 @@ const links = [
     isFavorite: true,
   },
   {
-    href: '/meal-plan',
-    name: 'Meal Plan',
+    href: '/profile?activeTab=Meal+Plans',
+    name: 'Meal Plans',
   },
 ];
 
