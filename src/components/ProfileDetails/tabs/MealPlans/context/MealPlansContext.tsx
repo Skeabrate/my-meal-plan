@@ -25,7 +25,7 @@ const dbData: MealPlan[] = [
         { id: 0, mealPlan: 'Breakfast', meals: ['52870', '52785', '52971'] },
         { id: 1, mealPlan: 'Dinner', meals: ['53025', '53012'] },
       ],
-      tue: [{ id: 0, mealPlan: 'Breakfast', meals: ['53025', '53012'] }],
+      tue: [{ id: 2, mealPlan: 'Breakfast', meals: ['53025', '53012'] }],
       wed: [],
       thu: [],
       fri: [],

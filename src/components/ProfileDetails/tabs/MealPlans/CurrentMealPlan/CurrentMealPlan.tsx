@@ -52,7 +52,8 @@ const CurrentMealPlan = () => {
         ))}
       </Styled.DaysBar>
 
-      <div>{selectedTab}</div>
+      {/* MealPlan */}
+      {selectedTab}
     </>
   );
 };
