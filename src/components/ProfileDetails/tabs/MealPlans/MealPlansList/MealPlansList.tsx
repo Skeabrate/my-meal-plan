@@ -1,18 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as Styled from './MealPlansList.styles';
+import { useRouter } from 'next/router';
 import { MealPlansContext } from '../context/MealPlansContext';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import OpenInput from 'components/OpenInput/OpenInput';
+import { useMealPlanPathChange } from '../hooks/useMealPlanPathChange';
 
 const MealPlansList = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
-  const { mealPlans, setMealPlans, setCurrentMealPlan, deleteMealPlan } =
-    useContext(MealPlansContext);
+  const { mealPlans, setMealPlans, deleteMealPlan } = useContext(MealPlansContext);
+
+  const router = useRouter();
+  useMealPlanPathChange();
 
   const addNewMealPlan = (inputValue: string) => {
     if (inputValue) {
       const newMealPlan = {
-        id: 0,
+        id: 3,
         name: inputValue,
         days: {
           mon: [],
@@ -44,7 +48,13 @@ const MealPlansList = () => {
         <Styled.MealPlansList>
           {mealPlans.map((mealPlan, index) => (
             <li key={mealPlan.id}>
-              <Styled.ListItem onClick={() => setCurrentMealPlan(mealPlan)}>
+              <Styled.ListItem
+                onClick={() => {
+                  router.push({
+                    query: { ...router.query, planId: mealPlan.id },
+                  });
+                }}
+              >
                 <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
                 {mealPlan.name}
               </Styled.ListItem>

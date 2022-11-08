@@ -43,9 +43,9 @@ const ProfileDetails = () => {
     []
   );
 
-  const router = useRouter();
-
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
+
+  const router = useRouter();
 
   useEffect(() => {
     const newTab = tabs.find((tab) => tab.label.props.children[1] === router.query?.activeTab)?.id;

@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import * as Styled from './CurrentMealPlan.styles';
 import { useTabs } from 'hooks/useTabs';
 import { MealPlansContext } from '../context/MealPlansContext';
 import MealPlan from './MealPlan/MealPlan';
-import GoBackButton from 'components/GoBackButton/GoBackButton';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
+import { useMealPlanPathChange } from '../hooks/useMealPlanPathChange';
 
 const CurrentMealPlan = () => {
   const [activeDaysHelper, setActiveDaysHelper] = useState(0);
-  const { currentMealPlan, setCurrentMealPlan, deleteMealPlan } = useContext(MealPlansContext);
+  const { currentMealPlan, deleteMealPlan } = useContext(MealPlansContext);
 
   const daysToArray = Object.entries(currentMealPlan!.days);
   const days = daysToArray.map(([key], index) => ({
@@ -21,13 +21,10 @@ const CurrentMealPlan = () => {
 
   const { activeDetails, selectedTab, setActiveDetails } = useTabs(days);
 
+  useMealPlanPathChange();
+
   return (
     <>
-      <GoBackButton
-        label='Back to meal plans list'
-        callback={() => setCurrentMealPlan(undefined)}
-      />
-
       <Styled.MealPlanTitle>
         <h2>{currentMealPlan!.name}</h2>
         <UnderlinedButton

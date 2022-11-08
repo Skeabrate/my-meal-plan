@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Arrow from 'assets/SVG/LeftArrow.svg';
-import { useContext } from 'react';
 import { HistoryContext } from 'context/HistoryContext';
 
 const StyledGoBackButton = styled.button`
@@ -31,11 +31,11 @@ const StyledGoBackButton = styled.button`
   }
 `;
 
-const GoBackButton = ({ label = 'Back', callback }: { label?: string; callback?: () => void }) => {
+const GoBackButton = ({ label = 'Back' }: { label?: string }) => {
   const { goBack } = useContext(HistoryContext);
 
   return (
-    <StyledGoBackButton onClick={callback || goBack}>
+    <StyledGoBackButton onClick={goBack}>
       <Arrow />
       {label}
     </StyledGoBackButton>
