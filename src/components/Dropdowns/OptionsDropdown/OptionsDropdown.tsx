@@ -1,10 +1,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import * as Styled from './OptionsDropdown.styles';
+import { SearchBarContext } from 'context/SearchBarContext';
 import SearchSVG from 'assets/SVG/Search.svg';
 import FavoritesSVG from 'assets/SVG/Marked.svg';
 import PlusSVG from 'assets/SVG/Plus.svg';
-import { SearchBarContext } from 'context/SearchBarContext';
-import Link from 'next/link';
 
 const OptionsDropdown = ({ deleteHandler }: { deleteHandler: () => void }) => {
   const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
