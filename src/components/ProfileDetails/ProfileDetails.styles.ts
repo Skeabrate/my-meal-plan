@@ -137,6 +137,8 @@ export const Logout = styled.li`
 `;
 
 export const Tab = styled.div`
+  z-index: 1;
+
   section {
     padding-top: 20px;
 
