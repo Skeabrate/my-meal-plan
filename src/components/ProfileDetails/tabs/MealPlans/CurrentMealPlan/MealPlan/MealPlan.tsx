@@ -47,7 +47,7 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
           <OpenInput
             label='Add new meal section'
             updateMealPLans={addNewMealSection}
-            placeholder='Meals section name...'
+            placeholder='E.g. Breakfast...'
           />
         )}
       </div>

@@ -4,7 +4,7 @@ import SearchSVG from 'assets/SVG/Search.svg';
 import FavoritesSVG from 'assets/SVG/Marked.svg';
 import PlusSVG from 'assets/SVG/Plus.svg';
 
-const OptionsDropdown = () => {
+const OptionsDropdown = ({ deleteHandler }: { deleteHandler: () => void }) => {
   const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
 
   const dropdownOpenRef = useRef(null);
@@ -51,7 +51,7 @@ const OptionsDropdown = () => {
             </button>
           </li>
           <li>
-            <button>
+            <button onClick={deleteHandler}>
               <PlusSVG />
               <span>Delete meal section</span>
             </button>

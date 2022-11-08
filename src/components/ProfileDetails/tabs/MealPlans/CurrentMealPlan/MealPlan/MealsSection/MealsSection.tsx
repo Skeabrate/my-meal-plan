@@ -32,14 +32,24 @@ const MealsSection = ({
   };
 
   const deleteMealsSection = () => {
-    console.log(currentMealPlan);
+    setMealPlans((plans) => {
+      return plans.map((plan) => {
+        if (plan.id === currentMealPlan?.id) {
+          plan.days[activeDay as keyof typeof plan.days] = plan.days[
+            activeDay as keyof typeof plan.days
+          ].filter((p) => p.mealPlan !== mealsSection.mealPlan);
+        }
+
+        return plan;
+      });
+    });
   };
 
   return (
     <Styled.MealPlan>
       <Styled.Header>
         <h3>{mealsSection.mealPlan}</h3>
-        <OptionsDropdown />
+        <OptionsDropdown deleteHandler={deleteMealsSection} />
       </Styled.Header>
 
       <Styled.MealsGrid>
