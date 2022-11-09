@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 32px !important;
+  height: 32px !important;
 `;
 
 export const ToggleButton = styled.button`
@@ -35,13 +35,12 @@ export const ToggleButton = styled.button`
     height: 100%;
     z-index: -2;
     border-radius: 100px;
-    background-color: ${({ theme }) => theme.themeColors.secondBackground};
-    opacity: 0;
-    transition: 0.1s ease-in-out;
+    background-color: ${({ theme }) => theme.themeColors.background};
+    transition: background-color 0.1s ease-in-out;
   }
 
   &:hover::after {
-    opacity: 1;
+    background-color: ${({ theme }) => theme.themeColors.secondBackground};
   }
 `;
 
@@ -78,28 +77,6 @@ export const Dropdown = styled.ul`
 
     &:hover {
       background-color: ${({ theme }) => theme.themeColors.secondBackground};
-    }
-  }
-
-  li:last-child button {
-    color: ${({ theme }) => theme.colors.red};
-
-    svg {
-      transform: rotate(45deg);
-
-      path {
-        transition: 0.1s ease-in-out;
-        fill: ${({ theme }) => theme.colors.red};
-      }
-    }
-
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.red};
-      color: white;
-
-      svg path {
-        fill: white;
-      }
     }
   }
 `;

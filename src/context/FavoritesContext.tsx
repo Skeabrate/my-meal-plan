@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 
 type FavoriteItem = string;
@@ -26,3 +26,22 @@ export default function FavoritesProvider({ children }: { children: React.ReactN
 
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 }
+
+export const useFavorites = (mealId: string) => {
+  const { favorites, setFavorites } = useContext(FavoritesContext);
+
+  const isMealAlreadyFavorite = useMemo(
+    () => favorites.some((item) => item === mealId),
+    [favorites, mealId]
+  );
+
+  const handleFavorites = () => {
+    if (isMealAlreadyFavorite) {
+      setFavorites((state) => state.filter((item) => item !== mealId));
+    } else {
+      setFavorites((state) => [...state, mealId]);
+    }
+  };
+
+  return { isMealAlreadyFavorite, handleFavorites };
+};

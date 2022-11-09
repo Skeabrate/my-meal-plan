@@ -4,9 +4,9 @@ import Image from 'next/image';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
 import SortCombobox from 'components/Comboboxes/SortCombobox';
-import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 import Loading from 'components/Loading/Loading';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
+import MealOptionsDropdown from 'components/Dropdowns/MealOptionsDropdown';
 
 export type DataItemType = {
   id: string;
@@ -68,11 +68,11 @@ const GridSection = ({
       ) : (
         <Styled.Grid>
           {currentData.map(({ id, name, img, slug }) => (
-            <article key={id}>
-              {enableFavorites && <FavoritesButton mealId={id} />}
+            <Styled.GridItem key={id}>
+              {enableFavorites && <MealOptionsDropdown mealId={id} />}
               <Link href={linkUrl + slug}>
                 <a>
-                  <div>
+                  <Styled.GridItemImage>
                     <ImageLoading>
                       <Image
                         src={img}
@@ -81,12 +81,12 @@ const GridSection = ({
                         objectFit={'cover'}
                       />
                     </ImageLoading>
-                  </div>
+                  </Styled.GridItemImage>
 
                   <h3>{name}</h3>
                 </a>
               </Link>
-            </article>
+            </Styled.GridItem>
           ))}
         </Styled.Grid>
       )}

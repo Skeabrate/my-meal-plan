@@ -66,7 +66,6 @@ export const Gallery = styled.section`
   gap: 1rem;
 
   div {
-    width: 100%;
     height: 350px;
   }
 

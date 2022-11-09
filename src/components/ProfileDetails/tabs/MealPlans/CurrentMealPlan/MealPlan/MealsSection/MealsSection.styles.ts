@@ -37,6 +37,7 @@ export const MealsGrid = styled.ul`
 
   li {
     font-weight: 600;
+    height: fit-content;
 
     span {
       display: block;

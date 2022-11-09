@@ -3,17 +3,17 @@ import { NextPage } from 'next';
 import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 import * as Styled from 'styles/meal.styles';
-import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { dehydrate, QueryClient } from 'react-query';
+import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { fetchMealById, useFetchMealById } from 'api/mealdb/useFetchMealById';
 import { useGetMealDetails } from 'hooks/useGetMealDetails';
-import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 import MealDetails from 'components/MealDetails/MealDetails';
 import Instruction from 'components/MealDetails/tabs/Instruction';
 import Ingredients from 'components/MealDetails/tabs/Ingredients';
 import Steps from 'components/MealDetails/tabs/Steps';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import MealOptionsDropdown from 'components/Dropdowns/MealOptionsDropdown';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);
@@ -49,14 +49,14 @@ const Meal = ({ mealId }: { mealId: string }) => {
               layout={'fill'}
               objectFit={'cover'}
             />
-            <FavoritesButton mealId={id} />
+            <MealOptionsDropdown mealId={id} />
           </ImageLoading>
 
           <iframe
             title={name}
             src={youtubeUrl}
             width='100%'
-            height='250px'
+            height='300px'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
             allowFullScreen
           />
