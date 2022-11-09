@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const Options = styled.div`
+export const Wrapper = styled.div`
   position: relative;
   width: 32px;
   height: 32px;
 `;
 
-export const OptionsButton = styled.button`
+export const ToggleButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +45,7 @@ export const OptionsButton = styled.button`
   }
 `;
 
-export const OptionsDropdown = styled.ul`
+export const Dropdown = styled.ul`
   position: absolute;
   z-index: 10;
   top: 100%;

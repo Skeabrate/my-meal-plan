@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { DataItemType } from 'components/GridSection/GridSection';
-import Dropdown from './Dropdown/Dropdown';
-import { useDropdownValue } from './Dropdown/useDropdownValue';
+import { useComboboxValue } from './template/useComboboxValue';
+import Combobox from './template/Combobox';
 
-const StyledSortDropdown = styled.div`
+const StyledSortCombobox = styled.div`
   width: 100px;
   height: 40px;
 
@@ -42,21 +42,21 @@ const options = [
   { id: 1, value: 'Name: Z - A' },
 ];
 
-type SortDropdownType = {
+type SortComboboxType = {
   itemsToSort: DataItemType[];
   setLoadingFilters: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
-  const { dropdownValue, setDropdownValue } = useDropdownValue(undefined);
+const SortCombobox = ({ itemsToSort, setLoadingFilters }: SortComboboxType) => {
+  const { comboboxValue, setComboboxValue } = useComboboxValue(undefined);
 
   const filtersHandler = useCallback(
-    (data: DataItemType[], dropdownValue: string) => {
+    (data: DataItemType[], comboboxValue: string) => {
       setLoadingFilters(true);
 
-      if (dropdownValue === options[0].value) {
+      if (comboboxValue === options[0].value) {
         data.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (dropdownValue === options[1].value) {
+      } else if (comboboxValue === options[1].value) {
         data.sort((a, b) => -1 * a.name.localeCompare(b.name));
       }
 
@@ -68,19 +68,19 @@ const SortDropdown = ({ itemsToSort, setLoadingFilters }: SortDropdownType) => {
   );
 
   useEffect(() => {
-    if (dropdownValue) filtersHandler(itemsToSort, dropdownValue.value);
-  }, [dropdownValue, filtersHandler, itemsToSort]);
+    if (comboboxValue) filtersHandler(itemsToSort, comboboxValue.value);
+  }, [comboboxValue, filtersHandler, itemsToSort]);
 
   return (
-    <StyledSortDropdown>
-      <Dropdown
+    <StyledSortCombobox>
+      <Combobox
         label='Sort by:'
         options={options}
-        dropdownValue={dropdownValue}
-        setDropdownValue={setDropdownValue}
+        comboboxValue={comboboxValue}
+        setComboboxValue={setComboboxValue}
       />
-    </StyledSortDropdown>
+    </StyledSortCombobox>
   );
 };
 
-export default SortDropdown;
+export default SortCombobox;

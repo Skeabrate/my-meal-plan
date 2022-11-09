@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import styles, { keyframes } from 'styled-components';
 import { isSystemThemeSettingSetToDark, ThemeContext, ThemeTypes } from 'context/ThemeContext';
-import Dropdown from './Dropdown/Dropdown';
-import { useDropdownValue } from './Dropdown/useDropdownValue';
+import Combobox from './template/Combobox';
+import { useComboboxValue } from './template/useComboboxValue';
 import LightSvg from 'assets/SVG/Light.svg';
 import DarkSvg from 'assets/SVG/Dark.svg';
 import SystemSvg from 'assets/SVG/System.svg';
@@ -20,7 +20,7 @@ const fadeInReverseAnimation = styled.keyframes`
   }
 `;
 
-const StyledThemeDropdown = styled.div`
+const StyledThemeCombobox = styled.div`
   height: 100%;
   width: 100%;
 
@@ -97,28 +97,28 @@ const options = [
   },
 ];
 
-const ThemeDropdown = () => {
+const ThemeCombobox = () => {
   const { themeStyle, setThemeStyle } = useContext(ThemeContext);
-  const initialDropdownValue = options.find((option) => option.value === themeStyle);
+  const initialComboboxValue = options.find((option) => option.value === themeStyle);
 
-  const { dropdownValue, setDropdownValue } = useDropdownValue({
-    id: initialDropdownValue!.id,
-    value: initialDropdownValue!.value,
+  const { comboboxValue, setComboboxValue } = useComboboxValue({
+    id: initialComboboxValue!.id,
+    value: initialComboboxValue!.value,
   });
 
   useEffect(() => {
-    setThemeStyle(dropdownValue.value);
-  }, [dropdownValue, setThemeStyle]);
+    setThemeStyle(comboboxValue.value);
+  }, [comboboxValue, setThemeStyle]);
 
   return (
-    <StyledThemeDropdown>
-      <Dropdown
+    <StyledThemeCombobox>
+      <Combobox
         options={options}
-        dropdownValue={dropdownValue}
-        setDropdownValue={setDropdownValue}
+        comboboxValue={comboboxValue}
+        setComboboxValue={setComboboxValue}
       />
-    </StyledThemeDropdown>
+    </StyledThemeCombobox>
   );
 };
 
-export default ThemeDropdown;
+export default ThemeCombobox;

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './GridSection.styles';
 import { usePaginate } from 'hooks/usePaginate';
-import SortDropdown from 'components/Dropdowns/SortDropdown';
+import SortCombobox from 'components/Comboboxes/SortCombobox';
 import FavoritesButton from 'components/FavoritesButton/FavoritesButton';
 import Loading from 'components/Loading/Loading';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
@@ -45,7 +45,7 @@ const GridSection = ({
 
   const loadingState = loadingFilters || loadingData;
   const errorState = error.value;
-  const displaySortDropdownState = !error.value && currentData.length > 1;
+  const displaySortComboboxState = !error.value && currentData.length > 1;
   const displayLoadingRefState = currentData.length < data.length;
 
   return (
@@ -53,8 +53,8 @@ const GridSection = ({
       <Styled.Header>
         {label.isMain ? <h1>{label.value}</h1> : <h2>{label.value}</h2>}
 
-        {displaySortDropdownState && (
-          <SortDropdown
+        {displaySortComboboxState && (
+          <SortCombobox
             itemsToSort={data}
             setLoadingFilters={setLoadingFilters}
           />

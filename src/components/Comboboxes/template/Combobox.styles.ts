@@ -26,7 +26,7 @@ export const Label = styled.p`
   }
 `;
 
-export const DropdownList = styled.ul`
+export const ComboboxList = styled.ul`
   position: absolute;
   top: calc(100% + 6px);
   left: -1px;
@@ -38,7 +38,7 @@ export const DropdownList = styled.ul`
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;
 
-export const DropdownListItem = styled.li`
+export const ComboboxListItem = styled.li`
   width: 100%;
   // prevent colapsed outlines
   margin-bottom: 2px;

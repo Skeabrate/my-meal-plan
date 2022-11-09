@@ -6,7 +6,7 @@ import { MealPlansContext } from '../../../../../context/MealPlansContext';
 import { FetchedMealType } from 'api/mealdb/useFetchMealPlanMeals';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
-import OptionsDropdown from 'components/Dropdowns/OptionsDropdown/OptionsDropdown';
+import MealsSectionOptionsDropdown from 'components/Dropdowns/MealsSectionOptionsDropdown';
 
 const MealsSection = ({
   mealsSection,
@@ -21,7 +21,7 @@ const MealsSection = ({
     <Styled.MealPlan>
       <Styled.Header>
         <h3>{mealsSection.mealPlan}</h3>
-        <OptionsDropdown
+        <MealsSectionOptionsDropdown
           deleteHandler={() => deleteMealsSection(mealsSection.mealPlan, activeDay)}
         />
       </Styled.Header>

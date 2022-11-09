@@ -13,7 +13,7 @@ import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
 import { useSession } from 'next-auth/react';
-import ThemeDropdown from 'components/Dropdowns/ThemeDropdown';
+import ThemeCombobox from 'components/Comboboxes/ThemeCombobox';
 
 const links = [
   {
@@ -98,7 +98,7 @@ const NavBar = () => {
 
           <Styled.NavSubItems $isCartOpen={isCartOpen}>
             <Styled.NavSubItem>
-              <ThemeDropdown />
+              <ThemeCombobox />
             </Styled.NavSubItem>
             <Styled.NavSubItem>
               <button
