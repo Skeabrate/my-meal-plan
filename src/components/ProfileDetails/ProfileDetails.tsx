@@ -55,11 +55,11 @@ const ProfileDetails = () => {
         </Styled.BackButton>
 
         <Styled.Options>
-          {tabs.map(({ id, label }) => (
-            <li key={id}>
+          {tabs.map(({ id: tabId, label }) => (
+            <li key={tabId}>
               <Styled.Button
-                onClick={() => changeTabPath(label.props.children[1])}
-                $isActive={activeDetails === id}
+                onClick={() => changeTabPath(label.props.children[1], tabId)}
+                $isActive={activeDetails === tabId}
               >
                 {label}
               </Styled.Button>

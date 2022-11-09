@@ -5,6 +5,7 @@ import { MealPlansContext } from 'context/MealPlansContext';
 import { useMealPlanPathChange } from '../../../hooks/useMealPlanPathChange';
 import MealPlan from './MealPlan/MealPlan';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
+import Loading from 'components/Loading/Loading';
 
 const CurrentMealPlan = () => {
   const [activeDaysHelper, setActiveDaysHelper] = useState(0);
@@ -20,9 +21,11 @@ const CurrentMealPlan = () => {
   }));
 
   const { activeDetails, selectedTab, setActiveDetails } = useTabs(days);
-  useMealPlanPathChange();
+  const { loadingMealPlan } = useMealPlanPathChange();
 
-  return (
+  return loadingMealPlan ? (
+    <Loading />
+  ) : (
     <>
       <Styled.MealPlanTitle>
         <h2>{currentMealPlan!.name}</h2>
