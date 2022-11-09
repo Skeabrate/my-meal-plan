@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { MealPlansContext } from '../context/MealPlansContext';
+import { MealPlansContext } from 'context/MealPlansContext';
 
 export const useMealPlanPathChange = () => {
   const [loadingMealPlan, setLoadingMealPlan] = useState(false);

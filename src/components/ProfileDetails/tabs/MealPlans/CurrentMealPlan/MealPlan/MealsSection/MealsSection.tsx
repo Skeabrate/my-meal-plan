@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as Styled from './MealsSection.styles';
-import { MealPlansContext } from '../../../../../context/MealPlansContext';
+import { MealPlansContext } from 'context/MealPlansContext';
 import { FetchedMealType } from 'api/mealdb/useFetchMealPlanMeals';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';

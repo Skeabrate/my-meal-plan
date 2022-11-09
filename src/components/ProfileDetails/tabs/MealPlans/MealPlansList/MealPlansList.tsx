@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import * as Styled from './MealPlansList.styles';
-import { MealPlansContext } from '../../../context/MealPlansContext';
+import { MealPlansContext } from 'context/MealPlansContext';
 import { useMealPlanPathChange } from '../../../hooks/useMealPlanPathChange';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import OpenInput from 'components/OpenInput/OpenInput';

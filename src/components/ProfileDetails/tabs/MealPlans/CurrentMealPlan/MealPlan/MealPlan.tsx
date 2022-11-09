@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useFetchMealPlans } from 'api/mealdb/useFetchMealPlanMeals';
-import { MealPlansContext } from '../../../../context/MealPlansContext';
+import { MealPlansContext } from 'context/MealPlansContext';
 import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';

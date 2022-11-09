@@ -4,6 +4,7 @@ import MarkedSvg from 'assets/SVG/Marked.svg';
 import UnMarkedSvg from 'assets/SVG/UnMarked.svg';
 import MealSvg from 'assets/SVG/Meal.svg';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -13,6 +14,11 @@ const StyledWrapper = styled.div`
 `;
 
 const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
+  // if session -> meal plans -> days -> meal sections
+  const [subMenuItems, setSubMenuItems] = useState([]);
+
   const { isMealAlreadyFavorite, handleFavorites } = useFavorites(mealId);
 
   return (
@@ -35,10 +41,20 @@ const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
         </li>
 
         <li>
-          <button>
+          <button onClick={() => setIsSubMenuOpen((isOpen) => !isOpen)}>
             <MealSvg />
             <span>Add to Meal Plan</span>
           </button>
+
+          {/* {isSubMenuOpen && (
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          )} */}
         </li>
       </Dropdown>
     </StyledWrapper>
