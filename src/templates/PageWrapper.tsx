@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const StyledPage = styled.main<{ $disableAnimation?: boolean }>`
   padding: 4rem 2rem;
+  min-width: 320px;
   max-width: 1400px;
   margin: 0 auto;
 

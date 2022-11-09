@@ -23,12 +23,12 @@ const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
             {isMealAlreadyFavorite ? (
               <>
                 <MarkedSvg />
-                <span>Remove from favorites</span>
+                <span>Remove from Favorites</span>
               </>
             ) : (
               <>
                 <UnMarkedSvg />
-                <span>Add to favorites</span>
+                <span>Add to Favorites</span>
               </>
             )}
           </button>
