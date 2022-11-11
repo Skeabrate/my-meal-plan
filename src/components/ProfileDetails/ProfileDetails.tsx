@@ -45,7 +45,6 @@ const ProfileDetails = () => {
   );
 
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
-  const { loadingTab, changeTabPath } = useProfileDetailsPathChange(tabs, setActiveDetails);
 
   return (
     <Styled.ProfileDetails>
@@ -58,7 +57,7 @@ const ProfileDetails = () => {
           {tabs.map(({ id: tabId, label }) => (
             <li key={tabId}>
               <Styled.Button
-                onClick={() => changeTabPath(label.props.children[1], tabId)}
+                onClick={() => {}}
                 $isActive={activeDetails === tabId}
               >
                 {label}
@@ -87,18 +86,7 @@ const ProfileDetails = () => {
         </Styled.Options>
       </Styled.SideBar>
 
-      <Styled.Tab>
-        {loadingTab ? (
-          <section>
-            <header>
-              <h1></h1>
-            </header>
-            <Loading />
-          </section>
-        ) : (
-          selectedTab
-        )}
-      </Styled.Tab>
+      <Styled.Tab>{selectedTab}</Styled.Tab>
     </Styled.ProfileDetails>
   );
 };

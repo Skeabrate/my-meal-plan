@@ -26,6 +26,7 @@
 			"templates/*": ["src/templates/*"],
 			"api/*": ["src/api/*"],
 			"lib/*": ["src/lib/*"],
+			"layouts/*": ["src/layouts/*"],
 		}
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],

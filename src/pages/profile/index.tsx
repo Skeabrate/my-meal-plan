@@ -1,10 +1,8 @@
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from 'next-auth/react';
-import ProfileDetails from 'components/ProfileDetails/ProfileDetails';
+import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 
-const Profile = () => {
-  return <ProfileDetails />;
-};
+const Profile = () => {};
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
@@ -16,11 +14,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         permanent: false,
       },
     };
+  } else {
+    return {
+      redirect: {
+        destination: '/profile/overview',
+        permament: false,
+      },
+      props: { session },
+    };
   }
-
-  return {
-    props: { session },
-  };
 }
 
 export default Profile;
+
+Profile.Layout = ProfileLayout;

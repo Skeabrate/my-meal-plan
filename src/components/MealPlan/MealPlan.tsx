@@ -1,18 +1,19 @@
-import { useContext, useState } from 'react';
-import { useFetchMealPlanMeals } from 'api/mealdb/useFetchMealPlanMeals';
-import { MealPlansContext } from 'context/MealPlansContext';
+import { useState } from 'react';
+import { MealPlansInCurrentDayType, useFetchMealPlanMeals } from 'api/mealdb/useFetchMealPlanMeals';
 import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
 
-const MealPlan = ({ activeDay }: { activeDay: string }) => {
+const MealPlan = ({
+  activeDay,
+  mealPlansInCurrentDay,
+}: {
+  activeDay: string;
+  mealPlansInCurrentDay: MealPlansInCurrentDayType[];
+}) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
-  const { currentMealPlan, addNewMealSection } = useContext(MealPlansContext);
-
-  const mealPlansInCurrentDay =
-    currentMealPlan?.days[activeDay as keyof typeof currentMealPlan.days] || [];
   const { fetchedMeals, isLoading, error } = useFetchMealPlanMeals(mealPlansInCurrentDay);
 
   return (
@@ -30,7 +31,6 @@ const MealPlan = ({ activeDay }: { activeDay: string }) => {
           <OpenInput
             label='Add new meal section'
             updateMealPLans={(inputValue) => {
-              addNewMealSection(inputValue, activeDay);
               setIsInputOpen(false);
             }}
             placeholder='E.g. Breakfast...'

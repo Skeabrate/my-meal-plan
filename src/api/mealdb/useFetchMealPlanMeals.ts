@@ -3,10 +3,10 @@ import { useQuery } from 'react-query';
 import { ApiResponseType } from 'types/ApiResponseType';
 import { MealType } from 'types/MealType';
 
-type MealPlansInCurrentDayType = { id: number; mealPlan: string; meals: string[] };
+export type MealPlansInCurrentDayType = { id: number; mealPlan: string; meals: string[] };
 export type FetchedMealType = { id: number; mealPlan: string; meals: MealType[] };
 
-export const fetchMealPlans = async (mealPlansInCurrentDay: MealPlansInCurrentDayType[]) => {
+export const fetchMealPlanMeals = async (mealPlansInCurrentDay: MealPlansInCurrentDayType[]) => {
   const fetchedMeals = mealPlansInCurrentDay.map((mealPlan) => ({
     id: mealPlan.id,
     mealPlan: mealPlan.mealPlan,
@@ -25,21 +25,21 @@ export const fetchMealPlans = async (mealPlansInCurrentDay: MealPlansInCurrentDa
   return fetchedMeals as any;
 };
 
-export const useFetchMealPlans = (mealPlansInCurrentDay: MealPlansInCurrentDayType[]) => {
+export const useFetchMealPlanMeals = (mealPlansInCurrentDay: MealPlansInCurrentDayType[]) => {
   const {
-    data: fetchedMealPlans,
+    data: fetchedMeals,
     isLoading,
     error,
   } = useQuery(
-    ['fetchMealPlans', mealPlansInCurrentDay],
-    () => fetchMealPlans(mealPlansInCurrentDay),
+    ['fetchMealPlanMeals', mealPlansInCurrentDay],
+    () => fetchMealPlanMeals(mealPlansInCurrentDay),
     {
       enabled: !!mealPlansInCurrentDay,
       refetchOnWindowFocus: false,
     }
   );
 
-  return { fetchedMealPlans, isLoading, error } as {
-    fetchedMealPlans: FetchedMealType[];
+  return { fetchedMeals, isLoading, error } as {
+    fetchedMeals: FetchedMealType[];
   } & ApiResponseType;
 };
