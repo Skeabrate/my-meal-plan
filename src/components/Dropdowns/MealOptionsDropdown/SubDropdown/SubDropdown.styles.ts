@@ -37,11 +37,18 @@ export const Label = styled.button<{ $isDisabled?: boolean }>`
   }
 `;
 
-export const MealPlansNotFound = styled.li`
-  font-size: ${({ theme }) => theme.fontSize.caption};
-  padding: 10px;
-`;
-
 export const Day = styled.button`
   text-transform: capitalize;
+`;
+
+export const Info = styled.li`
+  font-size: ${({ theme }) => theme.fontSize.caption};
+  padding: 10px;
+
+  a {
+    text-decoration: underline;
+    padding: 0;
+    display: initial;
+    margin-right: 4px;
+  }
 `;

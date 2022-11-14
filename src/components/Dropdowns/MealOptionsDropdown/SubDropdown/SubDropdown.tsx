@@ -3,6 +3,8 @@ import * as Styled from './SubDropdown.styles';
 import { mealPlansDb } from 'src/pages/profile/meal-plans';
 import Loading from 'components/Loading/Loading';
 import ArrowSvg from 'assets/SVG/LeftArrow.svg';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 const useFetchFakeMealsDb = () => {
   const [fetchFakeMeals, setFetchFakeMeals] = useState<any[]>([]);
@@ -26,6 +28,7 @@ const useFetchFakeMealsDb = () => {
 // if session -> meal plans -> days -> meal sections
 const SubDropdown = ({ mealId }: { mealId: string }) => {
   const { mealsDb, isLoading } = useFetchFakeMealsDb();
+  const { data: session } = useSession();
   const [displayedItems, setDisplayedItems] = useState<JSX.Element | undefined>();
 
   function updateDisplayedItems(
@@ -116,9 +119,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
             </li>
           ))
         ) : (
-          <Styled.MealPlansNotFound>
-            You don't have any meal plans in chosen day.
-          </Styled.MealPlansNotFound>
+          <Styled.Info>You don't have any meal plans in chosen day.</Styled.Info>
         )}
       </>
     );
@@ -130,7 +131,16 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   }, [mealsDb]);
 
   return (
-    <Styled.SubDropdown>{isLoading ? <Loading height={100} /> : displayedItems}</Styled.SubDropdown>
+    <Styled.SubDropdown>
+      {session ? (
+        <>{isLoading ? <Loading height={100} /> : displayedItems}</>
+      ) : (
+        <Styled.Info>
+          <Link href='/api/auth/signin'>Log in</Link>
+          to see your meal plans.
+        </Styled.Info>
+      )}
+    </Styled.SubDropdown>
   );
 };
 
