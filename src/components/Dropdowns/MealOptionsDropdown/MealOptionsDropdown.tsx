@@ -1,10 +1,11 @@
+import React, { useState } from 'react';
 import { useFavorites } from 'context/FavoritesContext';
-import Dropdown from './template/Dropdown';
+import styled from 'styled-components';
+import Dropdown from '../template/Dropdown';
 import MarkedSvg from 'assets/SVG/Marked.svg';
 import UnMarkedSvg from 'assets/SVG/UnMarked.svg';
 import MealSvg from 'assets/SVG/Meal.svg';
-import styled from 'styled-components';
-import { useState } from 'react';
+import SubDropdown from './SubDropdown/SubDropdown';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -16,14 +17,16 @@ const StyledWrapper = styled.div`
 const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
-  // if session -> meal plans -> days -> meal sections
-  const [subMenuItems, setSubMenuItems] = useState([]);
-
   const { isMealAlreadyFavorite, handleFavorites } = useFavorites(mealId);
+
+  const handleSubDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsSubMenuOpen((isOpen) => !isOpen);
+  };
 
   return (
     <StyledWrapper>
-      <Dropdown>
+      <Dropdown hideSubMenu={() => setIsSubMenuOpen(false)}>
         <li>
           <button onClick={handleFavorites}>
             {isMealAlreadyFavorite ? (
@@ -41,20 +44,12 @@ const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
         </li>
 
         <li>
-          <button onClick={() => setIsSubMenuOpen((isOpen) => !isOpen)}>
+          <button onClick={handleSubDropdown}>
             <MealSvg />
             <span>Add to Meal Plan</span>
           </button>
 
-          {/* {isSubMenuOpen && (
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          )} */}
+          {isSubMenuOpen && <SubDropdown />}
         </li>
       </Dropdown>
     </StyledWrapper>

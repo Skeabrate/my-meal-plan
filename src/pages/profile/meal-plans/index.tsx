@@ -6,7 +6,7 @@ import PlusSvg from 'assets/SVG/Plus.svg';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 
-export const mealPlans = [
+export const mealPlansDb = [
   {
     id: 0,
     name: 'Vegetarian',
@@ -57,9 +57,9 @@ const MealPlans = () => {
         />
       )}
 
-      {mealPlans.length ? (
+      {mealPlansDb.length ? (
         <Styled.MealPlansList>
-          {mealPlans.map((mealPlan, index) => (
+          {mealPlansDb.map((mealPlan, index) => (
             <li key={mealPlan.id}>
               <Link href={`/profile/meal-plans/${mealPlan.id}`}>
                 <Styled.ListItem>

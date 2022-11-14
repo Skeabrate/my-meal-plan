@@ -13,7 +13,7 @@ import Ingredients from 'components/MealDetails/tabs/Ingredients';
 import Steps from 'components/MealDetails/tabs/Steps';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
-import MealOptionsDropdown from 'components/Dropdowns/MealOptionsDropdown';
+import MealOptionsDropdown from 'components/Dropdowns/MealOptionsDropdown/MealOptionsDropdown';
 
 const Meal = ({ mealId }: { mealId: string }) => {
   const { mealById } = useFetchMealById(mealId);

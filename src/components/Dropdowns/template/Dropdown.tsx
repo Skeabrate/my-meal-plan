@@ -1,18 +1,28 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import * as Styled from './Dropdown.styles';
 
-const Dropdown = ({ children }: { children: React.ReactNode }) => {
+const Dropdown = ({
+  children,
+  hideSubMenu,
+}: {
+  children: React.ReactNode;
+  hideSubMenu?: () => void;
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownOpenRef = useRef(null);
 
-  const handleDropdown = useCallback((e: MouseEvent) => {
-    if (dropdownOpenRef.current && e.target === dropdownOpenRef.current) {
-      setIsDropdownOpen((isOpen) => !isOpen);
-    } else {
-      setIsDropdownOpen(false);
-    }
-  }, []);
+  const handleDropdown = useCallback(
+    (e: MouseEvent) => {
+      if (dropdownOpenRef.current && e.target === dropdownOpenRef.current) {
+        setIsDropdownOpen((isOpen) => !isOpen);
+      } else {
+        setIsDropdownOpen(false);
+        hideSubMenu && hideSubMenu();
+      }
+    },
+    [hideSubMenu]
+  );
 
   useEffect(() => {
     document.addEventListener('click', handleDropdown);
@@ -25,7 +35,7 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
   return (
     <Styled.Wrapper>
       <Styled.ToggleButton
-        aria-label=''
+        aria-label='open dropdown'
         ref={dropdownOpenRef}
       >
         <span></span>

@@ -6,10 +6,10 @@ import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealPlan from 'components/MealPlan/MealPlan';
-import { mealPlans } from './index';
+import { mealPlansDb } from './index';
 
 const MealPlanId = ({ mealPlanId }: { mealPlanId: number }) => {
-  const currentMealPlan = mealPlans[mealPlanId];
+  const currentMealPlan = mealPlansDb[mealPlanId];
   const daysToArray = Object.entries(currentMealPlan.days);
   const firstDay = daysToArray[0][0];
 

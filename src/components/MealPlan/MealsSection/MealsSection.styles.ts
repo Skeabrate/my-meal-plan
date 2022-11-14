@@ -20,7 +20,6 @@ export const Header = styled.div`
     font-weight: 600;
     font-style: normal;
     font-size: 2rem;
-    text-transform: capitalize;
   }
 `;
 

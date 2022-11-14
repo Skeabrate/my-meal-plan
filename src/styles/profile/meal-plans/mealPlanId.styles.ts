@@ -7,7 +7,6 @@ export const MealPlanTitle = styled.div`
     font-family: ${({ theme }) => theme.fontFamily.lato};
     font-size: 2.4rem;
     font-style: normal;
-    text-transform: capitalize;
     margin: 0;
 
     &::after {

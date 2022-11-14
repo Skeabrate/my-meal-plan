@@ -6,7 +6,7 @@ import { usePaginate } from 'hooks/usePaginate';
 import SortCombobox from 'components/Comboboxes/SortCombobox';
 import Loading from 'components/Loading/Loading';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
-import MealOptionsDropdown from 'components/Dropdowns/MealOptionsDropdown';
+import MealOptionsDropdown from 'components/Dropdowns/MealOptionsDropdown/MealOptionsDropdown';
 
 export type DataItemType = {
   id: string;
