@@ -1,6 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
+import { GetServerSidePropsContext } from 'next';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import useDeleteAcount from 'api/pscale/useDeleteAcount';
@@ -41,6 +41,23 @@ const Overview = () => {
     </ProfileTabLayuot>
   );
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: { session },
+    };
+  }
+}
 
 export default Overview;
 
