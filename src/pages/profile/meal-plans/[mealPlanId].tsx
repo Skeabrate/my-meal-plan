@@ -75,3 +75,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 MealPlanId.Layout = ProfileLayout;
+MealPlanId.requireAuth = true;

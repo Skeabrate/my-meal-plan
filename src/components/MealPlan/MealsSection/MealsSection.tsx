@@ -23,7 +23,7 @@ const MealsSection = ({
       <Styled.MealsGrid>
         {mealsSection.meals.map(({ idMeal, strMeal, strMealThumb }) => (
           <li key={idMeal}>
-            <Link href={`/meal/${idMeal}`}>
+            <Link href={`/loading/meal?id=${idMeal}`}>
               <a>
                 <ImageLoading>
                   <Image

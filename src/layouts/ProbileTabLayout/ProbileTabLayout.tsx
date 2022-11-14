@@ -1,22 +1,13 @@
 import * as Styled from './ProfileTabLayout.styles';
-import Loading from 'components/Loading/Loading';
 
-const ProfileTabLayout = ({
-  children,
-  label,
-  isLoading,
-}: {
-  children: React.ReactNode;
-  label: string;
-  isLoading?: boolean;
-}) => {
+const ProfileTabLayout = ({ children, label }: { children: React.ReactNode; label: string }) => {
   return (
     <Styled.Tab>
       <header>
         <h1>{label}</h1>
       </header>
 
-      {isLoading ? <Loading /> : <article>{children}</article>}
+      <article>{children}</article>
     </Styled.Tab>
   );
 };

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { GetServerSidePropsContext } from 'next';
-import { getSession } from 'next-auth/react';
 import * as Styled from 'styles/profile/meal-plans/index.styles';
 import OpenInput from 'components/OpenInput/OpenInput';
 import PlusSvg from 'assets/SVG/Plus.svg';
@@ -99,23 +97,7 @@ const MealPlans = () => {
   );
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: { session },
-    };
-  }
-}
-
 export default MealPlans;
 
 MealPlans.Layout = ProfileLayout;
+MealPlans.requireAuth = true;

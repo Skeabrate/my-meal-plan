@@ -1,37 +1,33 @@
 import Image from 'next/image';
-import { getSession, useSession } from 'next-auth/react';
-import { GetServerSidePropsContext } from 'next';
+import { useSession } from 'next-auth/react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import useDeleteAcount from 'api/pscale/useDeleteAcount';
 import Loading from 'components/Loading/Loading';
 
 const Overview = () => {
-  const { data, status } = useSession();
+  const { data: session } = useSession();
   const { deleteAccount, isLoading, error } = useDeleteAcount();
 
   const deleteAccountConfirmation = () => {
-    if (confirm('Are you sure you want to delete your account?') && data?.user.email) {
-      deleteAccount(data?.user.email);
+    if (confirm('Are you sure you want to delete your account?') && session?.user.email) {
+      deleteAccount(session?.user.email);
     }
   };
 
   return (
-    <ProfileTabLayuot
-      label='Profile Information:'
-      isLoading={status === 'loading'}
-    >
-      {data?.user.image && (
+    <ProfileTabLayuot label='Profile Information:'>
+      {session?.user.image && (
         <Image
-          src={data?.user.image}
-          alt={data?.user.name || data?.user.email!}
+          src={session?.user.image}
+          alt={session?.user.name || session?.user.email!}
           height='140'
           width='140'
         />
       )}
 
-      <p>{data?.user.name}</p>
-      <p>{data?.user.email}</p>
+      <p>{session?.user.name}</p>
+      <p>{session?.user.email}</p>
 
       <button onClick={deleteAccountConfirmation}>
         {isLoading ? <Loading height={40} /> : 'Delete Account'}
@@ -42,23 +38,7 @@ const Overview = () => {
   );
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: { session },
-    };
-  }
-}
-
 export default Overview;
 
 Overview.Layout = ProfileLayout;
+Overview.requireAuth = true;

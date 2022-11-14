@@ -10,6 +10,12 @@ type LayoutProps = {
   };
 };
 
+type AuthProps = {
+  Component: {
+    requireAuth?: boolean;
+  };
+};
+
 export type PageProps = {
   dehydratedState?: DehydratedState;
   session: Session;
@@ -18,4 +24,5 @@ export type PageProps = {
 export type ExtendedAppProps<P = {}> = {
   err?: NextPageContext['err'];
 } & AppProps<P> &
-  LayoutProps;
+  LayoutProps &
+  AuthProps;
