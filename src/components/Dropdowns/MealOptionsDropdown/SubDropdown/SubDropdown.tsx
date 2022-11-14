@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import * as Styled from './SubDropdown.styles';
 import { mealPlansDb } from 'src/pages/profile/meal-plans';
 import Loading from 'components/Loading/Loading';
 import ArrowSvg from 'assets/SVG/LeftArrow.svg';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 
 const useFetchFakeMealsDb = () => {
   const [fetchFakeMeals, setFetchFakeMeals] = useState<any[]>([]);
@@ -25,7 +25,6 @@ const useFetchFakeMealsDb = () => {
   };
 };
 
-// if session -> meal plans -> days -> meal sections
 const SubDropdown = ({ mealId }: { mealId: string }) => {
   const { mealsDb, isLoading } = useFetchFakeMealsDb();
   const { data: session } = useSession();
@@ -109,7 +108,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
         <li>
           <Styled.Label onClick={goBackToDays}>
             <ArrowSvg />
-            Chose Meals Section:
+            Chose Section:
           </Styled.Label>
         </li>
         {mealsInChosenDay.length ? (
