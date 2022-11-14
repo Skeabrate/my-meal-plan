@@ -49,7 +49,7 @@ const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
             <span>Add to Meal Plan</span>
           </button>
 
-          {isSubMenuOpen && <SubDropdown />}
+          {isSubMenuOpen && <SubDropdown mealId={mealId} />}
         </li>
       </Dropdown>
     </StyledWrapper>

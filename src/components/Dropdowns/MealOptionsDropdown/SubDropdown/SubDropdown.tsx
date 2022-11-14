@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as Styled from './SubDropdown.styles';
 import { mealPlansDb } from 'src/pages/profile/meal-plans';
+import Loading from 'components/Loading/Loading';
+import ArrowSvg from 'assets/SVG/LeftArrow.svg';
 
 const useFetchFakeMealsDb = () => {
   const [fetchFakeMeals, setFetchFakeMeals] = useState<any[]>([]);
@@ -21,15 +23,14 @@ const useFetchFakeMealsDb = () => {
   };
 };
 
-// mealPLansDb - fetch on subDropdown mount
 // if session -> meal plans -> days -> meal sections
-const SubDropdown = () => {
+const SubDropdown = ({ mealId }: { mealId: string }) => {
   const { mealsDb, isLoading } = useFetchFakeMealsDb();
-  const [displayedItems, setDisplayedItems] = useState(choseMealPlan());
+  const [displayedItems, setDisplayedItems] = useState<JSX.Element | undefined>();
 
   function updateDisplayedItems(
     e: React.MouseEvent<HTMLButtonElement>,
-    newDisplayedItems: () => React.SetStateAction<JSX.Element>
+    newDisplayedItems: () => React.SetStateAction<JSX.Element | undefined>
   ) {
     e.stopPropagation();
     setDisplayedItems(newDisplayedItems());
@@ -38,11 +39,19 @@ const SubDropdown = () => {
   function choseMealPlan() {
     return (
       <>
-        <li>Chose Meal Plan:</li>
-        {isLoading && <p>Loading...</p>}
-        {mealPlansDb.map(({ id, name }) => (
+        <li>
+          <Styled.Label
+            $isDisabled
+            disabled
+          >
+            Chose Meal Plan:
+          </Styled.Label>
+        </li>
+        {mealsDb.map(({ id, name: mealPlanName }) => (
           <li key={id}>
-            <button onClick={(e) => updateDisplayedItems(e, () => choseDay(name))}>{name}</button>
+            <button onClick={(e) => updateDisplayedItems(e, () => choseDay(mealPlanName))}>
+              {mealPlanName}
+            </button>
           </li>
         ))}
       </>
@@ -61,60 +70,68 @@ const SubDropdown = () => {
     return (
       <>
         <li>
-          <button onClick={goBackToMealPlans}>Chose Day:</button>
+          <Styled.Label onClick={goBackToMealPlans}>
+            <ArrowSvg />
+            Chose Day:
+          </Styled.Label>
         </li>
-        {days.map(([day, meals]) => (
+        {days.map(([day, mealsInCurrentDay]) => (
           <li key={day}>
-            <button
+            <Styled.Day
               onClick={(e) =>
-                updateDisplayedItems(e, () => choseMealsSection(chosenMealPlan, day, meals))
+                updateDisplayedItems(e, () =>
+                  choseMealsSection(chosenMealPlan, day, mealsInCurrentDay)
+                )
               }
             >
               {day}
-            </button>
+            </Styled.Day>
           </li>
         ))}
       </>
     );
   }
 
-  const choseMealsSection = (
-    chosenMealPlan: string,
-    chosenDay: string,
-    mealsInChosenDay: any[]
-  ) => {
+  function choseMealsSection(chosenMealPlan: string, chosenDay: string, mealsInChosenDay: any[]) {
     const goBackToDays = (e: React.MouseEvent<HTMLButtonElement>) => {
       updateDisplayedItems(e, () => choseDay(chosenMealPlan));
     };
 
-    const addMealToMealPlan = (mealPlan: string) => {
-      console.log(
-        chosenMealPlan,
-        chosenDay,
-        mealPlan,
-        '-> display loading state and modal with success or error info'
-      );
+    const addMealToMealPlan = (chosenMealsSection: string) => {
+      console.log(`Add ${mealId} to ${chosenMealPlan} -> ${chosenDay} -> ${chosenMealsSection}`);
     };
 
     return (
       <>
         <li>
-          <button onClick={goBackToDays}>Chose Meals Section:</button>
+          <Styled.Label onClick={goBackToDays}>
+            <ArrowSvg />
+            Chose Meals Section:
+          </Styled.Label>
         </li>
         {mealsInChosenDay.length ? (
-          mealsInChosenDay.map(({ mealPlan }) => (
-            <li key={mealPlan}>
-              <button onClick={() => addMealToMealPlan(mealPlan)}>{mealPlan}</button>
+          mealsInChosenDay.map(({ mealPlan: mealsSection }) => (
+            <li key={mealsSection}>
+              <button onClick={() => addMealToMealPlan(mealsSection)}>{mealsSection}</button>
             </li>
           ))
         ) : (
-          <li>You don't have any meal plans in chosen day.</li>
+          <Styled.MealPlansNotFound>
+            You don't have any meal plans in chosen day.
+          </Styled.MealPlansNotFound>
         )}
       </>
     );
-  };
+  }
 
-  return <Styled.SubDropdown>{displayedItems}</Styled.SubDropdown>;
+  useEffect(() => {
+    if (mealsDb.length) setDisplayedItems(choseMealPlan());
+    // eslint-disable-next-line
+  }, [mealsDb]);
+
+  return (
+    <Styled.SubDropdown>{isLoading ? <Loading height={100} /> : displayedItems}</Styled.SubDropdown>
+  );
 };
 
 export default SubDropdown;

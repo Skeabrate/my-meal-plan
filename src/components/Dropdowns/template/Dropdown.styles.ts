@@ -59,7 +59,7 @@ export const Dropdown = styled.ul`
   button,
   a {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     text-align: left;
     font-size: ${({ theme }) => theme.fontSize.caption};
     text-decoration: none;
