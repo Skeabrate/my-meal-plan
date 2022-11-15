@@ -132,7 +132,11 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   return (
     <Styled.SubDropdown>
       {session ? (
-        <>{isLoading ? <Loading height={100} /> : displayedItems}</>
+        isLoading ? (
+          <Loading height={100} />
+        ) : (
+          displayedItems
+        )
       ) : (
         <Styled.Info>
           <Link href='/api/auth/signin'>Log in</Link>

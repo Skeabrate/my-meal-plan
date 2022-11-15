@@ -22,7 +22,7 @@ const OpenInput = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     inputRef.current && updateMealPLans(inputRef.current.value);
