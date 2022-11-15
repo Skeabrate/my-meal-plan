@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Tab = styled.section`
+export const Tab = styled.section<{ $noAnimation?: boolean }>`
   z-index: 1;
   padding-top: 20px;
 
@@ -16,7 +16,7 @@ export const Tab = styled.section`
   }
 
   article {
-    ${({ theme }) => theme.fadeInAnimation(0.4)};
+    ${({ theme, $noAnimation }) => !$noAnimation && theme.fadeInAnimation(0.4)};
   }
 
   ${({ theme }) => theme.mq.tablet} {

@@ -31,7 +31,10 @@ const MealPlanId = ({ mealPlanId }: { mealPlanId: number }) => {
   const { activeDetails, selectedTab, setActiveDetails } = useTabs(days);
 
   return (
-    <ProfileTabLayout label='Meal Plan Details:'>
+    <ProfileTabLayout
+      noAnimation
+      label='Meal Plan Details:'
+    >
       <Styled.MealPlanTitle>
         <h2>{currentMealPlan!.name}</h2>
         <UnderlinedButton
