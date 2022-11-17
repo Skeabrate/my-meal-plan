@@ -28,6 +28,9 @@ export default NextAuth({
       from: process.env.EMAIL_FROM,
     }),
   ],
+  session: {
+    maxAge: 7 * 24 * 60 * 60,
+  },
   secret: process.env.SECRET,
   theme: {
     colorScheme: 'light',
