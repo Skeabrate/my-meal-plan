@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import { useDeleteAcount } from 'api/pscale/useDeleteAcount';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
-import useDeleteAcount from 'api/pscale/useDeleteAcount';
 import Loading from 'components/Loading/Loading';
 
 const Overview = () => {

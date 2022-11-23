@@ -37,13 +37,14 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  mealPlans     MealPlan[]
 }
 
 model VerificationToken {
@@ -52,4 +53,38 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model MealPlan {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  User         User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  userEmail    String
+  mealPlanName String
+  days         Days[]
+}
+
+model Days {
+  id           String         @id @default(cuid())
+  dayName      String
+  MealsSection MealsSection[]
+  MealPlan     MealPlan       @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  mealPlanId   String
+}
+
+model MealsSection {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  mealsSectionName String
+  meals            Meal[]
+  Days             Days     @relation(fields: [daysId], references: [id], onDelete: Cascade)
+  daysId           String
+}
+
+model Meal {
+  id             String       @id @default(cuid())
+  createdAt      DateTime     @default(now())
+  mealId         String
+  MealsSection   MealsSection @relation(fields: [mealsSectionId], references: [id], onDelete: Cascade)
+  mealsSectionId String
 }

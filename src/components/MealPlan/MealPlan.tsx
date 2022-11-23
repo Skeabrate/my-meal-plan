@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { MealPlansInCurrentDayType, useFetchMealPlanMeals } from 'api/mealdb/useFetchMealPlanMeals';
+import { useFetchMealsFromMealsSections } from 'api/mealdb/useFetchMealsFromMealsSections';
+import { useCreateMealsSection } from 'api/pscale/MealPlan/MealsSection/useCreateMealsSection';
 import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
 
-const MealPlan = ({
-  activeDay,
-  mealPlansInCurrentDay,
-}: {
-  activeDay: string;
-  mealPlansInCurrentDay: MealPlansInCurrentDayType[];
-}) => {
+const MealPlan = ({ mealPlan, activeTab }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
-  const { fetchedMeals, isLoading, error } = useFetchMealPlanMeals(mealPlansInCurrentDay);
+  const activeDay = mealPlan.days?.find(({ dayName }) => dayName === activeTab);
+
+  const { mealsSections, isLoading, error } = useFetchMealsFromMealsSections(
+    activeDay?.mealsSections || []
+  );
+  const { createMealsSection } = useCreateMealsSection();
 
   return (
     <div>
@@ -31,6 +31,12 @@ const MealPlan = ({
           <OpenInput
             label='Add new meal section'
             updateMealPLans={(inputValue) => {
+              createMealsSection({
+                mealPlanId: mealPlan.id,
+                mealsSectionName: inputValue,
+                activeDayId: activeDay?.id,
+                activeDayName: activeTab,
+              });
               setIsInputOpen(false);
             }}
             placeholder='E.g. Breakfast...'
@@ -42,12 +48,12 @@ const MealPlan = ({
         <Loading />
       ) : error?.message ? (
         <p>Error occured.</p>
-      ) : fetchedMeals.length ? (
-        fetchedMeals.map((mealsSection) => (
+      ) : mealsSections.length ? (
+        mealsSections.map((mealsSection) => (
           <MealsSection
             key={mealsSection.id}
+            activeDayId={activeDay.id}
             mealsSection={mealsSection}
-            activeDay={activeDay}
           />
         ))
       ) : (

@@ -1,18 +1,14 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
-export const useDeleteAcount = () => {
+export const useDeleteMealFromMealsSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
 
-  const router = useRouter();
-
-  const deleteAccount = async (userEmail: string) => {
+  const deleteMealFromMealsSection = async (mealId: string) => {
     setIsLoading(true);
     try {
-      const res = await axios.get(`/api/deleteAccount?query=${userEmail}`);
-      if (res.status === 200) router.push('/api/auth/signin');
+      await axios.get(`/api/deleteMealFromMealsSection?mealId=${mealId}`);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.log(err.message);
@@ -23,7 +19,7 @@ export const useDeleteAcount = () => {
   };
 
   return {
-    deleteAccount,
+    deleteMealFromMealsSection,
     isLoading,
     error,
   };

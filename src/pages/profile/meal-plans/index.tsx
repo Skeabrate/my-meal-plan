@@ -1,49 +1,28 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import * as Styled from 'styles/profile/meal-plans/index.styles';
-import OpenInput from 'components/OpenInput/OpenInput';
+import { useSession } from 'next-auth/react';
+import { useCreateMealPlan } from 'api/pscale/MealPlan/useCreateMealPlan';
+import { useDeleteMealPlan } from 'api/pscale/MealPlan/useDeleteMealPlan';
+import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
-
-export const mealPlansDb = [
-  {
-    id: 0,
-    name: 'Vegetarian',
-    days: {
-      mon: [
-        { id: 0, mealPlan: 'Breakfast', meals: ['52870', '52785', '52971'] },
-        { id: 1, mealPlan: 'Dinner', meals: ['53025', '53012'] },
-      ],
-      tue: [{ id: 2, mealPlan: 'Breakfast', meals: ['53025', '53012'] }],
-      wed: [],
-      thu: [],
-      fri: [],
-      sat: [],
-      sun: [],
-    },
-  },
-  {
-    id: 1,
-    name: 'Cheat Meal',
-    days: {
-      mon: [
-        { id: 0, mealPlan: 'Cheat Breakfast', meals: ['52990', '52768'] },
-        { id: 1, mealPlan: 'Cheat Dinner', meals: ['52853', '52989', '52905'] },
-        { id: 2, mealPlan: 'Cheat Supper', meals: ['52854'] },
-      ],
-      tue: [],
-      wed: [],
-      thu: [],
-      fri: [],
-      sat: [],
-      sun: [],
-    },
-  },
-];
+import Loading from 'components/Loading/Loading';
+import OpenInput from 'components/OpenInput/OpenInput';
 
 const MealPlans = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
+
+  const { data: session } = useSession();
+
+  const { createMealPlan, isLoading: loadingCreatePlan } = useCreateMealPlan();
+  const { deleteMealPlan, isLoading: loadingDeletePlan } = useDeleteMealPlan();
+  const {
+    mealPlans,
+    isLoading: loadingMealPlans,
+    refetch,
+  } = useFetchMealPlans(session?.user.email as string);
 
   return (
     <ProfileTabLayout label='My Meal Plans:'>
@@ -52,26 +31,31 @@ const MealPlans = () => {
           label='Add meal plan'
           placeholder='Meal plan name...'
           updateMealPLans={(inputValue) => {
+            createMealPlan(session!.user.email as string, inputValue).then(() => refetch());
             setIsAddMealPLanInputOpen(false);
           }}
         />
       )}
 
-      {mealPlansDb.length ? (
+      {loadingMealPlans || loadingCreatePlan || loadingDeletePlan ? (
+        <Loading />
+      ) : mealPlans.length ? (
         <Styled.MealPlansList>
-          {mealPlansDb.map((mealPlan, index) => (
-            <li key={mealPlan.id}>
-              <Link href={`/profile/meal-plans/loading/meal-plan?id=${mealPlan.id}`}>
+          {mealPlans.map(({ id, mealPlanName }, index) => (
+            <li key={mealPlanName}>
+              <Link href={`/profile/meal-plans/loading/meal-plan?mealPlanName=${mealPlanName}`}>
                 <Styled.ListItem>
                   <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
-                  {mealPlan.name}
+                  {mealPlanName}
                 </Styled.ListItem>
               </Link>
 
               <Styled.DeleteMealPLanButton
                 aria-label='delete meal plan'
                 title='Delete meal plan'
-                onClick={() => {}}
+                onClick={() => {
+                  deleteMealPlan(id).then(() => refetch());
+                }}
               >
                 <PlusSvg />
               </Styled.DeleteMealPLanButton>

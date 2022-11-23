@@ -2,33 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import * as Styled from './SubDropdown.styles';
-import { mealPlansDb } from 'src/pages/profile/meal-plans';
 import Loading from 'components/Loading/Loading';
 import ArrowSvg from 'assets/SVG/LeftArrow.svg';
-
-const useFetchFakeMealsDb = () => {
-  const [fetchFakeMeals, setFetchFakeMeals] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setFetchFakeMeals(mealPlansDb);
-      setIsLoading(false);
-    }, 500);
-  }, []);
-
-  return {
-    mealsDb: fetchFakeMeals,
-    isLoading,
-  };
-};
+import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
+import axios from 'axios';
 
 const SubDropdown = ({ mealId }: { mealId: string }) => {
-  const { mealsDb, isLoading } = useFetchFakeMealsDb();
+  const { mealPlansWithAllDetails, isLoading, error } = useFetchMealPlansWithAllDetails();
+
   const { data: session } = useSession();
   const [displayedItems, setDisplayedItems] = useState<JSX.Element | undefined>();
+
+  useEffect(() => {
+    if (mealPlansWithAllDetails?.length) setDisplayedItems(choseMealPlan());
+    // eslint-disable-next-line
+  }, [mealPlansWithAllDetails]);
 
   function updateDisplayedItems(
     e: React.MouseEvent<HTMLButtonElement>,
@@ -49,13 +37,17 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
             Chose Meal Plan:
           </Styled.Label>
         </li>
-        {mealsDb.map(({ id, name: mealPlanName }) => (
-          <li key={id}>
-            <button onClick={(e) => updateDisplayedItems(e, () => choseDay(mealPlanName))}>
-              {mealPlanName}
-            </button>
-          </li>
-        ))}
+        {mealPlansWithAllDetails?.length ? (
+          mealPlansWithAllDetails.map(({ id, mealPlanName }) => (
+            <li key={id}>
+              <button onClick={(e) => updateDisplayedItems(e, () => choseDay(mealPlanName))}>
+                {mealPlanName}
+              </button>
+            </li>
+          ))
+        ) : (
+          <Styled.Info>You don't have any meal plans yet.</Styled.Info>
+        )}
       </>
     );
   }
@@ -65,9 +57,9 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
       updateDisplayedItems(e, () => choseMealPlan());
     };
 
-    const days = Object.entries(
-      mealPlansDb.find((mealPlan) => mealPlan.name === chosenMealPlan)!.days
-    );
+    const days = mealPlansWithAllDetails.find(
+      ({ mealPlanName }) => mealPlanName === chosenMealPlan
+    )?.days;
 
     return (
       <>
@@ -77,30 +69,35 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
             Chose Day:
           </Styled.Label>
         </li>
-        {days.map(([day, mealsInCurrentDay]) => (
-          <li key={day}>
-            <Styled.Day
-              onClick={(e) =>
-                updateDisplayedItems(e, () =>
-                  choseMealsSection(chosenMealPlan, day, mealsInCurrentDay)
-                )
-              }
-            >
-              {day}
-            </Styled.Day>
-          </li>
-        ))}
+        {days?.length ? (
+          days.map(({ id, dayName, mealsSections }) => (
+            <li key={id}>
+              <Styled.Day
+                onClick={(e) =>
+                  updateDisplayedItems(e, () => choseMealsSection(chosenMealPlan, mealsSections))
+                }
+              >
+                {dayName}
+              </Styled.Day>
+            </li>
+          ))
+        ) : (
+          <Styled.Info>You don't have any meals sections in {chosenMealPlan}.</Styled.Info>
+        )}
+        {}
       </>
     );
   }
 
-  function choseMealsSection(chosenMealPlan: string, chosenDay: string, mealsInChosenDay: any[]) {
+  function choseMealsSection(chosenMealPlan: string, mealsSectionsInChosenDay: any[]) {
     const goBackToDays = (e: React.MouseEvent<HTMLButtonElement>) => {
       updateDisplayedItems(e, () => choseDay(chosenMealPlan));
     };
 
-    const addMealToMealPlan = (chosenMealsSection: string) => {
-      console.log(`Add ${mealId} to ${chosenMealPlan} -> ${chosenDay} -> ${chosenMealsSection}`);
+    const addMealToMealPlan = (chosenMealsSectionId: string) => {
+      axios.get(
+        `/api/addMealToMealsSection?mealsSectionId=${chosenMealsSectionId}&mealId=${mealId}`
+      );
     };
 
     return (
@@ -111,23 +108,18 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
             Chose Section:
           </Styled.Label>
         </li>
-        {mealsInChosenDay.length ? (
-          mealsInChosenDay.map(({ mealPlan: mealsSection }) => (
-            <li key={mealsSection}>
-              <button onClick={() => addMealToMealPlan(mealsSection)}>{mealsSection}</button>
+        {mealsSectionsInChosenDay.length ? (
+          mealsSectionsInChosenDay.map(({ id, mealsSectionName }) => (
+            <li key={id}>
+              <button onClick={() => addMealToMealPlan(id)}>{mealsSectionName}</button>
             </li>
           ))
         ) : (
-          <Styled.Info>You don't have any meal plans in chosen day.</Styled.Info>
+          <Styled.Info>You don't have any meals sections in chosen day.</Styled.Info>
         )}
       </>
     );
   }
-
-  useEffect(() => {
-    if (mealsDb.length) setDisplayedItems(choseMealPlan());
-    // eslint-disable-next-line
-  }, [mealsDb]);
 
   return (
     <Styled.SubDropdown>

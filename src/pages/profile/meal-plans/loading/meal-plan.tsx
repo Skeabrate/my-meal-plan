@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import * as Styled from 'styles/profile/meal-plans/loading-meal-plans.styles';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import { Tab } from 'layouts/ProbileTabLayout/ProfileTabLayout.styles';
-import * as Styled from 'styles/profile/meal-plans/loading-meal-plans.styles';
 
 const Loading = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace(`/profile/meal-plans/${router.query.id}`);
+    router.replace(`/profile/meal-plans/${router.query.mealPlanName}`);
   });
 
   return (
