@@ -5,11 +5,12 @@ import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
+import { MealPlanType } from 'types/pscale/MealPlanType';
 
-const MealPlan = ({ mealPlan, activeTab }) => {
+const MealPlan = ({ mealPlan, activeTab }: { mealPlan: MealPlanType; activeTab: string }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
-  const activeDay = mealPlan.days?.find(({ dayName }) => dayName === activeTab);
+  const activeDay = mealPlan.days.find(({ dayName }) => dayName === activeTab);
 
   const { mealsSections, isLoading, error } = useFetchMealsFromMealsSections(
     activeDay?.mealsSections || []

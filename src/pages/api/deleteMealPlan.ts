@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function deleteMealPlan(req: NextApiRequest, res: NextApiResponse) {
-  const mealPlanId = req.query.mealPlanId as string;
+  const { mealPlanId } = req.body;
 
   if (mealPlanId) {
     await prisma.mealPlan.delete({

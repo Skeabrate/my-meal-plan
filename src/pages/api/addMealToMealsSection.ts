@@ -3,8 +3,7 @@ import prisma from 'lib/prismadb';
 import { fetchMealById } from 'api/mealdb/useFetchMealById';
 
 export default async function addMealToMealsSection(req: NextApiRequest, res: NextApiResponse) {
-  const mealsSectionId = req.query.mealsSectionId as string;
-  const mealId = req.query.mealId as string;
+  const { mealsSectionId, mealId } = req.body;
 
   if (mealsSectionId && mealId) {
     const checkIfMealIdExistsInMealDb = await fetchMealById(mealId);

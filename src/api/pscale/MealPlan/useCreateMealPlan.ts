@@ -9,7 +9,14 @@ export const useCreateMealPlan = () => {
     setIsLoading(true);
 
     try {
-      await axios.get(`/api/createMealPlan?userEmail=${userEmail}&mealPlanName=${mealPlanName}`);
+      await axios({
+        method: 'post',
+        url: '/api/createMealPlan',
+        data: {
+          userEmail,
+          mealPlanName,
+        },
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.log(err);

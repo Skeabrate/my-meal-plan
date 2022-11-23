@@ -8,7 +8,13 @@ export const useDeleteMealFromMealsSection = () => {
   const deleteMealFromMealsSection = async (mealId: string) => {
     setIsLoading(true);
     try {
-      await axios.get(`/api/deleteMealFromMealsSection?mealId=${mealId}`);
+      await axios({
+        method: 'post',
+        url: '/api/deleteMealFromMealsSection',
+        data: {
+          mealId,
+        },
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.log(err.message);

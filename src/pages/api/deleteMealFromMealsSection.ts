@@ -5,7 +5,7 @@ export default async function deleteMealFromMealsSection(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const mealId = req.query.mealId as string;
+  const { mealId } = req.body;
 
   if (mealId) {
     await prisma.meal.delete({

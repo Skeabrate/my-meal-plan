@@ -12,9 +12,14 @@ export const useFetchMealPlansWithAllDetails = () => {
   const fetchMealPlans = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get(
-        `/api/fetchMealPlansWithAllDetails?userEmail=${data?.user.email}`
-      );
+      const res = await axios({
+        method: 'post',
+        url: '/api/fetchMealPlansWithAllDetails',
+        data: {
+          userEmail: data?.user.email,
+        },
+      });
+
       setMealPlansWithAllDetails(res.data);
     } catch (err) {
       console.log(err);

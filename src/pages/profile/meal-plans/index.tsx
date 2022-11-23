@@ -31,7 +31,7 @@ const MealPlans = () => {
           label='Add meal plan'
           placeholder='Meal plan name...'
           updateMealPLans={(inputValue) => {
-            createMealPlan(session!.user.email as string, inputValue).then(() => refetch());
+            createMealPlan(session?.user.email as string, inputValue).then(() => refetch());
             setIsAddMealPLanInputOpen(false);
           }}
         />
@@ -39,7 +39,7 @@ const MealPlans = () => {
 
       {loadingMealPlans || loadingCreatePlan || loadingDeletePlan ? (
         <Loading />
-      ) : mealPlans.length ? (
+      ) : mealPlans?.length ? (
         <Styled.MealPlansList>
           {mealPlans.map(({ id, mealPlanName }, index) => (
             <li key={mealPlanName}>

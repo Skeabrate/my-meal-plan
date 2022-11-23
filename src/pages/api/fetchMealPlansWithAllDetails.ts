@@ -6,7 +6,7 @@ export default async function fetchMealPlansWithAllDetails(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const userEmail = req.query.userEmail as string;
+  const { userEmail } = req.body;
 
   if (userEmail) {
     const getMealPlans = await prisma.mealPlan.findMany({

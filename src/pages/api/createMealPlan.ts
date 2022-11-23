@@ -2,8 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function createMealPlan(req: NextApiRequest, res: NextApiResponse) {
-  const userEmail = req.query.userEmail as string;
-  const mealPlanName = req.query.mealPlanName as string;
+  const { userEmail, mealPlanName } = req.body;
 
   if (userEmail && mealPlanName) {
     const doesMealPlanAlreadyExists = await prisma.mealPlan.findFirst({

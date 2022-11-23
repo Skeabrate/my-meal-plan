@@ -8,7 +8,14 @@ export const useDeleteMealsSection = () => {
   const deleteMealsSection = async (daysId: string, mealsSectionId: string) => {
     setIsLoading(true);
     try {
-      await axios.get(`/api/deleteMealsSection?daysId=${daysId}&mealsSectionId=${mealsSectionId}`);
+      await axios({
+        method: 'post',
+        url: '/api/deleteMealsSection',
+        data: {
+          daysId,
+          mealsSectionId,
+        },
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.log(err.message);

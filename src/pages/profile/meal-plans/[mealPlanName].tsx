@@ -3,6 +3,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import * as Styled from 'styles/profile/meal-plans/mealPlanName.styles';
+import { MealPlanType } from 'types/pscale/MealPlanType';
 import prisma from 'lib/prismadb';
 import { useDeleteMealPlan } from 'api/pscale/MealPlan/useDeleteMealPlan';
 import { useTabs } from 'hooks/useTabs';
@@ -11,15 +12,15 @@ import { getDays } from 'utils/getDays';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
-import MealPlan from 'components/MealPlan/MealPlan';
+import MealPlanComponent from 'components/MealPlan/MealPlan';
 
-const MealPlanName = ({ mealPlan }) => {
+const MealPlanName = ({ mealPlan }: { mealPlan: MealPlanType }) => {
   const [activeDaysHelper, setActiveDaysHelper] = useState(DAYS[0]);
   const tabs = DAYS.map((day) => ({
     id: day,
     label: day,
     Component: (
-      <MealPlan
+      <MealPlanComponent
         mealPlan={mealPlan}
         activeTab={activeDaysHelper}
       />

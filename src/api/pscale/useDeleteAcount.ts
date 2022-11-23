@@ -11,7 +11,13 @@ export const useDeleteAcount = () => {
   const deleteAccount = async (userEmail: string) => {
     setIsLoading(true);
     try {
-      const res = await axios.get(`/api/deleteAccount?query=${userEmail}`);
+      const res = await axios({
+        method: 'post',
+        url: '/api/deleteAccount',
+        data: {
+          userEmail,
+        },
+      });
       if (res.status === 200) router.push('/api/auth/signin');
     } catch (err) {
       if (axios.isAxiosError(err)) {

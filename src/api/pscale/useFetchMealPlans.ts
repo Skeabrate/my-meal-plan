@@ -1,9 +1,16 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import Prisma from '@prisma/client';
 
-export const fetchMealPlans = async (userEmail: string) => {
+export const fetchMealPlans = async (userEmail: string): Promise<Prisma.MealPlan[]> => {
   try {
-    const res = await axios.get(`/api/fetchMealPlans?userEmail=${userEmail}`);
+    const res = await axios({
+      method: 'post',
+      url: '/api/fetchMealPlans',
+      data: {
+        userEmail,
+      },
+    });
 
     return res.data;
   } catch (err) {

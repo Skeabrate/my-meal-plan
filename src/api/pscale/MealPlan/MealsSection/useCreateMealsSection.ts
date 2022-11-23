@@ -13,18 +13,24 @@ export const useCreateMealsSection = () => {
   }: {
     mealPlanId: string;
     mealsSectionName: string;
-    activeDayId: string;
     activeDayName: string;
+    activeDayId: string | undefined;
   }) => {
     setIsLoading(true);
-
     try {
-      await axios.get(
-        `/api/createMealsSection?mealPlanId=${mealPlanId}&mealsSectionName=${mealsSectionName}&activeDayId=${activeDayId}&activeDayName=${activeDayName}`
-      );
+      await axios({
+        method: 'post',
+        url: '/api/createMealsSection',
+        data: {
+          mealPlanId,
+          mealsSectionName,
+          activeDayId,
+          activeDayName,
+        },
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        console.log(err.response?.data);
+        console.log(err.response);
         setError(err.response?.data);
       }
     }
