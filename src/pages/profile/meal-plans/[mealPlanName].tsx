@@ -7,6 +7,7 @@ import prisma from 'lib/prismadb';
 import { useDeleteMealPlan } from 'api/pscale/MealPlan/useDeleteMealPlan';
 import { useTabs } from 'hooks/useTabs';
 import { DAYS } from 'utils/days';
+import { getDays } from 'utils/getDays';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
@@ -87,84 +88,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         notFound: true,
       };
 
-    const days = await prisma.days.findMany({
-      where: {
-        mealPlanId: mealPlan.id,
-      },
-    });
-
-    if (!days) {
-      return {
-        props: {
-          mealPlan: {
-            id: mealPlan.id,
-            mealPlanName: mealPlan.mealPlanName,
-          },
-        },
-      };
-    }
-
-    const getMealsSectionsInAllDays = days.map(({ id, dayName }) => {
-      return {
-        id,
-        dayName,
-        mealsSections: prisma.mealsSection.findMany({
-          where: {
-            Days: {
-              id,
-              dayName,
-            },
-          },
-        }),
-      };
-    });
-
-    let daysInMealPlan = [];
-
-    for await (const {
-      id: dayId,
-      dayName,
-      mealsSections: mealsSectionsPromise,
-    } of getMealsSectionsInAllDays) {
-      const getMealsSections = await Promise.resolve(mealsSectionsPromise);
-
-      const mealsInMealsSections = getMealsSections.map(({ id, mealsSectionName }) => {
-        return {
-          id,
-          mealsSectionName,
-          meals: prisma.meal.findMany({
-            where: {
-              mealsSectionId: id,
-            },
-          }),
-        };
-      });
-
-      let mealsSections = [];
-
-      for await (const { id, mealsSectionName, meals: mealsPromise } of mealsInMealsSections) {
-        const mealsResolved = await Promise.resolve(mealsPromise);
-
-        mealsSections.push({
-          id,
-          mealsSectionName,
-          meals: mealsResolved.map(({ id, mealId }) => ({ id, mealId })),
-        });
-      }
-
-      daysInMealPlan.push({
-        id: dayId,
-        dayName,
-        mealsSections,
-      });
-    }
+    const days = await getDays(mealPlan.id);
 
     return {
       props: {
         mealPlan: {
           id: mealPlan.id,
           mealPlanName: mealPlan.mealPlanName,
-          days: daysInMealPlan,
+          days,
         },
       },
     };

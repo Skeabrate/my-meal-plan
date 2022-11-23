@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
+import { getDays } from 'utils/getDays';
 
 export default async function fetchMealPlansWithAllDetails(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const userEmail = req.query.userEmail;
+  const userEmail = req.query.userEmail as string;
 
-  if (userEmail && typeof userEmail === 'string') {
+  if (userEmail) {
     const getMealPlans = await prisma.mealPlan.findMany({
       where: {
         User: {
@@ -22,43 +23,7 @@ export default async function fetchMealPlansWithAllDetails(
     let mealPlans = [];
 
     for await (const { id, mealPlanName } of getMealPlans) {
-      let days = [];
-
-      const getDays = await prisma.days.findMany({
-        where: {
-          mealPlanId: id,
-        },
-      });
-
-      for await (const { id, dayName } of getDays) {
-        const getMealsSections = await prisma.mealsSection.findMany({
-          where: {
-            daysId: id,
-          },
-        });
-
-        let mealsSections = [];
-
-        for await (const { id, mealsSectionName } of getMealsSections) {
-          const meals = await prisma.meal.findMany({
-            where: {
-              mealsSectionId: id,
-            },
-          });
-
-          mealsSections.push({
-            id,
-            mealsSectionName,
-            meals: meals.map(({ id, mealId }) => ({ id, mealId })),
-          });
-        }
-
-        days.push({
-          id,
-          dayName,
-          mealsSections,
-        });
-      }
+      const days = await getDays(id);
 
       mealPlans.push({
         id,
