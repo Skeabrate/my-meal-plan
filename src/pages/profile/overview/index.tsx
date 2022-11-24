@@ -7,7 +7,7 @@ import Loading from 'components/Loading/Loading';
 
 const Overview = () => {
   const { data: session } = useSession();
-  const { deleteAccount, isLoading, error } = useDeleteAcount();
+  const { deleteAccount, isLoading, isError } = useDeleteAcount();
 
   const deleteAccountConfirmation = () => {
     if (confirm('Are you sure you want to delete your account?') && session?.user.email) {
@@ -33,7 +33,7 @@ const Overview = () => {
         {isLoading ? <Loading height={40} /> : 'Delete Account'}
       </button>
 
-      {error ? <p>{error}</p> : null}
+      {isError ? <p>{isError}</p> : null}
     </ProfileTabLayuot>
   );
 };
