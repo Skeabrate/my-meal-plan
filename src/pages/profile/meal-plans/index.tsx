@@ -2,9 +2,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import * as Styled from 'styles/profile/meal-plans/index.styles';
 import { useSession } from 'next-auth/react';
-import { useCreateMealPlan } from 'api/pscale/MealPlan/useCreateMealPlan';
-import { useDeleteMealPlan } from 'api/pscale/MealPlan/useDeleteMealPlan';
 import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
+import { useMutation } from 'hooks/useMutation';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
@@ -16,13 +15,29 @@ const MealPlans = () => {
 
   const { data: session } = useSession();
 
-  const { createMealPlan, isLoading: loadingCreatePlan } = useCreateMealPlan();
-  const { deleteMealPlan, isLoading: loadingDeletePlan } = useDeleteMealPlan();
   const {
     mealPlans,
     isLoading: loadingMealPlans,
     refetch,
   } = useFetchMealPlans(session?.user.email as string);
+
+  const {
+    mutation: createMealPlan,
+    isLoading: isLoadingCreate,
+    isError: isErrorCreate,
+    error: errorCreate,
+  } = useMutation('/api/createMealPlan', () => {
+    refetch();
+  });
+
+  const {
+    mutation: deleteMealPlan,
+    isLoading: isLoadingDelete,
+    isError: isErrorDelete,
+    error: errorDelete,
+  } = useMutation('/api/deleteMealPlan', () => {
+    refetch();
+  });
 
   return (
     <ProfileTabLayout label='My Meal Plans:'>
@@ -31,13 +46,16 @@ const MealPlans = () => {
           label='Add meal plan'
           placeholder='Meal plan name...'
           updateMealPLans={(inputValue) => {
-            createMealPlan(session?.user.email as string, inputValue).then(() => refetch());
+            createMealPlan({
+              userEmail: session?.user.email,
+              mealPlanName: inputValue,
+            });
             setIsAddMealPLanInputOpen(false);
           }}
         />
       )}
 
-      {loadingMealPlans || loadingCreatePlan || loadingDeletePlan ? (
+      {loadingMealPlans || isLoadingCreate || isLoadingDelete ? (
         <Loading />
       ) : mealPlans?.length ? (
         <Styled.MealPlansList>
@@ -54,7 +72,7 @@ const MealPlans = () => {
                 aria-label='delete meal plan'
                 title='Delete meal plan'
                 onClick={() => {
-                  deleteMealPlan(id).then(() => refetch());
+                  deleteMealPlan({ mealPlanId: id });
                 }}
               >
                 <PlusSvg />

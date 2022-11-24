@@ -3,32 +3,26 @@ import { useQuery } from 'react-query';
 import Prisma from '@prisma/client';
 
 export const fetchMealPlans = async (userEmail: string): Promise<Prisma.MealPlan[]> => {
-  try {
-    const res = await axios({
-      method: 'post',
-      url: '/api/fetchMealPlans',
-      data: {
-        userEmail,
-      },
-    });
-
-    return res.data;
-  } catch (err) {
-    console.log(axios.isAxiosError(err) && err.message);
-    throw new Error('Something went wrong');
-  }
+  const { data } = await axios({
+    method: 'post',
+    url: '/api/fetchMealPlans',
+    data: {
+      userEmail,
+    },
+  });
+  return data;
 };
 
 export const useFetchMealPlans = (userEmail: string) => {
   const {
     data: mealPlans,
     isLoading,
+    isError,
     error,
     refetch,
-  } = useQuery(['fetchMealById', userEmail], () => fetchMealPlans(userEmail), {
-    enabled: !!userEmail,
+  } = useQuery('fetchMealPlans', () => fetchMealPlans(userEmail), {
     refetchOnWindowFocus: false,
   });
 
-  return { mealPlans, isLoading, error, refetch };
+  return { mealPlans, isLoading, isError, error, refetch };
 };

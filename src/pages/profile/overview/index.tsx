@@ -1,17 +1,26 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useDeleteAcount } from 'api/pscale/useDeleteAcount';
+import { useMutation } from 'hooks/useMutation';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
 
 const Overview = () => {
   const { data: session } = useSession();
-  const { deleteAccount, isLoading, isError } = useDeleteAcount();
+  const router = useRouter();
+
+  const {
+    mutation: deleteAccount,
+    isLoading,
+    isError,
+  } = useMutation('/api/deleteAccount', () => {
+    router.push('/api/auth/signin');
+  });
 
   const deleteAccountConfirmation = () => {
     if (confirm('Are you sure you want to delete your account?') && session?.user.email) {
-      deleteAccount(session?.user.email);
+      deleteAccount({ userEmail: session?.user.email });
     }
   };
 

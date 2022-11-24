@@ -39,7 +39,7 @@ export const useFetchMealsFromMealsSections = (
     error,
     refetch,
   } = useQuery(
-    ['fetchMealPlanMeals', mealsSectionsWithoutFetchedMeals],
+    ['fetchMealsFromMealsSections', mealsSectionsWithoutFetchedMeals],
     () => fetchMealsFromMealsSections(mealsSectionsWithoutFetchedMeals),
     {
       enabled: !!mealsSectionsWithoutFetchedMeals,

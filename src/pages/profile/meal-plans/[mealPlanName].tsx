@@ -3,67 +3,87 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import * as Styled from 'styles/profile/meal-plans/mealPlanName.styles';
-import { MealPlanType } from 'types/pscale/MealPlanType';
 import prisma from 'lib/prismadb';
-import { useDeleteMealPlan } from 'api/pscale/MealPlan/useDeleteMealPlan';
+import { MealPlanType } from 'types/pscale/MealPlanType';
 import { useTabs } from 'hooks/useTabs';
+import { useMutation } from 'hooks/useMutation';
 import { DAYS } from 'utils/days';
 import { getDays } from 'utils/getDays';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealPlanComponent from 'components/MealPlan/MealPlan';
+import Loading from 'components/Loading/Loading';
 
 const MealPlanName = ({ mealPlan }: { mealPlan: MealPlanType }) => {
-  const [activeDaysHelper, setActiveDaysHelper] = useState(DAYS[0]);
+  const [activeDetailsHelper, setActiveDetailsHelper] = useState(DAYS[0]);
   const tabs = DAYS.map((day) => ({
     id: day,
     label: day,
     Component: (
       <MealPlanComponent
         mealPlan={mealPlan}
-        activeTab={activeDaysHelper}
+        activeTab={activeDetailsHelper}
       />
     ),
   }));
 
-  const { activeDetails, selectedTab, setActiveDetails } = useTabs(tabs);
-
-  const { deleteMealPlan } = useDeleteMealPlan();
+  const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
 
   const router = useRouter();
+
+  const {
+    mutation: deleteMealPlan,
+    isLoading,
+    isError,
+    error,
+  } = useMutation('/api/deleteMealPlan', () => {
+    router.push('/profile/meal-plans');
+  });
 
   return (
     <ProfileTabLayout
       noAnimation
       label='Meal Plan Details:'
     >
-      <Styled.MealPlanTitle>
-        <h2>{mealPlan.mealPlanName}</h2>
-        <UnderlinedButton
-          label='Delete meal plan'
-          onClick={() => deleteMealPlan(mealPlan.id).then(() => router.push('/profile/meal-plans'))}
-        />
-      </Styled.MealPlanTitle>
+      {isLoading ? (
+        <Loading />
+      ) : isError ? (
+        <p>An error occurred: {error}</p>
+      ) : (
+        <>
+          <Styled.MealPlanTitle>
+            <h2>{mealPlan.mealPlanName}</h2>
+            <UnderlinedButton
+              label='Delete meal plan'
+              onClick={() =>
+                deleteMealPlan({
+                  mealPlanId: mealPlan.id,
+                })
+              }
+            />
+          </Styled.MealPlanTitle>
 
-      <Styled.DaysBar>
-        {DAYS.map((day) => (
-          <li key={day}>
-            <Styled.DaysBarButton
-              $isActive={day === activeDetails}
-              onClick={() => {
-                setActiveDetails(day);
-                setActiveDaysHelper(day);
-              }}
-            >
-              {day}
-            </Styled.DaysBarButton>
-          </li>
-        ))}
-      </Styled.DaysBar>
+          <Styled.DaysBar>
+            {DAYS.map((day) => (
+              <li key={day}>
+                <Styled.DaysBarButton
+                  $isActive={day === activeDetails}
+                  onClick={() => {
+                    setActiveDetails(day);
+                    setActiveDetailsHelper(day);
+                  }}
+                >
+                  {day}
+                </Styled.DaysBarButton>
+              </li>
+            ))}
+          </Styled.DaysBar>
 
-      {/* MealPlan */}
-      {selectedTab}
+          {/* MealPlan Component */}
+          {selectedTab}
+        </>
+      )}
     </ProfileTabLayout>
   );
 };
