@@ -6,8 +6,24 @@ import { useDeleteMealFromMealsSection } from 'api/pscale/MealPlan/MealsSection/
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSectionOptionsDropdown from 'components/Dropdowns/MealsSectionOptionsDropdown';
+import { MealType } from 'types/MealType';
 
-const MealsSection = ({ mealsSection, activeDayId }) => {
+type MealsSectionWithFetchedMealsType = {
+  id: string;
+  mealsSectionName: string;
+  meals: {
+    id: string;
+    mealDetails: MealType;
+  }[];
+};
+
+const MealsSection = ({
+  mealsSection,
+  activeDayId,
+}: {
+  mealsSection: MealsSectionWithFetchedMealsType;
+  activeDayId: string;
+}) => {
   const { deleteMealsSection } = useDeleteMealsSection();
   const { deleteMealFromMealsSection } = useDeleteMealFromMealsSection();
 

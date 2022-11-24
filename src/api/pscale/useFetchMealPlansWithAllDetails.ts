@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { MealPlanType } from 'types/pscale/MealPlanType';
 
 export const useFetchMealPlansWithAllDetails = () => {
-  const [mealPlansWithAllDetails, setMealPlansWithAllDetails] = useState([]);
+  const [mealPlansWithAllDetails, setMealPlansWithAllDetails] = useState<MealPlanType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -20,7 +21,7 @@ export const useFetchMealPlansWithAllDetails = () => {
         },
       });
 
-      setMealPlansWithAllDetails(res.data);
+      setMealPlansWithAllDetails(res.data as MealPlanType[]);
     } catch (err) {
       console.log(err);
       setError(true);

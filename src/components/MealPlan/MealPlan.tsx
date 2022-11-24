@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFetchMealsFromMealsSections } from 'api/mealdb/useFetchMealsFromMealsSections';
 import { useCreateMealsSection } from 'api/pscale/MealPlan/MealsSection/useCreateMealsSection';
 import OpenInput from 'components/OpenInput/OpenInput';
@@ -12,9 +12,10 @@ const MealPlan = ({ mealPlan, activeTab }: { mealPlan: MealPlanType; activeTab: 
 
   const activeDay = mealPlan.days.find(({ dayName }) => dayName === activeTab);
 
-  const { mealsSections, isLoading, error } = useFetchMealsFromMealsSections(
+  const { mealsSections, isLoading, error, refetch } = useFetchMealsFromMealsSections(
     activeDay?.mealsSections || []
   );
+
   const { createMealsSection } = useCreateMealsSection();
 
   return (
@@ -47,13 +48,13 @@ const MealPlan = ({ mealPlan, activeTab }: { mealPlan: MealPlanType; activeTab: 
 
       {isLoading ? (
         <Loading />
-      ) : error?.message ? (
+      ) : error ? (
         <p>Error occured.</p>
-      ) : mealsSections.length ? (
+      ) : mealsSections?.length ? (
         mealsSections.map((mealsSection) => (
           <MealsSection
             key={mealsSection.id}
-            activeDayId={activeDay.id}
+            activeDayId={activeDay!.id}
             mealsSection={mealsSection}
           />
         ))

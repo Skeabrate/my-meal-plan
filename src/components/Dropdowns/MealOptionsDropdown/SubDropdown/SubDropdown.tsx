@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import * as Styled from './SubDropdown.styles';
-import Loading from 'components/Loading/Loading';
-import ArrowSvg from 'assets/SVG/LeftArrow.svg';
-import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
 import axios from 'axios';
+import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
+import ArrowSvg from 'assets/SVG/LeftArrow.svg';
+import Loading from 'components/Loading/Loading';
 
 const SubDropdown = ({ mealId }: { mealId: string }) => {
   const { mealPlansWithAllDetails, isLoading, error } = useFetchMealPlansWithAllDetails();

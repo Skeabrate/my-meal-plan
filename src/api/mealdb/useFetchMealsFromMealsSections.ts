@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { MealsSectionType } from 'types/pscale/MealPlanType';
+import { MealType } from 'types/MealType';
 
-export const fetchMealsFromMealsSections = async (mealsSectionsWithoutFetchedMeals) => {
+export const fetchMealsFromMealsSections = async (
+  mealsSectionsWithoutFetchedMeals: MealsSectionType[]
+) => {
   const mealsSections = mealsSectionsWithoutFetchedMeals.map(({ id, mealsSectionName, meals }) => {
     return {
       id,
@@ -11,9 +15,8 @@ export const fetchMealsFromMealsSections = async (mealsSectionsWithoutFetchedMea
           id,
           mealDetails: axios
             .get(`${process.env.FETCH_MEAL_BY_ID}${mealId}`)
-            .then((mealDetails) => mealDetails?.data?.meals[0])
-            .catch((err) => console.log(axios.isAxiosError(err) && err.message)),
-        };
+            .then((mealDetails) => mealDetails?.data?.meals[0]),
+        } as unknown as { id: string; mealDetails: MealType };
       }),
     };
   });
@@ -27,11 +30,14 @@ export const fetchMealsFromMealsSections = async (mealsSectionsWithoutFetchedMea
   return mealsSections;
 };
 
-export const useFetchMealsFromMealsSections = (mealsSectionsWithoutFetchedMeals) => {
+export const useFetchMealsFromMealsSections = (
+  mealsSectionsWithoutFetchedMeals: MealsSectionType[]
+) => {
   const {
     data: mealsSections,
     isLoading,
     error,
+    refetch,
   } = useQuery(
     ['fetchMealPlanMeals', mealsSectionsWithoutFetchedMeals],
     () => fetchMealsFromMealsSections(mealsSectionsWithoutFetchedMeals),
@@ -41,5 +47,5 @@ export const useFetchMealsFromMealsSections = (mealsSectionsWithoutFetchedMeals)
     }
   );
 
-  return { mealsSections, isLoading, error };
+  return { mealsSections, isLoading, error, refetch };
 };
