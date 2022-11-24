@@ -17,18 +17,18 @@ const MealPlans = () => {
 
   const {
     mealPlans,
-    isLoading: loadingMealPlans,
+    isLoading: isLoadingMealPlans,
     refetch,
   } = useFetchMealPlans(session?.user.email as string);
 
-  const { mutation: createMealPlan, isLoading: isLoadingCreate } = useMutation(
+  const { mutation: createMealPlan, isLoading: isLoadingCreateMealPlan } = useMutation(
     '/api/createMealPlan',
     () => {
       refetch();
     }
   );
 
-  const { mutation: deleteMealPlan, isLoading: isLoadingDelete } = useMutation(
+  const { mutation: deleteMealPlan, isLoading: isLoadingDeleteMealPlan } = useMutation(
     '/api/deleteMealPlan',
     () => {
       refetch();
@@ -51,7 +51,7 @@ const MealPlans = () => {
         />
       )}
 
-      {loadingMealPlans || isLoadingCreate || isLoadingDelete ? (
+      {isLoadingMealPlans || isLoadingCreateMealPlan || isLoadingDeleteMealPlan ? (
         <Loading />
       ) : mealPlans?.length ? (
         <Styled.MealPlansList>
