@@ -9,7 +9,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
 
   if (mealPlanId && mealsSectionName) {
     if (activeDayId) {
-      const checkIfDayExistsById = await prisma.days.findFirst({
+      const checkIfDayExistsById = await prisma.day.findFirst({
         where: {
           id: activeDayId,
         },
@@ -18,7 +18,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
       if (checkIfDayExistsById) {
         const checkIfMealsSectionExists = await prisma.mealsSection.findFirst({
           where: {
-            daysId: activeDayId,
+            dayId: activeDayId,
             mealsSectionName,
           },
         });
@@ -28,7 +28,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
         } else {
           await prisma.mealsSection.create({
             data: {
-              daysId: activeDayId,
+              dayId: activeDayId,
               mealsSectionName,
             },
           });
@@ -39,7 +39,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
         res.status(500).send({ message: 'Wrong dayId.' });
       }
     } else if (checkIfActiveDayIsValidFormat) {
-      const checkIfDayExistsByName = await prisma.days.findFirst({
+      const checkIfDayExistsByName = await prisma.day.findFirst({
         where: {
           mealPlanId: mealPlanId,
           dayName: activeDayName,
@@ -49,11 +49,11 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
       if (checkIfDayExistsByName) {
         res.status(500).send({ message: 'No dayId provided' });
       } else {
-        await prisma.days.create({
+        await prisma.day.create({
           data: {
             mealPlanId,
             dayName: activeDayName,
-            MealsSection: {
+            MealsSections: {
               create: {
                 mealsSectionName,
               },

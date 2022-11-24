@@ -36,6 +36,14 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 model User {
   id            String     @id @default(cuid())
   name          String?
@@ -47,38 +55,30 @@ model User {
   mealPlans     MealPlan[]
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
 model MealPlan {
   id           String   @id @default(cuid())
-  createdAt    DateTime @default(now())
+  mealPlanName String
   User         User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
   userEmail    String
-  mealPlanName String
-  days         Days[]
+  createdAt    DateTime @default(now())
+  days         Day[]
 }
 
-model Days {
-  id           String         @id @default(cuid())
-  dayName      String
-  MealsSection MealsSection[]
-  MealPlan     MealPlan       @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
-  mealPlanId   String
+model Day {
+  id            String         @id @default(cuid())
+  dayName       String
+  MealPlan      MealPlan       @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  mealPlanId    String
+  MealsSections MealsSection[]
 }
 
 model MealsSection {
   id               String   @id @default(cuid())
   createdAt        DateTime @default(now())
   mealsSectionName String
+  Day              Day      @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  dayId            String
   meals            Meal[]
-  Days             Days     @relation(fields: [daysId], references: [id], onDelete: Cascade)
-  daysId           String
 }
 
 model Meal {

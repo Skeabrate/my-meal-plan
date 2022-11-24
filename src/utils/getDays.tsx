@@ -3,16 +3,16 @@ import prisma from 'lib/prismadb';
 export const getDays = async (mealPlanId: string) => {
   let days = [];
 
-  const daysInCurrentMealPlan = await prisma.days.findMany({
+  const daysInCurrentMealPlan = await prisma.day.findMany({
     where: {
       mealPlanId,
     },
   });
 
-  for await (const { id: daysId, dayName } of daysInCurrentMealPlan) {
+  for await (const { id: dayId, dayName } of daysInCurrentMealPlan) {
     const mealsSectionsInCurrentMealPlan = await prisma.mealsSection.findMany({
       where: {
-        daysId,
+        dayId,
       },
     });
 
@@ -33,7 +33,7 @@ export const getDays = async (mealPlanId: string) => {
     }
 
     days.push({
-      id: daysId,
+      id: dayId,
       dayName,
       mealsSections,
     });

@@ -37,7 +37,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
             Chose Meal Plan:
           </Styled.Label>
         </li>
-        {mealPlansWithAllDetails?.length ? (
+        {mealPlansWithAllDetails.length ? (
           mealPlansWithAllDetails.map(({ id, mealPlanName }) => (
             <li key={id}>
               <button onClick={(e) => updateDisplayedItems(e, () => choseDay(mealPlanName))}>

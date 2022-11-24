@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function deleteMealsSection(req: NextApiRequest, res: NextApiResponse) {
-  const { daysId, mealsSectionId } = req.body;
+  const { dayId, mealsSectionId } = req.body;
 
   if (mealsSectionId) {
     await prisma.mealsSection.delete({
@@ -13,14 +13,14 @@ export default async function deleteMealsSection(req: NextApiRequest, res: NextA
 
     const mealsSectionsInCurrentDay = await prisma.mealsSection.findMany({
       where: {
-        daysId,
+        dayId,
       },
     });
 
     if (!mealsSectionsInCurrentDay.length) {
-      await prisma.days.delete({
+      await prisma.day.delete({
         where: {
-          id: daysId,
+          id: dayId,
         },
       });
     }

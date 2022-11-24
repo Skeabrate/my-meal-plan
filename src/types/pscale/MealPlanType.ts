@@ -7,8 +7,8 @@ export type MealPlanType = {
 };
 
 export type DaysType = {
-  id: Prisma.Days['id'];
-  dayName: Prisma.Days['dayName'];
+  id: Prisma.Day['id'];
+  dayName: Prisma.Day['dayName'];
   mealsSections: MealsSectionType[];
 };
 

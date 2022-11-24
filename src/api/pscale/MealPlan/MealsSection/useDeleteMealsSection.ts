@@ -5,14 +5,14 @@ export const useDeleteMealsSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
 
-  const deleteMealsSection = async (daysId: string, mealsSectionId: string) => {
+  const deleteMealsSection = async (dayId: string, mealsSectionId: string) => {
     setIsLoading(true);
     try {
       await axios({
         method: 'post',
         url: '/api/deleteMealsSection',
         data: {
-          daysId,
+          dayId,
           mealsSectionId,
         },
       });
