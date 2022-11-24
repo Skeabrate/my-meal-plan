@@ -7,7 +7,7 @@ import * as Styled from 'styles/profile/meal-plans/mealPlanName.styles';
 import { useTabs } from 'hooks/useTabs';
 import { useMutation } from 'hooks/useMutation';
 import { DAYS } from 'utils/days';
-import { MealPlanType } from 'types/pscale/MealPlanType';
+import { MealPlanType } from 'types/MealPlanTypes';
 import { fetchMealPlan, useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';

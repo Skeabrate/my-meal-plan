@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { MealsSectionType } from 'types/pscale/MealPlanType';
+import { MealsSectionType } from 'types/MealPlanTypes';
 import { MealType } from 'types/MealType';
 
 export const fetchMealsFromMealsSections = async (

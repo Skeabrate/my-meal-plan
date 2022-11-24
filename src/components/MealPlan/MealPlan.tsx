@@ -4,7 +4,7 @@ import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
-import { MealPlanType } from 'types/pscale/MealPlanType';
+import { MealPlanType } from 'types/MealPlanTypes';
 import { useMutation } from 'hooks/useMutation';
 
 const MealPlan = ({

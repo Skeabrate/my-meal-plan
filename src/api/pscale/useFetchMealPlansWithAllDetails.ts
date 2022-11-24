@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useSession } from 'next-auth/react';
-import { MealPlanType } from 'types/pscale/MealPlanType';
+import { MealPlanType } from 'types/MealPlanTypes';
 
 export const fetchMealPlansWithAllDetails = async (userEmail: string): Promise<MealPlanType[]> => {
   const { data } = await axios({
