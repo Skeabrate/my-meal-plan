@@ -14,8 +14,8 @@ export default async function deleteMealFromMealsSection(
       },
     });
 
-    res.status(200).send({ message: 'Meal deleted successfully' });
+    res.status(200).send('Meal deleted successfully');
   } else {
-    res.status(500).send({ error: 'Operation failed' });
+    res.status(500).send('Operation failed');
   }
 }

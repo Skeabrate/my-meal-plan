@@ -4,14 +4,10 @@ import { ApiResponseType } from 'types/ApiResponseType';
 import { MealType } from 'types/MealType';
 
 export const fetchMealById = async (mealId: string) => {
-  try {
-    const res = await axios.get(`${process.env.FETCH_MEAL_BY_ID}${mealId}`);
-
-    return res?.data?.meals;
-  } catch (err) {
-    console.log(axios.isAxiosError(err) && err.message);
-    throw new Error('Something went wrong');
-  }
+  const {
+    data: { meals },
+  } = await axios.get(`${process.env.FETCH_MEAL_BY_ID}${mealId}`);
+  return meals;
 };
 
 export const useFetchMealById = (mealId: string) => {

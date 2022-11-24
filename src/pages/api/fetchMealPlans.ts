@@ -18,6 +18,6 @@ export default async function fetchMealPlans(req: NextApiRequest, res: NextApiRe
 
     res.status(200).json(mealPlans);
   } else {
-    res.status(500).send({ error: 'Operation failed' });
+    res.status(500).send('Operation failed');
   }
 }

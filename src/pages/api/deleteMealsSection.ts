@@ -25,8 +25,8 @@ export default async function deleteMealsSection(req: NextApiRequest, res: NextA
       });
     }
 
-    res.status(200).send({ message: 'Meals section deleted successfully' });
+    res.status(200).send('Meals section deleted successfully');
   } else {
-    res.status(500).send({ error: 'Operation failed' });
+    res.status(500).send('Operation failed');
   }
 }

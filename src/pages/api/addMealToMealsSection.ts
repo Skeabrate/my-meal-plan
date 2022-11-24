@@ -17,7 +17,7 @@ export default async function addMealToMealsSection(req: NextApiRequest, res: Ne
       });
 
       if (checkIfMealExistsInPscaleDb) {
-        res.status(500).send({ error: `Meal already added to your meals section.` });
+        res.status(500).send('Meal already added to your meals section.');
       } else {
         await prisma.meal.create({
           data: {
@@ -26,13 +26,13 @@ export default async function addMealToMealsSection(req: NextApiRequest, res: Ne
           },
         });
 
-        res.status(200).send({ message: 'Meal added to meals section.' });
+        res.status(200).send('Meal added to meals section.');
       }
     } else {
-      res.status(500).send({ error: `Meal doesn't exist.` });
+      res.status(500).send(`Meal doesn't exist.`);
     }
   } else {
-    res.status(500).send({ error: 'Operation failed.' });
+    res.status(500).send('Operation failed.');
   }
 }
 ``;

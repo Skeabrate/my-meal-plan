@@ -4,14 +4,10 @@ import { ApiResponseType } from 'types/ApiResponseType';
 import { CategoryType } from 'types/CategoryType';
 
 export const fetchCategories = async () => {
-  try {
-    const res = await axios.get(process.env.FETCH_CATEGORIES!);
-
-    return res?.data?.categories;
-  } catch (err) {
-    console.log(axios.isAxiosError(err) && err.message);
-    throw new Error('Something went wrong');
-  }
+  const {
+    data: { categories },
+  } = await axios.get(process.env.FETCH_CATEGORIES!);
+  return categories;
 };
 
 export const useFetchCategories = () => {

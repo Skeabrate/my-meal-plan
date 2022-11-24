@@ -11,8 +11,8 @@ export default async function deleteAccount(req: NextApiRequest, res: NextApiRes
       },
     });
 
-    res.status(200).send({ message: 'User deleted successfully' });
+    res.status(200).send('User deleted successfully');
   } else {
-    res.status(500).send({ error: 'Operation failed' });
+    res.status(500).send('Operation failed');
   }
 }

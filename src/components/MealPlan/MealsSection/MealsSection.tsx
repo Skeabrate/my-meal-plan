@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import * as Styled from './MealsSection.styles';
-import { useDeleteMealsSection } from 'api/pscale/MealPlan/MealsSection/useDeleteMealsSection';
-import { useDeleteMealFromMealsSection } from 'api/pscale/MealPlan/MealsSection/Meals/useDeleteMealFromMealsSection';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSectionOptionsDropdown from 'components/Dropdowns/MealsSectionOptionsDropdown';
 import { MealType } from 'types/MealType';
+import { useMutation } from 'hooks/useMutation';
+import Loading from 'components/Loading/Loading';
 
 type MealsSectionWithFetchedMealsType = {
   id: string;
@@ -20,42 +20,58 @@ type MealsSectionWithFetchedMealsType = {
 const MealsSection = ({
   mealsSection,
   activeDayId,
+  deleteMealsSection,
+  refetch,
 }: {
   mealsSection: MealsSectionWithFetchedMealsType;
   activeDayId: string;
+  deleteMealsSection: (body: {}) => void;
+  refetch: () => void;
 }) => {
-  const { deleteMealsSection } = useDeleteMealsSection();
-  const { deleteMealFromMealsSection } = useDeleteMealFromMealsSection();
+  const { mutation: deleteMealFromMealsSection, isLoading } = useMutation(
+    '/api/deleteMealFromMealsSection',
+    () => {
+      refetch();
+    }
+  );
 
   return (
     <Styled.MealPlan>
       <Styled.Header>
         <h3>{mealsSection.mealsSectionName}</h3>
         <MealsSectionOptionsDropdown
-          deleteHandler={() => deleteMealsSection(activeDayId, mealsSection.id)}
+          deleteHandler={() =>
+            deleteMealsSection({ dayId: activeDayId, mealsSectionId: mealsSection.id })
+          }
         />
       </Styled.Header>
       <Styled.MealsGrid>
         {mealsSection.meals.map(({ id, mealDetails }) => (
           <li key={id}>
-            <Link href={`/loading/meal?id=${mealDetails.idMeal}`}>
-              <a>
-                <ImageLoading>
-                  <Image
-                    src={mealDetails.strMealThumb}
-                    alt={mealDetails.strMeal}
-                    width={150}
-                    height={150}
-                  />
-                </ImageLoading>
-              </a>
-            </Link>
+            {isLoading ? (
+              <Loading height={150} />
+            ) : (
+              <>
+                <Link href={`/loading/meal?id=${mealDetails.idMeal}`}>
+                  <a>
+                    <ImageLoading>
+                      <Image
+                        src={mealDetails.strMealThumb}
+                        alt={mealDetails.strMeal}
+                        width={150}
+                        height={150}
+                      />
+                    </ImageLoading>
+                  </a>
+                </Link>
 
-            <span>{mealDetails.strMeal}</span>
-            <UnderlinedButton
-              label='Delete'
-              onClick={() => deleteMealFromMealsSection(id)}
-            />
+                <span>{mealDetails.strMeal}</span>
+                <UnderlinedButton
+                  label='Delete'
+                  onClick={() => deleteMealFromMealsSection({ mealId: id })}
+                />
+              </>
+            )}
           </li>
         ))}
       </Styled.MealsGrid>

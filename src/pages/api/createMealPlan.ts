@@ -13,7 +13,7 @@ export default async function createMealPlan(req: NextApiRequest, res: NextApiRe
     });
 
     if (doesMealPlanAlreadyExists) {
-      return res.status(500).send({ error: 'Meal plan already exists.' });
+      return res.status(500).send('Meal plan already exists.');
     } else {
       await prisma.mealPlan.create({
         data: {
@@ -22,10 +22,10 @@ export default async function createMealPlan(req: NextApiRequest, res: NextApiRe
         },
       });
 
-      res.status(200).send({ message: 'Meal plan added successfully' });
+      res.status(200).send('Meal plan added successfully');
     }
   } else {
-    res.status(500).send({ error: 'Operation failed' });
+    res.status(500).send('Operation failed');
   }
 }
 ``;

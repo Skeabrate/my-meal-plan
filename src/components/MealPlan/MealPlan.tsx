@@ -1,22 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFetchMealsFromMealsSections } from 'api/mealdb/useFetchMealsFromMealsSections';
-import { useCreateMealsSection } from 'api/pscale/MealPlan/MealsSection/useCreateMealsSection';
 import OpenInput from 'components/OpenInput/OpenInput';
 import Loading from 'components/Loading/Loading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
 import { MealPlanType } from 'types/pscale/MealPlanType';
+import { useMutation } from 'hooks/useMutation';
 
-const MealPlan = ({ mealPlan, activeTab }: { mealPlan: MealPlanType; activeTab: string }) => {
+const MealPlan = ({
+  mealPlan,
+  activeTab,
+  refetch,
+}: {
+  mealPlan: MealPlanType;
+  activeTab: string;
+  refetch: () => void;
+}) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
   const activeDay = mealPlan.days.find(({ dayName }) => dayName === activeTab);
 
-  const { mealsSections, isLoading, error, refetch } = useFetchMealsFromMealsSections(
+  const { mealsSections, isLoading: isLoadingFetchMeals } = useFetchMealsFromMealsSections(
     activeDay?.mealsSections || []
   );
 
-  const { createMealsSection } = useCreateMealsSection();
+  const { mutation: createMealsSection, isLoading: isLoadingCreateMealsSection } = useMutation(
+    '/api/createMealsSection',
+    () => {
+      refetch();
+    }
+  );
+
+  const { mutation: deleteMealsSection, isLoading: isLoadingDeleteMealsSection } =
+    useMutation('/api/deleteMealsSection');
 
   return (
     <div>
@@ -46,16 +62,16 @@ const MealPlan = ({ mealPlan, activeTab }: { mealPlan: MealPlanType; activeTab: 
         )}
       </div>
 
-      {isLoading ? (
+      {isLoadingFetchMeals || isLoadingCreateMealsSection ? (
         <Loading />
-      ) : error ? (
-        <p>Error occured.</p>
       ) : mealsSections?.length ? (
         mealsSections.map((mealsSection) => (
           <MealsSection
             key={mealsSection.id}
             activeDayId={activeDay!.id}
             mealsSection={mealsSection}
+            deleteMealsSection={deleteMealsSection}
+            refetch={refetch}
           />
         ))
       ) : (

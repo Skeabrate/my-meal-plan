@@ -24,7 +24,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
         });
 
         if (checkIfMealsSectionExists) {
-          res.status(500).send({ message: 'Meals section already exists.' });
+          res.status(500).send('Meals section already exists.');
         } else {
           await prisma.mealsSection.create({
             data: {
@@ -33,10 +33,10 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
             },
           });
 
-          res.status(200).send({ message: 'Added meals section to already existed day.' });
+          res.status(200).send('Added meals section to already existed day.');
         }
       } else {
-        res.status(500).send({ message: 'Wrong dayId.' });
+        res.status(500).send('Wrong dayId.');
       }
     } else if (checkIfActiveDayIsValidFormat) {
       const checkIfDayExistsByName = await prisma.day.findFirst({
@@ -47,7 +47,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
       });
 
       if (checkIfDayExistsByName) {
-        res.status(500).send({ message: 'No dayId provided' });
+        res.status(500).send('No dayId provided');
       } else {
         await prisma.day.create({
           data: {
@@ -61,14 +61,14 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
           },
         });
 
-        res.status(200).send({ message: 'Added meals section to new day.' });
+        res.status(200).send('Added meals section to a new day.');
       }
     } else {
-      res.status(500).send({ message: 'Something went wrong - day not specified.' });
+      res.status(500).send('Something went wrong - day not specified.');
     }
   } else {
-    res.status(500).send({
-      message: 'Something went wrong - meal plan id or meals section name not specified.',
-    });
+    res
+      .status(500)
+      .send('Something went wrong - meal plan id or meals section name not specified.');
   }
 }

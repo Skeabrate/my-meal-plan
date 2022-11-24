@@ -11,8 +11,8 @@ export default async function deleteMealPlan(req: NextApiRequest, res: NextApiRe
       },
     });
 
-    res.status(200).send({ message: 'Meal plan deleted successfully' });
+    res.status(200).send('Meal plan deleted successfully');
   } else {
-    res.status(500).send({ error: 'Operation failed' });
+    res.status(500).send('Operation failed');
   }
 }

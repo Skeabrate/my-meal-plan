@@ -8,9 +8,10 @@ import ArrowSvg from 'assets/SVG/LeftArrow.svg';
 import Loading from 'components/Loading/Loading';
 
 const SubDropdown = ({ mealId }: { mealId: string }) => {
-  const { mealPlansWithAllDetails, isLoading, error } = useFetchMealPlansWithAllDetails();
-
   const { data: session } = useSession();
+
+  const { mealPlansWithAllDetails, isLoading, isError, error } = useFetchMealPlansWithAllDetails();
+
   const [displayedItems, setDisplayedItems] = useState<JSX.Element | undefined>();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
             Chose Meal Plan:
           </Styled.Label>
         </li>
-        {mealPlansWithAllDetails.length ? (
+        {mealPlansWithAllDetails?.length ? (
           mealPlansWithAllDetails.map(({ id, mealPlanName }) => (
             <li key={id}>
               <button onClick={(e) => updateDisplayedItems(e, () => choseDay(mealPlanName))}>
@@ -57,7 +58,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
       updateDisplayedItems(e, () => choseMealPlan());
     };
 
-    const days = mealPlansWithAllDetails.find(
+    const days = mealPlansWithAllDetails?.find(
       ({ mealPlanName }) => mealPlanName === chosenMealPlan
     )?.days;
 

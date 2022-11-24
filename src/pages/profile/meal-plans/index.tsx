@@ -21,23 +21,19 @@ const MealPlans = () => {
     refetch,
   } = useFetchMealPlans(session?.user.email as string);
 
-  const {
-    mutation: createMealPlan,
-    isLoading: isLoadingCreate,
-    isError: isErrorCreate,
-    error: errorCreate,
-  } = useMutation('/api/createMealPlan', () => {
-    refetch();
-  });
+  const { mutation: createMealPlan, isLoading: isLoadingCreate } = useMutation(
+    '/api/createMealPlan',
+    () => {
+      refetch();
+    }
+  );
 
-  const {
-    mutation: deleteMealPlan,
-    isLoading: isLoadingDelete,
-    isError: isErrorDelete,
-    error: errorDelete,
-  } = useMutation('/api/deleteMealPlan', () => {
-    refetch();
-  });
+  const { mutation: deleteMealPlan, isLoading: isLoadingDelete } = useMutation(
+    '/api/deleteMealPlan',
+    () => {
+      refetch();
+    }
+  );
 
   return (
     <ProfileTabLayout label='My Meal Plans:'>
