@@ -3,10 +3,10 @@ import type Prisma from '@prisma/client';
 export type MealPlanType = {
   id: Prisma.MealPlan['id'];
   mealPlanName: Prisma.MealPlan['mealPlanName'];
-  days: DaysType[];
+  days: DayType[];
 };
 
-export type DaysType = {
+export type DayType = {
   id: Prisma.Day['id'];
   dayName: Prisma.Day['dayName'];
   mealsSections: MealsSectionType[];

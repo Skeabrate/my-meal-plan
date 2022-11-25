@@ -14,6 +14,7 @@ import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealPlanComponent from 'components/MealPlan/MealPlan';
 import Loading from 'components/Loading/Loading';
+import OpenInput from 'components/OpenInput/OpenInput';
 
 const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlanName: string }) => {
   const router = useRouter();
@@ -22,7 +23,17 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
     mealPlan,
     isLoading: isLoadingFetchMealPlan,
     refetch,
+    isRefetching,
   } = useFetchMealPlan(userEmail, mealPlanName);
+
+  const [isInputOpen, setIsInputOpen] = useState(false);
+
+  const { mutation: createMealsSection, isLoading: isLoadingCreateMealsSection } = useMutation(
+    '/api/createMealsSection',
+    () => {
+      refetch();
+    }
+  );
 
   const { mutation: deleteMealPlan, isLoading: isLoadingDeleteMealPlan } = useMutation(
     '/api/deleteMealPlan',
@@ -31,15 +42,31 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
     }
   );
 
+  const { mutation: deleteMealsSection, isLoading: isLoadingDeleteMealsSection } = useMutation(
+    '/api/deleteMealsSection',
+    () => {
+      refetch();
+    }
+  );
+
+  const { mutation: deleteMealFromMealsSection, isLoading: isLoadingDeleteMealFromMealsSection } =
+    useMutation('/api/deleteMealFromMealsSection', () => {
+      refetch();
+    });
+
   const [activeDetailsHelper, setActiveDetailsHelper] = useState(DAYS[0]);
+
+  const activeDayDetails = mealPlan?.days.find(({ dayName }) => dayName === activeDetailsHelper);
+
   const tabs = DAYS.map((day) => ({
     id: day,
     label: day,
     Component: (
       <MealPlanComponent
-        mealPlan={mealPlan as MealPlanType}
-        activeTab={activeDetailsHelper}
-        refetch={refetch}
+        activeDayDetails={activeDayDetails}
+        isLoading={isLoadingDeleteMealFromMealsSection || isRefetching}
+        deleteMealsSection={deleteMealsSection}
+        deleteMealFromMealsSection={deleteMealFromMealsSection}
       />
     ),
   }));
@@ -50,44 +77,59 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
       noAnimation
       label='Meal Plan Details:'
     >
-      {isLoadingFetchMealPlan || isLoadingDeleteMealPlan ? (
-        <Loading />
-      ) : mealPlan ? (
-        <>
-          <Styled.MealPlanTitle>
-            <h2>{mealPlan?.mealPlanName}</h2>
-            <UnderlinedButton
-              label='Delete meal plan'
-              onClick={() =>
-                deleteMealPlan({
-                  mealPlanId: mealPlan?.id,
-                })
-              }
-            />
-          </Styled.MealPlanTitle>
+      <Styled.MealPlanTitle>
+        <h2>{mealPlan?.mealPlanName}</h2>
+        <UnderlinedButton
+          label='Delete meal plan'
+          onClick={() =>
+            deleteMealPlan({
+              mealPlanId: mealPlan?.id,
+            })
+          }
+        />
+      </Styled.MealPlanTitle>
 
-          <Styled.DaysBar>
-            {DAYS.map((day) => (
-              <li key={day}>
-                <Styled.DaysBarButton
-                  $isActive={day === activeDetails}
-                  onClick={() => {
-                    setActiveDetails(day);
-                    setActiveDetailsHelper(day);
-                  }}
-                >
-                  {day}
-                </Styled.DaysBarButton>
-              </li>
-            ))}
-          </Styled.DaysBar>
+      <Styled.DaysBar>
+        {DAYS.map((day) => (
+          <li key={day}>
+            <Styled.DaysBarButton
+              $isActive={day === activeDetails}
+              onClick={() => {
+                setActiveDetails(day);
+                setActiveDetailsHelper(day);
+              }}
+            >
+              {day}
+            </Styled.DaysBarButton>
+          </li>
+        ))}
+      </Styled.DaysBar>
 
-          {/* MealPlanComponent */}
-          {selectedTab}
-        </>
-      ) : (
-        <p>Meal plan not found</p>
+      <div style={{ padding: '15px 0 10px' }}>
+        <UnderlinedButton
+          label='Add new meals section'
+          onClick={() => setIsInputOpen((isOpen) => !isOpen)}
+          isGreen
+        />
+      </div>
+
+      {isInputOpen && (
+        <OpenInput
+          label='Add new meal section'
+          updateMealPLans={(inputValue) => {
+            createMealsSection({
+              mealPlanId: mealPlan?.id,
+              mealsSectionName: inputValue,
+              activeDayId: activeDayDetails?.id,
+              activeDayName: activeDetails,
+            });
+            setIsInputOpen(false);
+          }}
+          placeholder='E.g. Breakfast...'
+        />
       )}
+
+      {selectedTab}
     </ProfileTabLayout>
   );
 };

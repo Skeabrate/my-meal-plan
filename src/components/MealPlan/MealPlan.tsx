@@ -1,78 +1,79 @@
-import { useState } from 'react';
 import { useFetchMealsFromMealsSections } from 'api/mealdb/useFetchMealsFromMealsSections';
-import OpenInput from 'components/OpenInput/OpenInput';
-import Loading from 'components/Loading/Loading';
-import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
-import MealsSection from './MealsSection/MealsSection';
-import { MealPlanType } from 'types/MealPlanTypes';
+import { DayType, MealPlanType } from 'types/MealPlanTypes';
 import { useMutation } from 'hooks/useMutation';
+import * as Styled from './MealPlan.styles';
+import MealsSectionOptionsDropdown from 'components/Dropdowns/MealsSectionOptionsDropdown';
+import ImageLoading from 'components/ImageLoading/ImageLoading';
+import Image from 'next/image';
+import Link from 'next/link';
+import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
+import { MealType } from 'types/MealType';
+import Loading from 'components/Loading/Loading';
 
 const MealPlan = ({
-  mealPlan,
-  activeTab,
-  refetch,
+  activeDayDetails,
+  isLoading,
+  deleteMealsSection,
+  deleteMealFromMealsSection,
 }: {
-  mealPlan: MealPlanType;
-  activeTab: string;
-  refetch: () => void;
+  activeDayDetails: DayType | undefined;
+  isLoading: boolean;
+  deleteMealsSection: (body: {}) => void;
+  deleteMealFromMealsSection: (body: {}) => void;
 }) => {
-  const [isInputOpen, setIsInputOpen] = useState(false);
-
-  const activeDay = mealPlan.days.find(({ dayName }) => dayName === activeTab);
-
   const { mealsSections, isLoading: isLoadingFetchMeals } = useFetchMealsFromMealsSections(
-    activeDay?.mealsSections || []
+    activeDayDetails?.mealsSections || []
   );
 
-  const { mutation: createMealsSection, isLoading: isLoadingCreateMealsSection } = useMutation(
-    '/api/createMealsSection',
-    () => {
-      refetch();
-    }
-  );
-
-  const { mutation: deleteMealsSection, isLoading: isLoadingDeleteMealsSection } =
-    useMutation('/api/deleteMealsSection');
-
-  return (
+  return isLoadingFetchMeals ? (
+    <Loading />
+  ) : (
     <div>
-      <div>
-        <div style={{ padding: '15px 0 10px' }}>
-          <UnderlinedButton
-            label='Add new meals section'
-            onClick={() => setIsInputOpen((isOpen) => !isOpen)}
-            isGreen
-          />
-        </div>
-
-        {isInputOpen && (
-          <OpenInput
-            label='Add new meal section'
-            updateMealPLans={(inputValue) => {
-              createMealsSection({
-                mealPlanId: mealPlan.id,
-                mealsSectionName: inputValue,
-                activeDayId: activeDay?.id,
-                activeDayName: activeTab,
-              });
-              setIsInputOpen(false);
-            }}
-            placeholder='E.g. Breakfast...'
-          />
-        )}
-      </div>
-
-      {isLoadingFetchMeals || isLoadingCreateMealsSection ? (
-        <Loading />
-      ) : mealsSections?.length ? (
+      {mealsSections?.length ? (
         mealsSections.map((mealsSection) => (
-          <MealsSection
-            key={mealsSection.id}
-            activeDayId={activeDay!.id}
-            mealsSection={mealsSection}
-            deleteMealsSection={deleteMealsSection}
-            refetch={refetch}
-          />
+          <Styled.MealPlan key={mealsSection.id}>
+            <Styled.Header>
+              <h3>{mealsSection.mealsSectionName}</h3>
+              <MealsSectionOptionsDropdown
+                deleteHandler={() =>
+                  deleteMealsSection({
+                    dayId: activeDayDetails?.id,
+                    mealsSectionId: mealsSection.id,
+                  })
+                }
+              />
+            </Styled.Header>
+            {isLoading ? (
+              <Loading height={155} />
+            ) : (
+              <Styled.MealsGrid>
+                {mealsSection.meals.map(({ id, mealDetails }) => (
+                  <li key={id}>
+                    <>
+                      <Link href={`/loading/meal?id=${mealDetails.idMeal}`}>
+                        <a>
+                          <ImageLoading>
+                            <Image
+                              src={mealDetails.strMealThumb}
+                              alt={mealDetails.strMeal}
+                              width={150}
+                              height={150}
+                            />
+                          </ImageLoading>
+                        </a>
+                      </Link>
+
+                      <span>{mealDetails.strMeal}</span>
+                      <UnderlinedButton
+                        label='Delete'
+                        onClick={() => deleteMealFromMealsSection({ mealId: id })}
+                      />
+                    </>
+                  </li>
+                ))}
+              </Styled.MealsGrid>
+            )}
+          </Styled.MealPlan>
         ))
       ) : (
         <p>Add your first meal section!</p>

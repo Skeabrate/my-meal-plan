@@ -57,7 +57,8 @@ const MealPlans = () => {
         <Styled.MealPlansList>
           {mealPlans.map(({ id, mealPlanName }, index) => (
             <li key={mealPlanName}>
-              <Link href={`/profile/meal-plans/loading/meal-plan?mealPlanName=${mealPlanName}`}>
+              {/* <Link href={`/profile/meal-plans/loading/meal-plan?mealPlanName=${mealPlanName}`}> */}
+              <Link href={`/profile/meal-plans/${mealPlanName}`}>
                 <Styled.ListItem>
                   <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
                   {mealPlanName}

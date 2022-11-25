@@ -24,6 +24,7 @@ export const useFetchMealPlan = (userEmail: string, mealPlanName: string) => {
     isError,
     error,
     refetch,
+    isRefetching,
   } = useQuery('fetchMealPlan', () => fetchMealPlan(userEmail, mealPlanName), {
     refetchOnWindowFocus: false,
   });
@@ -35,5 +36,6 @@ export const useFetchMealPlan = (userEmail: string, mealPlanName: string) => {
     error:
       axios.isAxiosError(error) && typeof error.response?.data === 'string' && error.response?.data,
     refetch,
+    isRefetching,
   };
 };
