@@ -30,5 +30,11 @@ export const useFetchMealPlansWithAllDetails = () => {
     }
   );
 
-  return { mealPlansWithAllDetails, isLoading, isError, error };
+  return {
+    mealPlansWithAllDetails,
+    isLoading,
+    isError,
+    error:
+      axios.isAxiosError(error) && typeof error.response?.data === 'string' && error.response?.data,
+  };
 };

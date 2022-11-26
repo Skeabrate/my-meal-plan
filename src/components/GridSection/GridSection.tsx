@@ -16,7 +16,7 @@ export type DataItemType = {
 };
 
 type GridSectionType = {
-  data: DataItemType[];
+  data: DataItemType[] | undefined;
   linkUrl: string;
   label: {
     value: string;

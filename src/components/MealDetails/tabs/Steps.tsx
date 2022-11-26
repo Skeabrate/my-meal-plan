@@ -1,4 +1,4 @@
-import { StepType } from 'hooks/useGetMealDetails';
+import { StepType } from 'src/pages/meal/[meal]';
 import styled from 'styled-components';
 
 const StyledSteps = styled.article`

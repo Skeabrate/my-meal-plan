@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { MealPlanType } from 'types/MealPlanTypes';
+import Prisma from '@prisma/client';
 
 export const fetchMealPlan = async (
   userEmail: string,
   mealPlanName: string
-): Promise<MealPlanType> => {
+): Promise<Prisma.MealPlan & { days: Prisma.Day[] }> => {
   const { data } = await axios({
     method: 'post',
     url: '/api/fetchMealPlan',
@@ -23,9 +23,7 @@ export const useFetchMealPlan = (userEmail: string, mealPlanName: string) => {
     isLoading,
     isError,
     error,
-    refetch,
-    isRefetching,
-  } = useQuery('fetchMealPlan', () => fetchMealPlan(userEmail, mealPlanName), {
+  } = useQuery(['fetchMealPlan', mealPlanName], () => fetchMealPlan(userEmail, mealPlanName), {
     refetchOnWindowFocus: false,
   });
 
@@ -35,7 +33,5 @@ export const useFetchMealPlan = (userEmail: string, mealPlanName: string) => {
     isError,
     error:
       axios.isAxiosError(error) && typeof error.response?.data === 'string' && error.response?.data,
-    refetch,
-    isRefetching,
   };
 };

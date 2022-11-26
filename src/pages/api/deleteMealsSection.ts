@@ -4,7 +4,7 @@ import prisma from 'lib/prismadb';
 export default async function deleteMealsSection(req: NextApiRequest, res: NextApiResponse) {
   const { dayId, mealsSectionId } = req.body;
 
-  if (mealsSectionId) {
+  if (dayId && mealsSectionId) {
     await prisma.mealsSection.delete({
       where: {
         id: mealsSectionId,

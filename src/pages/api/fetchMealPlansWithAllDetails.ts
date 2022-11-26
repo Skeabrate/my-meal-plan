@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
-import { getDays } from 'utils/getDays';
 
 export default async function fetchMealPlansWithAllDetails(
   req: NextApiRequest,
@@ -22,11 +21,47 @@ export default async function fetchMealPlansWithAllDetails(
 
     let mealPlans = [];
 
-    for await (const { id, mealPlanName } of getMealPlans) {
-      const days = await getDays(id);
+    for await (const { id: mealPlanId, mealPlanName } of getMealPlans) {
+      let days = [];
+
+      const daysInCurrentMealPlan = await prisma.day.findMany({
+        where: {
+          mealPlanId,
+        },
+      });
+
+      for await (const { id: dayId, dayName } of daysInCurrentMealPlan) {
+        const mealsSectionsInCurrentMealPlan = await prisma.mealsSection.findMany({
+          where: {
+            dayId,
+          },
+        });
+
+        let mealsSections = [];
+
+        for await (const { id, mealsSectionName } of mealsSectionsInCurrentMealPlan) {
+          const mealsInCurrentMealPlan = await prisma.meal.findMany({
+            where: {
+              mealsSectionId: id,
+            },
+          });
+
+          mealsSections.push({
+            id,
+            mealsSectionName,
+            meals: mealsInCurrentMealPlan.map(({ id, mealId }) => ({ id, mealId })),
+          });
+        }
+
+        days.push({
+          id: dayId,
+          dayName,
+          mealsSections,
+        });
+      }
 
       mealPlans.push({
-        id,
+        id: mealPlanId,
         mealPlanName,
         days,
       });

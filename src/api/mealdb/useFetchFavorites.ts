@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { ApiResponseType } from 'types/ApiResponseType';
 import { MealType } from 'types/MealType';
 
 type MealsTableType = string[];
 
-export const fetchFavorites = async (meals: MealsTableType = []) => {
+export const fetchFavorites = async (meals: MealsTableType = []): Promise<MealType[]> => {
   const mealsById = meals.map((mealId) =>
     axios
       .get(`${process.env.FETCH_MEAL_BY_ID}${mealId}`)
@@ -20,11 +19,12 @@ export const useFetchFavorites = (meals: MealsTableType) => {
   const {
     data: favoritesById,
     isLoading,
+    isError,
     error,
   } = useQuery(['fetchFavorites', meals], () => fetchFavorites(meals), {
     enabled: !!meals,
     refetchOnWindowFocus: false,
   });
 
-  return { favoritesById, isLoading, error } as { favoritesById: MealType[] } & ApiResponseType;
+  return { favoritesById, isLoading, isError, error: axios.isAxiosError(error) && error.message };
 };

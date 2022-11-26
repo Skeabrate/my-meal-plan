@@ -19,6 +19,7 @@ const MealPlans = () => {
     mealPlans,
     isLoading: isLoadingMealPlans,
     refetch,
+    isRefetching,
   } = useFetchMealPlans(session?.user.email as string);
 
   const { mutation: createMealPlan, isLoading: isLoadingCreateMealPlan } = useMutation(
@@ -51,14 +52,13 @@ const MealPlans = () => {
         />
       )}
 
-      {isLoadingMealPlans || isLoadingCreateMealPlan || isLoadingDeleteMealPlan ? (
+      {isLoadingMealPlans || isLoadingCreateMealPlan || isLoadingDeleteMealPlan || isRefetching ? (
         <Loading />
       ) : mealPlans?.length ? (
         <Styled.MealPlansList>
           {mealPlans.map(({ id, mealPlanName }, index) => (
             <li key={mealPlanName}>
-              {/* <Link href={`/profile/meal-plans/loading/meal-plan?mealPlanName=${mealPlanName}`}> */}
-              <Link href={`/profile/meal-plans/${mealPlanName}`}>
+              <Link href={`/profile/meal-plans/loading/meal-plan?mealPlanName=${mealPlanName}`}>
                 <Styled.ListItem>
                   <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
                   {mealPlanName}

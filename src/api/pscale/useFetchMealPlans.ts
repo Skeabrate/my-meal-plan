@@ -20,9 +20,18 @@ export const useFetchMealPlans = (userEmail: string) => {
     isError,
     error,
     refetch,
+    isRefetching,
   } = useQuery('fetchMealPlans', () => fetchMealPlans(userEmail), {
     refetchOnWindowFocus: false,
   });
 
-  return { mealPlans, isLoading, isError, error, refetch };
+  return {
+    mealPlans,
+    isLoading,
+    isError,
+    error:
+      axios.isAxiosError(error) && typeof error.response?.data === 'string' && error.response?.data,
+    refetch,
+    isRefetching,
+  };
 };

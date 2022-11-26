@@ -14,7 +14,7 @@ const Category = ({ category }: { category: string }) => {
   const { mealsByCategory } = useFetchMealsByCategory(category);
 
   const categoryDetails = useMemo(
-    () => categories.find((item) => item.strCategory === category),
+    () => categories?.find((item) => item.strCategory === category),
     [categories, category]
   );
 
@@ -41,7 +41,7 @@ const Category = ({ category }: { category: string }) => {
       </Styled.Intro>
 
       <GridSection
-        data={mealsByCategory.map(({ idMeal, strMeal, strMealThumb }) => ({
+        data={mealsByCategory?.map(({ idMeal, strMeal, strMealThumb }) => ({
           id: idMeal,
           name: strMeal,
           img: strMealThumb,

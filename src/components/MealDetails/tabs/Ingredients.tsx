@@ -1,4 +1,4 @@
-import { IngredientType } from 'hooks/useGetMealDetails';
+import { IngredientType } from 'src/pages/meal/[meal]';
 import styled from 'styled-components';
 
 const StyledIngredients = styled.article`

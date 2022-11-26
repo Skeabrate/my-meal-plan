@@ -3,46 +3,42 @@ import prisma from 'lib/prismadb';
 import { DAYS } from 'utils/days';
 
 export default async function createMealsSection(req: NextApiRequest, res: NextApiResponse) {
-  const { mealPlanId, mealsSectionName, activeDayName, activeDayId } = req.body;
+  const { mealPlanId, mealsSectionName, dayName, dayId } = req.body;
 
-  const checkIfActiveDayIsValidFormat = DAYS.find((day) => day === activeDayName);
+  const checkIfDayNameIsValidFormat = DAYS.find((day) => day === dayName);
 
   if (mealPlanId && mealsSectionName) {
-    if (activeDayId) {
-      const checkIfDayExistsById = await prisma.day.findFirst({
+    if (dayId) {
+      const checkIfMealsSectionExists = await prisma.mealsSection.findFirst({
         where: {
-          id: activeDayId,
+          dayId,
+          mealsSectionName,
         },
       });
 
-      if (checkIfDayExistsById) {
-        const checkIfMealsSectionExists = await prisma.mealsSection.findFirst({
+      if (checkIfMealsSectionExists) {
+        res.status(500).send('Meals section already exists.');
+      } else {
+        await prisma.day.update({
           where: {
-            dayId: activeDayId,
-            mealsSectionName,
+            id: dayId,
+          },
+          data: {
+            MealsSections: {
+              create: {
+                mealsSectionName,
+              },
+            },
           },
         });
 
-        if (checkIfMealsSectionExists) {
-          res.status(500).send('Meals section already exists.');
-        } else {
-          await prisma.mealsSection.create({
-            data: {
-              dayId: activeDayId,
-              mealsSectionName,
-            },
-          });
-
-          res.status(200).send('Added meals section to already existed day.');
-        }
-      } else {
-        res.status(500).send('Wrong dayId.');
+        res.status(200).send('Added meals section to already existed day.');
       }
-    } else if (checkIfActiveDayIsValidFormat) {
+    } else if (checkIfDayNameIsValidFormat) {
       const checkIfDayExistsByName = await prisma.day.findFirst({
         where: {
-          mealPlanId: mealPlanId,
-          dayName: activeDayName,
+          mealPlanId,
+          dayName,
         },
       });
 
@@ -52,7 +48,7 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
         await prisma.day.create({
           data: {
             mealPlanId,
-            dayName: activeDayName,
+            dayName,
             MealsSections: {
               create: {
                 mealsSectionName,

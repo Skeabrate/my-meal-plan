@@ -11,11 +11,10 @@ import ImageLoading from 'components/ImageLoading/ImageLoading';
 const Results = ({ inputValue }: { inputValue: string }) => {
   const debouncedInputValue = useDebouncedValue(inputValue, 700);
 
-  const { searchResults, isLoading, error } = useFetchSearchResults(debouncedInputValue);
+  const { searchResults, isLoading, isError, error } = useFetchSearchResults(debouncedInputValue);
   const { windowHeight } = useContext(ResizeWindowContext);
 
   const loading = isLoading;
-  const errorOccured = error?.message;
   const emptySearchInput = searchResults === null;
   const noMatchingResults = !emptySearchInput && searchResults.length === 0;
   const matchingResults = !emptySearchInput && searchResults.length > 0;
@@ -23,7 +22,7 @@ const Results = ({ inputValue }: { inputValue: string }) => {
   return (
     <Styled.Results $windowHeight={windowHeight}>
       {loading && <Loading />}
-      {errorOccured && <Styled.Error>An error occured while fetching meals.</Styled.Error>}
+      {isError && <Styled.Error>An error occured: {error}</Styled.Error>}
       {noMatchingResults && <Styled.Error>No matching meals.</Styled.Error>}
       {matchingResults && (
         <div>

@@ -95,10 +95,10 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
       updateDisplayedItems(e, () => choseDay(chosenMealPlan));
     };
 
-    const addMealToMealsSectionHandler = async (chosenMealsSectionId: string) => {
+    const createMealInMealsSectionHandler = async (chosenMealsSectionId: string) => {
       await axios({
         method: 'post',
-        url: '/api/addMealToMealsSection',
+        url: '/api/createMealInMealsSection',
         data: {
           mealsSectionId: chosenMealsSectionId,
           mealId,
@@ -117,7 +117,9 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
         {mealsSectionsInChosenDay.length ? (
           mealsSectionsInChosenDay.map(({ id, mealsSectionName }) => (
             <li key={id}>
-              <button onClick={() => addMealToMealsSectionHandler(id)}>{mealsSectionName}</button>
+              <button onClick={() => createMealInMealsSectionHandler(id)}>
+                {mealsSectionName}
+              </button>
             </li>
           ))
         ) : (

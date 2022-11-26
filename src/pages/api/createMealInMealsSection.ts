@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 import { fetchMealById } from 'api/mealdb/useFetchMealById';
 
-export default async function addMealToMealsSection(req: NextApiRequest, res: NextApiResponse) {
+export default async function createMealInMealsSection(req: NextApiRequest, res: NextApiResponse) {
   const { mealsSectionId, mealId } = req.body;
 
   if (mealsSectionId && mealId) {
