@@ -10,7 +10,7 @@ import GridSection from 'components/GridSection/GridSection';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
 
 const Category = ({ category }: { category: string }) => {
-  const { categories, isLoading, error } = useFetchCategories();
+  const { categories, isLoading, isError, error } = useFetchCategories();
   const { mealsByCategory } = useFetchMealsByCategory(category);
 
   const categoryDetails = useMemo(
@@ -53,7 +53,7 @@ const Category = ({ category }: { category: string }) => {
         loadingData={isLoading}
         error={{
           value: error,
-          fallbackMessage: `No meals found.`,
+          fallbackMessage: isError ? error : `No meals found.`,
         }}
       />
     </>

@@ -20,5 +20,10 @@ export const useFetchMealsByCategory = (category: string) => {
     refetchOnWindowFocus: false,
   });
 
-  return { mealsByCategory, isLoading, isError, error: axios.isAxiosError(error) && error.message };
+  return {
+    mealsByCategory,
+    isLoading,
+    isError,
+    error: axios.isAxiosError(error) ? error.message : '',
+  };
 };

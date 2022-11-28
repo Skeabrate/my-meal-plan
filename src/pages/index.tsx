@@ -4,8 +4,8 @@ import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategori
 import GridSection from 'components/GridSection/GridSection';
 
 function Home() {
-  const { categories, isLoading, error } = useFetchCategories();
-
+  const { categories, isLoading, isError, error } = useFetchCategories();
+  console.log(isError, error);
   return (
     <GridSection
       data={categories?.map(({ idCategory, strCategory, strCategoryThumb }) => ({
@@ -18,8 +18,8 @@ function Home() {
       label={{ value: 'Categories:', isMain: true }}
       loadingData={isLoading}
       error={{
-        value: error,
-        fallbackMessage: `No categories found.`,
+        value: isError,
+        fallbackMessage: isError ? error : `No categories found.`,
       }}
     />
   );

@@ -26,5 +26,10 @@ export const useFetchFavorites = (meals: MealsTableType) => {
     refetchOnWindowFocus: false,
   });
 
-  return { favoritesById, isLoading, isError, error: axios.isAxiosError(error) && error.message };
+  return {
+    favoritesById,
+    isLoading,
+    isError,
+    error: axios.isAxiosError(error) ? error.message : '',
+  };
 };

@@ -12,7 +12,7 @@ import GoBackButton from 'components/GoBackButton/GoBackButton';
 
 function Favorites() {
   const { favorites } = useContext(FavoritesContext);
-  const { favoritesById, isLoading, error } = useFetchFavorites(favorites);
+  const { favoritesById, isLoading, isError, error } = useFetchFavorites(favorites);
   const { data: session } = useSession();
 
   return (
@@ -31,8 +31,8 @@ function Favorites() {
         enableFavorites
         loadingData={isLoading}
         error={{
-          value: !favoritesById?.length || error,
-          fallbackMessage: `You don't have favorite meals yet.`,
+          value: isError || !favoritesById?.length,
+          fallbackMessage: isError ? error : `You don't have favorite meals yet.`,
         }}
       />
 

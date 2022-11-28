@@ -20,5 +20,5 @@ export const useFetchCategories = () => {
     refetchOnWindowFocus: false,
   });
 
-  return { categories, isLoading, isError, error: axios.isAxiosError(error) && error.message };
+  return { categories, isLoading, isError, error: axios.isAxiosError(error) ? error.message : '' };
 };
