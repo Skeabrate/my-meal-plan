@@ -49,7 +49,7 @@ const Category = ({ category }: { category: string }) => {
         }))}
         linkUrl='/loading/meal?id='
         label={{ value: 'Meals:' }}
-        enableFavorites
+        enableObtionsButton
         loadingData={isLoading}
         error={{
           value: error,

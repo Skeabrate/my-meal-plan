@@ -28,7 +28,7 @@ function Favorites() {
         }))}
         linkUrl='/loading/meal?id='
         label={{ value: 'Favorites:', isMain: true }}
-        enableFavorites
+        enableObtionsButton
         loadingData={isLoading}
         error={{
           value: isError || !favoritesById?.length,
