@@ -9,12 +9,12 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const loading = <Loading height={600} />;
 
   if (status === 'loading') {
-    return <>{loading}</>;
+    return loading;
   } else if (status === 'unauthenticated') {
     router.replace({
       pathname: '/api/auth/signin',
     });
-    return <>{loading}</>;
+    return loading;
   } else {
     return <>{children}</>;
   }

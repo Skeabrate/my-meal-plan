@@ -52,3 +52,15 @@ export const Info = styled.li`
     margin-right: 4px;
   }
 `;
+
+export const Success = styled.li`
+  text-align: left;
+  padding: 10px;
+
+  a {
+    text-decoration: underline;
+    padding: 0;
+    margin-top: 6px;
+    width: fit-content;
+  }
+`;

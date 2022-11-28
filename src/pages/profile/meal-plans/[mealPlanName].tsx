@@ -91,6 +91,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
   const queryClient = new QueryClient();
 
+  if (!session)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/api/auth/signin',
+      },
+      props: {},
+    };
+
   const mealPlanName = context.params?.mealPlanName as string;
   const userEmail = session?.user.email as string;
 

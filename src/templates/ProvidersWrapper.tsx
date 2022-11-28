@@ -7,6 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
 import HistoryProvider from 'context/HistoryContext';
+import ModalProvider from 'context/ModalContext';
 const FavoritesProvider = dynamic(() => import('context/FavoritesContext'), { ssr: false });
 const ThemeProvider = dynamic(() => import('context/ThemeContext'), { ssr: false });
 
@@ -27,7 +28,9 @@ const ProvidersWrapper = ({
             <HistoryProvider>
               <ResizeWindowProvider>
                 <FavoritesProvider>
-                  <SearchBarProvider>{children}</SearchBarProvider>
+                  <ModalProvider>
+                    <SearchBarProvider>{children}</SearchBarProvider>
+                  </ModalProvider>
                 </FavoritesProvider>
               </ResizeWindowProvider>
             </HistoryProvider>

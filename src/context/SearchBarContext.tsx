@@ -1,5 +1,7 @@
-import React, { ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { disablePageScroll } from 'utils/disablePageScroll';
+import SearchBar from 'components/SearchBar/SearchBar';
+import { ModalContext } from './ModalContext';
 
 type SearchBarContextType = {
   isSearchBarOpen: boolean;
@@ -10,15 +12,16 @@ export const SearchBarContext = React.createContext({} as SearchBarContextType);
 
 export default function SearchBarProvider({ children }: { children: ReactNode }) {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const { closeModal } = useContext(ModalContext);
 
-  const toggleSearchBar = useCallback(
-    () =>
-      setIsSearchBarOpen((state) => {
-        window.matchMedia('(min-width: 768px)').matches && disablePageScroll(!state);
-        return !state;
-      }),
-    []
-  );
+  const toggleSearchBar = useCallback(() => {
+    setIsSearchBarOpen((state) => {
+      window.matchMedia('(min-width: 768px)').matches && disablePageScroll(!state);
+      return !state;
+    });
+
+    closeModal();
+  }, [closeModal]);
 
   const value = useMemo(
     () => ({
@@ -28,5 +31,10 @@ export default function SearchBarProvider({ children }: { children: ReactNode })
     [isSearchBarOpen, toggleSearchBar]
   );
 
-  return <SearchBarContext.Provider value={value}>{children}</SearchBarContext.Provider>;
+  return (
+    <SearchBarContext.Provider value={value}>
+      {isSearchBarOpen && <SearchBar />}
+      {children}
+    </SearchBarContext.Provider>
+  );
 }
