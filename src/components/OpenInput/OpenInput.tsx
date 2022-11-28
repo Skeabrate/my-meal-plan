@@ -3,11 +3,20 @@ import styled from 'styled-components';
 
 const StyledForm = styled.form`
   ${({ theme }) => theme.fadeInAnimation(0.2)};
+  margin-bottom: 20px;
+  display: flex;
+  gap: 6px;
 
   input {
     border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
     padding: 10px;
-    margin-bottom: 10px;
+    background-color: ${({ theme }) => theme.themeColors.background};
+
+    &:last-child {
+      font-weight: 600;
+      cursor: pointer;
+      color: ${({ theme }) => theme.themeColors.secondFont};
+    }
   }
 `;
 
@@ -38,6 +47,10 @@ const OpenInput = ({
         required
         maxLength={50}
         autoFocus
+      />
+      <input
+        type='submit'
+        value='Add'
       />
     </StyledForm>
   );
