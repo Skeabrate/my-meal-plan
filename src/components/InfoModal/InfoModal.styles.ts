@@ -47,7 +47,7 @@ export const InfoModal = styled.div<{ $state: ModalType['state'] }>`
   font-weight: 600;
   background-color: ${({ theme }) => theme.themeColors.background};
   color: ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
-  border: 2px solid ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
+  border: 1px solid ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
   border-radius: 0px;
   box-shadow: ${({ theme }) => theme.colors.boxShadow};
   animation: ${customFadeIn} 0.2s forwards;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
@@ -13,6 +13,7 @@ import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import Day from 'components/Day/Day';
+import { useInfoModal } from 'components/InfoModal/InfoModal';
 
 const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlanName: string }) => {
   const router = useRouter();
@@ -24,12 +25,18 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
     error: errorFetchMealPlan,
   } = useFetchMealPlan(userEmail, mealPlanName);
 
-  const { mutation: deleteMealPlan, isLoading: isLoadingDeleteMealPlan } = useMutation(
-    '/api/deleteMealPlan',
-    () => {
-      router.push('/profile/meal-plans');
-    }
-  );
+  const {
+    mutation: deleteMealPlan,
+    isLoading: isLoadingDeleteMealPlan,
+    isError,
+    error,
+  } = useMutation('/api/deleteMealPlan', () => {
+    router.push('/profile/meal-plans');
+  });
+
+  const actionErrors = useMemo(() => [{ isError, error }], [isError, error]);
+
+  useInfoModal(actionErrors);
 
   const [activeDetailsHelper, setActiveDetailsHelper] = useState(DAYS[0]);
   const tabs = DAYS.map((day) => ({
@@ -39,7 +46,6 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
       <Day
         mealPlanId={mealPlan?.id}
         dayName={activeDetailsHelper}
-        dayId={mealPlan?.days.find((dayDb) => dayDb.dayName === day)?.id}
       />
     ),
   }));

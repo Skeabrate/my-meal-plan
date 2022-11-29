@@ -1,6 +1,18 @@
-import { ModalContext } from 'context/ModalContext';
 import React, { useContext, useEffect } from 'react';
+import { ModalContext } from 'context/ModalContext';
 import * as Styled from './InfoModal.styles';
+
+export const useInfoModal = (errors: { isError: boolean; error: unknown }[]) => {
+  const { openModal } = useContext(ModalContext);
+
+  useEffect(() => {
+    errors.forEach(({ isError, error }) => {
+      if (isError) {
+        openModal('error', error && typeof error === 'string' ? error : 'An error has occurred.');
+      }
+    });
+  }, [errors, openModal]);
+};
 
 const InfoModal = () => {
   const { modal, closeModal } = useContext(ModalContext);

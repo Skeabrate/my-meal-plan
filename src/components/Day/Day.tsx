@@ -1,20 +1,13 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useFetchMealsSections } from 'api/pscale/useFetchMealsSections';
 import { useMutation } from 'hooks/useMutation';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import OpenInput from 'components/OpenInput/OpenInput';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
+import { useInfoModal } from 'components/InfoModal/InfoModal';
 
-const Day = ({
-  mealPlanId,
-  dayName,
-  dayId,
-}: {
-  mealPlanId: string | undefined;
-  dayName: string;
-  dayId: string | undefined;
-}) => {
+const Day = ({ mealPlanId, dayName }: { mealPlanId: string | undefined; dayName: string }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
   const {
@@ -26,19 +19,38 @@ const Day = ({
     error: errorFetchMealsSections,
   } = useFetchMealsSections(mealPlanId, dayName);
 
-  const { mutation: deleteMealsSection, isLoading: isLoadingDeleteMealsSection } = useMutation(
-    '/api/deleteMealsSection',
-    () => {
-      refetch();
-    }
+  const {
+    mutation: createMealsSection,
+    isLoading: isLoadingCreateMealsSection,
+    isError: isErrorCreateMealsSection,
+    error: errorCreateMealsSection,
+  } = useMutation('/api/createMealsSection', () => {
+    refetch();
+  });
+
+  const {
+    mutation: deleteMealsSection,
+    isLoading: isLoadingDeleteMealsSection,
+    isError: isErrorDeleteMealsSection,
+    error: errorDeleteMealsSection,
+  } = useMutation('/api/deleteMealsSection', () => {
+    refetch();
+  });
+
+  const actionErrors = useMemo(
+    () => [
+      { isError: isErrorCreateMealsSection, error: errorCreateMealsSection },
+      { isError: isErrorDeleteMealsSection, error: errorDeleteMealsSection },
+    ],
+    [
+      isErrorCreateMealsSection,
+      errorCreateMealsSection,
+      isErrorDeleteMealsSection,
+      errorDeleteMealsSection,
+    ]
   );
 
-  const { mutation: createMealsSection, isLoading: isLoadingCreateMealsSection } = useMutation(
-    '/api/createMealsSection',
-    () => {
-      refetch();
-    }
-  );
+  useInfoModal(actionErrors);
 
   return (
     <div>
@@ -56,8 +68,8 @@ const Day = ({
           updateMealPLans={(inputValue) => {
             createMealsSection({
               mealPlanId,
-              dayId,
               dayName,
+              dayId: mealsSections?.length && mealsSections[0].dayId,
               mealsSectionName: inputValue,
             });
             setIsInputOpen(false);

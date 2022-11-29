@@ -22,10 +22,10 @@ export default async function createMealPlan(req: NextApiRequest, res: NextApiRe
         },
       });
 
-      res.status(200).send('Meal plan added successfully');
+      res.status(200).send('Meal plan added successfully.');
     }
   } else {
-    res.status(500).send('Operation failed');
+    res.status(500).send('Operation failed.');
   }
 }
 ``;

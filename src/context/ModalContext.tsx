@@ -1,6 +1,6 @@
-import InfoModal from 'components/InfoModal/InfoModal';
+import React, { useCallback, useMemo, useState } from 'react';
 import { usePathChange } from 'hooks/usePathChange';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import InfoModal from 'components/InfoModal/InfoModal';
 
 type ModalContextType = {
   modal: ModalType;
@@ -23,14 +23,6 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
     message: '',
   });
 
-  const openModal = useCallback((state: ModalType['state'], message: string) => {
-    setModal({
-      isOpen: true,
-      state,
-      message,
-    });
-  }, []);
-
   const closeModal = useCallback(() => {
     setModal((state) => ({
       ...state,
@@ -38,6 +30,28 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
       isOpen: false,
     }));
   }, []);
+
+  const openModal = useCallback(
+    (state: ModalType['state'], message: string) => {
+      const closeModalHandler = () =>
+        new Promise((resolve, reject) => {
+          closeModal();
+          resolve(true);
+        });
+
+      const openModalHandler = () =>
+        new Promise(() => {
+          setModal({
+            isOpen: true,
+            state,
+            message,
+          });
+        });
+
+      closeModalHandler().then(() => openModalHandler());
+    },
+    [closeModal]
+  );
 
   usePathChange(closeModal);
 

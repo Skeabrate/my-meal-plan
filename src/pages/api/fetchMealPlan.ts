@@ -13,21 +13,14 @@ export default async function fetchMealPlan(req: NextApiRequest, res: NextApiRes
     });
 
     if (mealPlan) {
-      const days = await prisma.day.findMany({
-        where: {
-          mealPlanId: mealPlan.id,
-        },
-      });
-
       res.status(200).json({
         id: mealPlan.id,
         mealPlanName: mealPlan.mealPlanName,
-        days,
       });
     } else {
       res.status(500).send('Meal plan not found.');
     }
   } else {
-    res.status(500).send('Operation failed');
+    res.status(500).send('Operation failed.');
   }
 }

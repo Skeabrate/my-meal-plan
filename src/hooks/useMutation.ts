@@ -20,6 +20,6 @@ export const useMutation = (
     mutation: (body: {}) => mutation.mutate(body),
     isLoading: mutation.isLoading,
     isError: mutation.isError,
-    error: axios.isAxiosError(mutation.error) && mutation.error.message,
+    error: axios.isAxiosError(mutation.error) && mutation.error.response?.data,
   };
 };

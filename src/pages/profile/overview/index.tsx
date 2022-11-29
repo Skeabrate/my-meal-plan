@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -5,6 +6,7 @@ import { useMutation } from 'hooks/useMutation';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
+import { useInfoModal } from 'components/InfoModal/InfoModal';
 
 const Overview = () => {
   const { data: session } = useSession();
@@ -14,6 +16,7 @@ const Overview = () => {
     mutation: deleteAccount,
     isLoading,
     isError,
+    error,
   } = useMutation('/api/deleteAccount', () => {
     router.push('/api/auth/signin');
   });
@@ -23,6 +26,10 @@ const Overview = () => {
       deleteAccount({ userEmail: session?.user.email });
     }
   };
+
+  const actionErrors = useMemo(() => [{ isError, error }], [isError, error]);
+
+  useInfoModal(actionErrors);
 
   return (
     <ProfileTabLayuot label='Profile Information:'>
@@ -41,8 +48,6 @@ const Overview = () => {
       <button onClick={deleteAccountConfirmation}>
         {isLoading ? <Loading height={40} /> : 'Delete Account'}
       </button>
-
-      {isError ? <p>{isError}</p> : null}
     </ProfileTabLayuot>
   );
 };

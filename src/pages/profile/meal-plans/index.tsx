@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import * as Styled from 'styles/profile/meal-plans/index.styles';
 import { useSession } from 'next-auth/react';
@@ -9,6 +9,7 @@ import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import OpenInput from 'components/OpenInput/OpenInput';
+import { useInfoModal } from 'components/InfoModal/InfoModal';
 
 const MealPlans = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
@@ -41,6 +42,16 @@ const MealPlans = () => {
   } = useMutation('/api/deleteMealPlan', () => {
     refetch();
   });
+
+  const actionErrors = useMemo(
+    () => [
+      { isError: isErrorCreateMealPlan, error: errorCreateMealPlan },
+      { isError: isErrorDeleteMealPlan, error: errorDeleteMealPlan },
+    ],
+    [isErrorCreateMealPlan, errorCreateMealPlan, isErrorDeleteMealPlan, errorDeleteMealPlan]
+  );
+
+  useInfoModal(actionErrors);
 
   return (
     <ProfileTabLayout label='My Meal Plans:'>

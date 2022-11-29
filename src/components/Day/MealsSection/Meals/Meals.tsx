@@ -1,24 +1,43 @@
+import { useMemo } from 'react';
 import * as Styled from './Meals.styles';
 import { useFetchMealsFromMealsSection } from 'api/pscale/useFetchMealsFromMealsSection';
 import { useMutation } from 'hooks/useMutation';
+import { useInfoModal } from 'components/InfoModal/InfoModal';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import Meal from './Meal/Meal';
 
 const Meals = ({ mealsSectionId }: { mealsSectionId: string }) => {
-  const { meals, isLoading, refetch, isRefetching, isError, error } =
-    useFetchMealsFromMealsSection(mealsSectionId);
+  const {
+    meals,
+    isLoading,
+    refetch,
+    isRefetching,
+    isError: isErrorFetchMealsFromMealsSection,
+    error: errorFetchMealsFromMealsSection,
+  } = useFetchMealsFromMealsSection(mealsSectionId);
 
-  const { mutation: deleteMealFromMealsSection, isLoading: isLoadingDeleteMealFromMealsSection } =
-    useMutation('/api/deleteMealFromMealsSection', () => {
-      refetch();
-    });
+  const {
+    mutation: deleteMealFromMealsSection,
+    isLoading: isLoadingDeleteMealFromMealsSection,
+    isError: isErrorDeleteMealFromMealsSection,
+    error: errorDeleteMealFromMealsSection,
+  } = useMutation('/api/deleteMealFromMealsSection', () => {
+    refetch();
+  });
+
+  const actionErrors = useMemo(
+    () => [{ isError: isErrorDeleteMealFromMealsSection, error: errorDeleteMealFromMealsSection }],
+    [isErrorDeleteMealFromMealsSection, errorDeleteMealFromMealsSection]
+  );
+
+  useInfoModal(actionErrors);
 
   return (
     <ErrorBoundary
       isLoading={isLoading || isRefetching || isLoadingDeleteMealFromMealsSection}
       loadingHeight={155}
-      isError={isError}
-      error={error}
+      isError={isErrorFetchMealsFromMealsSection}
+      error={errorFetchMealsFromMealsSection}
     >
       {meals?.length ? (
         <Styled.MealsGrid>

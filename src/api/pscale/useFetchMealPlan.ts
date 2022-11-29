@@ -5,7 +5,7 @@ import Prisma from '@prisma/client';
 export const fetchMealPlan = async (
   userEmail: string,
   mealPlanName: string
-): Promise<Prisma.MealPlan & { days: Prisma.Day[] }> => {
+): Promise<Prisma.MealPlan> => {
   const { data } = await axios({
     method: 'post',
     url: '/api/fetchMealPlan',

@@ -37,10 +37,6 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
     // eslint-disable-next-line
   }, [mealPlansWithAllDetails]);
 
-  useEffect(() => {
-    if (isErrorCreate) openModal('error', errorCreate ? errorCreate : 'An error has occurred.');
-  }, [isErrorCreate, errorCreate, openModal]);
-
   function updateDisplayedItems(
     e: React.MouseEvent<HTMLButtonElement>,
     newDisplayedItems: () => React.SetStateAction<JSX.Element | undefined>
