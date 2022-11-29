@@ -53,7 +53,7 @@ const Category = ({ category }: { category: string }) => {
         loadingData={isLoading}
         error={{
           value: error,
-          fallbackMessage: isError ? error : `No meals found.`,
+          fallbackMessage: isError && error ? error : `No meals found.`,
         }}
       />
     </>

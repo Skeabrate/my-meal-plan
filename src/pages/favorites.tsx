@@ -32,7 +32,7 @@ function Favorites() {
         loadingData={isLoading}
         error={{
           value: isError || !favoritesById?.length,
-          fallbackMessage: isError ? error : `You don't have favorite meals yet.`,
+          fallbackMessage: isError && error ? error : `You don't have favorite meals yet.`,
         }}
       />
 

@@ -24,6 +24,6 @@ export const useFetchMealsByCategory = (category: string) => {
     mealsByCategory,
     isLoading,
     isError,
-    error: axios.isAxiosError(error) ? error.message : '',
+    error: axios.isAxiosError(error) && error.message,
   };
 };

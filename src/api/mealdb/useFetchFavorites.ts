@@ -30,6 +30,6 @@ export const useFetchFavorites = (meals: MealsTableType) => {
     favoritesById,
     isLoading,
     isError,
-    error: axios.isAxiosError(error) ? error.message : '',
+    error: axios.isAxiosError(error) && error.message,
   };
 };

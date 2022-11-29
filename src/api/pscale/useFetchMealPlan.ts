@@ -31,7 +31,6 @@ export const useFetchMealPlan = (userEmail: string, mealPlanName: string) => {
     mealPlan,
     isLoading,
     isError,
-    error:
-      axios.isAxiosError(error) && typeof error.response?.data === 'string' && error.response?.data,
+    error: axios.isAxiosError(error) && error.response?.data,
   };
 };
