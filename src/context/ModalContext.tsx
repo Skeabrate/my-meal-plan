@@ -8,7 +8,7 @@ type ModalContextType = {
   closeModal: () => void;
 };
 
-type ModalType = {
+export type ModalType = {
   isOpen: boolean;
   state: 'success' | 'error';
   message: string;

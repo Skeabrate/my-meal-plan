@@ -43,6 +43,7 @@ export const theme: DefaultTheme = {
     orangeHover: 'hsl(22, 100%, 58%)',
     red: 'hsl(3, 100%, 44%)',
     redHover: 'hsl(3, 100%, 48%)',
+    boxShadow: '0px 0px 20px -16px rgba(0, 0, 0, 1)',
   },
   fontFamily: {
     abril: '"Abril Fatface", cursive',

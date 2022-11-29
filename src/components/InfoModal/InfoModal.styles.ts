@@ -1,80 +1,77 @@
-import styled, { keyframes } from 'styled-components';
+import { ModalType } from 'context/ModalContext';
+import styles, { DefaultTheme, keyframes } from 'styled-components';
 
-// const appear = keyframes`
-//     from{
-//         transform: translate(-50%, 10px);
-//         opacity: 0;
-//     } to {
-//         transform: translate(-50%, 0);
-//         opacity: 1;
-//     }
-// `;
+const styled = { keyframes, ...styles };
 
-// const timeout = keyframes`
-//     from{
-//         transform: translateX(-50%) scaleX(0);
-//     } to{
-//         transform: translateX(-50%) scaleX(1);
-//     }
-// `;
+const customFadeIn = styled.keyframes`
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+`;
 
-// export const StyledError = styled.div`
-//   position: fixed;
-//   bottom: 10%;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   z-index: 999999;
-//   background-color: ${({ theme, success }) => (success ? theme.colors.green : theme.colors.red)};
-//   color: ${({ theme }) => theme.colors.white};
-//   font-size: ${({ theme }) => theme.fontSize.xs};
-//   text-align: center;
-//   padding: 20px 30px 25px;
-//   border-radius: 0px;
+const timeout = styled.keyframes`
+  from {
+    transform: translateX(-50%) scaleX(0);
+  }
+  to {
+    transform: translateX(-50%) scaleX(1);
+  }
+`;
 
-//   animation: 0.2s ease-in forwards ${appear};
+const setColorBasedOnState = (theme: DefaultTheme, state: ModalType['state']) => {
+  switch (state) {
+    case 'success':
+      return theme.colors.green;
+    case 'error':
+      return theme.colors.red;
+    default:
+      return theme.themeColors.font;
+  }
+};
 
-//   @media (max-width: ${({ theme }) => theme.screenSize.mobile}) {
-//     padding: 20px 15px 25px;
-//     font-size: ${({ theme }) => theme.fontSize.s};
-//   }
-// `;
+export const InfoModal = styled.div<{ $state: ModalType['state'] }>`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 9999;
+  padding: 20px 30px 10px;
+  font-weight: 600;
+  background-color: ${({ theme }) => theme.themeColors.background};
+  color: ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
+  border: 2px solid ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
+  border-radius: 0px;
+  box-shadow: ${({ theme }) => theme.colors.boxShadow};
+  animation: ${customFadeIn} 0.2s forwards;
+`;
 
-// export const StyledBtn = styled.button`
-//   position: absolute;
-//   top: 5px;
-//   right: 5px;
-//   border: none;
-//   background-color: transparent;
+export const LoadingBar = styled.div<{ $state: ModalType['state'] }>`
+  width: 100px;
+  height: 5px;
+  border-radius: 100px;
+  background-color: transparent;
+  border: 1px solid ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
+  overflow: hidden;
+  position: relative;
 
-//   svg {
-//     height: 12px;
-//     width: 12px;
-//     fill: ${({ theme }) => theme.colors.white};
-//   }
-// `;
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: ${({ theme, $state }) => setColorBasedOnState(theme, $state)};
+    transform-origin: left;
+    transform: translateX(-50%) scaleX(0);
 
-// export const StyledLoadingBar = styled.div`
-//   position: absolute;
-//   bottom: 10px;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   width: 100px;
-//   height: 5px;
-//   border-radius: 100px;
-//   background-color: transparent;
-//   border: 1px solid ${({ theme }) => theme.colors.white};
-//   overflow: hidden;
-
-//   span {
-//     position: absolute;
-//     bottom: 0;
-//     left: 50%;
-//     width: 100%;
-//     height: 100%;
-//     background-color: white;
-//     transform-origin: left;
-//     transform: translateX(-50%) scaleX(0);
-
-//     animation: 3s ease-in forwards ${timeout};
-//   }
-// `;
+    animation: 3s ease-in forwards ${timeout};
+  }
+`;

@@ -35,6 +35,7 @@ export const ComboboxList = styled.ul`
   z-index: 1;
   border: 1px solid ${({ theme }) => theme.themeColors.font};
   background-color: ${({ theme }) => theme.themeColors.background};
+  box-shadow: ${({ theme }) => theme.colors.boxShadow};
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 `;
 

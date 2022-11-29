@@ -54,6 +54,7 @@ export const Dropdown = styled.ul`
   border: 1px solid ${({ theme }) => theme.themeColors.border};
   background-color: ${({ theme }) => theme.themeColors.background};
   list-style: none;
+  box-shadow: ${({ theme }) => theme.colors.boxShadow};
   ${({ theme }) => theme.fadeInAnimation(0.2)};
 
   button,

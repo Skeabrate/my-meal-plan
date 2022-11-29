@@ -19,6 +19,7 @@ declare module 'styled-components' {
       orangeHover: string;
       red: string;
       redHover: string;
+      boxShadow: string;
     };
     fontFamily: {
       abril: string;
