@@ -4,11 +4,11 @@ import { useFetchCategories } from 'api/mealdb/useFetchCategories';
 import SlideBar from 'components/SlideBar/SlideBar';
 
 const CategoriesBar = () => {
-  const { categories, error } = useFetchCategories();
+  const { categories, isError } = useFetchCategories();
 
   let animationDelay = 0.4;
 
-  return error ? null : (
+  return isError ? null : (
     <Styled.Wrapper>
       <SlideBar>
         {categories?.map(({ idCategory, strCategory }) => {

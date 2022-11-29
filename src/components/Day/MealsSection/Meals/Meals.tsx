@@ -1,8 +1,7 @@
 import * as Styled from './Meals.styles';
 import { useFetchMealsFromMealsSection } from 'api/pscale/useFetchMealsFromMealsSection';
 import { useMutation } from 'hooks/useMutation';
-import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
-import Loading from 'components/Loading/Loading';
+import ErrorBoundary from 'templates/ErrorBoundary';
 import Meal from './Meal/Meal';
 
 const Meals = ({ mealsSectionId }: { mealsSectionId: string }) => {
@@ -15,28 +14,27 @@ const Meals = ({ mealsSectionId }: { mealsSectionId: string }) => {
     });
 
   return (
-    <div>
-      {isLoading || isRefetching || isLoadingDeleteMealFromMealsSection ? (
-        <Loading height={155} />
-      ) : meals?.length ? (
+    <ErrorBoundary
+      isLoading={isLoading || isRefetching || isLoadingDeleteMealFromMealsSection}
+      loadingHeight={155}
+      isError={isError}
+      error={error}
+    >
+      {meals?.length ? (
         <Styled.MealsGrid>
           {meals.map(({ id, mealId }) => (
             <li key={id}>
-              <>
-                <Meal mealId={mealId} />
-
-                <UnderlinedButton
-                  label='Delete'
-                  onClick={() => deleteMealFromMealsSection({ mealId: id })}
-                />
-              </>
+              <Meal
+                mealId={mealId}
+                deleteHandler={() => deleteMealFromMealsSection({ mealId: id })}
+              />
             </li>
           ))}
         </Styled.MealsGrid>
       ) : (
         <Styled.Info>You don't have any meals in this meals section.</Styled.Info>
       )}
-    </div>
+    </ErrorBoundary>
   );
 };
 

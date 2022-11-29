@@ -16,6 +16,6 @@ export default async function fetchMealsFromMealsSection(
 
     res.status(200).json(meals);
   } else {
-    res.status(500).send('Operation failed');
+    res.status(500).send('Operation failed.');
   }
 }

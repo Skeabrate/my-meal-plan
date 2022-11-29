@@ -8,16 +8,21 @@ import { useTabs } from 'hooks/useTabs';
 import { useMutation } from 'hooks/useMutation';
 import { DAYS } from 'utils/days';
 import { fetchMealPlan, useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
+import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
-import Loading from 'components/Loading/Loading';
 import Day from 'components/Day/Day';
 
 const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlanName: string }) => {
   const router = useRouter();
 
-  const { mealPlan, isLoading: isLoadingFetchMealPlan } = useFetchMealPlan(userEmail, mealPlanName);
+  const {
+    mealPlan,
+    isLoading: isLoadingFetchMealPlan,
+    isError: isErrorFetchMealPlan,
+    error: errorFetchMealPlan,
+  } = useFetchMealPlan(userEmail, mealPlanName);
 
   const { mutation: deleteMealPlan, isLoading: isLoadingDeleteMealPlan } = useMutation(
     '/api/deleteMealPlan',
@@ -46,41 +51,41 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
       noAnimation
       label='Meal Plan Details:'
     >
-      {isLoadingFetchMealPlan || isLoadingDeleteMealPlan ? (
-        <Loading />
-      ) : (
-        <>
-          <Styled.MealPlanTitle>
-            <h2>{mealPlan?.mealPlanName}</h2>
-            <UnderlinedButton
-              label='Delete meal plan'
-              onClick={() =>
-                deleteMealPlan({
-                  mealPlanId: mealPlan?.id,
-                })
-              }
-            />
-          </Styled.MealPlanTitle>
+      <ErrorBoundary
+        isLoading={isLoadingFetchMealPlan || isLoadingDeleteMealPlan}
+        isError={isErrorFetchMealPlan}
+        error={errorFetchMealPlan}
+      >
+        <Styled.MealPlanTitle>
+          <h2>{mealPlan?.mealPlanName}</h2>
+          <UnderlinedButton
+            label='Delete meal plan'
+            onClick={() =>
+              deleteMealPlan({
+                mealPlanId: mealPlan?.id,
+              })
+            }
+          />
+        </Styled.MealPlanTitle>
 
-          <Styled.DaysBar>
-            {DAYS.map((day) => (
-              <li key={day}>
-                <Styled.DaysBarButton
-                  $isActive={day === activeDetails}
-                  onClick={() => {
-                    setActiveDetails(day);
-                    setActiveDetailsHelper(day);
-                  }}
-                >
-                  {day}
-                </Styled.DaysBarButton>
-              </li>
-            ))}
-          </Styled.DaysBar>
+        <Styled.DaysBar>
+          {DAYS.map((day) => (
+            <li key={day}>
+              <Styled.DaysBarButton
+                $isActive={day === activeDetails}
+                onClick={() => {
+                  setActiveDetails(day);
+                  setActiveDetailsHelper(day);
+                }}
+              >
+                {day}
+              </Styled.DaysBarButton>
+            </li>
+          ))}
+        </Styled.DaysBar>
 
-          {selectedTab}
-        </>
-      )}
+        {selectedTab}
+      </ErrorBoundary>
     </ProfileTabLayout>
   );
 };

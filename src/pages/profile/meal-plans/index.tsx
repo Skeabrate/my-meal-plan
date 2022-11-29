@@ -5,11 +5,10 @@ import { useSession } from 'next-auth/react';
 import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
 import { useMutation } from 'hooks/useMutation';
 import PlusSvg from 'assets/SVG/Plus.svg';
+import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
-import Loading from 'components/Loading/Loading';
 import OpenInput from 'components/OpenInput/OpenInput';
-import ErrorBoundary from 'templates/ErrorBoundary';
 
 const MealPlans = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);

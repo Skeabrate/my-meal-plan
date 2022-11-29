@@ -4,8 +4,8 @@ import Loading from 'components/Loading/Loading';
 import styled from 'styled-components';
 
 const StyledError = styled.p`
-  font-size: 2rem;
   font-weight: 600;
+  font-style: italic;
 `;
 
 const ErrorBoundary = ({

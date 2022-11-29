@@ -52,7 +52,7 @@ const Category = ({ category }: { category: string }) => {
         enableObtionsButton
         loadingData={isLoading}
         error={{
-          value: error,
+          value: isError,
           fallbackMessage: isError && error ? error : `No meals found.`,
         }}
       />

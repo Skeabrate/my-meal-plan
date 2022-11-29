@@ -1,20 +1,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useFetchMealById } from 'api/mealdb/useFetchMealById';
+import ErrorBoundary from 'templates/ErrorBoundary';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
-import Loading from 'components/Loading/Loading';
+import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 
-const Meal = ({ mealId }: { mealId: string }) => {
+const Meal = ({ mealId, deleteHandler }: { mealId: string; deleteHandler: () => void }) => {
   const { mealById, isLoading, isError, error } = useFetchMealById(mealId);
 
   return (
-    <>
-      {isLoading || !mealById?.length ? (
-        <Loading height={155} />
-      ) : isError ? (
-        <p>An error has occured.</p>
-      ) : (
-        <div>
+    <ErrorBoundary
+      isLoading={isLoading}
+      loadingHeight={155}
+      isError={isError}
+      error={error}
+    >
+      {mealById?.length && (
+        <>
           <Link href={`/loading/meal?id=${mealById[0].idMeal}`}>
             <a>
               <ImageLoading>
@@ -29,9 +31,14 @@ const Meal = ({ mealId }: { mealId: string }) => {
           </Link>
 
           <span>{mealById[0].strMeal}</span>
-        </div>
+
+          <UnderlinedButton
+            label='Delete'
+            onClick={deleteHandler}
+          />
+        </>
       )}
-    </>
+    </ErrorBoundary>
   );
 };
 

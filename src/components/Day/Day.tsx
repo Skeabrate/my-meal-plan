@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFetchMealsSections } from 'api/pscale/useFetchMealsSections';
 import { useMutation } from 'hooks/useMutation';
-import Loading from 'components/Loading/Loading';
+import ErrorBoundary from 'templates/ErrorBoundary';
 import OpenInput from 'components/OpenInput/OpenInput';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
@@ -17,10 +17,14 @@ const Day = ({
 }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
 
-  const { mealsSections, isLoading, refetch, isRefetching, isError, error } = useFetchMealsSections(
-    mealPlanId,
-    dayName
-  );
+  const {
+    mealsSections,
+    isLoading: isLoadingFetchMealsSections,
+    refetch,
+    isRefetching,
+    isError: isErrorFetchMealsSections,
+    error: errorFetchMealsSections,
+  } = useFetchMealsSections(mealPlanId, dayName);
 
   const { mutation: deleteMealsSection, isLoading: isLoadingDeleteMealsSection } = useMutation(
     '/api/deleteMealsSection',
@@ -62,19 +66,28 @@ const Day = ({
         />
       )}
 
-      {isLoading || isLoadingCreateMealsSection || isLoadingDeleteMealsSection || isRefetching ? (
-        <Loading />
-      ) : mealsSections?.length ? (
-        mealsSections?.map((mealsSection) => (
-          <MealsSection
-            key={mealsSection.id}
-            mealsSection={mealsSection}
-            deleteMealsSection={deleteMealsSection}
-          />
-        ))
-      ) : (
-        <p>Add your first meals section.</p>
-      )}
+      <ErrorBoundary
+        isLoading={
+          isLoadingFetchMealsSections ||
+          isLoadingCreateMealsSection ||
+          isLoadingDeleteMealsSection ||
+          isRefetching
+        }
+        isError={isErrorFetchMealsSections}
+        error={errorFetchMealsSections}
+      >
+        {mealsSections?.length ? (
+          mealsSections?.map((mealsSection) => (
+            <MealsSection
+              key={mealsSection.id}
+              mealsSection={mealsSection}
+              deleteMealsSection={deleteMealsSection}
+            />
+          ))
+        ) : (
+          <p>Add your first meals section.</p>
+        )}
+      </ErrorBoundary>
     </div>
   );
 };
