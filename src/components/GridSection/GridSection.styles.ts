@@ -23,13 +23,13 @@ export const Grid = styled.section`
 `;
 
 export const GridItem = styled.div`
-  border: 1px solid ${({ theme }) => theme.themeColors.border};
   text-align: center;
   overflow: hidden;
   opacity: 0;
   position: relative;
   ${({ theme }) => theme.fadeInAnimation()};
   transition: box-shadow 0.4s ease-in-out;
+  box-shadow: ${({ theme }) => theme.colors.boxShadow};
 
   a {
     text-decoration: none;
@@ -49,8 +49,6 @@ export const GridItem = styled.div`
   }
 
   &:hover {
-    box-shadow: 0px 0px 40px -30px ${({ theme }) => theme.themeColors.font};
-
     img {
       scale: 1.05;
     }
