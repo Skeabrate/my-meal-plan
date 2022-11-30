@@ -15,7 +15,7 @@ import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import Day from 'components/Day/Day';
 import { useInfoModal } from 'components/InfoModal/InfoModal';
 
-const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlanName: string }) => {
+const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
   const router = useRouter();
 
   const {
@@ -23,7 +23,7 @@ const MealPlanName = ({ userEmail, mealPlanName }: { userEmail: string; mealPlan
     isLoading: isLoadingFetchMealPlan,
     isError: isErrorFetchMealPlan,
     error: errorFetchMealPlan,
-  } = useFetchMealPlan(userEmail, mealPlanName);
+  } = useFetchMealPlan(mealPlanName);
 
   const {
     mutation: deleteMealPlan,
@@ -112,17 +112,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
 
   const mealPlanName = context.params?.mealPlanName as string;
-  const userEmail = session?.user.email as string;
 
   await queryClient.prefetchQuery(['fetchMealPlan', mealPlanName], () =>
-    fetchMealPlan(userEmail, mealPlanName)
+    fetchMealPlan(session.user.id, mealPlanName)
   );
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
       mealPlanName,
-      userEmail,
     },
   };
 }

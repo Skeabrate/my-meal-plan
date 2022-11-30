@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function fetchMealPlan(req: NextApiRequest, res: NextApiResponse) {
-  const { userEmail, mealPlanName } = req.body;
+  const { userId, mealPlanName } = req.body;
 
-  if (userEmail && mealPlanName) {
+  if (userId && mealPlanName) {
     const mealPlan = await prisma.mealPlan.findFirst({
       where: {
+        userId,
         mealPlanName,
-        userEmail,
       },
     });
 

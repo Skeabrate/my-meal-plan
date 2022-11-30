@@ -2,12 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function createMealPlan(req: NextApiRequest, res: NextApiResponse) {
-  const { userEmail, mealPlanName } = req.body;
+  const { userId, mealPlanName } = req.body;
 
-  if (userEmail && mealPlanName) {
+  if (userId && mealPlanName) {
     const doesMealPlanAlreadyExists = await prisma.mealPlan.findFirst({
       where: {
-        userEmail,
+        userId,
         mealPlanName,
       },
     });
@@ -17,7 +17,7 @@ export default async function createMealPlan(req: NextApiRequest, res: NextApiRe
     } else {
       await prisma.mealPlan.create({
         data: {
-          userEmail,
+          userId,
           mealPlanName,
         },
       });

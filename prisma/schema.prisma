@@ -1,12 +1,11 @@
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 model Account {
@@ -26,6 +25,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -34,6 +34,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model VerificationToken {
@@ -58,33 +60,41 @@ model User {
 model MealPlan {
   id           String   @id @default(cuid())
   mealPlanName String
-  User         User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
-  userEmail    String
   createdAt    DateTime @default(now())
   days         Day[]
+  userId       String
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Day {
   id            String         @id @default(cuid())
   dayName       String
-  MealPlan      MealPlan       @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
-  mealPlanId    String
   MealsSections MealsSection[]
+  mealPlanId    String
+  MealPlan      MealPlan       @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+
+  @@index([mealPlanId])
 }
 
 model MealsSection {
   id               String   @id @default(cuid())
   createdAt        DateTime @default(now())
   mealsSectionName String
-  Day              Day      @relation(fields: [dayId], references: [id], onDelete: Cascade)
-  dayId            String
   meals            Meal[]
+  dayId            String
+  Day              Day      @relation(fields: [dayId], references: [id], onDelete: Cascade)
+
+  @@index([dayId])
 }
 
 model Meal {
   id             String       @id @default(cuid())
   createdAt      DateTime     @default(now())
   mealId         String
-  MealsSection   MealsSection @relation(fields: [mealsSectionId], references: [id], onDelete: Cascade)
   mealsSectionId String
+  MealsSection   MealsSection @relation(fields: [mealsSectionId], references: [id], onDelete: Cascade)
+
+  @@index([mealsSectionId])
 }

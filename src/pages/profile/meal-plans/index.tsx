@@ -23,7 +23,7 @@ const MealPlans = () => {
     isRefetching,
     isError: isErrorFetchMealPlans,
     error: errorFetchMealPlans,
-  } = useFetchMealPlans(session?.user.email as string);
+  } = useFetchMealPlans();
 
   const {
     mutation: createMealPlan,
@@ -61,7 +61,7 @@ const MealPlans = () => {
           placeholder='Meal plan name...'
           updateMealPLans={(inputValue) => {
             createMealPlan({
-              userEmail: session?.user.email,
+              userId: session?.user.id,
               mealPlanName: inputValue,
             });
             setIsAddMealPLanInputOpen(false);

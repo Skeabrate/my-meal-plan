@@ -10,9 +10,7 @@ export default async function fetchMealPlansWithAllDetails(
   if (userId) {
     const getMealPlans = await prisma.mealPlan.findMany({
       where: {
-        User: {
-          id: userId,
-        },
+        userId,
       },
       orderBy: {
         createdAt: 'asc',

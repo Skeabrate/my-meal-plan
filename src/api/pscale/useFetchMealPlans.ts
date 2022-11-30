@@ -1,19 +1,22 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import Prisma from '@prisma/client';
+import { useSession } from 'next-auth/react';
 
-export const fetchMealPlans = async (userEmail: string): Promise<Prisma.MealPlan[]> => {
+export const fetchMealPlans = async (userId: string | undefined): Promise<Prisma.MealPlan[]> => {
   const { data } = await axios({
     method: 'post',
     url: '/api/fetchMealPlans',
     data: {
-      userEmail,
+      userId,
     },
   });
   return data;
 };
 
-export const useFetchMealPlans = (userEmail: string) => {
+export const useFetchMealPlans = () => {
+  const { data } = useSession();
+
   const {
     data: mealPlans,
     isLoading,
@@ -21,7 +24,7 @@ export const useFetchMealPlans = (userEmail: string) => {
     error,
     refetch,
     isRefetching,
-  } = useQuery('fetchMealPlans', () => fetchMealPlans(userEmail), {
+  } = useQuery('fetchMealPlans', () => fetchMealPlans(data?.user.id), {
     refetchOnWindowFocus: false,
   });
 

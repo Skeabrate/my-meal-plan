@@ -2,14 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function fetchMealPlans(req: NextApiRequest, res: NextApiResponse) {
-  const { userEmail } = req.body;
+  const { userId } = req.body;
 
-  if (userEmail) {
+  if (userId) {
     const mealPlans = await prisma.mealPlan.findMany({
       where: {
-        User: {
-          email: userEmail,
-        },
+        userId,
       },
       orderBy: {
         createdAt: 'asc',
@@ -18,6 +16,6 @@ export default async function fetchMealPlans(req: NextApiRequest, res: NextApiRe
 
     res.status(200).json(mealPlans);
   } else {
-    res.status(500).send('Operation failed');
+    res.status(500).send('Operation failed.');
   }
 }
