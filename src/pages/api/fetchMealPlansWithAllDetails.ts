@@ -5,13 +5,13 @@ export default async function fetchMealPlansWithAllDetails(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { userEmail } = req.body;
+  const { userId } = req.body;
 
-  if (userEmail) {
+  if (userId) {
     const getMealPlans = await prisma.mealPlan.findMany({
       where: {
         User: {
-          email: userEmail,
+          id: userId,
         },
       },
       orderBy: {

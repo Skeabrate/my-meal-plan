@@ -22,8 +22,8 @@ const Overview = () => {
   });
 
   const deleteAccountConfirmation = () => {
-    if (confirm('Are you sure you want to delete your account?') && session?.user.email) {
-      deleteAccount({ userEmail: session?.user.email });
+    if (confirm('Are you sure you want to delete your account?') && session?.user.id) {
+      deleteAccount({ userId: session?.user.id });
     }
   };
 

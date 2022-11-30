@@ -2,12 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 
 export default async function deleteAccount(req: NextApiRequest, res: NextApiResponse) {
-  const { userEmail } = req.body;
+  const { userId } = req.body;
 
-  if (userEmail) {
+  if (userId) {
     await prisma.user.delete({
       where: {
-        email: userEmail,
+        id: userId,
       },
     });
 

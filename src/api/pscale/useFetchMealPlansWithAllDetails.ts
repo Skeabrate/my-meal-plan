@@ -3,12 +3,12 @@ import { useQuery } from 'react-query';
 import { useSession } from 'next-auth/react';
 import { MealPlanType } from 'types/MealPlanTypes';
 
-export const fetchMealPlansWithAllDetails = async (userEmail: string): Promise<MealPlanType[]> => {
+export const fetchMealPlansWithAllDetails = async (userId: string): Promise<MealPlanType[]> => {
   const { data } = await axios({
     method: 'post',
     url: '/api/fetchMealPlansWithAllDetails',
     data: {
-      userEmail,
+      userId,
     },
   });
   return data;
@@ -25,7 +25,7 @@ export const useFetchMealPlansWithAllDetails = () => {
     error,
   } = useQuery(
     'fetchMealPlansWithAllDetails',
-    () => fetchMealPlansWithAllDetails(session?.user.email as string),
+    () => fetchMealPlansWithAllDetails(session?.user.id as string),
     {
       refetchOnWindowFocus: false,
     }
