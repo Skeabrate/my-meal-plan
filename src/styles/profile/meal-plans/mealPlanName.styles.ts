@@ -8,6 +8,7 @@ export const MealPlanTitle = styled.div`
     font-size: 2.4rem;
     font-style: normal;
     margin: 0;
+    height: 28px;
 
     &::after {
       display: none;
