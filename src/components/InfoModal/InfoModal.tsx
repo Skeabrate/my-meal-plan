@@ -8,7 +8,7 @@ export const useInfoModal = (errors: { isError: boolean; error: unknown }[]) => 
   useEffect(() => {
     errors.forEach(({ isError, error }) => {
       if (isError) {
-        openModal('error', error && typeof error === 'string' ? error : 'An error has occurred.');
+        openModal('error', error);
       }
     });
   }, [errors, openModal]);

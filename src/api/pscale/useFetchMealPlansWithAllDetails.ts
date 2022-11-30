@@ -20,6 +20,7 @@ export const useFetchMealPlansWithAllDetails = () => {
   const {
     data: mealPlansWithAllDetails,
     isLoading,
+    isRefetching,
     isError,
     error,
   } = useQuery(
@@ -33,6 +34,7 @@ export const useFetchMealPlansWithAllDetails = () => {
   return {
     mealPlansWithAllDetails,
     isLoading,
+    isRefetching,
     isError,
     error: axios.isAxiosError(error) && error.response?.data,
   };

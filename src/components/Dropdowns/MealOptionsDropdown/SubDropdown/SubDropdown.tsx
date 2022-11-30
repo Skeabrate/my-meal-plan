@@ -7,42 +7,132 @@ import { useMutation } from 'hooks/useMutation';
 import ArrowSvg from 'assets/SVG/LeftArrow.svg';
 import Loading from 'components/Loading/Loading';
 import { ModalContext } from 'context/ModalContext';
-import { MealsSectionType, MealType } from 'types/MealPlanTypes';
+import { MealsSectionType } from 'types/MealPlanTypes';
+import { TRANSITIONS } from './Transitions';
 
 const SubDropdown = ({ mealId }: { mealId: string }) => {
-  const [displayedItems, setDisplayedItems] = useState<JSX.Element | undefined>();
+  const states = {
+    isEmpty: {
+      type: 'isEmpty',
+      value: () => <></>,
+    },
+    isLoading: {
+      type: 'isLoading',
+      value: loadingHandler,
+    },
+    isError: {
+      type: 'isError',
+      value: errorHandler,
+    },
+    mealPlans: {
+      type: 'mealPlans',
+      value: choseMealPlan,
+    },
+    days: {
+      type: 'days',
+      value: choseDay,
+    },
+    mealsSections: {
+      type: 'mealsSections',
+      value: choseMealsSection,
+    },
+    addMealSuccess: {
+      type: 'addMealSuccess',
+      value: successHandler,
+    },
+  };
+
+  const transitions = {
+    [states.isEmpty.type]: {
+      [TRANSITIONS.isEmpty.fetchMealPlans]: states.isLoading,
+    },
+    [states.isLoading.type]: {
+      [TRANSITIONS.isLoading.fetchMealPlansSuccess]: states.mealPlans,
+      [TRANSITIONS.isLoading.fetchMealPlansError]: states.isError,
+      [TRANSITIONS.isLoading.addMealToMealsSectionSuccess]: states.addMealSuccess,
+      [TRANSITIONS.isLoading.addMealToMealsSectionError]: states.mealPlans, // show modal error
+    },
+    [states.mealPlans.type]: {
+      [TRANSITIONS.mealPlans.choseDay]: states.days,
+    },
+    [states.days.type]: {
+      [TRANSITIONS.days.goBackToMealPlans]: states.mealPlans,
+      [TRANSITIONS.days.choseMealsSection]: states.mealsSections,
+    },
+    [states.mealsSections.type]: {
+      [TRANSITIONS.mealsSections.goBackToDays]: states.days,
+      [TRANSITIONS.mealsSections.addMealToMealsSection]: states.isLoading,
+    },
+  };
+
+  const [view, setView] = useState(states.isEmpty);
+
+  const updateView = (action: string, params?: any) => {
+    setView((currentState) =>
+      transitions[currentState.type][action]
+        ? {
+            type: transitions[currentState.type][action].type,
+            value: () => transitions[currentState.type][action].value(params),
+          }
+        : currentState
+    );
+  };
 
   const { data: session } = useSession();
+  const { openModal } = useContext(ModalContext);
 
   const {
     mealPlansWithAllDetails,
     isLoading: isLoadingFetch,
+    isRefetching,
     isError: isErrorFetch,
     error: errorFetch,
   } = useFetchMealPlansWithAllDetails();
 
-  const { openModal } = useContext(ModalContext);
-
-  const {
-    mutation: createMealInMealsSection,
-    isLoading: isLoadingCreate,
-    isError: isErrorCreate,
-    error: errorCreate,
-  } = useMutation('/api/createMealInMealsSection', (data, variables, context) => {
-    setDisplayedItems(successHandler(variables.mealPlan));
-  });
+  const { mutation: createMealInMealsSection, isLoading: isLoadingCreate } = useMutation(
+    '/api/createMealInMealsSection',
+    (data, variables) => {
+      updateView(TRANSITIONS.isLoading.addMealToMealsSectionSuccess, {
+        mealPlanName: variables.mealPlanName,
+      });
+    },
+    (err) => {
+      openModal('error', err.response?.data);
+      updateView(TRANSITIONS.isLoading.addMealToMealsSectionError);
+    }
+  );
 
   useEffect(() => {
-    if (mealPlansWithAllDetails?.length) setDisplayedItems(choseMealPlan());
-    // eslint-disable-next-line
+    if (isLoadingFetch || isRefetching) {
+      updateView(TRANSITIONS.isEmpty.fetchMealPlans);
+    }
+  }, [isLoadingFetch, isRefetching]);
+
+  useEffect(() => {
+    if (isErrorFetch) {
+      updateView(TRANSITIONS.isLoading.fetchMealPlansError);
+      openModal('error', errorFetch);
+    }
+  }, [isErrorFetch, errorFetch, openModal]);
+
+  useEffect(() => {
+    if (mealPlansWithAllDetails?.length) {
+      updateView(TRANSITIONS.isLoading.fetchMealPlansSuccess);
+    }
   }, [mealPlansWithAllDetails]);
 
-  function updateDisplayedItems(
-    e: React.MouseEvent<HTMLButtonElement>,
-    newDisplayedItems: () => React.SetStateAction<JSX.Element | undefined>
-  ) {
-    e.stopPropagation();
-    setDisplayedItems(newDisplayedItems());
+  useEffect(() => {
+    if (isLoadingCreate) {
+      updateView(TRANSITIONS.mealsSections.addMealToMealsSection);
+    }
+  }, [isLoadingCreate]);
+
+  function loadingHandler() {
+    return <Loading height={100} />;
+  }
+
+  function errorHandler() {
+    return <>An error has occured.</>;
   }
 
   function choseMealPlan() {
@@ -59,7 +149,12 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
         {mealPlansWithAllDetails?.length ? (
           mealPlansWithAllDetails.map(({ id, mealPlanName }) => (
             <li key={id}>
-              <button onClick={(e) => updateDisplayedItems(e, () => choseDay(mealPlanName))}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  updateView(TRANSITIONS.mealPlans.choseDay, { chosenMealPlanName: mealPlanName });
+                }}
+              >
                 {mealPlanName}
               </button>
             </li>
@@ -71,78 +166,82 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
     );
   }
 
-  function choseDay(chosenMealPlan: string) {
-    const goBackToMealPlans = (e: React.MouseEvent<HTMLButtonElement>) => {
-      updateDisplayedItems(e, () => choseMealPlan());
-    };
-
-    const days = mealPlansWithAllDetails?.find(
-      ({ mealPlanName }) => mealPlanName === chosenMealPlan
+  function choseDay({ chosenMealPlanName }: { chosenMealPlanName: string }) {
+    const daysInChosenMealPlan = mealPlansWithAllDetails?.find(
+      ({ mealPlanName }) => mealPlanName === chosenMealPlanName
     )?.days;
 
     return (
       <>
         <li>
-          <Styled.Label onClick={goBackToMealPlans}>
+          <Styled.Label
+            onClick={(e) => {
+              e.stopPropagation();
+              updateView(TRANSITIONS.days.goBackToMealPlans);
+            }}
+          >
             <ArrowSvg />
             Chose Day:
           </Styled.Label>
         </li>
-        {days?.length ? (
-          days.map(({ id, dayName, mealsSections }) => (
+        {daysInChosenMealPlan?.length ? (
+          daysInChosenMealPlan.map(({ id, dayName, mealsSections }) => (
             <li key={id}>
               <Styled.Day
-                onClick={(e) =>
-                  updateDisplayedItems(e, () => choseMealsSection(chosenMealPlan, mealsSections))
-                }
+                onClick={(e) => {
+                  e.stopPropagation();
+                  updateView(TRANSITIONS.days.choseMealsSection, {
+                    chosenMealPlanName,
+                    mealsSectionsInChosenDay: mealsSections,
+                  });
+                }}
               >
                 {dayName}
               </Styled.Day>
             </li>
           ))
         ) : (
-          <Styled.Info>You don't have any meals sections in {chosenMealPlan}.</Styled.Info>
+          <Styled.Info>You don't have any meals sections in {chosenMealPlanName}.</Styled.Info>
         )}
-        {}
       </>
     );
   }
 
-  function choseMealsSection(chosenMealPlan: string, mealsSectionsInChosenDay: MealsSectionType[]) {
-    const goBackToDays = (e: React.MouseEvent<HTMLButtonElement>) => {
-      updateDisplayedItems(e, () => choseDay(chosenMealPlan));
-    };
-
-    const createMealInMealsSectionHandler = (
-      e: React.MouseEvent<HTMLButtonElement>,
-      mealsSectionId: string,
-      meals: MealType[]
-    ) => {
-      e.stopPropagation();
-
-      if (meals.find((meal) => meal.mealId === mealId)) {
-        openModal('error', 'Meal already exists in this meals section.');
-      } else {
-        createMealInMealsSection({
-          mealsSectionId,
-          mealId,
-          mealPlan: chosenMealPlan,
-        });
-      }
-    };
-
+  function choseMealsSection({
+    chosenMealPlanName,
+    mealsSectionsInChosenDay,
+  }: {
+    chosenMealPlanName: string;
+    mealsSectionsInChosenDay: MealsSectionType[];
+  }) {
     return (
       <>
         <li>
-          <Styled.Label onClick={goBackToDays}>
+          <Styled.Label
+            onClick={(e) => {
+              e.stopPropagation();
+              updateView(TRANSITIONS.mealsSections.goBackToDays, {
+                chosenMealPlanName,
+              });
+            }}
+          >
             <ArrowSvg />
             Chose Section:
           </Styled.Label>
         </li>
         {mealsSectionsInChosenDay.length ? (
-          mealsSectionsInChosenDay.map(({ id, mealsSectionName, meals }) => (
+          mealsSectionsInChosenDay.map(({ id, mealsSectionName }) => (
             <li key={id}>
-              <button onClick={(e) => createMealInMealsSectionHandler(e, id, meals)}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  createMealInMealsSection({
+                    mealsSectionId: id,
+                    mealId,
+                    mealPlanName: chosenMealPlanName,
+                  });
+                }}
+              >
                 {mealsSectionName}
               </button>
             </li>
@@ -154,11 +253,11 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
     );
   }
 
-  function successHandler(mealPlan: string) {
+  function successHandler({ mealPlanName }: { mealPlanName: string }) {
     return (
       <Styled.Success>
         Meal added to your meal plan!
-        <Link href={`/profile/meal-plans/${mealPlan}`}>Go to meal plan</Link>
+        <Link href={`/profile/meal-plans/${mealPlanName}`}>Go to meal plan</Link>
       </Styled.Success>
     );
   }
@@ -166,11 +265,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   return (
     <Styled.SubDropdown>
       {session ? (
-        isLoadingFetch || isLoadingCreate ? (
-          <Loading height={100} />
-        ) : (
-          displayedItems
-        )
+        view.value()
       ) : (
         <Styled.Info>
           <Link href='/api/auth/signin'>Log in</Link>

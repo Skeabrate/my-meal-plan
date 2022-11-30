@@ -1,5 +1,6 @@
 import React, { ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { disablePageScroll } from 'utils/disablePageScroll';
+import { usePathChange } from 'hooks/usePathChange';
 import SearchBar from 'components/SearchBar/SearchBar';
 import { ModalContext } from './ModalContext';
 
@@ -22,6 +23,8 @@ export default function SearchBarProvider({ children }: { children: ReactNode })
 
     closeModal();
   }, [closeModal]);
+
+  usePathChange(isSearchBarOpen ? toggleSearchBar : () => {});
 
   const value = useMemo(
     () => ({

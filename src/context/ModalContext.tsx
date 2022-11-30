@@ -4,7 +4,7 @@ import InfoModal from 'components/InfoModal/InfoModal';
 
 type ModalContextType = {
   modal: ModalType;
-  openModal: (state: ModalType['state'], message: string) => void;
+  openModal: (state: ModalType['state'], message: unknown) => void;
   closeModal: () => void;
 };
 
@@ -32,7 +32,7 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
   }, []);
 
   const openModal = useCallback(
-    (state: ModalType['state'], message: string) => {
+    (state: ModalType['state'], message: unknown) => {
       const closeModalHandler = () =>
         new Promise((resolve, reject) => {
           closeModal();
@@ -44,7 +44,7 @@ export default function ModalProvider({ children }: { children: React.ReactNode 
           setModal({
             isOpen: true,
             state,
-            message,
+            message: message && typeof message === 'string' ? message : 'An error has occured.',
           });
         });
 
