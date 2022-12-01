@@ -1,14 +1,11 @@
 import { useMemo, useState } from 'react';
-import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { getSession } from 'next-auth/react';
-import { dehydrate, QueryClient } from 'react-query';
 import * as Styled from 'styles/profile/meal-plans/mealPlanName.styles';
 import { useTabs } from 'hooks/useTabs';
 import { useMutation } from 'hooks/useMutation';
 import { useResizeWindow } from 'hooks/useResizeWindow';
 import { DAYS, ShortenedDay } from 'utils/days';
-import { fetchMealPlan, useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
+import { useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
@@ -16,15 +13,16 @@ import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import Day from 'components/Day/Day';
 import { useInfoModal } from 'components/InfoModal/InfoModal';
 
-const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
+const MealPlanName = () => {
   const router = useRouter();
 
   const {
     mealPlan,
     isLoading: isLoadingFetchMealPlan,
+    isRefetching: isRefetchingMealPlan,
     isError: isErrorFetchMealPlan,
     error: errorFetchMealPlan,
-  } = useFetchMealPlan(mealPlanName);
+  } = useFetchMealPlan(router.query.mealPlanName as string);
 
   const {
     mutation: deleteMealPlan,
@@ -61,7 +59,7 @@ const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
       label='Meal Plan Details:'
     >
       <ErrorBoundary
-        isLoading={isLoadingFetchMealPlan || isLoadingDeleteMealPlan}
+        isLoading={isLoadingFetchMealPlan || isRefetchingMealPlan || isLoadingDeleteMealPlan}
         isError={isErrorFetchMealPlan}
         error={errorFetchMealPlan}
       >
@@ -100,33 +98,6 @@ const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
 };
 
 export default MealPlanName;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
-  const queryClient = new QueryClient();
-
-  if (!session)
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/api/auth/signin',
-      },
-      props: {},
-    };
-
-  const mealPlanName = context.params?.mealPlanName as string;
-
-  await queryClient.prefetchQuery(['fetchMealPlan', mealPlanName], () =>
-    fetchMealPlan(session.user.id, mealPlanName)
-  );
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      mealPlanName,
-    },
-  };
-}
 
 MealPlanName.Layout = ProfileLayout;
 MealPlanName.requireAuth = true;

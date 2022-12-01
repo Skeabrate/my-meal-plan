@@ -7,16 +7,23 @@ import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
 import { useInfoModal } from 'components/InfoModal/InfoModal';
+import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
 
 const Overview = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const {
+    mealPlans,
+    isLoading: isLoadingFetching,
+    isError: isErrorFetching,
+    error: errorFetching,
+  } = useFetchMealPlans();
 
   const {
     mutation: deleteAccount,
-    isLoading,
-    isError,
-    error,
+    isLoading: isLoadingDeleteAccount,
+    isError: isErrorDeleteAccount,
+    error: errorDeleteAccount,
   } = useMutation('/api/deleteAccount', () => {
     router.push('/api/auth/signin');
   });
@@ -27,7 +34,13 @@ const Overview = () => {
     }
   };
 
-  const actionErrors = useMemo(() => [{ isError, error }], [isError, error]);
+  const actionErrors = useMemo(
+    () => [
+      { isError: isErrorFetching, error: errorFetching },
+      { isError: isErrorDeleteAccount, error: errorDeleteAccount },
+    ],
+    [isErrorFetching, errorFetching, isErrorDeleteAccount, errorDeleteAccount]
+  );
 
   useInfoModal(actionErrors);
 
@@ -46,7 +59,7 @@ const Overview = () => {
       <p>{session?.user.email}</p>
 
       <button onClick={deleteAccountConfirmation}>
-        {isLoading ? <Loading height={40} /> : 'Delete Account'}
+        {isLoadingDeleteAccount ? <Loading height={40} /> : 'Delete Account'}
       </button>
     </ProfileTabLayuot>
   );

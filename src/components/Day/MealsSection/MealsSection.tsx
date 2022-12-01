@@ -21,6 +21,7 @@ const MealsSection = ({
               mealsSectionId: mealsSection.id,
             })
           }
+          mealsSectionId={mealsSection.id}
         />
       </Styled.Header>
 

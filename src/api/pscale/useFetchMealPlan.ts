@@ -24,6 +24,7 @@ export const useFetchMealPlan = (mealPlanName: string) => {
   const {
     data: mealPlan,
     isLoading,
+    isRefetching,
     isError,
     error,
   } = useQuery(['fetchMealPlan', mealPlanName], () => fetchMealPlan(data?.user.id, mealPlanName), {
@@ -33,6 +34,7 @@ export const useFetchMealPlan = (mealPlanName: string) => {
   return {
     mealPlan,
     isLoading,
+    isRefetching,
     isError,
     error: axios.isAxiosError(error) && error.response?.data,
   };
