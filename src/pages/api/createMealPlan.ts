@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
+import { getSession } from 'next-auth/react';
 
 export default async function createMealPlan(req: NextApiRequest, res: NextApiResponse) {
   const { userId, mealPlanName } = req.body;
+  const session = await getSession({ req });
 
-  if (userId && mealPlanName) {
+  if (session && userId && mealPlanName) {
     const doesMealPlanAlreadyExists = await prisma.mealPlan.findFirst({
       where: {
         userId,
