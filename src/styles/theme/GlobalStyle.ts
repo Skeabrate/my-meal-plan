@@ -146,6 +146,7 @@ export const GlobaStyles = styled.createGlobalStyle`
     font-size: 16px;
     color: ${({ theme }) => theme.themeColors.font};
     background-color: ${({ theme }) => theme.themeColors.background};
+    border-radius: 0px;
   }
 
   input:focus {
