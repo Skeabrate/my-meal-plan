@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import * as Styled from 'styles/profile/overview.styles';
 import { useMutation } from 'hooks/useMutation';
-import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
+import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import EmailSvg from 'assets/SVG/Email.svg';
 import DeleteSvg from 'assets/SVG/Delete.svg';
@@ -12,17 +12,18 @@ import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
 import { useInfoModal } from 'components/InfoModal/InfoModal';
-import ImageLoading from 'components/ImageLoading/ImageLoading';
 
 const Overview = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
   const {
-    mealPlans,
+    mealPlansWithAllDetails,
     isLoading: isLoadingFetching,
+    isRefetching,
     isError: isErrorFetching,
     error: errorFetching,
-  } = useFetchMealPlans();
+  } = useFetchMealPlansWithAllDetails();
 
   const {
     mutation: deleteAccount,
@@ -48,6 +49,43 @@ const Overview = () => {
   );
 
   useInfoModal(actionErrors);
+
+  const getCount = useMemo(
+    () =>
+      mealPlansWithAllDetails?.reduce(
+        ({ mealsSectionsCount, mealsCount }, { days }) => {
+          days.forEach(({ mealsSections }) => {
+            mealsSectionsCount += mealsSections.length;
+
+            mealsSections.forEach(({ meals }) => {
+              mealsCount += meals.length;
+            });
+          });
+
+          return { mealsSectionsCount, mealsCount };
+        },
+        {
+          mealsSectionsCount: 0,
+          mealsCount: 0,
+        }
+      ),
+    [mealPlansWithAllDetails]
+  );
+
+  const stats = [
+    {
+      label: 'Meal plans:',
+      count: mealPlansWithAllDetails?.length,
+    },
+    {
+      label: 'Meals sections:',
+      count: getCount?.mealsSectionsCount,
+    },
+    {
+      label: 'Meals:',
+      count: getCount?.mealsCount,
+    },
+  ];
 
   return (
     <ProfileTabLayuot label='Profile Information:'>
@@ -87,20 +125,12 @@ const Overview = () => {
       </div>
 
       <Styled.Stats>
-        <div>
-          <h2>Meal plans:</h2>
-          <p>0</p>
-        </div>
-
-        <div>
-          <h2>Meals sections:</h2>
-          <p>0</p>
-        </div>
-
-        <div>
-          <h2>Meals:</h2>
-          <p>0</p>
-        </div>
+        {stats.map(({ label, count }) => (
+          <div key={label}>
+            <h2>{label}</h2>
+            <p>{isLoadingFetching || isRefetching ? <Loading height={48} /> : count}</p>
+          </div>
+        ))}
       </Styled.Stats>
     </ProfileTabLayuot>
   );

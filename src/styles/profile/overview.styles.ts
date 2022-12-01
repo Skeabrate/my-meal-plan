@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const boxShadow = () => css`
+  box-shadow: 0px 0px 5px -3px rgba(0, 0, 0, 1);
+`;
 
 export const ProfileInformations = styled.div`
   margin-bottom: 2rem;
@@ -11,7 +15,7 @@ export const ProfileInformations = styled.div`
   ${({ theme }) => theme.mq.desktop} {
     display: grid;
     grid-template-columns: 300px 1fr;
-    box-shadow: 0px 0px 6px -4px rgba(0, 0, 0, 1);
+    ${boxShadow()};
     border-bottom: 3px solid ${({ theme }) => theme.themeColors.border};
     padding: 4rem 0;
   }
@@ -33,7 +37,7 @@ export const ProfileImage = styled.div`
 
 export const ProfileDetails = styled.div`
   color: ${({ theme }) => theme.themeColors.secondFont};
-  box-shadow: 0px 0px 6px -4px rgba(0, 0, 0, 1);
+  ${boxShadow()};
   border-bottom: 3px solid ${({ theme }) => theme.themeColors.border};
   border-radius: 4px;
   padding: 1rem;
@@ -108,7 +112,7 @@ export const Stats = styled.div`
     gap: 1rem;
     padding-block: 1rem;
     align-items: center;
-    box-shadow: 0px 0px 6px -4px rgba(0, 0, 0, 1);
+    ${boxShadow()};
     border-radius: 4px;
 
     &:first-child {
