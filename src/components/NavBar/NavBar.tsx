@@ -14,6 +14,7 @@ import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
 import { useSession } from 'next-auth/react';
 import ThemeCombobox from 'components/Comboboxes/ThemeCombobox';
+import Loading from 'components/Loading/Loading';
 
 const links = [
   {
@@ -38,7 +39,7 @@ const NavBar = () => {
   const { toggleSearchBar } = useContext(SearchBarContext);
   const { favorites } = useContext(FavoritesContext);
 
-  const { data: session } = useSession();
+  const { data, status } = useSession();
 
   const router = useRouter();
 
@@ -111,25 +112,38 @@ const NavBar = () => {
               </button>
             </Styled.NavSubItem>
             <Styled.NavSubItem>
-              <Link
-                aria-label='go to login page'
-                href={session ? '/profile/overview' : '/api/auth/signin'}
-              >
-                <a>
-                  {session?.user.image ? (
-                    <Styled.ProfileImage>
-                      <Image
-                        src={session.user.image}
-                        alt={session.user.name!}
-                        height='40'
-                        width='40'
-                      />
-                    </Styled.ProfileImage>
-                  ) : (
+              {status === 'loading' ? (
+                <Loading height={30} />
+              ) : status === 'authenticated' ? (
+                <Link
+                  aria-label='go to profile page'
+                  href={'/profile/overview'}
+                >
+                  <a>
+                    {data?.user.image ? (
+                      <Styled.ProfileImage>
+                        <Image
+                          src={data.user.image}
+                          alt={data.user.name || 'profile image'}
+                          height='40'
+                          width='40'
+                        />
+                      </Styled.ProfileImage>
+                    ) : (
+                      <ProfileSvg />
+                    )}
+                  </a>
+                </Link>
+              ) : status === 'unauthenticated' ? (
+                <Link
+                  aria-label='go to login page'
+                  href={'/api/auth/signin'}
+                >
+                  <a>
                     <ProfileSvg />
-                  )}
-                </a>
-              </Link>
+                  </a>
+                </Link>
+              ) : null}
             </Styled.NavSubItem>
           </Styled.NavSubItems>
         </Styled.SlideCart>

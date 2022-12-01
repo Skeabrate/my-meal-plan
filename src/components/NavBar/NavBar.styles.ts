@@ -286,6 +286,9 @@ export const NavSubItems = styled.ul<MenuProps>`
 `;
 
 export const NavSubItem = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   height: 100%;
   width: 60px;

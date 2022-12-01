@@ -128,7 +128,7 @@ const Overview = () => {
         {stats.map(({ label, count }) => (
           <div key={label}>
             <h2>{label}</h2>
-            <p>{isLoadingFetching || isRefetching ? <Loading height={48} /> : count}</p>
+            {isLoadingFetching || isRefetching ? <Loading height={48} /> : <p>{count}</p>}
           </div>
         ))}
       </Styled.Stats>
