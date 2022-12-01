@@ -1,6 +1,7 @@
 export const TRANSITIONS = {
   isEmpty: {
     fetchMealPlans: 'FETCH_MEAL_PLANS',
+    refetchMealPlans: 'REFETCH_MEAL_PLANS',
   },
   isLoading: {
     fetchMealPlansSuccess: 'FETCH_MEAL_PLANS_SUCCESS',

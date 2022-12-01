@@ -69,6 +69,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
     () => ({
       [states.isEmpty.type]: {
         [TRANSITIONS.isEmpty.fetchMealPlans]: states.isLoading,
+        [TRANSITIONS.isEmpty.refetchMealPlans]: states.isLoading,
       },
       [states.isLoading.type]: {
         [TRANSITIONS.isLoading.fetchMealPlansSuccess]: states.mealPlans,
@@ -117,10 +118,10 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   const { openModal } = useContext(ModalContext);
 
   useEffect(() => {
-    if (isLoadingFetch || isRefetching) {
+    if (isLoadingFetch) {
       updateView(TRANSITIONS.isEmpty.fetchMealPlans);
     }
-  }, [isLoadingFetch, isRefetching, updateView]);
+  }, [isLoadingFetch, updateView]);
 
   useEffect(() => {
     if (isErrorFetch) {
@@ -130,10 +131,12 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   }, [isErrorFetch, errorFetch, openModal, updateView]);
 
   useEffect(() => {
-    if (mealPlansWithAllDetails?.length) {
+    if (isRefetching) {
+      updateView(TRANSITIONS.isEmpty.refetchMealPlans);
+    } else if (mealPlansWithAllDetails) {
       updateView(TRANSITIONS.isLoading.fetchMealPlansSuccess);
     }
-  }, [mealPlansWithAllDetails, updateView]);
+  }, [isRefetching, mealPlansWithAllDetails, updateView]);
 
   return (
     <Styled.SubDropdown>

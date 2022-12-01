@@ -5,7 +5,7 @@ import { DAYS } from 'utils/days';
 export default async function createMealsSection(req: NextApiRequest, res: NextApiResponse) {
   const { mealPlanId, mealsSectionName, dayName, dayId } = req.body;
 
-  const checkIfDayNameIsValidFormat = DAYS.find((day) => day === dayName);
+  const checkIfDayNameIsValidFormat = DAYS.find(({ shortened }) => shortened === dayName);
 
   if (mealPlanId && mealsSectionName) {
     if (dayId) {

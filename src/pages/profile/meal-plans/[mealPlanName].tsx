@@ -6,7 +6,8 @@ import { dehydrate, QueryClient } from 'react-query';
 import * as Styled from 'styles/profile/meal-plans/mealPlanName.styles';
 import { useTabs } from 'hooks/useTabs';
 import { useMutation } from 'hooks/useMutation';
-import { DAYS } from 'utils/days';
+import { useResizeWindow } from 'hooks/useResizeWindow';
+import { DAYS, ShortenedDay } from 'utils/days';
 import { fetchMealPlan, useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
@@ -38,10 +39,10 @@ const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
 
   useInfoModal(actionErrors);
 
-  const [activeDetailsHelper, setActiveDetailsHelper] = useState(DAYS[0]);
-  const tabs = DAYS.map((day) => ({
-    id: day,
-    label: day,
+  const [activeDetailsHelper, setActiveDetailsHelper] = useState<ShortenedDay>(DAYS[0].shortened);
+  const tabs = DAYS.map(({ value, shortened }) => ({
+    id: shortened,
+    label: value, // not used in this tabs / only id
     Component: (
       <Day
         mealPlanId={mealPlan?.id}
@@ -51,6 +52,8 @@ const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
   }));
 
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
+
+  const { windowWidth } = useResizeWindow();
 
   return (
     <ProfileTabLayout
@@ -75,16 +78,16 @@ const MealPlanName = ({ mealPlanName }: { mealPlanName: string }) => {
         </Styled.MealPlanTitle>
 
         <Styled.DaysBar>
-          {DAYS.map((day) => (
-            <li key={day}>
+          {DAYS.map(({ value, shortened }) => (
+            <li key={shortened}>
               <Styled.DaysBarButton
-                $isActive={day === activeDetails}
+                $isActive={shortened === activeDetails}
                 onClick={() => {
-                  setActiveDetails(day);
-                  setActiveDetailsHelper(day);
+                  setActiveDetails(shortened);
+                  setActiveDetailsHelper(shortened);
                 }}
               >
-                {day}
+                {windowWidth > 500 ? value : shortened}
               </Styled.DaysBarButton>
             </li>
           ))}
