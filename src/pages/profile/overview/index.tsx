@@ -2,12 +2,17 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import * as Styled from 'styles/profile/overview.styles';
 import { useMutation } from 'hooks/useMutation';
+import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
+import ProfileSvg from 'assets/SVG/Profile.svg';
+import EmailSvg from 'assets/SVG/Email.svg';
+import DeleteSvg from 'assets/SVG/Delete.svg';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
 import { useInfoModal } from 'components/InfoModal/InfoModal';
-import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
+import ImageLoading from 'components/ImageLoading/ImageLoading';
 
 const Overview = () => {
   const { data: session } = useSession();
@@ -46,21 +51,57 @@ const Overview = () => {
 
   return (
     <ProfileTabLayuot label='Profile Information:'>
-      {session?.user.image && (
-        <Image
-          src={session?.user.image}
-          alt={session?.user.name || session?.user.email!}
-          height='140'
-          width='140'
-        />
-      )}
+      <div>
+        <Styled.ProfileInformations>
+          <Styled.ProfileImage>
+            {session?.user.image && (
+              <Image
+                src={session?.user.image}
+                alt={session?.user.name || session?.user.email!}
+                height='140'
+                width='140'
+              />
+            )}
+          </Styled.ProfileImage>
 
-      <p>{session?.user.name}</p>
-      <p>{session?.user.email}</p>
+          <Styled.ProfileDetails>
+            <div>
+              {session?.user.name && (
+                <p>
+                  <ProfileSvg /> {session?.user.name}
+                </p>
+              )}
+              {session?.user.email && (
+                <p>
+                  <EmailSvg /> {session?.user.email}
+                </p>
+              )}
+            </div>
 
-      <button onClick={deleteAccountConfirmation}>
-        {isLoadingDeleteAccount ? <Loading height={40} /> : 'Delete Account'}
-      </button>
+            <button onClick={deleteAccountConfirmation}>
+              {isLoadingDeleteAccount ? <Loading height={20} /> : <DeleteSvg />}
+              Delete Account
+            </button>
+          </Styled.ProfileDetails>
+        </Styled.ProfileInformations>
+      </div>
+
+      <Styled.Stats>
+        <div>
+          <h2>Meal plans:</h2>
+          <p>0</p>
+        </div>
+
+        <div>
+          <h2>Meals sections:</h2>
+          <p>0</p>
+        </div>
+
+        <div>
+          <h2>Meals:</h2>
+          <p>0</p>
+        </div>
+      </Styled.Stats>
     </ProfileTabLayuot>
   );
 };
