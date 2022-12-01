@@ -97,14 +97,18 @@ export const Options = styled.ul`
   }
 `;
 
-export const ActiveLink = styled.a<{ $isActive: boolean }>`
-  color: ${({ theme, $isActive }) => ($isActive ? 'white' : theme.themeColors.font)};
-  background-color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.green : theme.themeColors.background};
+export const ActiveLink = styled.li<{ $isActive: boolean }>`
+  a {
+    color: ${({ theme, $isActive }) => ($isActive ? 'white' : theme.themeColors.font)};
+    background-color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors.green : theme.themeColors.background};
+  }
 
   &:hover {
-    background-color: ${({ theme, $isActive }) =>
-      $isActive ? theme.colors.green : theme.themeColors.secondBackground} !important;
+    a {
+      background-color: ${({ theme, $isActive }) =>
+        $isActive ? theme.colors.green : theme.themeColors.secondBackground} !important;
+    }
   }
 
   svg path {

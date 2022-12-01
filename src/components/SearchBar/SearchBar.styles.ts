@@ -80,4 +80,9 @@ export const InputWrapper = styled.div`
     border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
     background-color: transparent;
   }
+
+  button:focus {
+    ${({ theme }) => theme.boxShadow(theme.colors.orange)}
+    outline: none;
+  }
 `;

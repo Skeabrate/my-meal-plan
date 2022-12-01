@@ -40,7 +40,7 @@ const OptionsDropdown = ({
 }) => {
   const { toggleSearchBar } = useContext(SearchBarContext);
 
-  // const { mutation: createMealInMealsSection, isLoading, isError, error } = useMutation();
+  // const { mutation: createMealInMealsSection, isLoading, isError, error } = useMutation('/api/createMealInMealsSection');
 
   return (
     <StyledWrapper>

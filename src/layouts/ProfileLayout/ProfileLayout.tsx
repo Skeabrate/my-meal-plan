@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import * as Styled from './ProfileLayout.styles';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -8,6 +7,7 @@ import LogoutSvg from 'assets/SVG/Logout.svg';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import MealSvg from 'assets/SVG/Meal.svg';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import Link from 'next/link';
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -22,26 +22,26 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
         </Styled.BackButton>
 
         <Styled.Options>
-          <li>
+          <Styled.ActiveLink $isActive={isLinkActive('/profile/overview')}>
             <Link href='/profile/overview'>
-              <Styled.ActiveLink $isActive={isLinkActive('/profile/overview')}>
+              <a>
                 <span>
                   <ProfileSvg />
                 </span>
                 Overview
-              </Styled.ActiveLink>
+              </a>
             </Link>
-          </li>
-          <li>
+          </Styled.ActiveLink>
+          <Styled.ActiveLink $isActive={isLinkActive('/profile/meal-plans')}>
             <Link href='/profile/meal-plans'>
-              <Styled.ActiveLink $isActive={isLinkActive('/profile/meal-plans')}>
+              <a>
                 <span>
                   <MealSvg />
                 </span>
                 Meal Plans
-              </Styled.ActiveLink>
+              </a>
             </Link>
-          </li>
+          </Styled.ActiveLink>
           <li>
             <Link href='/favorites'>
               <a>

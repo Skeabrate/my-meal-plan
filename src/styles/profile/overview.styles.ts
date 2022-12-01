@@ -124,7 +124,7 @@ export const Stats = styled.div`
     }
 
     &:nth-child(3) {
-      border-bottom: 3px solid orange;
+      border-bottom: 3px solid ${({ theme }) => theme.colors.orangeHover};
     }
   }
 

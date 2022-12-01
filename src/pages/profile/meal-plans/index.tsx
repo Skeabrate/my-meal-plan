@@ -80,12 +80,14 @@ const MealPlans = () => {
           <Styled.MealPlansList>
             {mealPlans.map(({ id, mealPlanName }, index) => (
               <li key={mealPlanName}>
-                <Link href={`/profile/meal-plans/${mealPlanName}`}>
-                  <Styled.ListItem>
-                    <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
-                    {mealPlanName}
-                  </Styled.ListItem>
-                </Link>
+                <Styled.Link>
+                  <Link href={`/profile/meal-plans/${mealPlanName}`}>
+                    <a>
+                      <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
+                      {mealPlanName}
+                    </a>
+                  </Link>
+                </Styled.Link>
 
                 <Styled.DeleteMealPLanButton
                   aria-label='delete meal plan'
