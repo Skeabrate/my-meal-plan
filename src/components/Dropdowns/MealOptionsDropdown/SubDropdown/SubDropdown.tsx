@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import * as Styled from './SubDropdown.styles';
 import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
-import { ModalContext } from 'context/ModalContext';
+import { AlertModalContext } from 'context/AlertModalContext';
 import { DayType, MealPlanType, MealsSectionType } from 'types/MealPlanTypes';
 import { TRANSITIONS } from './Transitions';
 import IsLoading from './Views/IsLoading';
@@ -115,7 +115,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   } = useFetchMealPlansWithAllDetails();
 
   const { data: session } = useSession();
-  const { openModal } = useContext(ModalContext);
+  const { openAlertModal } = useContext(AlertModalContext);
 
   useEffect(() => {
     if (isLoadingFetch) {
@@ -126,9 +126,9 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
   useEffect(() => {
     if (isErrorFetch) {
       updateView(TRANSITIONS.isLoading.fetchMealPlansError);
-      openModal('error', errorFetch);
+      openAlertModal('error', errorFetch);
     }
-  }, [isErrorFetch, errorFetch, openModal, updateView]);
+  }, [isErrorFetch, errorFetch, openAlertModal, updateView]);
 
   useEffect(() => {
     if (isRefetching) {

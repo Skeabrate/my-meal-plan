@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import * as Styled from './Meals.styles';
 import { useFetchMealsFromMealsSection } from 'api/pscale/useFetchMealsFromMealsSection';
 import { useMutation } from 'hooks/useMutation';
-import { useInfoModal } from 'components/InfoModal/InfoModal';
+import { useAlertModal } from 'components/AlertModal/AlertModal';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import Meal from './Meal/Meal';
 
@@ -30,7 +30,7 @@ const Meals = ({ mealsSectionId }: { mealsSectionId: string }) => {
     [isErrorDeleteMealFromMealsSection, errorDeleteMealFromMealsSection]
   );
 
-  useInfoModal(actionErrors);
+  useAlertModal(actionErrors);
 
   return (
     <ErrorBoundary

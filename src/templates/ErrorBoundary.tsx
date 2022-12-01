@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ModalContext } from 'context/ModalContext';
+import { AlertModalContext } from 'context/AlertModalContext';
 import Loading from 'components/Loading/Loading';
 import styled from 'styled-components';
 
@@ -21,11 +21,11 @@ const ErrorBoundary = ({
   error: unknown;
   children: React.ReactNode;
 }) => {
-  const { openModal } = useContext(ModalContext);
+  const { openAlertModal } = useContext(AlertModalContext);
 
   useEffect(() => {
-    if (isError) openModal('error', 'An error has occurred.');
-  }, [isError, openModal]);
+    if (isError) openAlertModal('error', 'An error has occurred.');
+  }, [isError, openAlertModal]);
 
   if (isLoading) {
     return <Loading height={loadingHeight} />;

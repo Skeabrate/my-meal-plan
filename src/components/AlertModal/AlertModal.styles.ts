@@ -1,4 +1,4 @@
-import { ModalType } from 'context/ModalContext';
+import { AlertModalType } from 'context/AlertModalContext';
 import styles, { DefaultTheme, keyframes } from 'styled-components';
 
 const styled = { keyframes, ...styles };
@@ -23,7 +23,7 @@ const timeout = styled.keyframes`
   }
 `;
 
-const setColorBasedOnState = (theme: DefaultTheme, state: ModalType['state']) => {
+const setColorBasedOnState = (theme: DefaultTheme, state: AlertModalType['state']) => {
   switch (state) {
     case 'success':
       return theme.colors.green;
@@ -34,7 +34,7 @@ const setColorBasedOnState = (theme: DefaultTheme, state: ModalType['state']) =>
   }
 };
 
-export const InfoModal = styled.div<{ $state: ModalType['state'] }>`
+export const AlertModal = styled.div<{ $state: AlertModalType['state'] }>`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -53,7 +53,7 @@ export const InfoModal = styled.div<{ $state: ModalType['state'] }>`
   animation: ${customFadeIn} 0.2s forwards;
 `;
 
-export const LoadingBar = styled.div<{ $state: ModalType['state'] }>`
+export const LoadingBar = styled.div<{ $state: AlertModalType['state'] }>`
   width: 100px;
   height: 5px;
   border-radius: 100px;

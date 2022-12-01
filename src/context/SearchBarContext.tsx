@@ -2,7 +2,7 @@ import React, { ReactNode, useCallback, useContext, useMemo, useState } from 're
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
 import SearchBar from 'components/SearchBar/SearchBar';
-import { ModalContext } from './ModalContext';
+import { AlertModalContext } from './AlertModalContext';
 
 type SearchBarContextType = {
   isSearchBarOpen: boolean;
@@ -13,7 +13,7 @@ export const SearchBarContext = React.createContext({} as SearchBarContextType);
 
 export default function SearchBarProvider({ children }: { children: ReactNode }) {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
-  const { closeModal } = useContext(ModalContext);
+  const { closeAlertModal } = useContext(AlertModalContext);
 
   const toggleSearchBar = useCallback(() => {
     setIsSearchBarOpen((state) => {
@@ -21,8 +21,8 @@ export default function SearchBarProvider({ children }: { children: ReactNode })
       return !state;
     });
 
-    closeModal();
-  }, [closeModal]);
+    closeAlertModal();
+  }, [closeAlertModal]);
 
   usePathChange(isSearchBarOpen ? toggleSearchBar : () => {});
 

@@ -5,7 +5,7 @@ import ErrorBoundary from 'templates/ErrorBoundary';
 import OpenInput from 'components/OpenInput/OpenInput';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import MealsSection from './MealsSection/MealsSection';
-import { useInfoModal } from 'components/InfoModal/InfoModal';
+import { useAlertModal } from 'components/AlertModal/AlertModal';
 
 const Day = ({ mealPlanId, dayName }: { mealPlanId: string | undefined; dayName: string }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
@@ -50,7 +50,7 @@ const Day = ({ mealPlanId, dayName }: { mealPlanId: string | undefined; dayName:
     ]
   );
 
-  useInfoModal(actionErrors);
+  useAlertModal(actionErrors);
 
   return (
     <div>

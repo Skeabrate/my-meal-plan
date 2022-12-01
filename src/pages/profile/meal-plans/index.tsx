@@ -9,7 +9,7 @@ import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import OpenInput from 'components/OpenInput/OpenInput';
-import { useInfoModal } from 'components/InfoModal/InfoModal';
+import { useAlertModal } from 'components/AlertModal/AlertModal';
 
 const MealPlans = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
@@ -51,7 +51,7 @@ const MealPlans = () => {
     [isErrorCreateMealPlan, errorCreateMealPlan, isErrorDeleteMealPlan, errorDeleteMealPlan]
   );
 
-  useInfoModal(actionErrors);
+  useAlertModal(actionErrors);
 
   return (
     <ProfileTabLayout label='My Meal Plans:'>

@@ -4,11 +4,11 @@ import ArrowSvg from 'assets/SVG/LeftArrow.svg';
 import { ViewsContext } from '../SubDropdown';
 import { TRANSITIONS } from '../Transitions';
 import { useMutation } from 'hooks/useMutation';
-import { ModalContext } from 'context/ModalContext';
+import { AlertModalContext } from 'context/AlertModalContext';
 
 const ChoseMealsSection = ({ mealId }: { mealId: string }) => {
   const { options, updateView } = useContext(ViewsContext);
-  const { openModal } = useContext(ModalContext);
+  const { openAlertModal } = useContext(AlertModalContext);
 
   const { mutation: createMealInMealsSection, isLoading: isLoadingCreate } = useMutation(
     '/api/createMealInMealsSection',
@@ -16,7 +16,7 @@ const ChoseMealsSection = ({ mealId }: { mealId: string }) => {
       updateView(TRANSITIONS.isLoading.addMealToMealsSectionSuccess);
     },
     (err) => {
-      openModal('error', err.response?.data);
+      openAlertModal('error', err.response?.data);
       updateView(TRANSITIONS.isLoading.addMealToMealsSectionError);
     }
   );

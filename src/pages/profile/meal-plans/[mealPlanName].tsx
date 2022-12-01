@@ -11,7 +11,7 @@ import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import Day from 'components/Day/Day';
-import { useInfoModal } from 'components/InfoModal/InfoModal';
+import { useAlertModal } from 'components/AlertModal/AlertModal';
 
 const MealPlanName = () => {
   const router = useRouter();
@@ -35,7 +35,7 @@ const MealPlanName = () => {
 
   const actionErrors = useMemo(() => [{ isError, error }], [isError, error]);
 
-  useInfoModal(actionErrors);
+  useAlertModal(actionErrors);
 
   const [activeDetailsHelper, setActiveDetailsHelper] = useState<ShortenedDay>(DAYS[0].shortened);
   const tabs = DAYS.map(({ value, shortened }) => ({

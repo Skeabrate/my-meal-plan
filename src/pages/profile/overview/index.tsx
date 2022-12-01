@@ -11,7 +11,7 @@ import DeleteSvg from 'assets/SVG/Delete.svg';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
-import { useInfoModal } from 'components/InfoModal/InfoModal';
+import { useAlertModal } from 'components/AlertModal/AlertModal';
 
 const Overview = () => {
   const { data: session } = useSession();
@@ -48,7 +48,7 @@ const Overview = () => {
     [isErrorFetching, errorFetching, isErrorDeleteAccount, errorDeleteAccount]
   );
 
-  useInfoModal(actionErrors);
+  useAlertModal(actionErrors);
 
   const getCount = useMemo(
     () =>
