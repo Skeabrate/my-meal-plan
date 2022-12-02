@@ -6,7 +6,7 @@ export const AddingMealModal = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 99999;
+  z-index: 50;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@ export const AddingMealModal = styled.div`
 `;
 
 export const InnerWrapper = styled.div`
-  position: relative;
+  position: absolute;
   width: 95%;
   height: 80%;
   background-color: ${({ theme }) => theme.themeColors.background};
@@ -37,7 +37,6 @@ export const TabsSwitch = styled.div`
   height: 40px;
   display: flex;
   gap: 6px;
-  z-index: 99999999;
 `;
 
 export const TabsSwitchButton = styled.button<{ $isActive: boolean }>`

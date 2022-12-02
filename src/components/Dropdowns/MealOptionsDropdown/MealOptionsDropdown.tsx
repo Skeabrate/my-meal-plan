@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 99;
+  z-index: 10;
 `;
 
 const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {

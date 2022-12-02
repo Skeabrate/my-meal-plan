@@ -42,7 +42,7 @@ export const AlertModal = styled.div<{ $state: AlertModalType['state'] }>`
   position: fixed;
   top: 10%;
   left: 50%;
-  z-index: 9999;
+  z-index: 50;
   padding: 20px 30px 10px;
   font-weight: 600;
   background-color: ${({ theme }) => theme.themeColors.background};

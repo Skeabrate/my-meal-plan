@@ -14,7 +14,7 @@ const StyledModalBackground = styled.div`
   background-color: ${({ theme }) => theme.themeColors.background};
 
   ${({ theme }) => theme.mq.tablet} {
-    opacity: 0.7;
+    opacity: 0.8;
   }
 `;
 

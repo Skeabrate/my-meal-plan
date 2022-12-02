@@ -45,7 +45,7 @@ export const NavBar = styled.div`
 export const Logo = styled.a`
   display: flex;
   position: relative;
-  z-index: 9999;
+  z-index: 40;
   ${({ theme }) => theme.boxShadow('white')};
 
   img {
@@ -143,7 +143,7 @@ export const SlideCart = styled.div<MenuProps & { $windowHeight: number }>`
   background-color: ${({ theme }) => theme.themeColors.background};
   display: flex;
   flex-direction: column;
-  z-index: 999;
+  z-index: 30;
 
   transform: ${({ $isCartOpen }) =>
     $isCartOpen === false ? 'translateX(0)' : 'translateX(-100%)'};
