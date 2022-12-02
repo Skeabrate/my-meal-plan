@@ -3,6 +3,7 @@ import * as Styled from './SearchBar.styles';
 import CloseSvg from 'assets/SVG/Close.svg';
 import { SearchBarContext } from 'context/SearchBarContext';
 import Results from './Results/Results';
+import ModalBackground from 'components/ModalBackground/ModalBackground';
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState('');
@@ -10,11 +11,7 @@ const SearchBar = () => {
 
   return (
     <Styled.SearchBar $isSearchBarOpen={isSearchBarOpen}>
-      <Styled.Background
-        role='button'
-        aria-label='close search bar'
-        onClick={toggleSearchBar}
-      />
+      <ModalBackground actionHandler={toggleSearchBar} />
 
       <Styled.SearchBarInner>
         <Styled.InputWrapper>

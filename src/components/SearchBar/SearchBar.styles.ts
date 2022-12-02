@@ -15,23 +15,6 @@ export const SearchBar = styled.div<{ $isSearchBarOpen: boolean }>`
   ${({ theme }) => theme.fadeInAnimation(0.4)};
 `;
 
-export const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.9;
-  z-index: -1;
-  background-color: ${({ theme }) => theme.themeColors.background};
-
-  ${({ theme }) => theme.mq.tablet} {
-    opacity: 0.7;
-  }
-`;
-
 export const SearchBarInner = styled.div`
   width: 100%;
   padding: 20px;

@@ -15,7 +15,6 @@ export const DeleteMealPLanButton = styled.button`
   svg {
     height: 24px;
     width: 24px;
-    transform: rotate(45deg);
     transition: 0.1s ease-in-out;
 
     path {

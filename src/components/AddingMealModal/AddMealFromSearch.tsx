@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
 import { AddingMealModalContext } from 'context/AddingMealModalContext';
 
-const AddMealFromSearch = () => {
+const AddMealFromSearch = ({
+  createMealInMealsSectionHandler,
+}: {
+  createMealInMealsSectionHandler: (body: {}) => void;
+}) => {
   const { mealsSectionId } = useContext(AddingMealModalContext);
 
   return (
     <div>
-      <p>Add meal from search</p>
+      <p>Search for meal</p>
     </div>
   );
 };

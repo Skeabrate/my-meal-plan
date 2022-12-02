@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import Dropdown from './template/Dropdown';
-import SearchSvg from 'assets/SVG/Search.svg';
+import DeleteSvg from 'assets/SVG/Delete.svg';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import { AddingMealModalContext } from 'context/AddingMealModalContext';
 
@@ -10,8 +10,6 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.colors.red};
 
     svg {
-      transform: rotate(45deg);
-
       path {
         transition: 0.1s ease-in-out;
         fill: ${({ theme }) => theme.colors.red};
@@ -43,15 +41,15 @@ const OptionsDropdown = ({
       <Dropdown>
         <li>
           <button onClick={() => openModalHandler(mealsSectionId)}>
-            <SearchSvg />
+            <PlusSvg />
             <span>Add new meal</span>
           </button>
         </li>
 
         <li>
           <button onClick={deleteHandler}>
-            <PlusSvg />
-            <span>Delete meal section</span>
+            <DeleteSvg />
+            <span>Delete meals section</span>
           </button>
         </li>
       </Dropdown>

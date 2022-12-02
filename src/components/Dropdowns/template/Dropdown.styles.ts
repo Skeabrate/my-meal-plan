@@ -68,7 +68,6 @@ export const Dropdown = styled.ul`
     background-color: transparent;
     transition: 0.1s ease-in-out;
     display: flex;
-    align-items: center;
     gap: 8px;
 
     svg {

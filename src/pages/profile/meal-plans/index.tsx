@@ -4,6 +4,7 @@ import * as Styled from 'styles/profile/meal-plans/index.styles';
 import { useSession } from 'next-auth/react';
 import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
 import { useMutation } from 'hooks/useMutation';
+import DeleteSvg from 'assets/SVG/Delete.svg';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
@@ -96,7 +97,7 @@ const MealPlans = () => {
                     deleteMealPlan({ mealPlanId: id });
                   }}
                 >
-                  <PlusSvg />
+                  <DeleteSvg />
                 </Styled.DeleteMealPLanButton>
               </li>
             ))}

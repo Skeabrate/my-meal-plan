@@ -43,7 +43,7 @@ export default function AddingMealModalProvider({ children }: { children: React.
 
   return (
     <AddingMealModalContext.Provider value={value}>
-      {modal.isOpen && <AddingMealModal />}
+      {!modal.isOpen && <AddingMealModal />}
       {children}
     </AddingMealModalContext.Provider>
   );
