@@ -8,10 +8,6 @@ const StyledForm = styled.form`
   gap: 6px;
 
   input {
-    border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
-    padding: 10px;
-    background-color: ${({ theme }) => theme.themeColors.background};
-
     &:last-child {
       font-weight: 600;
       cursor: pointer;

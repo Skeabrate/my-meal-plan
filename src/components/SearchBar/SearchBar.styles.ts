@@ -60,7 +60,7 @@ export const InputWrapper = styled.div`
   input {
     border-radius: 0px;
     border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
-    background-color: transparent;
+    background-color: ${({ theme }) => theme.themeColors.background};
   }
 
   button:focus {

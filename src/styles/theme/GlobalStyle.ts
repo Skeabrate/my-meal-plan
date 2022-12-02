@@ -128,6 +128,7 @@ export const GlobaStyles = styled.createGlobalStyle`
 
   // prevent focusing inputs on mobile devices
   input[type='color'],
+  input[type='submit'],
   input[type='date'],
   input[type='datetime'],
   input[type='datetime-local'],
@@ -143,8 +144,10 @@ export const GlobaStyles = styled.createGlobalStyle`
   input[type='week'],
   select:focus,
   textarea {
+    padding: 10px;
     font-size: 16px;
     color: ${({ theme }) => theme.themeColors.font};
+    border: 2px solid ${({ theme }) => theme.themeColors.secondFont};
     background-color: ${({ theme }) => theme.themeColors.background};
     border-radius: 0px;
   }
