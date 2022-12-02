@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import * as Styled from './Meals.styles';
 import { useFetchMealsFromMealsSection } from 'api/pscale/useFetchMealsFromMealsSection';
 import { useMutation } from 'hooks/useMutation';
-import { useAlertModal } from 'components/AlertModal/AlertModal';
+import { AlertModalContext } from 'context/AlertModalContext';
 import ErrorBoundary from 'templates/ErrorBoundary';
+import { useAlertModal } from 'components/AlertModal/AlertModal';
+import { MEAL_ADDED_SUCCESSFULLY } from 'components/AddingMealModal/AddingMealModal';
 import Meal from './Meal/Meal';
 
 const Meals = ({ mealsSectionId }: { mealsSectionId: string }) => {
@@ -29,8 +31,14 @@ const Meals = ({ mealsSectionId }: { mealsSectionId: string }) => {
     () => [{ isError: isErrorDeleteMealFromMealsSection, error: errorDeleteMealFromMealsSection }],
     [isErrorDeleteMealFromMealsSection, errorDeleteMealFromMealsSection]
   );
-
   useAlertModal(actionErrors);
+
+  const { alertModal } = useContext(AlertModalContext);
+  useEffect(() => {
+    if (alertModal.message === MEAL_ADDED_SUCCESSFULLY) {
+      refetch();
+    }
+  }, [alertModal.message, refetch]);
 
   return (
     <ErrorBoundary

@@ -9,18 +9,23 @@ import FavoritesSvg from 'assets/SVG/Marked.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
 import ModalBackground from 'components/ModalBackground/ModalBackground';
 import Loading from 'components/Loading/Loading';
-import AddMealFromSearch from './AddMealFromSearch';
-import AddMealFromFavorites from './AddMealFromFavorites';
+import AddMealFromSearch from './tabs/AddMealFromSearch';
+import AddMealFromFavorites from './tabs/AddMealFromFavorites';
+
+export const MEAL_ADDED_SUCCESSFULLY = 'Meal added successfully.';
 
 const AddingMealModal = () => {
-  const { closeModalHandler } = useContext(AddingMealModalContext);
+  const { closeAddingMealModalHandler } = useContext(AddingMealModalContext);
   const { openAlertModal } = useContext(AlertModalContext);
 
   const { mutation: createMealInMealsSection, isLoading: isLoadingCreateMeal } = useMutation(
     '/api/createMealInMealsSection',
-    () => {},
+    () => {
+      openAlertModal('success', MEAL_ADDED_SUCCESSFULLY);
+      closeAddingMealModalHandler();
+    },
     (err) => {
-      openAlertModal('error', err);
+      openAlertModal('error', err.response?.data);
     }
   );
 
@@ -42,7 +47,7 @@ const AddingMealModal = () => {
 
   return (
     <Styled.AddingMealModal>
-      <ModalBackground actionHandler={closeModalHandler} />
+      <ModalBackground actionHandler={closeAddingMealModalHandler} />
 
       <Styled.InnerWrapper>
         <Styled.TabsSwitch>
@@ -71,12 +76,18 @@ const AddingMealModal = () => {
               : ''}
           </h2>
 
-          <button onClick={closeModalHandler}>
+          <button onClick={closeAddingMealModalHandler}>
             <PlusSvg />
           </button>
         </Styled.Header>
 
-        {isLoadingCreateMeal ? <Loading /> : selectedTab}
+        {isLoadingCreateMeal ? (
+          <Styled.LoadingWrapper>
+            <Loading height={50} />
+          </Styled.LoadingWrapper>
+        ) : (
+          selectedTab
+        )}
       </Styled.InnerWrapper>
     </Styled.AddingMealModal>
   );

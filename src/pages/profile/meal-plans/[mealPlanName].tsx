@@ -6,6 +6,7 @@ import { useMutation } from 'hooks/useMutation';
 import { useResizeWindow } from 'hooks/useResizeWindow';
 import { DAYS, ShortenedDay } from 'utils/days';
 import { useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
+import DeleteSvg from 'assets/SVG/Delete.svg';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import ProfileTabLayout from 'layouts/ProbileTabLayout/ProbileTabLayout';
@@ -66,7 +67,11 @@ const MealPlanName = () => {
         <Styled.MealPlanTitle>
           <h2>{mealPlan?.mealPlanName}</h2>
           <UnderlinedButton
-            label='Delete meal plan'
+            label={
+              <>
+                <DeleteSvg /> Delete meal plan
+              </>
+            }
             onClick={() =>
               deleteMealPlan({
                 mealPlanId: mealPlan?.id,

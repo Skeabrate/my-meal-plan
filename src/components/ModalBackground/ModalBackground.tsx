@@ -1,5 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles, { keyframes } from 'styled-components';
+
+const styled = { ...styles, keyframes };
+
+const fadeInTablet = styled.keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+`;
+
+const fadeInDesktop = styled.keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
+`;
 
 const StyledModalBackground = styled.div`
   position: absolute;
@@ -12,9 +32,11 @@ const StyledModalBackground = styled.div`
   opacity: 0.9;
   z-index: -1;
   background-color: ${({ theme }) => theme.themeColors.background};
+  animation: ${fadeInTablet} 0.4s forwards;
 
   ${({ theme }) => theme.mq.tablet} {
     opacity: 0.8;
+    animation: ${fadeInDesktop} 0.4s forwards;
   }
 `;
 

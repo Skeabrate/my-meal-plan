@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import Dropdown from './template/Dropdown';
+import { AddingMealModalContext } from 'context/AddingMealModalContext';
 import DeleteSvg from 'assets/SVG/Delete.svg';
 import PlusSvg from 'assets/SVG/Plus.svg';
-import { AddingMealModalContext } from 'context/AddingMealModalContext';
+import Dropdown from './template/Dropdown';
 
 const StyledWrapper = styled.div`
   li:last-child button {
@@ -34,13 +34,13 @@ const OptionsDropdown = ({
   deleteHandler: () => void;
   mealsSectionId: string;
 }) => {
-  const { openModalHandler } = useContext(AddingMealModalContext);
+  const { openAddingMealModalHandler } = useContext(AddingMealModalContext);
 
   return (
     <StyledWrapper>
       <Dropdown>
         <li>
-          <button onClick={() => openModalHandler(mealsSectionId)}>
+          <button onClick={() => openAddingMealModalHandler(mealsSectionId)}>
             <PlusSvg />
             <span>Add new meal</span>
           </button>

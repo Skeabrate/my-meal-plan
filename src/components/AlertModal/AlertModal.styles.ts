@@ -39,10 +39,11 @@ export const AlertModal = styled.div<{ $state: AlertModalType['state'] }>`
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  text-align: center;
   position: fixed;
-  top: 10%;
+  top: 9%;
   left: 50%;
-  z-index: 50;
+  z-index: 70;
   padding: 20px 30px 10px;
   font-weight: 600;
   background-color: ${({ theme }) => theme.themeColors.background};

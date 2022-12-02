@@ -8,6 +8,13 @@ const StyledError = styled.p`
   font-style: italic;
 `;
 
+const StyledLoading = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ErrorBoundary = ({
   isLoading,
   loadingHeight,
@@ -28,7 +35,11 @@ const ErrorBoundary = ({
   }, [isError, openAlertModal]);
 
   if (isLoading) {
-    return <Loading height={loadingHeight} />;
+    return (
+      <StyledLoading>
+        <Loading height={loadingHeight} />
+      </StyledLoading>
+    );
   }
 
   if (isError) {

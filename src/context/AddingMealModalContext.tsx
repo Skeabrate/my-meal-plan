@@ -4,8 +4,8 @@ import AddingMealModal from 'components/AddingMealModal/AddingMealModal';
 
 type AddingMealModalContext = {
   mealsSectionId: string;
-  closeModalHandler: () => void;
-  openModalHandler: (mealsSectionId: string) => void;
+  closeAddingMealModalHandler: () => void;
+  openAddingMealModalHandler: (mealsSectionId: string) => void;
 };
 
 export const AddingMealModalContext = React.createContext({} as AddingMealModalContext);
@@ -16,34 +16,34 @@ export default function AddingMealModalProvider({ children }: { children: React.
     mealsSectionId: '',
   });
 
-  const closeModalHandler = () => {
+  const closeAddingMealModalHandler = () => {
     setModal({
       isOpen: false,
       mealsSectionId: '',
     });
   };
 
-  const openModalHandler = (mealsSectionId: string) => {
+  const openAddingMealModalHandler = (mealsSectionId: string) => {
     setModal({
       isOpen: true,
       mealsSectionId,
     });
   };
 
-  usePathChange(closeModalHandler);
+  usePathChange(closeAddingMealModalHandler);
 
   const value = useMemo(
     () => ({
       mealsSectionId: modal.mealsSectionId,
-      closeModalHandler,
-      openModalHandler,
+      closeAddingMealModalHandler,
+      openAddingMealModalHandler,
     }),
     [modal.mealsSectionId]
   );
 
   return (
     <AddingMealModalContext.Provider value={value}>
-      {!modal.isOpen && <AddingMealModal />}
+      {modal.isOpen && <AddingMealModal />}
       {children}
     </AddingMealModalContext.Provider>
   );

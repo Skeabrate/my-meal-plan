@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useFetchMealsSections } from 'api/pscale/useFetchMealsSections';
 import { useMutation } from 'hooks/useMutation';
+import PlusSvg from 'assets/SVG/Plus.svg';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import OpenInput from 'components/OpenInput/OpenInput';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
@@ -56,7 +57,11 @@ const Day = ({ mealPlanId, dayName }: { mealPlanId: string | undefined; dayName:
     <div>
       <div style={{ padding: '15px 0 10px' }}>
         <UnderlinedButton
-          label='Add new meals section'
+          label={
+            <>
+              <PlusSvg /> Add new meals section
+            </>
+          }
           onClick={() => setIsInputOpen((isOpen) => !isOpen)}
           isGreen
         />

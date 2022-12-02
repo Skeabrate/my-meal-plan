@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useFetchMealById } from 'api/mealdb/useFetchMealById';
+import DeleteSvg from 'assets/SVG/Delete.svg';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';

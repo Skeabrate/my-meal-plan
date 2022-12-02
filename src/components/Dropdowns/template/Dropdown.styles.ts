@@ -68,11 +68,12 @@ export const Dropdown = styled.ul`
     background-color: transparent;
     transition: 0.1s ease-in-out;
     display: flex;
-    gap: 8px;
+    align-items: flex-end;
+    gap: 6px;
 
     svg {
-      height: 14px;
-      width: 14px;
+      height: 16px;
+      width: 16px;
     }
 
     &:hover {

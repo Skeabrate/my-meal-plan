@@ -12,7 +12,6 @@ export const SearchBar = styled.div<{ $isSearchBarOpen: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${({ theme }) => theme.fadeInAnimation(0.4)};
 `;
 
 export const SearchBarInner = styled.div`
