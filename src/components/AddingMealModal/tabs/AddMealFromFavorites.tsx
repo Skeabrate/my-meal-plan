@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { useFetchFavorites } from 'api/mealdb/useFetchFavorites';
 import ErrorBoundary from 'templates/ErrorBoundary';

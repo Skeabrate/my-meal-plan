@@ -125,3 +125,17 @@ export const Header = styled.div`
     margin-bottom: 3rem;
   }
 `;
+
+export const SearchBar = styled.div`
+  width: 100%;
+  margin-bottom: 2rem;
+
+  input {
+    width: 100%;
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 400px;
+    margin-bottom: 3rem;
+  }
+`;

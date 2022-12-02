@@ -2,31 +2,25 @@ import React, { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './Results.styles';
-import { useFetchSearchResults } from 'api/mealdb/useFetchSearchResults';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
-import useDebouncedValue from 'hooks/useDebouncedValue';
+import { useSearchResults } from 'hooks/useSearchResults';
 import Loading from 'components/Loading/Loading';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 
 const Results = ({ inputValue }: { inputValue: string }) => {
-  const debouncedInputValue = useDebouncedValue(inputValue, 700);
+  const { searchResults, isLoading, isError, error, noMatchingResults, matchingResults } =
+    useSearchResults(inputValue);
 
-  const { searchResults, isLoading, isError, error } = useFetchSearchResults(debouncedInputValue);
   const { windowHeight } = useContext(ResizeWindowContext);
-
-  const loading = isLoading;
-  const emptySearchInput = searchResults === null;
-  const noMatchingResults = !emptySearchInput && searchResults.length === 0;
-  const matchingResults = !emptySearchInput && searchResults.length > 0;
 
   return (
     <Styled.Results $windowHeight={windowHeight}>
-      {loading && <Loading />}
+      {isLoading && <Loading />}
       {isError && <Styled.Error>An error occured: {error}</Styled.Error>}
-      {noMatchingResults && <Styled.Error>No matching meals.</Styled.Error>}
+      {noMatchingResults && <Styled.Error>Meal not found.</Styled.Error>}
       {matchingResults && (
         <div>
-          {searchResults.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
+          {searchResults?.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
             <Link
               href={`/loading/meal?id=${idMeal}`}
               key={idMeal}

@@ -1,32 +1,45 @@
-import React, { useContext } from 'react';
+import { useState } from 'react';
 import * as Styled from '../AddingMealModal.styles';
-import { AddingMealModalContext } from 'context/AddingMealModalContext';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import AddingMealsGrid from '../AddingMealsGrid/AddingMealsGrid';
+import { useSearchResults } from 'hooks/useSearchResults';
 
 const AddMealFromSearch = ({
   createMealInMealsSectionHandler,
 }: {
   createMealInMealsSectionHandler: (body: {}) => void;
 }) => {
-  const { mealsSectionId } = useContext(AddingMealModalContext);
+  const [inputValue, setInputValue] = useState('');
+  const { searchResults, isLoading, isError, error, noMatchingResults, matchingResults } =
+    useSearchResults(inputValue);
 
   return (
-    <ErrorBoundary
-      isLoading={false}
-      loadingHeight={50}
-      isError={false}
-      error={false}
-    >
-      {[]?.length ? (
-        <AddingMealsGrid
-          meals={[]}
-          createMealInMealsSectionHandler={createMealInMealsSectionHandler}
+    <>
+      <Styled.SearchBar>
+        <input
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          type='text'
+          placeholder='Search...'
+          autoFocus
         />
-      ) : (
-        <p>Meals not found.</p>
-      )}
-    </ErrorBoundary>
+      </Styled.SearchBar>
+
+      <ErrorBoundary
+        isLoading={isLoading}
+        loadingHeight={50}
+        isError={isError}
+        error={error}
+      >
+        {matchingResults && searchResults && (
+          <AddingMealsGrid
+            meals={searchResults}
+            createMealInMealsSectionHandler={createMealInMealsSectionHandler}
+          />
+        )}
+        {noMatchingResults && <p>Meal not found.</p>}
+      </ErrorBoundary>
+    </>
   );
 };
 
