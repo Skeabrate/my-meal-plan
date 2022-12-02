@@ -1,11 +1,9 @@
 import { useContext } from 'react';
-import Link from 'next/link';
 import styled from 'styled-components';
-import { SearchBarContext } from 'context/SearchBarContext';
 import Dropdown from './template/Dropdown';
 import SearchSvg from 'assets/SVG/Search.svg';
-import FavoritesSvg from 'assets/SVG/Marked.svg';
 import PlusSvg from 'assets/SVG/Plus.svg';
+import { AddingMealModalContext } from 'context/AddingMealModalContext';
 
 const StyledWrapper = styled.div`
   li:last-child button {
@@ -38,27 +36,18 @@ const OptionsDropdown = ({
   deleteHandler: () => void;
   mealsSectionId: string;
 }) => {
-  const { toggleSearchBar } = useContext(SearchBarContext);
-
-  // const { mutation: createMealInMealsSection, isLoading, isError, error } = useMutation('/api/createMealInMealsSection');
+  const { openModalHandler } = useContext(AddingMealModalContext);
 
   return (
     <StyledWrapper>
       <Dropdown>
         <li>
-          <button onClick={toggleSearchBar}>
+          <button onClick={() => openModalHandler(mealsSectionId)}>
             <SearchSvg />
-            <span>Search for a meal</span>
+            <span>Add new meal</span>
           </button>
         </li>
-        <li>
-          <Link href='/favorites'>
-            <a>
-              <FavoritesSvg />
-              <span>Add from favorites</span>
-            </a>
-          </Link>
-        </li>
+
         <li>
           <button onClick={deleteHandler}>
             <PlusSvg />

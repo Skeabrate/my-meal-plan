@@ -8,6 +8,7 @@ import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
 import HistoryProvider from 'context/HistoryContext';
 import AlertModalProvider from 'context/AlertModalContext';
+import AddingMealModalProvider from 'context/AddingMealModalContext';
 const FavoritesProvider = dynamic(() => import('context/FavoritesContext'), { ssr: false });
 const ThemeProvider = dynamic(() => import('context/ThemeContext'), { ssr: false });
 
@@ -29,7 +30,9 @@ const ProvidersWrapper = ({
               <ResizeWindowProvider>
                 <FavoritesProvider>
                   <AlertModalProvider>
-                    <SearchBarProvider>{children}</SearchBarProvider>
+                    <AddingMealModalProvider>
+                      <SearchBarProvider>{children}</SearchBarProvider>
+                    </AddingMealModalProvider>
                   </AlertModalProvider>
                 </FavoritesProvider>
               </ResizeWindowProvider>

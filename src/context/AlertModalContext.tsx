@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { usePathChange } from 'hooks/usePathChange';
-import InfoModal from 'components/AlertModal/AlertModal';
+import AlertModal from 'components/AlertModal/AlertModal';
 
 type AlertModalContextType = {
   alertModal: AlertModalType;
@@ -66,7 +66,7 @@ export default function AlertModalProvider({ children }: { children: React.React
 
   return (
     <AlertModalContext.Provider value={value}>
-      {alertModal.isOpen && <InfoModal />}
+      {alertModal.isOpen && <AlertModal />}
       {children}
     </AlertModalContext.Provider>
   );

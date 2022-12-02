@@ -1,7 +1,12 @@
+import React from 'react';
 import * as Styled from './MealDetails.styles';
-import { useTabs, TabType } from 'hooks/useTabs';
+import { useTabs } from 'hooks/useTabs';
 
-const MealDetails = ({ tabs }: { tabs: TabType[] }) => {
+const MealDetails = <T extends number>({
+  tabs,
+}: {
+  tabs: { id: T; label: string; Component: React.ReactNode }[];
+}) => {
   const { activeDetails, setActiveDetails, selectedTab } = useTabs(tabs);
 
   return (

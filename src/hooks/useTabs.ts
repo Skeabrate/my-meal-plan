@@ -1,12 +1,12 @@
 import { ReactNode, useMemo, useState } from 'react';
 
-export type TabType = {
-  id: number | string;
+export type TabType<T> = {
+  id: T;
   label: string | ReactNode;
   Component: React.ReactNode;
 };
 
-export const useTabs = (tabs: TabType[]) => {
+export const useTabs = <T>(tabs: TabType<T>[]) => {
   const [activeDetails, setActiveDetails] = useState(tabs[0].id);
 
   const selectedTab = useMemo(
