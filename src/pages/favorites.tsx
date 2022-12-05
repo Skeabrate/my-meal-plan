@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { useFetchFavorites } from 'api/mealdb/useFetchFavorites';
 import { FavoritesContext } from 'context/FavoritesContext';
+import { ROUTES } from 'utils/routes';
 import GridSection from 'components/GridSection/GridSection';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
 
@@ -26,7 +27,7 @@ function Favorites() {
           img: strMealThumb,
           slug: idMeal,
         }))}
-        linkUrl='/loading/meal?id='
+        linkUrl={ROUTES.meal}
         label={{ value: 'Favorites:', isMain: true }}
         enableObtionsButton
         loadingData={isLoading}
@@ -43,7 +44,7 @@ function Favorites() {
             <span>Sign in to store your favorites list across multiple devices.</span>
           </p>
 
-          <Link href='/api/auth/signin'>Sign in</Link>
+          <Link href={ROUTES.profile.signIn}>Sign in</Link>
         </Styled.SignIn>
       )}
     </>

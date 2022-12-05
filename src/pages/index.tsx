@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import * as Styled from 'styles/index.styles';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategories';
-import GridSection from 'components/GridSection/GridSection';
+import { ROUTES } from 'utils/routes';
 import HomepageBaner from 'assets/homepageBaner.jpg';
-import Link from 'next/link';
+import GridSection from 'components/GridSection/GridSection';
 
 function Home() {
   const { categories, isLoading, isError, error } = useFetchCategories();
@@ -16,7 +17,7 @@ function Home() {
         <Styled.HeroInfo>
           <h1>My Meal Plan</h1>
           <p>Save favorite recipies and create your own meal plans!</p>
-          <Link href='/profile/meal-plans'>
+          <Link href={ROUTES.profile.mealPlans}>
             <a>
               <span>Try it out</span>
             </a>
@@ -39,7 +40,7 @@ function Home() {
           img: strCategoryThumb,
           slug: strCategory,
         }))}
-        linkUrl='/category/'
+        linkUrl={`${ROUTES.category}/`}
         label={{ value: 'Categories:' }}
         loadingData={isLoading}
         error={{

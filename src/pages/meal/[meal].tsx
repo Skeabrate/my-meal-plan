@@ -7,6 +7,7 @@ import * as Styled from 'styles/meal.styles';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { fetchMealById, useFetchMealById } from 'api/mealdb/useFetchMealById';
+import { ROUTES } from 'utils/routes';
 import MealDetails from 'components/MealDetails/MealDetails';
 import Instruction from 'components/MealDetails/tabs/Instruction';
 import Ingredients from 'components/MealDetails/tabs/Ingredients';
@@ -64,7 +65,7 @@ const Meal = ({ mealId }: { mealId: string }) => {
           <p>
             Category:
             <span>
-              <Link href={`/category/${strCategory}`}>{strCategory}</Link>
+              <Link href={`${ROUTES.category}/${strCategory}`}>{strCategory}</Link>
             </span>
           </p>
           <p>

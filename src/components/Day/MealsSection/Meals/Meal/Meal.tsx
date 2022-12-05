@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useFetchMealById } from 'api/mealdb/useFetchMealById';
-import DeleteSvg from 'assets/SVG/Delete.svg';
+import { ROUTES } from 'utils/routes';
 import ErrorBoundary from 'templates/ErrorBoundary';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
@@ -18,7 +18,7 @@ const Meal = ({ mealId, deleteHandler }: { mealId: string; deleteHandler: () => 
     >
       {mealById?.length && (
         <>
-          <Link href={`/loading/meal?id=${mealById[0].idMeal}`}>
+          <Link href={`${ROUTES.meal}${mealById[0].idMeal}`}>
             <a>
               <ImageLoading>
                 <Image

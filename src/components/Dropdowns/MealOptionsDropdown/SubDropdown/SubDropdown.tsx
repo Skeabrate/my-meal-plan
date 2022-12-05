@@ -6,6 +6,7 @@ import * as Styled from './SubDropdown.styles';
 import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
 import { AlertModalContext } from 'context/AlertModalContext';
 import { DayType, MealPlanType, MealsSectionType } from 'types/MealPlanTypes';
+import { ROUTES } from 'utils/routes';
 import { TRANSITIONS } from './Transitions';
 import IsLoading from './Views/IsLoading';
 import IsError from './Views/IsError';
@@ -152,7 +153,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
         </ViewsContext.Provider>
       ) : (
         <Styled.Info>
-          <Link href='/api/auth/signin'>Log in</Link>
+          <Link href={ROUTES.profile.signIn}>Log in</Link>
           to see your meal plans.
         </Styled.Info>
       )}

@@ -4,6 +4,7 @@ import * as Styled from 'styles/profile/meal-plans/index.styles';
 import { useSession } from 'next-auth/react';
 import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
 import { useMutation } from 'hooks/useMutation';
+import { ROUTES } from 'utils/routes';
 import DeleteSvg from 'assets/SVG/Delete.svg';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import ErrorBoundary from 'templates/ErrorBoundary';
@@ -82,7 +83,7 @@ const MealPlans = () => {
             {mealPlans.map(({ id, mealPlanName }, index) => (
               <li key={mealPlanName}>
                 <Styled.Link>
-                  <Link href={`/profile/meal-plans/${mealPlanName}`}>
+                  <Link href={`${ROUTES.profile.mealPlans}/${mealPlanName}`}>
                     <a>
                       <span>{index < 9 ? `0${index + 1}` : index + 1}:</span>
                       {mealPlanName}

@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import Image from 'next/image';
 import { GetStaticPropsContext, NextPage } from 'next';
+import { dehydrate, QueryClient } from 'react-query';
 import * as Styled from 'styles/category.styles';
 import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategories';
-import { CategoryType } from 'types/CategoryType';
-import { dehydrate, QueryClient } from 'react-query';
 import { fetchMealsByCategory, useFetchMealsByCategory } from 'api/mealdb/useFetchMealsByCategory';
+import { CategoryType } from 'types/CategoryType';
+import { ROUTES } from 'utils/routes';
 import GridSection from 'components/GridSection/GridSection';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
 
@@ -47,7 +48,7 @@ const Category = ({ category }: { category: string }) => {
           img: strMealThumb,
           slug: idMeal,
         }))}
-        linkUrl='/loading/meal?id='
+        linkUrl={ROUTES.meal}
         label={{ value: 'Meals:' }}
         enableObtionsButton
         loadingData={isLoading}

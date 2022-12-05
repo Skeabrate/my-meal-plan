@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import * as Styled from './CategoriesBar.styles';
 import { useFetchCategories } from 'api/mealdb/useFetchCategories';
+import { ROUTES } from 'utils/routes';
 import SlideBar from 'components/SlideBar/SlideBar';
 
 const CategoriesBar = () => {
@@ -15,7 +16,7 @@ const CategoriesBar = () => {
           animationDelay = +(animationDelay + 0.05).toFixed(2);
           return (
             <li key={idCategory}>
-              <Link href={`/category/${strCategory}`}>
+              <Link href={`${ROUTES.category}/${strCategory}`}>
                 <a style={{ animationDelay: `${animationDelay}s` }}>{strCategory}</a>
               </Link>
             </li>

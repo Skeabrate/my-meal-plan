@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './NavBar.styles';
+import { useSession } from 'next-auth/react';
 import LogoSrc from 'assets/logo.png';
 import ProfileSvg from 'assets/SVG/Profile.svg';
 import SearchSvg from 'assets/SVG/Search.svg';
@@ -12,22 +13,22 @@ import { SearchBarContext } from 'context/SearchBarContext';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
 import { usePathChange } from 'hooks/usePathChange';
-import { useSession } from 'next-auth/react';
+import { ROUTES } from 'utils/routes';
 import ThemeCombobox from 'components/Comboboxes/ThemeCombobox';
 import Loading from 'components/Loading/Loading';
 
 const links = [
   {
-    href: '/',
+    href: ROUTES.index,
     name: 'Home',
   },
   {
-    href: '/favorites',
+    href: ROUTES.favorites,
     name: 'Favorites',
     isFavorite: true,
   },
   {
-    href: '/profile/meal-plans',
+    href: ROUTES.profile.mealPlans,
     name: 'Meal Plans',
   },
 ];
@@ -56,18 +57,20 @@ const NavBar = () => {
     <Styled.NavWrapper>
       <Styled.NavBar>
         <Link
-          href='/'
+          href={ROUTES.index}
           aria-label='navigate to homepage'
         >
-          <Styled.Logo>
-            <Image
-              src={LogoSrc}
-              alt='My Meal Plan'
-              priority
-              height='80'
-              width='128'
-            />
-          </Styled.Logo>
+          <a>
+            <Styled.Logo>
+              <Image
+                src={LogoSrc}
+                alt='My Meal Plan'
+                priority
+                height='80'
+                width='128'
+              />
+            </Styled.Logo>
+          </a>
         </Link>
 
         <Styled.HambuergerMenu
@@ -117,7 +120,7 @@ const NavBar = () => {
               ) : status === 'authenticated' ? (
                 <Link
                   aria-label='go to profile page'
-                  href={'/profile/overview'}
+                  href={ROUTES.profile.overwiew}
                 >
                   <a>
                     {data?.user.image ? (
@@ -137,7 +140,7 @@ const NavBar = () => {
               ) : status === 'unauthenticated' ? (
                 <Link
                   aria-label='go to login page'
-                  href={'/api/auth/signin'}
+                  href={ROUTES.profile.signIn}
                 >
                   <a>
                     <ProfileSvg />

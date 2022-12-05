@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ROUTES } from 'utils/routes';
 import { ViewsContext } from '../SubDropdown';
 
 const StyledSuccess = styled.li`
@@ -21,7 +22,7 @@ const Success = () => {
   return (
     <StyledSuccess>
       Meal added to {options.mealPlanName}!
-      <Link href={`/profile/meal-plans/${options.mealPlanName}`}>Go to meal plan</Link>
+      <Link href={`${ROUTES.profile.mealPlans}/${options.mealPlanName}`}>Go to meal plan</Link>
     </StyledSuccess>
   );
 };

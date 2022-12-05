@@ -4,7 +4,8 @@ export const ROUTES = {
   profile: {
     overwiew: '/profile/overview',
     mealPlans: '/profile/meal-plans',
+    signIn: '/api/auth/signin',
   },
-  category: '/category/',
+  category: '/category',
   meal: '/loading/meal?id=',
 };

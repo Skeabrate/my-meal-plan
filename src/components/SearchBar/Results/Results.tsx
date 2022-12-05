@@ -4,6 +4,7 @@ import Image from 'next/image';
 import * as Styled from './Results.styles';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 import { useSearchResults } from 'hooks/useSearchResults';
+import { ROUTES } from 'utils/routes';
 import Loading from 'components/Loading/Loading';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 
@@ -22,7 +23,7 @@ const Results = ({ inputValue }: { inputValue: string }) => {
         <div>
           {searchResults?.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
             <Link
-              href={`/loading/meal?id=${idMeal}`}
+              href={`${ROUTES.meal}${idMeal}`}
               key={idMeal}
             >
               <a>

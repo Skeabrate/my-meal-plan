@@ -8,6 +8,7 @@ import ProfileSvg from 'assets/SVG/Profile.svg';
 import MealSvg from 'assets/SVG/Meal.svg';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
 import Link from 'next/link';
+import { ROUTES } from 'utils/routes';
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -22,8 +23,8 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
         </Styled.BackButton>
 
         <Styled.Options>
-          <Styled.ActiveLink $isActive={isLinkActive('/profile/overview')}>
-            <Link href='/profile/overview'>
+          <Styled.ActiveLink $isActive={isLinkActive(ROUTES.profile.overwiew)}>
+            <Link href={ROUTES.profile.overwiew}>
               <a>
                 <span>
                   <ProfileSvg />
@@ -32,8 +33,8 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
               </a>
             </Link>
           </Styled.ActiveLink>
-          <Styled.ActiveLink $isActive={isLinkActive('/profile/meal-plans')}>
-            <Link href='/profile/meal-plans'>
+          <Styled.ActiveLink $isActive={isLinkActive(ROUTES.profile.mealPlans)}>
+            <Link href={ROUTES.profile.mealPlans}>
               <a>
                 <span>
                   <MealSvg />

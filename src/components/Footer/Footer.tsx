@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './Footer.styles';
+import { ROUTES } from 'utils/routes';
 import LogoSrc from 'assets/logo.png';
 import GithubSvg from 'assets/SVG/Github.svg';
 
@@ -8,7 +9,7 @@ const Footer = () => {
   return (
     <Styled.Footer>
       <Link
-        href='/'
+        href={ROUTES.index}
         aria-label='navigate to homepage'
       >
         <a>

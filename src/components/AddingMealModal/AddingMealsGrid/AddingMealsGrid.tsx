@@ -4,6 +4,7 @@ import Image from 'next/image';
 import * as Styled from './AddingMealsGrid.styles';
 import { AddingMealModalContext } from 'context/AddingMealModalContext';
 import { MealType } from 'types/MealType';
+import { ROUTES } from 'utils/routes';
 import PlusSvg from 'assets/SVG/Plus.svg';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
@@ -43,7 +44,7 @@ const AddingMealsGrid = ({
                 isGreen
                 onClick={() => createMealInMealsSectionHandler({ mealsSectionId, mealId: idMeal })}
               />
-              <Link href={`/loading/meal?id=${idMeal}`}>Go to meal page</Link>
+              <Link href={`${ROUTES.meal}${idMeal}`}>Go to meal page</Link>
             </div>
           </Styled.OverlayOptions>
         </li>
