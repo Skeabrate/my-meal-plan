@@ -46,7 +46,7 @@ export const NavBar = styled.div`
   }
 `;
 
-export const Logo = styled.a`
+export const Logo = styled.div`
   display: flex;
   position: relative;
   z-index: 40;

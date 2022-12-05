@@ -33,12 +33,13 @@ export const HeroInfo = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
   text-align: center;
-  width: 90%;
+  color: black;
 
   h1 {
     margin: 0;
@@ -49,7 +50,7 @@ export const HeroInfo = styled.div`
   }
 
   p {
-    font-weight: 600;
+    font-size: 2rem;
   }
 
   a {

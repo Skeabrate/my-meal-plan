@@ -5,6 +5,7 @@ import * as Styled from 'styles/index.styles';
 import { dehydrate, QueryClient } from 'react-query';
 import { fetchCategories, useFetchCategories } from 'api/mealdb/useFetchCategories';
 import { ROUTES } from 'utils/routes';
+import { TypeAnimation } from 'react-type-animation';
 import HomepageBaner from 'assets/homepageBaner.jpg';
 import GridSection from 'components/GridSection/GridSection';
 
@@ -16,7 +17,13 @@ function Home() {
       <Styled.HeroImage>
         <Styled.HeroInfo>
           <h1>My Meal Plan</h1>
-          <p>Save favorite recipies and create your own meal plans!</p>
+          <TypeAnimation
+            sequence={['Save favorite recipies', 2000, 'Create meal plans!', 2000]}
+            wrapper='div'
+            cursor={true}
+            repeat={Infinity}
+            style={{ fontSize: '2.2rem' }}
+          />
           <Link href={ROUTES.profile.mealPlans}>
             <a>
               <span>Try it out</span>
