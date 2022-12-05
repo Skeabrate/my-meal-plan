@@ -1,5 +1,4 @@
 // State Machine
-
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -24,7 +23,7 @@ type OptionsType = {
 export const ViewsContext = React.createContext(
   {} as {
     mealPlansWithAllDetails: MealPlanType[] | undefined;
-    updateView: (action: string, params?: any) => void;
+    updateView: (action: string) => void;
     options: OptionsType;
     setOptions: React.Dispatch<React.SetStateAction<OptionsType>>;
   }

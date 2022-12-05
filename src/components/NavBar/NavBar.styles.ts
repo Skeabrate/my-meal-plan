@@ -19,6 +19,10 @@ type MenuProps = {
 
 const navBarMobileHeight = '80px';
 
+export const NavWrapper = styled.nav`
+  box-shadow: ${({ theme }) => theme.colors.boxShadow};
+`;
+
 export const NavBar = styled.div`
   display: flex;
   justify-content: space-between;

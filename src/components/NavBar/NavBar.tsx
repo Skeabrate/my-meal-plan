@@ -53,7 +53,7 @@ const NavBar = () => {
   usePathChange(isCartOpen ? toggleCart : () => {});
 
   return (
-    <nav>
+    <Styled.NavWrapper>
       <Styled.NavBar>
         <Link
           href='/'
@@ -150,7 +150,7 @@ const NavBar = () => {
       </Styled.NavBar>
 
       <CategoriesBar />
-    </nav>
+    </Styled.NavWrapper>
   );
 };
 
