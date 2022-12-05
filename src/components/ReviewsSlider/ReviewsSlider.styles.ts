@@ -1,4 +1,30 @@
-import styled from 'styled-components';
+import styles, { css, Keyframes, keyframes } from 'styled-components';
+
+const styled = { ...styles, keyframes };
+
+const animationHelper = (animation: Keyframes) => css`
+  animation: ${animation} linear 0.3s forwards, ${animation} 0.3s linear reverse 0.5s forwards;
+`;
+
+const fadeReview = styled.keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const slideHeader = styled.keyframes`
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(40%);
+    opacity: 0;
+  }
+`;
 
 export const ReviewsSlider = styled.div`
   display: flex;
@@ -15,6 +41,10 @@ export const ReviewsSlider = styled.div`
 `;
 
 export const Header = styled.h2`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   font-family: ${({ theme }) => theme.fontFamily.lato};
   font-style: normal;
   font-weight: 400;
@@ -25,38 +55,43 @@ export const Header = styled.h2`
     display: none;
   }
 
+  @media (min-width: 500px) {
+    flex-direction: row;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
   ${({ theme }) => theme.mq.tablet} {
     font-size: ${({ theme }) => theme.fontSize.headingMobile};
+    gap: 2rem;
   }
 `;
 
-export const HeaderAnimation = styled.span`
+export const HeaderAnimation = styled.span<{ $isSliding: boolean }>`
   position: relative;
   display: inline-block;
-  width: 100px;
+  width: 85px;
   font-weight: 600;
   font-style: italic;
+  overflow: hidden;
+  border-bottom: 2px solid ${({ theme }) => theme.themeColors.font};
+  padding-bottom: 2px;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 2px;
-    width: 90%;
-    background-color: ${({ theme }) => theme.themeColors.font};
+  span {
+    display: inline-block;
+    ${({ $isSliding }) => $isSliding && animationHelper(slideHeader)}
   }
 
   ${({ theme }) => theme.mq.tablet} {
-    width: 130px;
+    width: 120px;
   }
 `;
 
-export const Review = styled.div`
+export const Review = styled.div<{ $isSliding: boolean }>`
   line-height: 1.4;
   margin: 2rem auto 3rem;
-  position: relative;
+  ${({ $isSliding }) => $isSliding && animationHelper(fadeReview)};
 
   span {
     display: block;
@@ -89,7 +124,7 @@ export const Stars = styled.div`
 
 export const Legend = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 1.2rem;
 `;
 
 export const LegendButton = styled.button<{ $isActive: boolean }>`

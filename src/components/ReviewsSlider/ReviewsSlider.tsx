@@ -1,8 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as Styled from './ReviewsSlider.styles';
 import StarSvg from 'assets/SVG/Star.svg';
 
-const SLIDES = [
+type SlideType = {
+  id: number;
+  header: string;
+  review: string;
+  author: string;
+};
+
+const SLIDES: SlideType[] = [
   {
     id: 0,
     header: 'money',
@@ -24,33 +31,64 @@ const SLIDES = [
 ];
 
 const ReviewsSlider = () => {
-  const [currentSlide, setCurrentSlide] = useState(SLIDES[0]);
+  const [slider, setSlider] = useState({
+    isSliding: false,
+    activeSlideIndex: SLIDES[0].id,
+    currentSlide: SLIDES[0],
+  });
+
+  const slideChangeHandler = useCallback(
+    (newSlide: SlideType) => {
+      if (newSlide.id === slider.activeSlideIndex || slider.isSliding) return;
+
+      setSlider((slider) => ({
+        ...slider,
+        activeSlideIndex: newSlide.id,
+        isSliding: true,
+      }));
+
+      setTimeout(() => {
+        setSlider((slider) => ({
+          ...slider,
+          currentSlide: newSlide,
+        }));
+      }, 300);
+
+      setTimeout(() => {
+        setSlider((slider) => ({
+          ...slider,
+          isSliding: false,
+        }));
+      }, 800);
+    },
+    [slider.isSliding, slider.activeSlideIndex]
+  );
 
   useEffect(() => {
     let interval = setInterval(() => {
-      setCurrentSlide((current) => {
-        const findCurrentIndex = SLIDES.findIndex((item) => item.id === current.id);
-        const newIndex = findCurrentIndex + 1 > SLIDES.length - 1 ? 0 : findCurrentIndex + 1;
-        return SLIDES[newIndex];
-      });
+      const findCurrentIndex = SLIDES.findIndex((item) => item.id === slider.activeSlideIndex);
+      const newIndex = findCurrentIndex + 1 > SLIDES.length - 1 ? 0 : findCurrentIndex + 1;
+      const newSlide = SLIDES[newIndex];
+
+      slideChangeHandler(newSlide);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [currentSlide]);
+  }, [slider, slideChangeHandler]);
 
   return (
     <Styled.ReviewsSlider>
       <Styled.Header>
         We save you serious
-        <Styled.HeaderAnimation>
-          <span>{currentSlide.header}</span>
+        <Styled.HeaderAnimation $isSliding={slider.isSliding}>
+          <span>{slider.currentSlide.header}</span>
         </Styled.HeaderAnimation>
       </Styled.Header>
 
-      <Styled.Review>
-        <p>{currentSlide.review}</p>
+      <Styled.Review $isSliding={slider.isSliding}>
+        <p>{slider.currentSlide.review}</p>
 
-        <span>~ {currentSlide.author}</span>
+        <span>~ {slider.currentSlide.author}</span>
 
         <Styled.Stars>
           <StarSvg />
@@ -65,8 +103,8 @@ const ReviewsSlider = () => {
         {SLIDES.map((slide) => (
           <Styled.LegendButton
             key={slide.id}
-            $isActive={slide.id === currentSlide.id}
-            onClick={() => setCurrentSlide(slide)}
+            $isActive={slide.id === slider.activeSlideIndex}
+            onClick={() => slideChangeHandler(slide)}
           ></Styled.LegendButton>
         ))}
       </Styled.Legend>
