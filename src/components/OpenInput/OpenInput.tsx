@@ -6,14 +6,6 @@ const StyledForm = styled.form`
   margin-bottom: 20px;
   display: flex;
   gap: 6px;
-
-  input {
-    &:last-child {
-      font-weight: 600;
-      cursor: pointer;
-      color: ${({ theme }) => theme.themeColors.secondFont};
-    }
-  }
 `;
 
 const OpenInput = ({

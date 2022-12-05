@@ -152,6 +152,13 @@ export const GlobaStyles = styled.createGlobalStyle`
     border-radius: 0px;
   }
 
+  input[type='submit'] {
+    font-weight: 600;
+    cursor: pointer;
+    color: ${({ theme }) => theme.themeColors.secondFont};
+    border-radius: 0px !important;
+  }
+
   input:focus {
     outline: none;
     ${({ theme }) => theme.boxShadow(theme.colors.orange)}
