@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as Styled from './ReviewsSlider.styles';
 import StarSvg from 'assets/SVG/Star.svg';
 
-const Slides = [
+const SLIDES = [
   {
     id: 0,
     header: 'money',
@@ -24,12 +24,27 @@ const Slides = [
 ];
 
 const ReviewsSlider = () => {
-  const [currentSlide, setCurrentSlide] = useState(Slides[0]);
+  const [currentSlide, setCurrentSlide] = useState(SLIDES[0]);
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setCurrentSlide((current) => {
+        const findCurrentIndex = SLIDES.findIndex((item) => item.id === current.id);
+        const newIndex = findCurrentIndex + 1 > SLIDES.length - 1 ? 0 : findCurrentIndex + 1;
+        return SLIDES[newIndex];
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentSlide]);
 
   return (
     <Styled.ReviewsSlider>
       <Styled.Header>
-        We save you serious <span>{currentSlide.header}</span>
+        We save you serious
+        <Styled.HeaderAnimation>
+          <span>{currentSlide.header}</span>
+        </Styled.HeaderAnimation>
       </Styled.Header>
 
       <Styled.Review>
@@ -47,7 +62,7 @@ const ReviewsSlider = () => {
       </Styled.Review>
 
       <Styled.Legend>
-        {Slides.map((slide) => (
+        {SLIDES.map((slide) => (
           <Styled.LegendButton
             key={slide.id}
             $isActive={slide.id === currentSlide.id}

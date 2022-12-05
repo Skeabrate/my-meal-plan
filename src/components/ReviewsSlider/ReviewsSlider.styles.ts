@@ -25,31 +25,31 @@ export const Header = styled.h2`
     display: none;
   }
 
-  span {
-    position: relative;
-    display: inline-block;
-    width: 100px;
-    font-weight: 600;
-    font-style: italic;
+  ${({ theme }) => theme.mq.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.headingMobile};
+  }
+`;
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 2px;
-      width: 90%;
-      background-color: ${({ theme }) => theme.themeColors.font};
-    }
+export const HeaderAnimation = styled.span`
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  font-weight: 600;
+  font-style: italic;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+    width: 90%;
+    background-color: ${({ theme }) => theme.themeColors.font};
   }
 
   ${({ theme }) => theme.mq.tablet} {
-    font-size: ${({ theme }) => theme.fontSize.headingMobile};
-
-    span {
-      width: 130px;
-    }
+    width: 130px;
   }
 `;
 
