@@ -8,6 +8,7 @@ import { ROUTES } from 'utils/routes';
 import { TypeAnimation } from 'react-type-animation';
 import HomepageBaner from 'assets/homepageBaner.jpg';
 import GridSection from 'components/GridSection/GridSection';
+import ReviewsSlider from 'components/ReviewsSlider/ReviewsSlider';
 
 function Home() {
   const { categories, isLoading, isError, error } = useFetchCategories();
@@ -38,7 +39,7 @@ function Home() {
         />
       </Styled.HeroImage>
 
-      <div>slider</div>
+      <ReviewsSlider />
 
       <GridSection
         data={categories?.map(({ idCategory, strCategory, strCategoryThumb }) => ({
