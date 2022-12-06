@@ -102,19 +102,22 @@ const NavBar = () => {
               <ThemeCombobox />
             </Styled.NavSubItem>
             <Styled.NavSubItem>
-              <button
+              <Styled.NavSubItemButton
                 aria-label='search'
                 onClick={toggleSearchBar}
               >
                 <SearchSvg />
-              </button>
+              </Styled.NavSubItemButton>
             </Styled.NavSubItem>
             <Styled.NavSubItem>
               {status === 'loading' ? (
                 <Loading height={30} />
               ) : status === 'authenticated' ? (
                 <Link href={ROUTES.profile.overwiew}>
-                  <a aria-label='go to profile page'>
+                  <Styled.NavSubItemButton
+                    as='a'
+                    aria-label='go to profile page'
+                  >
                     {data?.user.image ? (
                       <Styled.ProfileImage>
                         <Image
@@ -127,13 +130,16 @@ const NavBar = () => {
                     ) : (
                       <ProfileSvg />
                     )}
-                  </a>
+                  </Styled.NavSubItemButton>
                 </Link>
               ) : status === 'unauthenticated' ? (
                 <Link href={ROUTES.profile.signIn}>
-                  <a aria-label='go to login page'>
+                  <Styled.NavSubItemButton
+                    as='a'
+                    aria-label='go to login page'
+                  >
                     <ProfileSvg />
-                  </a>
+                  </Styled.NavSubItemButton>
                 </Link>
               ) : null}
             </Styled.NavSubItem>

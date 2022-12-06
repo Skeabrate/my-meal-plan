@@ -312,17 +312,16 @@ export const NavSubItem = styled.li`
       fill: ${({ theme }) => theme.colors.orange};
     }
   }
+`;
 
-  a,
-  button {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+export const NavSubItemButton = styled.button`
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ProfileImage = styled.div`
