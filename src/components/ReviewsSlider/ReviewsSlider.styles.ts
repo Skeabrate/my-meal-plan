@@ -90,7 +90,8 @@ export const HeaderAnimation = styled.span<{ $isSliding: boolean }>`
 
 export const Review = styled.div<{ $isSliding: boolean }>`
   line-height: 1.4;
-  margin: 2rem auto 3rem;
+  height: 225px;
+  padding-top: 1.4rem;
   ${({ $isSliding }) => $isSliding && animationHelper(fadeReview)};
 
   span {
@@ -102,8 +103,13 @@ export const Review = styled.div<{ $isSliding: boolean }>`
     letter-spacing: 0.6px;
   }
 
-  ${({ theme }) => theme.mq.tablet} {
-    margin: 3rem auto 4rem;
+  @media (min-width: 400px) {
+    height: 200px;
+  }
+
+  @media (min-width: 550px) {
+    padding-top: 2rem;
+    height: 180px;
   }
 `;
 

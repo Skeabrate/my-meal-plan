@@ -27,6 +27,7 @@ export const SlideBar = styled.div<SlideBarType>`
     margin: 0 auto;
     width: fit-content;
     height: 100%;
+    will-change: transform;
 
     li a {
       height: 100%;

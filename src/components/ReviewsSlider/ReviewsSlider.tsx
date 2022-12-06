@@ -19,13 +19,13 @@ const SLIDES: SlideType[] = [
   {
     id: 1,
     header: 'time',
-    review: `My wife does all the chopping and I cook which is great, Wide choice of meals so lovely not to have to decide what to have every day!`,
+    review: `My wife does all the schopping and I cook which is great, Wide choice of meals so lovely not to have to decide what to have every day! I definitely reccomand my-meal-plans to everyone.`,
     author: 'Miłosz',
   },
   {
     id: 2,
     header: 'stress',
-    review: `I'm enjoying receiving meals from MyMealPlan, as the variety of recipes has rekindled my interest in cooking, choosing and cooking the recipes with my son has awakened an appreciation of cooking tasty meals without the hassle of shopping for the ingredients.`,
+    review: `I'm enjoying receiving meals from MyMealPlan, as the variety of recipes has rekindled my interest in cooking, choosing and cooking the recipes with my son has awakened an appreciation of cooking tasty meals.`,
     author: 'Sebastian',
   },
 ];
