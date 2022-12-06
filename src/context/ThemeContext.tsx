@@ -20,14 +20,9 @@ export const isSystemThemeSettingSetToDark =
   typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const initialThemeBasedOnSystemSettings = isSystemThemeSettingSetToDark
-    ? ThemeTypes.Dark
-    : ThemeTypes.Light;
+  const initialTheme = ThemeTypes.Light;
 
-  const { state: themeStyle, setState: setThemeStyle } = useLocalStorage(
-    'theme',
-    initialThemeBasedOnSystemSettings
-  );
+  const { state: themeStyle, setState: setThemeStyle } = useLocalStorage('theme', initialTheme);
 
   const getNewTheme = useMemo(
     () => ({

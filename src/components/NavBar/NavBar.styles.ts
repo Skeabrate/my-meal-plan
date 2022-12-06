@@ -319,9 +319,6 @@ export const NavSubItem = styled.li`
     height: 100%;
     border: none;
     background-color: transparent;
-  }
-
-  a {
     display: flex;
     justify-content: center;
     align-items: center;

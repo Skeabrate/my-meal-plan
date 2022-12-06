@@ -100,8 +100,9 @@ const ReviewsSlider = () => {
       </Styled.Review>
 
       <Styled.Legend>
-        {SLIDES.map((slide) => (
+        {SLIDES.map((slide, index) => (
           <Styled.LegendButton
+            aria-label={`review ${index}`}
             key={slide.id}
             $isActive={slide.id === slider.activeSlideIndex}
             onClick={() => slideChangeHandler(slide)}

@@ -46,6 +46,10 @@ export const GridItem = styled.div`
   h3 {
     padding-inline: 1rem;
     padding: 2rem;
+    font-family: ${({ theme }) => theme.fontFamily.lato};
+    font-style: normal;
+    font-size: ${({ theme }) => theme.fontSize.paragraph};
+    font-weight: 600;
   }
 
   &:hover {

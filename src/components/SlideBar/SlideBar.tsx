@@ -154,6 +154,7 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
   return (
     <Styled.SlideBar $isLinkDisabled={slider.isLinkDisabled}>
       <Styled.Arrow
+        aria-label='slide bar left'
         $isActive={displayArrows.left}
         $left
         onClick={() => arrowButtonHandler('left')}
@@ -181,6 +182,7 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
       </ul>
 
       <Styled.Arrow
+        aria-label='slide bar right'
         $isActive={displayArrows.right}
         $right
         onClick={() => arrowButtonHandler('right')}

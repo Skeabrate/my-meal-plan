@@ -56,11 +56,8 @@ const NavBar = () => {
   return (
     <Styled.NavWrapper>
       <Styled.NavBar>
-        <Link
-          href={ROUTES.index}
-          aria-label='navigate to homepage'
-        >
-          <a>
+        <Link href={ROUTES.index}>
+          <a aria-label='navigate to homepage'>
             <Styled.Logo>
               <Image
                 src={LogoSrc}
@@ -109,20 +106,15 @@ const NavBar = () => {
                 aria-label='search'
                 onClick={toggleSearchBar}
               >
-                <a>
-                  <SearchSvg />
-                </a>
+                <SearchSvg />
               </button>
             </Styled.NavSubItem>
             <Styled.NavSubItem>
               {status === 'loading' ? (
                 <Loading height={30} />
               ) : status === 'authenticated' ? (
-                <Link
-                  aria-label='go to profile page'
-                  href={ROUTES.profile.overwiew}
-                >
-                  <a>
+                <Link href={ROUTES.profile.overwiew}>
+                  <a aria-label='go to profile page'>
                     {data?.user.image ? (
                       <Styled.ProfileImage>
                         <Image
@@ -138,11 +130,8 @@ const NavBar = () => {
                   </a>
                 </Link>
               ) : status === 'unauthenticated' ? (
-                <Link
-                  aria-label='go to login page'
-                  href={ROUTES.profile.signIn}
-                >
-                  <a>
+                <Link href={ROUTES.profile.signIn}>
+                  <a aria-label='go to login page'>
                     <ProfileSvg />
                   </a>
                 </Link>

@@ -34,9 +34,10 @@ function Home() {
 
         <Image
           src={HomepageBaner}
-          alt='my-meal-plan'
+          alt='my-meal-plan baner'
           objectFit='cover'
           placeholder='blur'
+          priority
         />
       </Styled.HeroImage>
 
