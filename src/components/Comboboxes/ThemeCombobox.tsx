@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import styles, { keyframes } from 'styled-components';
-import { isSystemThemeSettingSetToDark, ThemeContext, ThemeTypes } from 'context/ThemeContext';
+import { ThemeContext, ThemeTypes } from 'context/ThemeContext';
 import Combobox from './template/Combobox';
 import { useComboboxValue } from './template/useComboboxValue';
 import LightSvg from 'assets/SVG/Light.svg';
@@ -66,6 +66,9 @@ const StyledThemeCombobox = styled.div`
     }
   }
 `;
+
+const isSystemThemeSettingSetToDark =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const options = [
   {

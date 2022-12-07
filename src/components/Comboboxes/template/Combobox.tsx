@@ -60,7 +60,7 @@ const Combobox = <T extends string>({
     <Styled.Wrapper
       ref={comboboxRef}
       role='button'
-      aria-label='open Combobox'
+      aria-label={label || 'open combobox'}
       aria-pressed={toggleCombobox}
       tabIndex={0}
       onKeyDown={(e) => e.keyCode === 13 && setToggleCombobox((state) => !state)}

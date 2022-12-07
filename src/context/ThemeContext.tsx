@@ -16,9 +16,6 @@ type ThemeContextType = {
 
 export const ThemeContext = React.createContext({} as ThemeContextType);
 
-export const isSystemThemeSettingSetToDark =
-  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const initialTheme = ThemeTypes.Light;
 
