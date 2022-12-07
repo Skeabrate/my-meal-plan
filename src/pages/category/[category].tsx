@@ -50,7 +50,7 @@ const Category = ({ category }: { category: string }) => {
         }))}
         linkUrl={ROUTES.meal}
         label={{ value: 'Meals:' }}
-        enableObtionsButton
+        enableOptionsButton
         loadingData={isLoading}
         error={{
           value: isError,

@@ -27,14 +27,14 @@ type GridSectionType = {
     fallbackMessage: string;
   };
   loadingData?: boolean;
-  enableObtionsButton?: boolean;
+  enableOptionsButton?: boolean;
 };
 
 const GridSection = ({
   data = [],
   linkUrl = '',
   label,
-  enableObtionsButton,
+  enableOptionsButton,
   loadingData,
   error,
 }: GridSectionType) => {
@@ -69,7 +69,7 @@ const GridSection = ({
         <Styled.Grid>
           {currentData.map(({ id, name, img, slug }) => (
             <Styled.GridItem key={id}>
-              {enableObtionsButton && <MealOptionsDropdown mealId={id} />}
+              {enableOptionsButton && <MealOptionsDropdown mealId={id} />}
               <Link href={linkUrl + slug}>
                 <a>
                   <Styled.GridItemImage>

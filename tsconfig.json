@@ -16,6 +16,7 @@
     "incremental": true,
 		"baseUrl": ".",
 		"paths": {
+      "pages/*": ["src/pages/*"],
       "components/*": ["src/components/*"],
       "hooks/*": ["src/hooks/*"],
       "types/*": ["src/types/*"],

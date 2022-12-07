@@ -29,7 +29,7 @@ function Favorites() {
         }))}
         linkUrl={ROUTES.meal}
         label={{ value: 'Favorites:', isMain: true }}
-        enableObtionsButton
+        enableOptionsButton
         loadingData={isLoading}
         error={{
           value: isError || !favoritesById?.length,
