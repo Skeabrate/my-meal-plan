@@ -9,6 +9,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "cypress": "cypress open",
+    "test-all": "jest",
     "test": "jest --watch"
   },
   "dependencies": {
