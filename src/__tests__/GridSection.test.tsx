@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/renderWithProviders';
-import GridSection from './GridSection';
+import GridSection from '../components/GridSection/GridSection';
 
 const dataWithOneItem = [
   {
@@ -11,6 +11,7 @@ const dataWithOneItem = [
     slug: 'first-item',
   },
 ];
+
 const dataWithTwoOrMoreItems = [
   {
     id: '0',

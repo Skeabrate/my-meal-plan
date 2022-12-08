@@ -3,7 +3,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import { renderWithProviders } from 'utils/renderWithProviders';
 
-describe('UnderlinedButton tests', () => {
+describe('UnderlinedButton', () => {
   it('test if underlined button is rendered', () => {
     renderWithProviders(
       <UnderlinedButton
