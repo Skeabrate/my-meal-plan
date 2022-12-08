@@ -34,7 +34,7 @@ export default function AlertModalProvider({ children }: { children: React.React
   const openAlertModal = useCallback(
     (state: AlertModalType['state'], message: unknown) => {
       const closeAlertModalHandler = () =>
-        new Promise((resolve, reject) => {
+        new Promise((resolve) => {
           closeAlertModal();
           resolve(true);
         });
