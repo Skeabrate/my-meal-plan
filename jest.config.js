@@ -21,6 +21,7 @@ const customJestConfig = {
     '^types/(.*)$': '<rootDir>/src/types/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
+  setupFiles: ['<rootDir>/matchmedia'],
 };
 
 module.exports = createJestConfig(customJestConfig);

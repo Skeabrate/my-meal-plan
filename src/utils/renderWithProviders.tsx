@@ -1,9 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'styles/theme/theme';
 import { render } from '@testing-library/react';
+import ThemeProvider from 'context/ThemeContext';
 
 export const renderWithProviders = (children: React.ReactNode) => {
-  return render(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
+  return render(<ThemeProvider>{children}</ThemeProvider>);
 };
