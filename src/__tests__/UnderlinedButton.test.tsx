@@ -1,7 +1,6 @@
-import '@testing-library/jest-dom';
 import { fireEvent, screen } from '@testing-library/react';
-import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 import { renderWithProviders } from 'utils/renderWithProviders';
+import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 
 describe('UnderlinedButton', () => {
   it('test if underlined button is rendered', () => {

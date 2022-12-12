@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/renderWithProviders';
 import GridSection from '../components/GridSection/GridSection';
