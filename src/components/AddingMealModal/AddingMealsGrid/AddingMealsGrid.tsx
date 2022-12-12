@@ -5,7 +5,7 @@ import * as Styled from './AddingMealsGrid.styles';
 import { AddingMealModalContext } from 'context/AddingMealModalContext';
 import { MealType } from 'types/MealType';
 import { ROUTES } from 'utils/routes';
-import PlusSvg from 'assets/SVG/Plus.svg';
+import PlusSvg from 'assets/SVG/Plus';
 import ImageLoading from 'components/ImageLoading/ImageLoading';
 import UnderlinedButton from 'components/UnderlinedButton/UnderlinedButton';
 

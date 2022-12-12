@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { AddingMealModalContext } from 'context/AddingMealModalContext';
-import DeleteSvg from 'assets/SVG/Delete.svg';
-import PlusSvg from 'assets/SVG/Plus.svg';
+import DeleteSvg from 'assets/SVG/Delete';
+import PlusSvg from 'assets/SVG/Plus';
 import Dropdown from './template/Dropdown';
 
 const StyledWrapper = styled.div`

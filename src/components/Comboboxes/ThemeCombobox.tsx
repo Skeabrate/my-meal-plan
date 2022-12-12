@@ -3,9 +3,9 @@ import styles, { keyframes } from 'styled-components';
 import { isSystemThemeSettingSetToDark, ThemeContext, ThemeTypes } from 'context/ThemeContext';
 import Combobox from './template/Combobox';
 import { useComboboxValue } from './template/useComboboxValue';
-import LightSvg from 'assets/SVG/Light.svg';
-import DarkSvg from 'assets/SVG/Dark.svg';
-import SystemSvg from 'assets/SVG/System.svg';
+import LightSvg from 'assets/SVG/Light';
+import DarkSvg from 'assets/SVG/Dark';
+import SystemSvg from 'assets/SVG/System';
 
 const styled = { keyframes, ...styles };
 

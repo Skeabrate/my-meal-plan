@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import * as Styled from '../SubDropdown.styles';
-import ArrowSvg from 'assets/SVG/LeftArrow.svg';
+import ArrowSvg from 'assets/SVG/LeftArrow';
 import { DAYS } from 'utils/days';
 import { ViewsContext } from '../SubDropdown';
 import { TRANSITIONS } from '../Transitions';

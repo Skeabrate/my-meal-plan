@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useFavorites } from 'context/FavoritesContext';
 import styled from 'styled-components';
 import Dropdown from '../template/Dropdown';
-import MarkedSvg from 'assets/SVG/Marked.svg';
-import UnMarkedSvg from 'assets/SVG/UnMarked.svg';
-import MealSvg from 'assets/SVG/Meal.svg';
+import MarkedSvg from 'assets/SVG/Marked';
+import UnMarkedSvg from 'assets/SVG/UnMarked';
+import MealSvg from 'assets/SVG/Meal';
 import SubDropdown from './SubDropdown/SubDropdown';
 
 const StyledWrapper = styled.div`

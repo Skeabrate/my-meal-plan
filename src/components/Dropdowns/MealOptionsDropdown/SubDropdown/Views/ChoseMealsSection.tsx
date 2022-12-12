@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import * as Styled from '../SubDropdown.styles';
-import ArrowSvg from 'assets/SVG/LeftArrow.svg';
+import ArrowSvg from 'assets/SVG/LeftArrow';
 import { ViewsContext } from '../SubDropdown';
 import { TRANSITIONS } from '../Transitions';
 import { useMutation } from 'hooks/useMutation';

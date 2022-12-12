@@ -1,4 +1,5 @@
-module.exports = {
+/*** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     domains: ['www.themealdb.com', 'avatars.githubusercontent.com', 'platform-lookaside.fbsbx.com'],
   },
@@ -8,11 +9,6 @@ module.exports = {
     FETCH_MEAL_BY_NAME: process.env.FETCH_MEAL_BY_NAME,
     FETCH_MEALS_BY_CATEGORY: process.env.FETCH_MEALS_BY_CATEGORY,
   },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-    return config;
-  },
 };
+
+module.exports = nextConfig;

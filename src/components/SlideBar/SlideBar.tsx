@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
 import * as Styled from './SliderBar.styles';
-import RightArrow from 'assets/SVG/RightArrow.svg';
-import LeftArrow from 'assets/SVG/LeftArrow.svg';
+import RightArrow from 'assets/SVG/RightArrow';
+import LeftArrow from 'assets/SVG/LeftArrow';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 
 const SlideBar = ({ children }: { children: React.ReactNode }) => {

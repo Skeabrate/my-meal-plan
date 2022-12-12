@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import * as Styled from './SearchBar.styles';
-import CloseSvg from 'assets/SVG/Close.svg';
+import CloseSvg from 'assets/SVG/Close';
 import { SearchBarContext } from 'context/SearchBarContext';
 import Results from './Results/Results';
 import ModalBackground from 'components/ModalBackground/ModalBackground';

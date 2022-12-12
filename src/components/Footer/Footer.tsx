@@ -3,7 +3,7 @@ import Image from 'next/image';
 import * as Styled from './Footer.styles';
 import { ROUTES } from 'utils/routes';
 import LogoSrc from 'assets/logo.png';
-import GithubSvg from 'assets/SVG/Github.svg';
+import GithubSvg from 'assets/SVG/Github';
 
 const Footer = () => {
   return (

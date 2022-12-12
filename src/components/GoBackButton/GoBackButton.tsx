@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import Arrow from 'assets/SVG/LeftArrow.svg';
+import Arrow from 'assets/SVG/LeftArrow';
 import { HistoryContext } from 'context/HistoryContext';
 
 const StyledGoBackButton = styled.button`

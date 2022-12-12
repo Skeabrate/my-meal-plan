@@ -19,6 +19,7 @@ const customJestConfig = {
     '^lib/(.*)$': '<rootDir>/src/lib/$1',
     '^hooks/(.*)$': '<rootDir>/src/hooks/$1',
     '^types/(.*)$': '<rootDir>/src/types/$1',
+    '^assets/(.*)$': '<rootDir>/src/assets/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
   setupFiles: ['<rootDir>/matchmedia'],

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import * as Styled from './ReviewsSlider.styles';
-import StarSvg from 'assets/SVG/Star.svg';
+import StarSvg from 'assets/SVG/Star';
 
 type SlideType = {
   id: number;
