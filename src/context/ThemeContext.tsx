@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ThemeProvider as ThemeStyledComponentsProvider } from 'styled-components';
+import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import { theme, themeVariants } from 'styles/theme/theme';
 import { GlobaStyles } from 'styles/theme/GlobalStyle';
@@ -13,6 +13,9 @@ type ThemeContextType = {
   themeStyle: ThemeTypes;
   setThemeStyle: React.Dispatch<React.SetStateAction<ThemeTypes>>;
 };
+
+export const isSystemThemeSettingSetToDark =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 export const ThemeContext = React.createContext({} as ThemeContextType);
 
@@ -39,10 +42,10 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   return (
     <ThemeContext.Provider value={value}>
-      <ThemeStyledComponentsProvider theme={getNewTheme}>
+      <StyledComponentsThemeProvider theme={getNewTheme}>
         <GlobaStyles />
         {children}
-      </ThemeStyledComponentsProvider>
+      </StyledComponentsThemeProvider>
     </ThemeContext.Provider>
   );
 }

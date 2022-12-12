@@ -2,7 +2,6 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { PageProps } from 'types/PagePropsType';
-
 import { SessionProvider } from 'next-auth/react';
 import SearchBarProvider from 'context/SearchBarContext';
 import ResizeWindowProvider from 'context/ResizeWindowContext';
