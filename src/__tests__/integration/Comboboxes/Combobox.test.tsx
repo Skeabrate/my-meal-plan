@@ -17,23 +17,7 @@ const ComboboxWrapper = () => {
 };
 
 describe('Combobox', () => {
-  it('test if combobox expands when label button is clicked', () => {
-    renderWithProviders(<ComboboxWrapper />);
-
-    fireEvent.click(
-      screen.getByRole('button', {
-        name: 'label',
-      })
-    );
-
-    expect(
-      screen.getByRole('button', {
-        name: 'first item',
-      })
-    ).toBeInTheDocument();
-  });
-
-  it('test if combobox is closing when user clicks anything other than combobox label', () => {
+  it('test if combobox list is expanding when clicked on a label and closing when clicked anywhere else', () => {
     renderWithProviders(
       <div>
         wrapper-text
@@ -41,17 +25,20 @@ describe('Combobox', () => {
       </div>
     );
 
+    // OPEN
     fireEvent.click(
       screen.getByRole('button', {
         name: 'label',
       })
     );
     expect(screen.queryByText('first item')).toBeInTheDocument();
+
+    // CLOSE
     fireEvent.click(screen.getByText('wrapper-text'));
     expect(screen.queryByText('first item')).toBeNull();
   });
 
-  it('test if combobox show proper label after chosing option from expanded list', () => {
+  it('test if combobox show new label after chosing option from expanded list and if list closes after chosing an option', () => {
     renderWithProviders(
       <div>
         wrapper-text
@@ -64,14 +51,11 @@ describe('Combobox', () => {
         name: 'label',
       })
     );
-
     fireEvent.click(
       screen.getByRole('button', {
         name: 'first item',
       })
     );
-
-    fireEvent.click(screen.getByText('wrapper-text'));
 
     expect(screen.queryByText('label')).toBeNull();
     expect(screen.queryByText('first item')).toBeInTheDocument();
