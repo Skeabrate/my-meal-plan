@@ -116,6 +116,7 @@ const ThemeCombobox = () => {
   return (
     <StyledThemeCombobox>
       <Combobox
+        ariaLabel='open theme combobox'
         options={options}
         comboboxValue={comboboxValue}
         setComboboxValue={setComboboxValue}

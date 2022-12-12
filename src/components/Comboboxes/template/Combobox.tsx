@@ -9,6 +9,7 @@ type ComboboxValueType<T> = {
 // label or ComboboxValue must be provided
 type ComboboxType<T> = {
   options: { id: number; value: T; Component?: React.ReactNode }[];
+  ariaLabel?: string;
 } & (
   | {
       label?: string;
@@ -24,6 +25,7 @@ type ComboboxType<T> = {
 
 const Combobox = <T extends string>({
   label,
+  ariaLabel,
   options,
   comboboxValue,
   setComboboxValue,
@@ -60,7 +62,7 @@ const Combobox = <T extends string>({
     <Styled.Wrapper
       ref={comboboxRef}
       role='button'
-      aria-label={label || 'open combobox'}
+      aria-label={label || ariaLabel || 'open combobox'}
       aria-pressed={toggleCombobox}
       tabIndex={0}
       onKeyDown={(e) => e.keyCode === 13 && setToggleCombobox((state) => !state)}
