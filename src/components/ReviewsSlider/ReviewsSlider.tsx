@@ -30,7 +30,7 @@ const SLIDES: SlideType[] = [
   },
 ];
 
-const ReviewsSlider = () => {
+export const useReviewsSlider = () => {
   const [slider, setSlider] = useState({
     isSliding: false,
     activeSlideIndex: SLIDES[0].id,
@@ -76,12 +76,18 @@ const ReviewsSlider = () => {
     return () => clearInterval(interval);
   }, [slider, slideChangeHandler]);
 
+  return { slider, slideChangeHandler };
+};
+
+const ReviewsSlider = () => {
+  const { slider, slideChangeHandler } = useReviewsSlider();
+
   return (
     <Styled.ReviewsSlider>
       <Styled.Header>
         We save you serious
         <Styled.HeaderAnimation $isSliding={slider.isSliding}>
-          <span>{slider.currentSlide.header}</span>
+          <span data-testid='reviews-slider-header'>{slider.currentSlide.header}</span>
         </Styled.HeaderAnimation>
       </Styled.Header>
 
