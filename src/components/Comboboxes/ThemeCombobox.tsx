@@ -7,6 +7,18 @@ import LightSvg from 'assets/SVG/Light';
 import DarkSvg from 'assets/SVG/Dark';
 import SystemSvg from 'assets/SVG/System';
 
+class Option {
+  id: number;
+  value: ThemeTypes;
+  Component: React.ReactNode;
+
+  constructor(id: number, value: ThemeTypes, Component: React.ReactNode) {
+    this.id = id;
+    this.value = value;
+    this.Component = Component;
+  }
+}
+
 const styled = { keyframes, ...styles };
 
 const fadeInReverseAnimation = styled.keyframes`
@@ -68,33 +80,33 @@ const StyledThemeCombobox = styled.div`
 `;
 
 const options = [
-  {
-    id: 0,
-    value: ThemeTypes.Light,
-    Component: (
+  new Option(
+    0,
+    ThemeTypes.Light,
+    (
       <>
         <LightSvg /> <span>light</span>
       </>
-    ),
-  },
-  {
-    id: 1,
-    value: ThemeTypes.Dark,
-    Component: (
+    )
+  ),
+  new Option(
+    1,
+    ThemeTypes.Dark,
+    (
       <>
         <DarkSvg /> <span>dark</span>
       </>
-    ),
-  },
-  {
-    id: 2,
-    value: isSystemThemeSettingSetToDark ? ThemeTypes.Dark : ThemeTypes.Light,
-    Component: (
+    )
+  ),
+  new Option(
+    2,
+    isSystemThemeSettingSetToDark ? ThemeTypes.Dark : ThemeTypes.Light,
+    (
       <>
         <SystemSvg /> <span>system</span>
       </>
-    ),
-  },
+    )
+  ),
 ];
 
 const ThemeCombobox = () => {
