@@ -1,17 +1,16 @@
 # My Meal Plan
 
-Meals Api: https://www.themealdb.com/api.php
-
 Website Url: https://my-meal-plan.vercel.app/
 
 ## Main technologies:
 
 - NextJs + typescript
 - Styled-components
+- Planetscale db
+- Prisma
 - React-query
 - Axios
-- Next-auth
-- Prisma + Planetscale db
+- NextAuth.js
 - Vercel hosting
 - React-testing-library & Jest
 - Cypress
@@ -23,6 +22,61 @@ Website Url: https://my-meal-plan.vercel.app/
 - cypress (e2e - end to end tests)
 
 ## Application description:
+
+Search for meals and recipes from all over the world, save your favorites and create meal plans!
+
+Applitacion is build using NextJS with typescript and hosted by Vercel.
+
+App URL: https://my-meal-plan.vercel.app/
+
+Meals API: https://www.themealdb.com/api.php
+
+Styling - styled-components - leverage a mixture of JavaScript and CSS using a technique called CSS-in-JS. Based on tagged template literals, meaning actual CSS code is written between backticks when styling your components.
+
+Database for storing users accounts, sessions tokens and meal plans - planetscale.
+PlanetScale is a limitless scaling, MySQL-compatible, serverless database.
+
+Database ORM - Prisma - an open-source ORM that integrates with PlanetScale. Allows you to define database schema declaratively using the Prisma schema fetch data from PlanetScale with full type safety using Prisma Client.
+
+Fetching, caching, synchronizing and updating server state - react-query - data-fetching library for React which allows you to control server state in your application.
+
+User authentication, authorization and managing sessions tokens - NextAuth.js - complete open-source authentication solution for Next.js applications which supports secure, passwordless sign-in mechanisms via different popular OAuth providers.
+
+Testing tools: react-testing-library, jest and cypress.
+
+#### Navigation bar:
+
+- MyMealPlan logo / Home - homepage
+
+- Favorites - favorite meals list
+
+- Meal Plans - if user is logged in, links to created meal plans otherwise redirects to login/signin screen
+
+- Theme combobox - user can chose colors theme between light / dark and color based on system settings
+
+- Search - user can search for any meal by name
+
+- Profile - if user is logged in, links to the profile dashboard page otherwise redirects to login/signin screen
+
+#### Homepage (https://my-meal-plan.vercel.app/):
+
+- home
+
+#### Meals by Category Page (https://my-meal-plan.vercel.app/category/categoryName):
+
+- meals by category
+
+#### Meal Page (https://my-meal-plan.vercel.app/meal/mealId):
+
+- meal page
+
+#### Favorites (https://my-meal-plan.vercel.app/favorites):
+
+- favorites
+
+#### Profile (https://my-meal-plan.vercel.app/profile/overview):
+
+- profile
 
 ## Environment Variables
 
