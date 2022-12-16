@@ -58,26 +58,6 @@ Testing tools: react-testing-library, jest and cypress.
 
 - Profile - if user is logged in, links to the profile dashboard page otherwise redirects to login/signin screen
 
-#### Homepage (https://my-meal-plan.vercel.app/):
-
-- home
-
-#### Meals by Category Page (https://my-meal-plan.vercel.app/category/categoryName):
-
-- meals by category
-
-#### Meal Page (https://my-meal-plan.vercel.app/meal/mealId):
-
-- meal page
-
-#### Favorites (https://my-meal-plan.vercel.app/favorites):
-
-- favorites
-
-#### Profile (https://my-meal-plan.vercel.app/profile/overview):
-
-- profile
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
