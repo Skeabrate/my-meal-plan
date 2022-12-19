@@ -39,6 +39,7 @@ export const useReviewsSlider = () => {
 
   const slideChangeHandler = useCallback(
     (newSlide: SlideType) => {
+      // disable sliding when slider is active
       if (newSlide.id === slider.activeSlideIndex || slider.isSliding) return;
 
       setSlider((slider) => ({

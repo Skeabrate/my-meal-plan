@@ -1,12 +1,10 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { renderWithProviders } from 'utils/renderWithProviders';
 import ReviewsSlider, { useReviewsSlider } from 'components/ReviewsSlider/ReviewsSlider';
 
 jest.useRealTimers();
 jest.spyOn(global, 'setInterval');
-
-const handleTransition = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay));
 
 describe('Reviews slider', () => {
   it('slider should change every 3 seconds', () => {
@@ -15,7 +13,7 @@ describe('Reviews slider', () => {
     expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 3000);
   });
 
-  it('slider should change between states in time', async () => {
+  it('slider should change slides on timeout', async () => {
     const { result } = renderHook(() => useReviewsSlider());
 
     const newSlide = {
@@ -32,14 +30,9 @@ describe('Reviews slider', () => {
     expect(result.current.slider.activeSlideIndex).toEqual(newSlide.id);
     expect(result.current.slider.isSliding).toBe(true);
 
-    // slider transition timeout + 100ms
-    await handleTransition(400).then(() => {
+    await waitFor(() => {
       expect(result.current.slider.activeSlideIndex).toEqual(newSlide.id);
       expect(result.current.slider.currentSlide).toEqual(newSlide);
-    });
-
-    await handleTransition(500).then(() => {
-      expect(result.current.slider.isSliding).toBe(false);
     });
   });
 
@@ -68,7 +61,7 @@ describe('Reviews slider', () => {
       result.current.slideChangeHandler(secondSlide);
     });
 
-    await handleTransition(400).then(() => {
+    await waitFor(() => {
       expect(result.current.slider.activeSlideIndex).toEqual(firstSlide.id);
       expect(result.current.slider.currentSlide).toEqual(firstSlide);
     });
