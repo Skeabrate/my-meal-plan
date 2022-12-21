@@ -1,10 +1,10 @@
-import React, { useRef, useState, useContext, useEffect } from 'react';
+import React, { useRef, useState, useContext, useEffect, RefObject } from 'react';
 import * as Styled from './SliderBar.styles';
 import RightArrow from 'assets/SVG/RightArrow';
 import LeftArrow from 'assets/SVG/LeftArrow';
 import { ResizeWindowContext } from 'context/ResizeWindowContext';
 
-const SlideBar = ({ children }: { children: React.ReactNode }) => {
+const useSlideBar = (listRef: RefObject<HTMLUListElement>) => {
   const [slider, setSlider] = useState({
     isSliderMoving: false,
     isLinkDisabled: false,
@@ -18,7 +18,6 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
   });
 
   const { windowWidth } = useContext(ResizeWindowContext);
-  const listRef = useRef<HTMLUListElement>(null);
 
   const sliderTransitionValue = 'transform .3s ease-in-out';
 
@@ -150,6 +149,28 @@ const SlideBar = ({ children }: { children: React.ReactNode }) => {
       }
     }
   }, [windowWidth, listRef]);
+
+  return {
+    slider,
+    displayArrows,
+    arrowButtonHandler,
+    startSliding,
+    cancelSliding,
+    updateSliderPostion,
+  };
+};
+
+const SlideBar = ({ children }: { children: React.ReactNode }) => {
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const {
+    slider,
+    displayArrows,
+    arrowButtonHandler,
+    startSliding,
+    cancelSliding,
+    updateSliderPostion,
+  } = useSlideBar(listRef);
 
   return (
     <Styled.SlideBar $isLinkDisabled={slider.isLinkDisabled}>
