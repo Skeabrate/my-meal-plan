@@ -27,15 +27,13 @@ Profile Page:
 [*] Add submit button for CRUD mealplans input
 [*] Error boundary component
 [*] Add error views (modal) and success when user add meal to meals section:
-
-- creating meal plan: display error modal on top of the screen (error)
-- deleting meal plan (error)
-- Creating meals section (error)
-- deleting meal section (error)
-- added meal to meals section: display loading state -> (success = change bg to green) / (error = change bg to red)
-- add link on the bottom to meal plan
-- delete meal from meals section (error)
-
+	- creating meal plan: display error modal on top of the screen (error)
+	- deleting meal plan (error)
+	- Creating meals section (error)
+	- deleting meal section (error)
+	- added meal to meals section: display loading state -> (success = change bg to green) / (error = change bg to red)
+	- add link on the bottom to meal plan
+	- delete meal from meals section (error)
 [*] Replace userEmail with userId on every pscale request
 [*] Secure api routes
 [*] Overwiev
@@ -72,92 +70,88 @@ Jest & React-testing-library
 Integration / Unit:
 [*] GridSection: check if sort combobox is rendered if grid items length is greater than 1 (if its less than 2 don't render)
 [*] Combobox:
-
-- expands when user clicks and hides when user clicks on anything different than expanded list
-- shows correct label depends on user click
-
+	- expands when user clicks and hides when user clicks on anything different than expanded list
+	- shows correct label depends on user click
 [*] SortCombobox - sorting GridSection items alphabetically, after showing loading state
 [*] ReviewsSlider:
-
-- slider should change every 3 seconds
-- slider should change between states in time
-- user should not be able to change slide during transition duration
+	- slider should change every 3 seconds
+	- slider should change between states in time
+	- user should not be able to change slide during transition duration
 
 Cypress:
 Integration:
-[] Grid Section sorting alphabetically:
-
-- render grid section with 3 items: "B-item", "A-item", "C-item"
-- click "Sort by:"
-- click "Name: A - Z"
-- display loading spinner
-- check if items are in correct order: "A-item", "B-item", "C-item"
-- click "Sort by:"
-- click "Name: Z - A"
-- display loading spinner
-- check if items are in correct order: "C-item", "B-item", "A-item"
+[ ] Grid Section sorting alphabetically:
+	- render grid section with 3 items: "B-item", "A-item", "C-item"
+	- click "Sort by:"
+	- click "Name: A - Z"
+	- display loading spinner
+	- check if items are in correct order: "A-item", "B-item", "C-item"
+	- click "Sort by:"
+	- click "Name: Z - A"
+	- display loading spinner
+	- check if items are in correct order: "C-item", "B-item", "A-item"
 
 [ ] Options - Add to Meal Plan:
-
-- if not logged in display: "Log in to see your meal plans."
-- else if logged in display: "Chose Meal Plan":
-
-  - click "Chose Meal Plan" - expect -> nothing should happend
-  - if there are no meal plans display: "You don't have any meal plans yet."
-  - else if there is a meal plan display: "meal-plan-name",
-    - click "meal-plan-name"
-    - display "Chose Day:"
-    - if there are no meals sections display: "You don't have any meals sections in meal-plan-name."
-      - click "Chose Day" - expect -> should display "Chose Meal Plan:"
-    - else if there are meals sections in Monday display: "Monday",
-      - click "Chose Section:" - expect -> should display "Chose Day:"
-      - click "Monday",
-      - click "meals-section-name"
-      - if there is already a meal id in "meals-section-name":
-        - display loading spinner
-        - display "Chose Section:" and "meals-section-name"
-        - display Error modal with text: "Meal already added to your meals section."
-      - else if there isn't meal id in "meals-section-name":
-        - display loading spinner
-        - display "Meal added to test!"
-        - display "Go to meal plan" should link to /profile/meal-plans/meal-plan-name
+	- if not logged in display: "Log in to see your meal plans."
+	- else if logged in display: "Chose Meal Plan":
+		- click "Chose Meal Plan" - expect -> nothing should happend
+		- if there are no meal plans display: "You don't have any meal plans yet."
+		- else if there is a meal plan display: "meal-plan-name",
+			- click "meal-plan-name"
+			- display "Chose Day:"
+			- if there are no meals sections display: "You don't have any meals sections in meal-plan-name."
+				- click "Chose Day" - expect -> should display "Chose Meal Plan:"
+			- else if there are meals sections in Monday display: "Monday",
+				- click "Chose Section:" - expect -> should display "Chose Day:"
+				- click "Monday",
+				- click "meals-section-name"
+				- if there is already a meal id in "meals-section-name":
+					- display loading spinner
+					- display "Chose Section:" and "meals-section-name"
+					- display Error modal with text: "Meal already added to your meals section."
+				- else if there isn't meal id in "meals-section-name":
+					- display loading spinner
+					- display "Meal added to test!"
+					- display "Go to meal plan" should link to /profile/meal-plans/meal-plan-name
 
 [ ] Tabs:
 
 E2E:
-[ ] Searchbar: - open searchbar after clicking search svg - input should be focused - close after clicking X svg
+[ ] Searchbar: 
+	- open searchbar after clicking search svg 
+	- input should be focused 
+	- close after clicking X svg
 
-- open searchbar
-- close after clicking on background
+	- open searchbar
+	- close after clicking on background
 
-- open searchbar
-- type "asdfgh"
-- display loading spinner
-- display error "Meal not found."
+	- open searchbar
+	- type "asdfgh"
+	- display loading spinner
+	- display error "Meal not found."
 
-- clear input
-- error should disapear
+	- clear input
+	- error should disapear
 
-- type "polskie naleśniki"
-- display result - "polskie naleśniki"
-- link to meal page after clicking on it
+	- type "polskie naleśniki"
+	- display result - "polskie naleśniki"
+	- link to meal page after clicking on it
 
 [ ] Favorites:
+	- visit http://localhost:3000/category/Beef
+	- navigation item - favorites should display "0"
+	- click on options button
+	- add "Beef and Mustard Pie" to favorites
+	- reload the page (test if item was added to local storage)
+	- navigation item - favorites should display "1"
+	- visit http://localhost:3000/favorites
+	- "Beef and Mustard Pie" should be displayed in grid section
 
-- visit http://localhost:3000/category/Beef
-- navigation item - favorites should display "0"
-- click on options button
-- add "Beef and Mustard Pie" to favorites
-- reload the page (test if item was added to local storage)
-- navigation item - favorites should display "1"
-- visit http://localhost:3000/favorites
-- "Beef and Mustard Pie" should be displayed in grid section
+	- click on options button
+	- remove from Favorites
+	- "Beef and Mustard Pie" should NOT be displayed in grid section
+	- navigation item - favorites should display "0"
 
-- click on options button
-- remove from Favorites
-- "Beef and Mustard Pie" should NOT be displayed in grid section
-- navigation item - favorites should display "0"
-
-- reload the page (test if local storage was cleared)
-- "Beef and Mustard Pie" should NOT be displayed in grid section
-- navigation item - favorites should display "0"
+	- reload the page (test if local storage was cleared)
+	- "Beef and Mustard Pie" should NOT be displayed in grid section
+	- navigation item - favorites should display "0"
