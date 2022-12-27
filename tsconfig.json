@@ -28,8 +28,8 @@
 			"api/*": ["src/api/*"],
 			"lib/*": ["src/lib/*"],
 			"layouts/*": ["src/layouts/*"],
-		}
+		},
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
-  "exclude": ["node_modules", "cypress.config.ts", "cypress"]
+  "exclude": ["node_modules", "cypress.config.ts", "cypress"],
 }
