@@ -115,6 +115,11 @@ Integration:
 					- display "Go to meal plan" should link to /profile/meal-plans/meal-plan-name
 
 [ ] Tabs:
+	- create test component with useTabs
+	- render selectedTab
+	- set tab id to label id
+	- activeDetails should be equal to selectedTab
+	- user should be able to switch between all tabs
 
 E2E:
 [ ] Searchbar: 
