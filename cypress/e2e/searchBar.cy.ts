@@ -4,6 +4,7 @@ describe('Searchbar', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.get(`[aria-label="search"]`).click();
+    cy.get('input[placeholder="Search..."]').should('be.focused');
   });
 
   it('searchbar should close when user clicks on background', () => {
