@@ -15,7 +15,10 @@ const Loading = ({ height = 400 }: { height?: number }) => {
   const { themeStyle } = useContext(ThemeContext);
 
   return (
-    <StyledLoading $height={height}>
+    <StyledLoading
+      aria-label='loading spinner'
+      $height={height}
+    >
       <ClipLoader color={themeVariants[themeStyle].themeColors.font} />
     </StyledLoading>
   );

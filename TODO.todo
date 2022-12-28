@@ -122,25 +122,20 @@ Integration:
 	- user should be able to switch between all tabs
 
 E2E:
-[ ] Searchbar: 
+[*] Searchbar: 
 	- open searchbar after clicking search svg 
 	- input should be focused 
 	- close after clicking X svg
-
 	- open searchbar
 	- close after clicking on background
-
 	- open searchbar
 	- type "asdfgh"
 	- display loading spinner
 	- display error "Meal not found."
-
 	- clear input
 	- error should disapear
-
 	- type "polskie naleśniki"
 	- display result - "polskie naleśniki"
-	- link to meal page after clicking on it
 
 [ ] Favorites:
 	- visit http://localhost:3000/category/Beef

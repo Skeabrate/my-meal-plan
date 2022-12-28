@@ -20,7 +20,7 @@ const Results = ({ inputValue }: { inputValue: string }) => {
       {isError && <Styled.Error>An error occured: {error}</Styled.Error>}
       {noMatchingResults && <Styled.Error>Meal not found.</Styled.Error>}
       {matchingResults && (
-        <div>
+        <div data-testid='search results'>
           {searchResults?.map(({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => (
             <Link
               href={`${ROUTES.meal}${idMeal}`}
