@@ -22,7 +22,10 @@ const SearchBar = () => {
             placeholder='Search...'
             autoFocus
           />
-          <button onClick={toggleSearchBar}>
+          <button
+            aria-label='close searchbar'
+            onClick={toggleSearchBar}
+          >
             <CloseSvg />
           </button>
         </Styled.InputWrapper>
