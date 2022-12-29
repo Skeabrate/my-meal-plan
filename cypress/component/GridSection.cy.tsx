@@ -1,6 +1,6 @@
 import React from 'react';
 import GridSection from './../../src/components/GridSection/GridSection';
-import ThemeProvider from './../../src/context/ThemeContext';
+import MountWithProviders from './../../src/utils/MountWithProviders';
 
 const gridSectionItems = [
   {
@@ -26,7 +26,7 @@ const gridSectionItems = [
 describe('Grid Section', () => {
   it('should sort items ascending and descdenging alphabetically', () => {
     cy.mount(
-      <ThemeProvider>
+      <MountWithProviders>
         <GridSection
           data={gridSectionItems}
           label={{ value: 'Test section with one item' }}
@@ -37,7 +37,7 @@ describe('Grid Section', () => {
           linkUrl={'/'}
           loadingData={false}
         />
-      </ThemeProvider>
+      </MountWithProviders>
     );
     const getItemsOrder = (orderedArray: string[]) => {
       cy.get('.GridSectionstyles__GridItem-sc-1eynb7l-2')
