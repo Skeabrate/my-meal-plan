@@ -153,3 +153,10 @@ E2E:
 	- reload the page (test if local storage was cleared)
 	- "Beef and Mustard Pie" should NOT be displayed in grid section
 	- navigation item - favorites should display "0"
+
+[*] Back button
+	- go from '/' to '/favorites' using navigation
+	- use back Button
+	- should be redirected to '/' 
+	- visit '/favorites' and use back button
+	-	should also be redirected to '/' instead of beeing redirected away from the website
