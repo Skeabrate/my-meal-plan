@@ -81,8 +81,6 @@ Integration / Unit:
 Cypress:
 Integration:
 [*] Grid Section sorting alphabetically:
-
-[ ] Tabs:
 	- render grid section with 3 items: "B-item", "A-item", "C-item"
 	- click "Sort by:"
 	- click "Name: A - Z"
@@ -92,6 +90,13 @@ Integration:
 	- click "Name: Z - A"
 	- display loading spinner
 	- check if items are in correct order: "C-item", "B-item", "A-item"
+
+[*] Tabs:
+	- create test component with useTabs
+	- render selectedTab
+	- set tab id to label id
+	- activeDetails should be equal to selectedTab
+	- user should be able to switch between all tabs
 
 [ ] Options - Add to Meal Plan:
 	- if not logged in display: "Log in to see your meal plans."
@@ -115,13 +120,6 @@ Integration:
 					- display loading spinner
 					- display "Meal added to test!"
 					- display "Go to meal plan" should link to /profile/meal-plans/meal-plan-name
-
-
-	- create test component with useTabs
-	- render selectedTab
-	- set tab id to label id
-	- activeDetails should be equal to selectedTab
-	- user should be able to switch between all tabs
 
 E2E:
 [*] Searchbar: 
