@@ -80,7 +80,7 @@ Integration / Unit:
 
 Cypress:
 Integration:
-[ ] Grid Section sorting alphabetically:
+[*] Grid Section sorting alphabetically:
 	- render grid section with 3 items: "B-item", "A-item", "C-item"
 	- click "Sort by:"
 	- click "Name: A - Z"
