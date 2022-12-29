@@ -165,5 +165,5 @@ To run tests, run the following commands:
 - cypress:
 
 ```bash
-  npm run test:e2e
+  npm run cypress
 ```
