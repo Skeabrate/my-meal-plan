@@ -68,7 +68,10 @@ const GridSection = ({
       ) : (
         <Styled.Grid>
           {currentData.map(({ id, name, img, slug }) => (
-            <Styled.GridItem key={id}>
+            <Styled.GridItem
+              data-testid={id}
+              key={id}
+            >
               {enableOptionsButton && <MealOptionsDropdown mealId={id} />}
               <Link href={linkUrl + slug}>
                 <a>

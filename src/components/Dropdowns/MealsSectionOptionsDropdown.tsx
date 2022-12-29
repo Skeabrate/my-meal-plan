@@ -38,7 +38,7 @@ const OptionsDropdown = ({
 
   return (
     <StyledWrapper>
-      <Dropdown>
+      <Dropdown ariaLabel='open meal section options'>
         <li>
           <button onClick={() => openAddingMealModalHandler(mealsSectionId)}>
             <PlusSvg />

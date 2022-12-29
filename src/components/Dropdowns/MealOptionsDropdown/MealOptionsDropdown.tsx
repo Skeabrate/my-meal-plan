@@ -26,7 +26,10 @@ const MealOptionsDropdown = ({ mealId }: { mealId: string }) => {
 
   return (
     <StyledWrapper>
-      <Dropdown hideSubMenu={() => setIsSubMenuOpen(false)}>
+      <Dropdown
+        ariaLabel='open meal options'
+        hideSubMenu={() => setIsSubMenuOpen(false)}
+      >
         <li>
           <button onClick={handleFavorites}>
             {isMealAlreadyFavorite ? (

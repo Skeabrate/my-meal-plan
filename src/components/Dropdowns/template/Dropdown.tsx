@@ -4,9 +4,11 @@ import * as Styled from './Dropdown.styles';
 const Dropdown = ({
   children,
   hideSubMenu,
+  ariaLabel,
 }: {
   children: React.ReactNode;
   hideSubMenu?: () => void;
+  ariaLabel: string;
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -35,7 +37,7 @@ const Dropdown = ({
   return (
     <Styled.Wrapper>
       <Styled.ToggleButton
-        aria-label='open dropdown'
+        aria-label={ariaLabel}
         ref={dropdownOpenRef}
       >
         <span></span>
