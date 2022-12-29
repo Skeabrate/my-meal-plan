@@ -91,7 +91,7 @@ const NavBar = () => {
                 key={href}
               >
                 <Link href={href}>
-                  <a data-favorite={favorites.length}>{name}</a>
+                  <a data-favorite={isFavorite ? favorites.length : undefined}>{name}</a>
                 </Link>
               </Styled.NavLink>
             ))}

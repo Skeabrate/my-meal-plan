@@ -138,8 +138,8 @@ E2E:
 	- display result - "polskie naleśniki"
 
 [ ] Favorites:
-	- visit http://localhost:3000/category/Beef
 	- navigation item - favorites should display "0"
+	- visit http://localhost:3000/category/Beef
 	- click on options button
 	- add "Beef and Mustard Pie" to favorites
 	- reload the page (test if item was added to local storage)
