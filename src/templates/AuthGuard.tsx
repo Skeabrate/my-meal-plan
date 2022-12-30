@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Loading from 'components/Loading/Loading';
+import { ROUTES } from 'utils/routes';
 
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { status } = useSession();
@@ -12,7 +13,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     return loading;
   } else if (status === 'unauthenticated') {
     router.replace({
-      pathname: '/api/auth/signin',
+      pathname: ROUTES.profile.signIn,
     });
     return loading;
   } else {
