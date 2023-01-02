@@ -17,6 +17,8 @@ export default async function deleteMealFromMealsSection(
     });
 
     res.status(200).send('Meal deleted successfully');
+  } else if (session.testUser) {
+    res.status(500).send('You are not allowed to modify test account meal plans.');
   } else {
     res.status(500).send('Operation failed');
   }

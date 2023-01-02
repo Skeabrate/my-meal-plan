@@ -33,6 +33,8 @@ export default async function createMealInMealsSection(req: NextApiRequest, res:
     } else {
       res.status(500).send(`Meal doesn't exist.`);
     }
+  } else if (session.testUser) {
+    res.status(500).send('You are not allowed to modify test account meal plans.');
   } else {
     res.status(500).send('Operation failed.');
   }

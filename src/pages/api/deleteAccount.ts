@@ -15,7 +15,7 @@ export default async function deleteAccount(req: NextApiRequest, res: NextApiRes
 
     res.status(200).send('User deleted successfully.');
   } else if (session.testUser) {
-    res.status(500).send("You can't delete test account.");
+    res.status(500).send('You are not allowed to delete test account.');
   } else {
     res.status(500).send('Operation failed.');
   }

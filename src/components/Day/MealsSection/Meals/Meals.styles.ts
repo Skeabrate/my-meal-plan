@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MealsGrid = styled.ul`
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
 
   li,
@@ -27,6 +27,11 @@ export const MealsGrid = styled.ul`
         scale: 1.05;
       }
     }
+  }
+
+  @media (min-width: 440px) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-gap: 2rem;
   }
 `;
 

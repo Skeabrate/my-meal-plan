@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 import { getSessionHelper } from 'hooks/useSessionHelper';
-import { TEST_USER } from 'utils/testUser';
 
 const getIfMealPlanAlreadyExists = async (userId: string, mealPlanName: string) => {
   return await prisma.mealPlan.findFirst({
@@ -32,13 +31,8 @@ export default async function createMealPlan(req: NextApiRequest, res: NextApiRe
       await createMealPlanHandler(userId, mealPlanName);
       res.status(200).send('Meal plan added successfully.');
     }
-  } else if (session.testUser && mealPlanName) {
-    if (await getIfMealPlanAlreadyExists(TEST_USER, mealPlanName)) {
-      return res.status(500).send('Meal plan already exists.');
-    } else {
-      await createMealPlanHandler(TEST_USER, mealPlanName);
-      res.status(200).send('Meal plan added successfully.');
-    }
+  } else if (session.testUser) {
+    res.status(500).send('You are not allowed to modify test account meal plans.');
   } else {
     res.status(500).send('Operation failed.');
   }

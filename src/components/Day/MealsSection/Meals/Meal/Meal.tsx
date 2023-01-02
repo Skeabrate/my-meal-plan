@@ -24,8 +24,8 @@ const Meal = ({ mealId, deleteHandler }: { mealId: string; deleteHandler: () => 
                 <Image
                   src={mealById[0].strMealThumb}
                   alt={mealById[0].strMeal}
-                  width={150}
-                  height={150}
+                  width={300}
+                  height={300}
                 />
               </ImageLoading>
             </a>

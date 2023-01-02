@@ -95,7 +95,8 @@ export default async function createMealsSection(req: NextApiRequest, res: NextA
       mealPlanId
     );
     res.status(status).send(message);
-  } else if (session.testUser && mealPlanId && mealsSectionName) {
+  } else if (session.testUser) {
+    res.status(500).send('You are not allowed to modify test account meal plans.');
   } else {
     res
       .status(500)
