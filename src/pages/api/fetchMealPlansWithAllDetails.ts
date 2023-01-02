@@ -3,7 +3,7 @@ import prisma from 'lib/prismadb';
 import { getSessionHelper } from 'hooks/useSessionHelper';
 import { TEST_USER } from 'utils/testUser';
 
-const mealPlansWithAllDetailsHandler = async (userId: string) => {
+const getMealPlansWithAllDetails = async (userId: string) => {
   const getMealPlans = await prisma.mealPlan.findMany({
     where: {
       userId,
@@ -72,9 +72,9 @@ export default async function fetchMealPlansWithAllDetails(
   const session = await getSessionHelper(req);
 
   if (session.session && userId) {
-    res.status(200).json(await mealPlansWithAllDetailsHandler(userId));
+    res.status(200).json(await getMealPlansWithAllDetails(userId));
   } else if (session.testUser) {
-    res.status(200).json(await mealPlansWithAllDetailsHandler(TEST_USER));
+    res.status(200).json(await getMealPlansWithAllDetails(TEST_USER));
   } else {
     res.status(500).send('Operation failed');
   }
