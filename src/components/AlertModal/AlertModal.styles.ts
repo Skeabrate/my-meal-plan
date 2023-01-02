@@ -52,6 +52,11 @@ export const AlertModal = styled.div<{ $state: AlertModalType['state'] }>`
   border-radius: 0px;
   box-shadow: ${({ theme }) => theme.colors.boxShadow};
   animation: ${customFadeIn} 0.2s forwards;
+
+  p {
+    max-height: 100px;
+    overflow-y: auto;
+  }
 `;
 
 export const LoadingBar = styled.div<{ $state: AlertModalType['state'] }>`

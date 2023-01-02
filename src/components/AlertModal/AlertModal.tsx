@@ -27,7 +27,7 @@ const AlertModal = () => {
 
   return (
     <Styled.AlertModal $state={alertModal.state}>
-      {alertModal.message}
+      <p>{alertModal.message}</p>
       <Styled.LoadingBar $state={alertModal.state}>
         <span></span>
       </Styled.LoadingBar>
