@@ -1,19 +1,26 @@
 import React from 'react';
 import * as Styled from './ProfileLayout.styles';
-import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/react';
+import { deleteCookie } from 'cookies-next';
+import { ROUTES } from 'utils/routes';
+import { TEST_USER } from 'utils/testUser';
 import FavoritesSvg from 'assets/SVG/Marked';
 import LogoutSvg from 'assets/SVG/Logout';
 import ProfileSvg from 'assets/SVG/Profile';
 import MealSvg from 'assets/SVG/Meal';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
-import Link from 'next/link';
-import { ROUTES } from 'utils/routes';
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   const isLinkActive = (href: string) => router.pathname.includes(href);
+
+  const signOutHandler = () => {
+    deleteCookie(TEST_USER);
+    signOut();
+  };
 
   return (
     <Styled.ProfileDetails>
@@ -54,7 +61,7 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
             </Link>
           </li>
           <Styled.Logout>
-            <button onClick={() => signOut()}>
+            <button onClick={signOutHandler}>
               <span>
                 <LogoutSvg />
               </span>

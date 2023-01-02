@@ -1,20 +1,23 @@
-import { useMemo } from 'react';
-import Image from 'next/image';
+import { useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 import * as Styled from 'styles/profile/overview.styles';
 import { useMutation } from 'hooks/useMutation';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
+import { TEST_USER } from 'utils/testUser';
+import { ROUTES } from 'utils/routes';
+import { AlertModalContext } from 'context/AlertModalContext';
+import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
+import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import ProfileSvg from 'assets/SVG/Profile';
 import EmailSvg from 'assets/SVG/Email';
 import DeleteSvg from 'assets/SVG/Delete';
-import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
-import ProfileTabLayuot from 'layouts/ProbileTabLayout/ProbileTabLayout';
 import Loading from 'components/Loading/Loading';
 import { useAlertModal } from 'components/AlertModal/AlertModal';
 
 const Overview = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSessionHelper();
+  const { openAlertModal } = useContext(AlertModalContext);
   const router = useRouter();
 
   const {
@@ -31,11 +34,13 @@ const Overview = () => {
     isError: isErrorDeleteAccount,
     error: errorDeleteAccount,
   } = useMutation('/api/deleteAccount', () => {
-    router.push('/api/auth/signin');
+    router.push(ROUTES.profile.logIn).then(() => {
+      openAlertModal('success', 'Account deleted successfully');
+    });
   });
 
   const deleteAccountConfirmation = () => {
-    if (confirm('Are you sure you want to delete your account?') && session?.user.id) {
+    if (confirm('Are you sure you want to delete your account?')) {
       deleteAccount({ userId: session?.user.id });
     }
   };
@@ -93,7 +98,7 @@ const Overview = () => {
         <Styled.ProfileInformations>
           <Styled.ProfileImage>
             {session?.user.image && (
-              <Image
+              <img
                 src={session?.user.image}
                 alt={session?.user.name || session?.user.email!}
                 height='140'

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { useSession } from 'next-auth/react';
 import { MealPlanType } from 'types/MealPlanTypes';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 
 export const fetchMealPlansWithAllDetails = async (userId: string): Promise<MealPlanType[]> => {
   const { data } = await axios({
@@ -15,7 +15,7 @@ export const fetchMealPlansWithAllDetails = async (userId: string): Promise<Meal
 };
 
 export const useFetchMealPlansWithAllDetails = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSessionHelper();
 
   const {
     data: mealPlansWithAllDetails,

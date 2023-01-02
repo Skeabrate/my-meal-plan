@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as Styled from './NavBar.styles';
-import { useSession } from 'next-auth/react';
 import LogoSrc from 'assets/logo.png';
 import ProfileSvg from 'assets/SVG/Profile';
 import SearchSvg from 'assets/SVG/Search';
@@ -16,6 +15,7 @@ import { usePathChange } from 'hooks/usePathChange';
 import { ROUTES } from 'utils/routes';
 import ThemeCombobox from 'components/Comboboxes/ThemeCombobox';
 import Loading from 'components/Loading/Loading';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 
 const links = [
   {
@@ -40,7 +40,7 @@ const NavBar = () => {
   const { toggleSearchBar } = useContext(SearchBarContext);
   const { favorites } = useContext(FavoritesContext);
 
-  const { data, status } = useSession();
+  const { data, status } = useSessionHelper();
 
   const router = useRouter();
 
@@ -120,7 +120,7 @@ const NavBar = () => {
                   >
                     {data?.user.image ? (
                       <Styled.ProfileImage>
-                        <Image
+                        <img
                           src={data.user.image}
                           alt={data.user.name || 'profile image'}
                           height='40'
@@ -133,7 +133,7 @@ const NavBar = () => {
                   </Styled.NavSubItemButton>
                 </Link>
               ) : status === 'unauthenticated' ? (
-                <Link href={ROUTES.profile.signIn}>
+                <Link href={ROUTES.profile.logIn}>
                   <Styled.NavSubItemButton
                     as='a'
                     aria-label='go to login page'

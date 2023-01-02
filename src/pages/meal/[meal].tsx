@@ -24,7 +24,7 @@ const Meal = ({ mealId }: { mealId: string }) => {
   const router = useRouter();
 
   if (!mealById) {
-    router.replace('/404');
+    router.replace(ROUTES.notFound);
     return null;
   }
 

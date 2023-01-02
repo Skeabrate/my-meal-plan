@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import Prisma from '@prisma/client';
-import { useSession } from 'next-auth/react';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 
 export const fetchMealPlan = async (
   userId: string | undefined,
@@ -19,7 +19,7 @@ export const fetchMealPlan = async (
 };
 
 export const useFetchMealPlan = (mealPlanName: string) => {
-  const { data } = useSession();
+  const { data } = useSessionHelper();
 
   const {
     data: mealPlan,

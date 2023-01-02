@@ -1,7 +1,7 @@
 /*** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['www.themealdb.com', 'avatars.githubusercontent.com', 'platform-lookaside.fbsbx.com'],
+    domains: ['www.themealdb.com'],
   },
   env: {
     FETCH_CATEGORIES: process.env.FETCH_CATEGORIES,

@@ -1,9 +1,10 @@
-import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import { useRouter } from 'next/router';
+import { ROUTES } from 'utils/routes';
+import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 
 const Profile = () => {
   const router = useRouter();
-  router.replace('/profile/overview');
+  router.replace(ROUTES.profile.overwiew);
 };
 
 export default Profile;

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import * as Styled from 'styles/profile/meal-plans/index.styles';
-import { useSession } from 'next-auth/react';
 import { useFetchMealPlans } from 'api/pscale/useFetchMealPlans';
 import { useMutation } from 'hooks/useMutation';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 import { ROUTES } from 'utils/routes';
 import DeleteSvg from 'assets/SVG/Delete';
 import PlusSvg from 'assets/SVG/Plus';
@@ -16,7 +16,7 @@ import { useAlertModal } from 'components/AlertModal/AlertModal';
 const MealPlans = () => {
   const [isAddMealPLanInputOpen, setIsAddMealPLanInputOpen] = useState(false);
 
-  const { data: session } = useSession();
+  const { data: session } = useSessionHelper();
 
   const {
     mealPlans,

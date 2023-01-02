@@ -1,12 +1,12 @@
 // State Machine
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import * as Styled from './SubDropdown.styles';
 import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
 import { AlertModalContext } from 'context/AlertModalContext';
 import { DayType, MealPlanType, MealsSectionType } from 'types/MealPlanTypes';
 import { ROUTES } from 'utils/routes';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 import { TRANSITIONS } from './Transitions';
 import IsLoading from './Views/IsLoading';
 import IsError from './Views/IsError';
@@ -114,7 +114,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
     error: errorFetch,
   } = useFetchMealPlansWithAllDetails();
 
-  const { data: session } = useSession();
+  const { data: session } = useSessionHelper();
   const { openAlertModal } = useContext(AlertModalContext);
 
   useEffect(() => {
@@ -153,7 +153,7 @@ const SubDropdown = ({ mealId }: { mealId: string }) => {
         </ViewsContext.Provider>
       ) : (
         <Styled.Info>
-          <Link href={ROUTES.profile.signIn}>Log in</Link>
+          <Link href={ROUTES.profile.logIn}>Log in</Link>
           to see your meal plans.
         </Styled.Info>
       )}

@@ -3,10 +3,10 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import * as Styled from 'styles/favorites.styles';
 import { dehydrate, QueryClient } from 'react-query';
-import { useSession } from 'next-auth/react';
 import { fetchCategories } from 'api/mealdb/useFetchCategories';
 import { useFetchFavorites } from 'api/mealdb/useFetchFavorites';
 import { FavoritesContext } from 'context/FavoritesContext';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 import { ROUTES } from 'utils/routes';
 import GridSection from 'components/GridSection/GridSection';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
@@ -14,7 +14,7 @@ import GoBackButton from 'components/GoBackButton/GoBackButton';
 function Favorites() {
   const { favorites } = useContext(FavoritesContext);
   const { favoritesById, isLoading, isError, error } = useFetchFavorites(favorites);
-  const { data: session } = useSession();
+  const { data: session } = useSessionHelper();
 
   return (
     <>
@@ -44,7 +44,7 @@ function Favorites() {
             <span>Sign in to store your favorites list across multiple devices.</span>
           </p>
 
-          <Link href={ROUTES.profile.signIn}>Sign in</Link>
+          <Link href={ROUTES.profile.logIn}>Sign in</Link>
         </Styled.SignIn>
       )}
     </>

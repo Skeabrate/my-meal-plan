@@ -5,6 +5,7 @@ import { useTabs } from 'hooks/useTabs';
 import { useMutation } from 'hooks/useMutation';
 import { useResizeWindow } from 'hooks/useResizeWindow';
 import { DAYS, ShortenedDay } from 'utils/days';
+import { ROUTES } from 'utils/routes';
 import { useFetchMealPlan } from 'api/pscale/useFetchMealPlan';
 import DeleteSvg from 'assets/SVG/Delete';
 import ErrorBoundary from 'templates/ErrorBoundary';
@@ -31,7 +32,7 @@ const MealPlanName = () => {
     isError,
     error,
   } = useMutation('/api/deleteMealPlan', () => {
-    router.push('/profile/meal-plans');
+    router.push(ROUTES.profile.mealPlans);
   });
 
   const actionErrors = useMemo(() => [{ isError, error }], [isError, error]);
