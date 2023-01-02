@@ -1,15 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
-import { getSession } from 'next-auth/react';
+import { getSessionHelper } from 'hooks/useSessionHelper';
 
 export default async function deleteMealFromMealsSection(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const { mealId } = req.body;
-  const session = await getSession({ req });
+  const session = await getSessionHelper(req);
 
-  if (session && mealId) {
+  if (session.session && mealId) {
     await prisma.meal.delete({
       where: {
         id: mealId,

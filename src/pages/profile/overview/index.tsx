@@ -4,7 +4,6 @@ import * as Styled from 'styles/profile/overview.styles';
 import { useMutation } from 'hooks/useMutation';
 import { useSessionHelper } from 'hooks/useSessionHelper';
 import { useFetchMealPlansWithAllDetails } from 'api/pscale/useFetchMealPlansWithAllDetails';
-import { TEST_USER } from 'utils/testUser';
 import { ROUTES } from 'utils/routes';
 import { AlertModalContext } from 'context/AlertModalContext';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';

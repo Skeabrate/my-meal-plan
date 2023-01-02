@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 import { fetchMealById } from 'api/mealdb/useFetchMealById';
-import { getSession } from 'next-auth/react';
+import { getSessionHelper } from 'hooks/useSessionHelper';
 
 export default async function createMealInMealsSection(req: NextApiRequest, res: NextApiResponse) {
   const { mealsSectionId, mealId } = req.body;
-  const session = await getSession({ req });
+  const session = await getSessionHelper(req);
 
-  if (session && mealsSectionId && mealId) {
+  if (session.session && mealsSectionId && mealId) {
     const checkIfMealIdExistsInMealDb = await fetchMealById(mealId);
 
     if (checkIfMealIdExistsInMealDb) {

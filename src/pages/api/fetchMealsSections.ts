@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
-import { getSession } from 'next-auth/react';
+import { getSessionHelper } from 'hooks/useSessionHelper';
 
 export default async function fetchMealsSections(req: NextApiRequest, res: NextApiResponse) {
   const { dayName, mealPlanId } = req.body;
-  const session = await getSession({ req });
+  const session = await getSessionHelper(req);
 
-  if (session && dayName && mealPlanId) {
+  if (session.session && dayName && mealPlanId) {
     const mealsSections = await prisma.mealsSection.findMany({
       where: {
         Day: {

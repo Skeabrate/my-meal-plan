@@ -1,15 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from 'lib/prismadb';
 import { DAYS } from 'utils/days';
-import { getSession } from 'next-auth/react';
+import { getSessionHelper } from 'hooks/useSessionHelper';
 
 export default async function createMealsSection(req: NextApiRequest, res: NextApiResponse) {
   const { mealPlanId, mealsSectionName, dayName, dayId } = req.body;
-  const session = await getSession({ req });
+  const session = await getSessionHelper(req);
 
   const checkIfDayNameIsValidFormat = DAYS.find(({ shortened }) => shortened === dayName);
 
-  if (session && mealPlanId && mealsSectionName) {
+  if (session.session && mealPlanId && mealsSectionName) {
     if (dayId) {
       const checkIfMealsSectionExists = await prisma.mealsSection.findFirst({
         where: {

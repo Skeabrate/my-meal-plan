@@ -11,11 +11,11 @@ import { ResizeWindowContext } from 'context/ResizeWindowContext';
 import { SearchBarContext } from 'context/SearchBarContext';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { disablePageScroll } from 'utils/disablePageScroll';
-import { usePathChange } from 'hooks/usePathChange';
 import { ROUTES } from 'utils/routes';
+import { usePathChange } from 'hooks/usePathChange';
+import { useSessionHelper } from 'hooks/useSessionHelper';
 import ThemeCombobox from 'components/Comboboxes/ThemeCombobox';
 import Loading from 'components/Loading/Loading';
-import { useSessionHelper } from 'hooks/useSessionHelper';
 
 const links = [
   {

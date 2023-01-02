@@ -47,7 +47,7 @@ Login page:
 [*] Add next-auth + prisma + planetscale
 [*] Email provider with Sendgrid SMTP ( "magic link" signin)
 [*] Change Login page to redirect to auth/signin from navbar directly
-[ ] Add test account with email and password provider
+[*] Add test account with email and password provider
 
 Global:
 [*] Add box-shadow to dropdown
