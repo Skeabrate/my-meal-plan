@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { useRouter } from 'next/router';
 import { getCookie, setCookie } from 'cookies-next';
+import * as Styled from 'styles/login.styles';
 import { ROUTES } from 'utils/routes';
 import { TEST_USER } from 'utils/testUser';
 
@@ -14,11 +15,17 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Singin</h1>
-      <button onClick={handleTestUser}>Log in as a Test User</button>
-      <Link href={ROUTES.profile.signIn}>Sign in with providers</Link>
-    </div>
+    <Styled.Login>
+      <Styled.LoginForm>
+        <h1>Log in</h1>
+
+        <Styled.Options>
+          <Link href={ROUTES.profile.signIn}>Sign in with Providers</Link>
+          <p>or</p>
+          <button onClick={handleTestUser}>Log in as a Test User</button>
+        </Styled.Options>
+      </Styled.LoginForm>
+    </Styled.Login>
   );
 };
 
