@@ -6,15 +6,13 @@ Website Url: https://my-meal-plan.vercel.app/
 
 - NextJs + typescript
 - Styled-components
+- React-query
 - Planetscale db
 - Prisma
-- React-query
 - Axios
 - NextAuth.js
 - Vercel hosting
-- React-testing-library & Jest
-- Cypress
-- Husky precommit hooks
+- SendGrid SMTP
 
 ## Testing with:
 
@@ -23,13 +21,15 @@ Website Url: https://my-meal-plan.vercel.app/
 
 ## Application description:
 
-Search for meals and recipes from all over the world, save your favorites and create meal plans!
+Search for meals and recipes, save your favorites and create meal plans.
 
 Applitacion is build using NextJS with typescript and hosted by Vercel.
 
 App URL: https://my-meal-plan.vercel.app/
 
-Meals API: https://www.themealdb.com/api.php
+Application is using free mealsdb API:
+
+API URL: https://www.themealdb.com/api.php
 
 Styling - styled-components - leverage a mixture of JavaScript and CSS using a technique called CSS-in-JS. Based on tagged template literals, meaning actual CSS code is written between backticks when styling your components.
 
@@ -57,26 +57,6 @@ Testing tools: react-testing-library, jest and cypress.
 - Search - user can search for any meal by name
 
 - Profile - if user is logged in, links to the profile dashboard page otherwise redirects to login/signin screen
-
-#### Homepage (https://my-meal-plan.vercel.app/):
-
-- home
-
-#### Meals by Category Page (https://my-meal-plan.vercel.app/category/categoryName):
-
-- meals by category
-
-#### Meal Page (https://my-meal-plan.vercel.app/meal/mealId):
-
-- meal page
-
-#### Favorites (https://my-meal-plan.vercel.app/favorites):
-
-- favorites
-
-#### Profile (https://my-meal-plan.vercel.app/profile/overview):
-
-- profile
 
 ## Environment Variables
 
