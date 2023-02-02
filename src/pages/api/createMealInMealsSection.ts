@@ -39,4 +39,3 @@ export default async function createMealInMealsSection(req: NextApiRequest, res:
     res.status(500).send('Operation failed.');
   }
 }
-``;

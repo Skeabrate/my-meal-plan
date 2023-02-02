@@ -37,4 +37,3 @@ export default async function createMealPlan(req: NextApiRequest, res: NextApiRe
     res.status(500).send('Operation failed.');
   }
 }
-``;
